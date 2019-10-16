@@ -1,0 +1,73 @@
+<?xml-stylesheet type="text/xsl" href="https://zhou-mfk.github.io/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/archives/</loc>
+    <lastmod>2019-10-11T23:16:55+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/</loc>
+    <lastmod>2019-10-11T23:16:55+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/categories/</loc>
+    <lastmod>2019-10-11T21:44:22+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/categories/hugo/</loc>
+    <lastmod>2019-10-11T21:44:22+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/post/</loc>
+    <lastmod>2019-10-11T21:44:22+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/tags/</loc>
+    <lastmod>2019-10-11T21:44:22+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/tags/git/</loc>
+    <lastmod>2019-10-11T21:44:22+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/tags/hugo/</loc>
+    <lastmod>2019-10-11T21:44:22+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/post/%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BAblog/</loc>
+    <lastmod>2019-10-11T21:44:22+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/page/about/</loc>
+    <lastmod>2019-10-11T12:32:29+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/page/</loc>
+    <lastmod>2019-10-11T12:32:29+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

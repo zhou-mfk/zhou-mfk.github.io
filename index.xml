@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Zhou Li Shan</title>
+    <link>https://zhou-mfk.github.io/</link>
+    <description>Recent content on Zhou Li Shan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 11 Oct 2019 23:16:55 +0800</lastBuildDate>
+    
+	<atom:link href="https://zhou-mfk.github.io/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Archives</title>
+      <link>https://zhou-mfk.github.io/archives/</link>
+      <pubDate>Fri, 11 Oct 2019 23:16:55 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/archives/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>使用hugo搭建blog</title>
+      <link>https://zhou-mfk.github.io/post/%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BAblog/</link>
+      <pubDate>Fri, 11 Oct 2019 21:44:22 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/post/%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BAblog/</guid>
+      <description>&lt;p&gt;hugo 的使用到发布到github&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://zhou-mfk.github.io/page/about/</link>
+      <pubDate>Fri, 11 Oct 2019 12:32:29 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/page/about/</guid>
+      <description>关于我 周利山 Email: zhou_mfk@163.com</description>
+    </item>
+    
+  </channel>
+</rss>
