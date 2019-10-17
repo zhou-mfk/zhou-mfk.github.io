@@ -6,10 +6,37 @@
     <description>Recent content in Tags on Zhou Li Shan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 11 Oct 2019 21:44:22 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 17 Oct 2019 20:56:45 +0800</lastBuildDate>
     
 	<atom:link href="https://zhou-mfk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>github</title>
+      <link>https://zhou-mfk.github.io/tags/github/</link>
+      <pubDate>Thu, 17 Oct 2019 20:56:45 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://zhou-mfk.github.io/tags/hugo/</link>
+      <pubDate>Thu, 17 Oct 2019 20:56:45 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>picGo</title>
+      <link>https://zhou-mfk.github.io/tags/picgo/</link>
+      <pubDate>Thu, 17 Oct 2019 20:56:45 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/picgo/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>git</title>
@@ -17,15 +44,6 @@
       <pubDate>Fri, 11 Oct 2019 21:44:22 +0800</pubDate>
       
       <guid>https://zhou-mfk.github.io/tags/git/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>hugo</title>
-      <link>https://zhou-mfk.github.io/tags/hugo/</link>
-      <pubDate>Fri, 11 Oct 2019 21:44:22 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/hugo/</guid>
       <description></description>
     </item>
     
