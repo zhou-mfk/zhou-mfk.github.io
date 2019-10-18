@@ -6,10 +6,19 @@
     <description>Recent content in Categories on Zhou Li Shan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 17 Oct 2019 20:56:45 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 18 Oct 2019 20:52:27 +0800</lastBuildDate>
     
 	<atom:link href="https://zhou-mfk.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ELK</title>
+      <link>https://zhou-mfk.github.io/categories/elk/</link>
+      <pubDate>Fri, 18 Oct 2019 20:52:27 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/categories/elk/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Hugo</title>
