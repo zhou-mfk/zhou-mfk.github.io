@@ -6,10 +6,19 @@
     <description>Recent content in elasticsearch on Zhou Li Shan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 18 Oct 2019 20:52:27 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 19 Oct 2019 20:39:51 +0800</lastBuildDate>
     
 	<atom:link href="https://zhou-mfk.github.io/tags/elasticsearch/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Elasticsearch常见问题与解决方法</title>
+      <link>https://zhou-mfk.github.io/post/elasticsearch%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</link>
+      <pubDate>Sat, 19 Oct 2019 20:39:51 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/post/elasticsearch%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid>
+      <description>Elasticsearch常见问题与解决方法 工作中遇到的问题及解决方法，本程文章持续会更新 问题及解决方法 索引字段 默认为1000，如果超过了这</description>
+    </item>
     
     <item>
       <title>使用Filebeat&#43;kafka&#43;logstash&#43;elasticsearch&#43;kibana搭建日志系统</title>

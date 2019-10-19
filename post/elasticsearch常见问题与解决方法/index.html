@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Elasticsearch常见问题与解决方法 - Zhou Li Shan</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="周利山" /><meta name="description" content="Elasticsearch常见问题与解决方法 工作中遇到的问题及解决方法，本程文章持续会更新 问题及解决方法 索引字段 默认为1000，如果超过了这" /><meta name="keywords" content="elasticsearch" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6 with theme even" />
+
+
+<link rel="canonical" href="https://zhou-mfk.github.io/post/elasticsearch%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Elasticsearch常见问题与解决方法" />
+<meta property="og:description" content="Elasticsearch常见问题与解决方法 工作中遇到的问题及解决方法，本程文章持续会更新 问题及解决方法 索引字段 默认为1000，如果超过了这" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhou-mfk.github.io/post/elasticsearch%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" />
+<meta property="article:published_time" content="2019-10-19T20:39:51&#43;08:00"/>
+<meta property="article:modified_time" content="2019-10-19T20:39:51&#43;08:00"/>
+
+<meta itemprop="name" content="Elasticsearch常见问题与解决方法">
+<meta itemprop="description" content="Elasticsearch常见问题与解决方法 工作中遇到的问题及解决方法，本程文章持续会更新 问题及解决方法 索引字段 默认为1000，如果超过了这">
+
+
+<meta itemprop="datePublished" content="2019-10-19T20:39:51&#43;08:00" />
+<meta itemprop="dateModified" content="2019-10-19T20:39:51&#43;08:00" />
+<meta itemprop="wordCount" content="1829">
+
+
+
+<meta itemprop="keywords" content="elasticsearch," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Elasticsearch常见问题与解决方法"/>
+<meta name="twitter:description" content="Elasticsearch常见问题与解决方法 工作中遇到的问题及解决方法，本程文章持续会更新 问题及解决方法 索引字段 默认为1000，如果超过了这"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">花开花落，云卷云舒</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">花开花落，云卷云舒</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Elasticsearch常见问题与解决方法</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-10-19 </span>
+        <div class="post-category">
+            <a href="/categories/elk/"> ELK </a>
+            </div>
+          <span class="more-meta"> 约 1829 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#问题及解决方法">问题及解决方法</a>
+<ul>
+<li><a href="#索引字段">索引字段</a></li>
+<li><a href="#调整磁盘使用的百分比">调整磁盘使用的百分比</a></li>
+<li><a href="#分片迁移">分片迁移</a></li>
+<li><a href="#调整max-buckets">调整max_ buckets</a></li>
+<li><a href="#索引的名称小写">索引的名称小写</a></li>
+<li><a href="#elasticsearch-节点上下线">elasticsearch 节点上下线</a></li>
+<li><a href="#cerebro-管理elasticsearch集群">Cerebro 管理elasticsearch集群</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<p>Elasticsearch常见问题与解决方法 工作中遇到的问题及解决方法，本程文章持续会更新</p>
+
+<h2 id="问题及解决方法">问题及解决方法</h2>
+
+<h3 id="索引字段">索引字段</h3>
+
+<p>默认为1000，如果超过了这个默认值则日志数据无法写入到Elasticsearch 调整索引字段的个数如下所示:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">#对于‘your_index_name’这个索引设置fields为无限制，默认为1000</span>
+curl -XPUT yourEShost:port/your_index_name/_settings -d <span class="s1">&#39;{&#34;index.mapping.total_fields.limit&#34;: 0}&#39;</span>
+
+<span class="c1">#这个表示对所有index的fields的limit设置为50000</span>
+curl -XPUT <span class="m">10</span>.0.1.1:9200/*/_settings -d <span class="s1">&#39;{&#34;index.mapping.total_fields.limit&#34;: 50000}&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="调整磁盘使用的百分比">调整磁盘使用的百分比</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">PUT /_cluster/settings
+<span class="o">{</span>
+  <span class="s2">&#34;transient&#34;</span>: <span class="o">{</span>
+    <span class="s2">&#34;cluster.routing.allocation.disk.watermark.low&#34;</span>: <span class="s2">&#34;90%&#34;</span>,  <span class="c1"># 最低可使用</span>
+    <span class="s2">&#34;cluster.routing.allocation.disk.watermark.high&#34;</span>: <span class="s2">&#34;95%&#34;</span>, <span class="c1"># 最高可使用</span>
+    <span class="s2">&#34;cluster.info.update.interval&#34;</span>: <span class="s2">&#34;1m&#34;</span>  <span class="c1"># 集群刷新时间</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1"># low 最大只能调整到 90% 也就是说集群必须保证10%的可用空间</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>磁盘达到90%之后，es集群变成只读模式，磁盘空间调整后还是只读模式，可以使用以下命令来配置改变只读模式:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;index&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;blocks&#34;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&#34;read_only_allow_delete&#34;</span><span class="p">:</span> <span class="s2">&#34;false&#34;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="分片迁移">分片迁移</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="err">#</span> <span class="err">http://ip:</span><span class="mi">9200</span><span class="err">/_cluster/reroute</span> 
+<span class="err">#</span> <span class="err">post</span>
+<span class="p">{</span>
+    <span class="nt">&#34;commands&#34;</span><span class="p">:[</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;move&#34;</span><span class="p">:{</span>
+                <span class="nt">&#34;index&#34;</span><span class="p">:</span><span class="s2">&#34;索引名称&#34;</span><span class="p">,</span>
+                <span class="nt">&#34;shard&#34;</span><span class="p">:</span><span class="err">分片号</span><span class="p">,</span>
+                <span class="nt">&#34;from_node&#34;</span><span class="p">:</span><span class="s2">&#34;源节点名称&#34;</span><span class="p">,</span>
+                <span class="nt">&#34;to_node&#34;</span><span class="p">:</span><span class="s2">&#34;目的节点名称&#34;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span> </code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="调整max-buckets">调整max_ buckets</h3>
+
+<p>日志信息如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="o">[</span><span class="m">2019</span>-05-28T14:59:25,614<span class="o">][</span>WARN <span class="o">][</span>o.e.d.s.a.MultiBucketConsumerService<span class="o">]</span> <span class="o">[</span>elasticsearch01<span class="o">]</span> This aggregation creates too many buckets <span class="o">(</span><span class="m">10001</span><span class="o">)</span> and will throw an error in future versions. You should update the <span class="o">[</span>search.max_buckets<span class="o">]</span> cluster setting or use the <span class="o">[</span>composite<span class="o">]</span> aggregation to paginate all buckets in multiple requests.</code></pre></td></tr></table>
+</div>
+</div>
+<p>从个面日志信息可以看到查询出的信息数据量超过search.max_buckets 默认值10000 需要对个值进行调整：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">$ curl -XPUT <span class="s2">&#34;http://localhost:9200/_cluster/settings&#34;</span> <span class="se">\
+</span><span class="se"></span>  -d <span class="s1">&#39;{ &#34;persistent&#34;: { &#34;search&#34; : { &#34;max_buckets&#34; : 35000 } } }&#39;</span> <span class="se">\
+</span><span class="se"></span>  --header <span class="s2">&#34;content-type: application/JSON&#34;</span> </code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="索引的名称小写">索引的名称小写</h3>
+
+<p>elasticsearch索引名称需要全部小写，有时topic会包含大写，这时就需要转为小写，如下</p>
+
+<p>在filter规则中加入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="n">mutate</span> <span class="p">{</span>
+                <span class="n">add_field</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="s2">&#34;[@metadata][index_name]&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;%{[@metadata][topic]}&#34;</span> <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">mutate</span> <span class="p">{</span>
+                <span class="n">lowercase</span> <span class="o">=&gt;</span> <span class="o">[</span> <span class="s2">&#34;index_name&#34;</span> <span class="o">]</span>
+                <span class="n">lowercase</span> <span class="o">=&gt;</span> <span class="o">[</span> <span class="s2">&#34;[@metadata][index_name]&#34;</span> <span class="o">]</span>
+        <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>然后现output中引用这人index_name变量即可转为小写的索引名称</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-ruby" data-lang="ruby"><span class="n">elasticsearch</span> <span class="p">{</span>
+                <span class="n">hosts</span> <span class="o">=&gt;</span> <span class="o">[</span><span class="s2">&#34;10.10.10.11:9200&#34;</span><span class="p">,</span><span class="s2">&#34;10.10.10.12:9200&#34;</span><span class="o">]</span>
+                <span class="n">index</span> <span class="o">=&gt;</span> <span class="s2">&#34;%{[@metadata][index_name]}-%{+YYYY.MM.dd}&#34;</span>
+        <span class="p">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="elasticsearch-节点上下线">elasticsearch 节点上下线</h3>
+
+<p>用来维护集群的机器时</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 下线某个节点</span>
+curl -X PUT <span class="m">127</span>.0.0.1:9200/_cluster/settings -d <span class="s1">&#39;{&#34;transient&#34;: {&#34;cluster.routing.allocation.exclude._ip&#34;:&#34;x.x.x.x&#34;}}&#39;</span>
+
+<span class="c1"># 一次下线多个节点</span>
+curl -XPUT http://0.0.0.0:9200/_cluster/settings?pretty -d <span class="s1">&#39;{&#34;transient&#34;:{&#34;cluster.routing.allocation.exclude._ip&#34;:&#34;10.10.10.11,10.10.10.12&#34;}}&#39;</span>
+<span class="c1"># 下线的节点上的数据会逐步迁移到其他在线的节点上，等待数据迁移完成后就可以把下线的节点停掉了。</span>
+
+<span class="c1"># 如果下线了一节点后，节点故障处理完成之后， 再把下线的节点上线，使用如下命令:</span> 
+curl -X PUT <span class="m">127</span>.0.0.1:9200/_cluster/settings -d <span class="s1">&#39;{&#34;transient&#34;: {&#34;cluster.routing.allocation.exclude._ip&#34;:&#34;&#34;}}&#39;</span>
+
+<span class="c1"># 即把移除的_ip 置空即可</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>相关的属性说明</p>
+
+<p>可通过集群级别的 include/require/exclude 三种filter影响集群级的shard分配过程, 对应的配置项是:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">cluster.routing.allocation.include.{attribute}: {value} 
+cluster.routing.allocation.require.{attribute}: {value} 
+cluster.routing.allocation.exclude.{attribute}: {value} </pre></td></tr></table>
+</div>
+</div>
+<p>其中{attribute} 是节点的属性, 即在es配置文件中以 node. 开头的属性(除了 node.name , node.client 和 node.data 这三个); 其中有4个属性比较特殊, 分别是:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">_ip : 表示节点的ip
+_host: 表示节点的hostname
+_name<span class="o">(</span>或name<span class="o">)</span> : 表示节点的名称, 即在Transwarp ES配置文件中的 node.name
+_id : 表示节点的id<span class="p">;</span> 节点id是es内部分配的</code></pre></td></tr></table>
+</div>
+</div>
+<p>{value} 是属性值, 多个值之间用逗号(,)分割; 每个值支持通配符( a* , *a , <em>a</em> , a*b 这几种)。
+{attribute} 和 {value} 构成了一个过滤条件。
+include/require/exclude 的含义分别是:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">include : 节点的 {attribute} 值包含指定的至少一个value, value中的各个值是OR关系。 
+require : 节点的 {attribute} 值包含指定的所有value, value中的各个值是AND关系。 
+exclude : 节点的 {attribute} 值不包含指定的所有value。 
+每种filter可以指定多个 {attribute} , 多个 {attribute} 之间是AND关系。</pre></td></tr></table>
+</div>
+</div>
+<h3 id="cerebro-管理elasticsearch集群">Cerebro 管理elasticsearch集群</h3>
+
+<p>Github地址：<a href="https://github.com/lmenezes/cerebro">Cerebro</a></p>
+
+<p>简单的配置就可使用，界面如下:</p>
+
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191019212027.png" alt="" /></p>
+
+<p>配置文件如下所示:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># cd /usr/local/cerebro/conf</span>
+<span class="c1"># cat application.conf | egrep -v &#34;^#|^$&#34;</span>
+<span class="nv">secret</span> <span class="o">=</span> <span class="s2">&#34;ki:s:[[@=Ag?QI`W2jMwkY:eqvrJ]JqoJyi2axj3ZvOv^/KavOT4ViJSv?6YY4[N&#34;</span>
+<span class="nv">basePath</span> <span class="o">=</span> <span class="s2">&#34;/&#34;</span>
+pidfile.path<span class="o">=</span>/dev/null
+rest.history.size <span class="o">=</span> <span class="m">50</span> // defaults to <span class="m">50</span> <span class="k">if</span> not specified
+data.path <span class="o">=</span> <span class="s2">&#34;./cerebro.db&#34;</span>
+<span class="nv">es</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="nv">gzip</span> <span class="o">=</span> <span class="nb">true</span>
+<span class="o">}</span>
+<span class="c1"># 访问认证 支持basic和ldap两各种方式</span>
+<span class="nv">auth</span> <span class="o">=</span> <span class="o">{</span>
+  <span class="c1"># either basic or ldap</span>
+  type: <span class="si">${</span><span class="p">?AUTH_TYPE</span><span class="si">}</span>
+  settings <span class="o">{</span>
+    <span class="c1"># LDAP</span>
+    <span class="nv">url</span> <span class="o">=</span> <span class="si">${</span><span class="p">?LDAP_URL</span><span class="si">}</span>
+    <span class="c1"># OpenLDAP might be something like &#34;ou=People,dc=domain,dc=com&#34;</span>
+    base-dn <span class="o">=</span> <span class="si">${</span><span class="p">?LDAP_BASE_DN</span><span class="si">}</span>
+    <span class="c1"># Usually method should  be &#34;simple&#34; otherwise, set it to the SASL mechanisms to try</span>
+    <span class="nv">method</span> <span class="o">=</span> <span class="si">${</span><span class="p">?LDAP_METHOD</span><span class="si">}</span>
+    <span class="c1"># user-template executes a string.format() operation where</span>
+    <span class="c1"># username is passed in first, followed by base-dn. Some examples</span>
+    <span class="c1">#  - %s =&gt; leave user untouched</span>
+    <span class="c1">#  - %s@domain.com =&gt; append &#34;@domain.com&#34; to username</span>
+    <span class="c1">#  - uid=%s,%s =&gt; usual case of OpenLDAP</span>
+    user-template <span class="o">=</span> <span class="si">${</span><span class="p">?LDAP_USER_TEMPLATE</span><span class="si">}</span>
+    // User identifier that can perform searches
+    bind-dn <span class="o">=</span> <span class="si">${</span><span class="p">?LDAP_BIND_DN</span><span class="si">}</span>
+    bind-pw <span class="o">=</span> <span class="si">${</span><span class="p">?LDAP_BIND_PWD</span><span class="si">}</span>
+    group-search <span class="o">{</span>
+      // If left <span class="nb">unset</span> parent<span class="s1">&#39;s base-dn will be used
+</span><span class="s1">      base-dn = ${?LDAP_GROUP_BASE_DN}
+</span><span class="s1">      // Attribute that represent the user, for example uid or mail
+</span><span class="s1">      user-attr = ${?LDAP_USER_ATTR}
+</span><span class="s1">      // Define a separate template for user-attr
+</span><span class="s1">      // If left unset parent&#39;</span>s user-template will be used
+      user-attr-template <span class="o">=</span> <span class="si">${</span><span class="p">?LDAP_USER_ATTR_TEMPLATE</span><span class="si">}</span>
+      // Filter that tests membership of the group. If this property is empty <span class="k">then</span> there is no group membership check
+      // AD <span class="nv">example</span> <span class="o">=</span>&gt; <span class="nv">memberOf</span><span class="o">=</span><span class="nv">CN</span><span class="o">=</span>mygroup,ou<span class="o">=</span>ouofthegroup,DC<span class="o">=</span>domain,DC<span class="o">=</span>com
+      // OpenLDAP <span class="nv">example</span> <span class="o">=</span>&gt; <span class="nv">CN</span><span class="o">=</span>mygroup
+      <span class="nv">group</span> <span class="o">=</span> <span class="si">${</span><span class="p">?LDAP_GROUP</span><span class="si">}</span>
+    <span class="o">}</span>
+    <span class="c1"># Basic auth</span>
+    <span class="nv">username</span> <span class="o">=</span> <span class="si">${</span><span class="p">?BASIC_AUTH_USER</span><span class="si">}</span>
+    <span class="nv">password</span> <span class="o">=</span> <span class="si">${</span><span class="p">?BASIC_AUTH_PWD</span><span class="si">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="nv">hosts</span> <span class="o">=</span> <span class="o">[</span>
+  <span class="o">{</span>
+    <span class="nv">host</span> <span class="o">=</span> <span class="s2">&#34;http://10.10.10.11:9200&#34;</span>
+    <span class="nv">name</span> <span class="o">=</span> <span class="s2">&#34;ELK&#34;</span>
+    <span class="nv">auth</span> <span class="o">=</span> <span class="o">{</span> // 这个配置也可以不用配置，此时的elastic 则不需要认证就能使用
+      <span class="nv">username</span> <span class="o">=</span> <span class="s2">&#34;username&#34;</span>
+      <span class="nv">password</span> <span class="o">=</span> <span class="s2">&#34;password&#34;</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<hr />
+
+<p>&lt;&ndash;持续更新&ndash;&gt;</p>
+
+<hr />
+
+<blockquote>
+<p>本文为原创文章，转载注明出处</p>
+
+<p>如果帮到你了，还请多支持</p>
+</blockquote>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">周利山</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-10-19
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/wechatpay.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/elasticsearch/">elasticsearch</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/filebeat&#43;kafka&#43;logstash&#43;elasticsearch&#43;kibana%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/">
+            <span class="next-text nav-default">使用Filebeat&#43;kafka&#43;logstash&#43;elasticsearch&#43;kibana搭建日志系统</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="zhou_mfk@163.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://zhou-mfk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">周利山</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

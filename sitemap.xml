@@ -3,37 +3,44 @@
   
   <url>
     <loc>https://zhou-mfk.github.io/categories/</loc>
-    <lastmod>2019-10-18T20:52:27+08:00</lastmod>
+    <lastmod>2019-10-19T20:39:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/categories/elk/</loc>
-    <lastmod>2019-10-18T20:52:27+08:00</lastmod>
+    <lastmod>2019-10-19T20:39:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://zhou-mfk.github.io/post/elasticsearch%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2019-10-19T20:39:51+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://zhou-mfk.github.io/post/</loc>
-    <lastmod>2019-10-18T20:52:27+08:00</lastmod>
+    <lastmod>2019-10-19T20:39:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/tags/</loc>
-    <lastmod>2019-10-18T20:52:27+08:00</lastmod>
+    <lastmod>2019-10-19T20:39:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/</loc>
-    <lastmod>2019-10-18T20:52:27+08:00</lastmod>
+    <lastmod>2019-10-19T20:39:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/tags/elasticsearch/</loc>
-    <lastmod>2019-10-18T20:52:27+08:00</lastmod>
+    <lastmod>2019-10-19T20:39:51+08:00</lastmod>
     <priority>0</priority>
   </url>
   
