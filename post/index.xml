@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Zhou Li Shan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 19 Oct 2019 20:39:51 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 19 Nov 2019 17:02:32 +0800</lastBuildDate>
     
 	<atom:link href="https://zhou-mfk.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python中使用ldap实现用户认证</title>
+      <link>https://zhou-mfk.github.io/post/python%E4%B8%AD%E4%BD%BF%E7%94%A8ldap%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/</link>
+      <pubDate>Tue, 19 Nov 2019 17:02:32 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/post/python%E4%B8%AD%E4%BD%BF%E7%94%A8ldap%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/</guid>
+      <description>使用python实现域账号认证，并增加对ldaps的支持 版本信息如下: python 3 python-ldap 3.2.0 安装python-ldap 参考文档 python-ldap 1 python -m pip install python-ldap 代码实例 ldapauth 函数</description>
+    </item>
     
     <item>
       <title>Elasticsearch常见问题与解决方法</title>
