@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>监控 on Zhou Li Shan</title>
+    <link>https://zhou-mfk.github.io/tags/%E7%9B%91%E6%8E%A7/</link>
+    <description>Recent content in 监控 on Zhou Li Shan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Fri, 22 Nov 2019 10:46:18 +0800</lastBuildDate>
+    
+	<atom:link href="https://zhou-mfk.github.io/tags/%E7%9B%91%E6%8E%A7/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Prometheus监控</title>
+      <link>https://zhou-mfk.github.io/post/prometheus%E7%9B%91%E6%8E%A7/</link>
+      <pubDate>Fri, 22 Nov 2019 10:46:18 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/post/prometheus%E7%9B%91%E6%8E%A7/</guid>
+      <description>参考: Prometheus 官方文档 promethues-book 简介 Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog</description>
+    </item>
+    
+  </channel>
+</rss>

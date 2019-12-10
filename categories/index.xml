@@ -6,10 +6,19 @@
     <description>Recent content in Categories on Zhou Li Shan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 19 Nov 2019 17:02:32 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 22 Nov 2019 10:46:18 +0800</lastBuildDate>
     
 	<atom:link href="https://zhou-mfk.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>prometheus</title>
+      <link>https://zhou-mfk.github.io/categories/prometheus/</link>
+      <pubDate>Fri, 22 Nov 2019 10:46:18 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/categories/prometheus/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Python</title>
