@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2019-11-22T10:46:18&#43;08:00" />
 <meta itemprop="dateModified" content="2019-11-22T10:46:18&#43;08:00" />
-<meta itemprop="wordCount" content="7064">
+<meta itemprop="wordCount" content="7144">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/prometheus/"> prometheus </a>
             </div>
-          <span class="more-meta"> 约 7064 字 </span>
+          <span class="more-meta"> 约 7144 字 </span>
           <span class="more-meta"> 预计阅读 15 分钟 </span>
         
       </div>
@@ -199,13 +199,13 @@
 <li><p>Exporter  将监控数据采集的端点通过HTTP服务的形式暴露给Prometheus Server，Prometheus Server通过访问该Exporter提供的Endpoint端点，即可获取到需要采集的监控数据。</p>
 
 <ul>
-<li>直接采集</li>
+<li>直接采集  应用内置了对prometheus的支持，直接把监控数据暴漏出来</li>
 </ul>
 
 <p>应用内置了对prometheus的支持，直接把监控数据暴漏出来</p>
 
 <ul>
-<li>简接采集</li>
+<li>简接采集 应用不支持直接对prometheus, 需要我们安装对应的exporter 如nginx exporter , Consul exporter</li>
 </ul>
 
 <p>应用不支持直接对prometheus, 需要我们安装对应的exporter 如nginx exporter , Consul exporter</p></li>
@@ -255,52 +255,65 @@
 <pre class="chroma"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
-</span><span class="lnt">4
 </span></pre></td>
 <td class="lntd">
 <pre class="chroma">  http_request_status{code=&#39;200&#39;,content_path=&#39;/api/path&#39;, environment=&#39;produment&#39;} =&gt; [value1@timestamp1,value2@timestamp2...]
   
-  
   http_request_status{code=&#39;200&#39;,content_path=&#39;/api/path2&#39;, environment=&#39;produment&#39;} =&gt; [value1@timestamp1,value2@timestamp2...]</pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">&gt; 每一条时间序列由指标名称(Metrics Name)以及一组标签(Labels)唯一标识。</pre></td></tr></table>
 </div>
 </div>
 <blockquote>
-<p>每一条时间序列由指标名称(Metrics Name)以及一组标签(Labels)唯一标识。</p>
-
 <p>每条时间序列按照时间的先后顺序存储一系列的样本值。</p>
-
-<p>表示维度的标签可能来源于你的监控对象的状态，比如code=404或者content_path=/api/path。也可能来源于的你的环境定义，比如environment=produment。基于这些Labels我们可以方便地对监控数据进行聚合，过滤，裁剪。</p>
 </blockquote>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">&gt; 表示维度的标签可能来源于你的监控对象的状态，比如code=404或者content_path=/api/path。也可能来源于的你的环境定义，比如environment=produment。基于这些Labels我们可以方便地对监控数据进行聚合，过滤，裁剪。</pre></td></tr></table>
+</div>
+</div>
 <ul>
 <li>强大的查询语言promQL</li>
 </ul>
 
 <blockquote>
 <p>Prometheus内置了一个强大的数据查询语言PromQL。 通过PromQL可以实现对监控数据的查询、聚合。同时PromQL也被应用于数据可视化(如Grafana)以及告警当中。</p>
-</blockquote>
 
 <p>通过PromQL可以轻松回答类似于以下问题：</p>
 
 <ul>
-<li>在过去一段时间中95%应用延迟时间的分布范围？</li>
-<li>预测在4小时后，磁盘空间占用大致会是什么情况？</li>
+<li><p>在过去一段时间中95%应用延迟时间的分布范围？</p></li>
+
+<li><p>预测在4小时后，磁盘空间占用大致会是什么情况？</p></li>
 
 <li><p>CPU占用率前5位的服务有哪些？(过滤)</p></li>
+</ul>
+</blockquote>
 
-<li><p>高效</p></li>
+<ul>
+<li>高效</li>
 </ul>
 
 <blockquote>
 <p>对于监控系统而言，大量的监控任务必然导致有大量的数据产生。而Prometheus可以高效地处理这些数据，对于单一Prometheus Server实例而言它可以处理：</p>
+
+<ol>
+<li><p>数以百万的监控指标</p></li>
+
+<li><p>每秒处理数十万的数据点。</p></li>
+</ol>
 </blockquote>
 
 <ul>
-<li>数以百万的监控指标</li>
-
-<li><p>每秒处理数十万的数据点。</p></li>
-
-<li><p>可扩展</p></li>
+<li>可扩展</li>
 </ul>
 
 <blockquote>
@@ -1048,7 +1061,11 @@ curl -s consul_url/v1/catalog/node/主机ip地址</code></pre></td></tr></table>
           <a href="/tags/%E7%9B%91%E6%8E%A7/">监控</a>
           </div>
       <nav class="post-nav">
-        
+        <a class="prev" href="/post/prometheus%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8Apromql/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Prometheus的数据类型及promQL</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
         <a class="next" href="/post/python%E4%B8%AD%E4%BD%BF%E7%94%A8ldap%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/">
             <span class="next-text nav-default">Python中使用ldap实现用户认证</span>
             <span class="next-text nav-mobile">下一篇</span>

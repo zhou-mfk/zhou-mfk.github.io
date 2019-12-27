@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Prometheus的数据类型及promQL - Zhou Li Shan</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="周利山" /><meta name="description" content="Prometheus通过指标名称（metrics name）以及对应的一组标签（labelset）唯一定义一条时间序列。指标名称反映了监控样本" /><meta name="keywords" content="prometheus, 监控" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6 with theme even" />
+
+
+<link rel="canonical" href="https://zhou-mfk.github.io/post/prometheus%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8Apromql/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Prometheus的数据类型及promQL" />
+<meta property="og:description" content="Prometheus通过指标名称（metrics name）以及对应的一组标签（labelset）唯一定义一条时间序列。指标名称反映了监控样本" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhou-mfk.github.io/post/prometheus%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8Apromql/" />
+<meta property="article:published_time" content="2019-12-10T16:52:08&#43;08:00"/>
+<meta property="article:modified_time" content="2019-12-10T16:52:08&#43;08:00"/>
+
+<meta itemprop="name" content="Prometheus的数据类型及promQL">
+<meta itemprop="description" content="Prometheus通过指标名称（metrics name）以及对应的一组标签（labelset）唯一定义一条时间序列。指标名称反映了监控样本">
+
+
+<meta itemprop="datePublished" content="2019-12-10T16:52:08&#43;08:00" />
+<meta itemprop="dateModified" content="2019-12-10T16:52:08&#43;08:00" />
+<meta itemprop="wordCount" content="1541">
+
+
+
+<meta itemprop="keywords" content="prometheus,监控," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Prometheus的数据类型及promQL"/>
+<meta name="twitter:description" content="Prometheus通过指标名称（metrics name）以及对应的一组标签（labelset）唯一定义一条时间序列。指标名称反映了监控样本"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">花开花落，云卷云舒</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">花开花落，云卷云舒</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Prometheus的数据类型及promQL</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2019-12-10 </span>
+        <div class="post-category">
+            <a href="/categories/prometheus/"> prometheus </a>
+            </div>
+          <span class="more-meta"> 约 1541 字 </span>
+          <span class="more-meta"> 预计阅读 4 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#metrics类型">Metrics类型</a>
+<ul>
+<li><a href="#counter-只增不减的计数器">Counter 只增不减的计数器</a></li>
+<li><a href="#gauge-可增可减仪表盘">Gauge 可增可减仪表盘</a></li>
+<li><a href="#使用histogram和summary分析数据分布情况">使用Histogram和Summary分析数据分布情况</a></li>
+</ul></li>
+<li><a href="#promql语言">promQL语言</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<blockquote>
+<p>Prometheus通过指标名称（metrics name）以及对应的一组标签（labelset）唯一定义一条时间序列。指标名称反映了监控样本的基本标识，而label则在这个基本特征上为采集到的数据提供了多种特征维度。用户可以基于这些特征维度过滤，聚合，统计从而产生新的计算后的一条时间序列。</p>
+</blockquote>
+
+<h2 id="metrics类型">Metrics类型</h2>
+
+<p>Prometheus定义了4中不同的指标类型(metric type)：</p>
+
+<ul>
+<li>Counter（计数器）</li>
+<li>Gauge（仪表盘）</li>
+<li>Histogram（直方图）</li>
+<li>Summary（摘要）</li>
+</ul>
+
+<h3 id="counter-只增不减的计数器">Counter 只增不减的计数器</h3>
+
+<p>Counter类型的指标其工作方式和计数器一样，只增不减（除非系统发生重置）</p>
+
+<p>如监控项中的网卡进出流量数据只增加发送或接收的量，这样就可以使用的内置rate() 或irate() 来计算进出的网络速度：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">rate<span class="o">(</span>net_bytes_recv<span class="o">{</span><span class="nv">host</span><span class="o">=</span><span class="s2">&#34;</span><span class="nv">$host</span><span class="s2">&#34;</span>,interface<span class="o">=</span>~<span class="s2">&#34;eth.*|bond.*&#34;</span><span class="o">}[</span>5m<span class="o">])</span>
+计算最近5m的网卡流量</code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="gauge-可增可减仪表盘">Gauge 可增可减仪表盘</h3>
+
+<p>Gauge类型的指标侧重于反应系统的当前状态。因此这类指标的样本数据可增可减的瞬时值。</p>
+
+<p>这类的数据不可以用类似rate()的函数。 可以使用predict_linear()来预测未来数据趋势</p>
+
+<p>如:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">predict_linear<span class="o">(</span>node_filesystem_free<span class="o">{</span><span class="nv">job</span><span class="o">=</span><span class="s2">&#34;node&#34;</span><span class="o">}[</span>2h<span class="o">]</span>, <span class="m">4</span> * <span class="m">3600</span><span class="o">)</span> &lt; <span class="m">0</span> 
+<span class="c1"># 根据前两小时的数据预测试此后4小时的磁盘空间是否小于0</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="使用histogram和summary分析数据分布情况">使用Histogram和Summary分析数据分布情况</h3>
+
+<p>Histogram和Summary主用用于统计和分析样本的分布情况</p>
+
+<p>例如: prometheus 的查询持续时间情况：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># HELP prometheus_engine_query_duration_seconds Query timings</span>
+<span class="c1"># TYPE prometheus_engine_query_duration_seconds summary</span>
+prometheus_engine_query_duration_seconds<span class="o">{</span><span class="nv">slice</span><span class="o">=</span><span class="s2">&#34;inner_eval&#34;</span>,quantile<span class="o">=</span><span class="s2">&#34;0.5&#34;</span><span class="o">}</span> <span class="m">3</span>.3634e-05
+prometheus_engine_query_duration_seconds<span class="o">{</span><span class="nv">slice</span><span class="o">=</span><span class="s2">&#34;inner_eval&#34;</span>,quantile<span class="o">=</span><span class="s2">&#34;0.9&#34;</span><span class="o">}</span> <span class="m">0</span>.000148559
+prometheus_engine_query_duration_seconds<span class="o">{</span><span class="nv">slice</span><span class="o">=</span><span class="s2">&#34;inner_eval&#34;</span>,quantile<span class="o">=</span><span class="s2">&#34;0.99&#34;</span><span class="o">}</span> <span class="m">0</span>.086480298
+prometheus_engine_query_duration_seconds_sum<span class="o">{</span><span class="nv">slice</span><span class="o">=</span><span class="s2">&#34;inner_eval&#34;</span><span class="o">}</span> <span class="m">2</span>.8547534292935394e+06
+prometheus_engine_query_duration_seconds_count<span class="o">{</span><span class="nv">slice</span><span class="o">=</span><span class="s2">&#34;inner_eval&#34;</span><span class="o">}</span> <span class="m">1</span>.260549577e+09</code></pre></td></tr></table>
+</div>
+</div>
+<p>类型为Histogram的监控指标</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># HELP prometheus_tsdb_compaction_chunk_range_seconds Final time range of chunks on their first compaction</span>
+<span class="c1"># TYPE prometheus_tsdb_compaction_chunk_range_seconds histogram</span>
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">&#34;100&#34;</span><span class="o">}</span> <span class="m">836536</span>
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">&#34;400&#34;</span><span class="o">}</span> <span class="m">836536</span>
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">&#34;1600&#34;</span><span class="o">}</span> <span class="m">836536</span>
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">&#34;6400&#34;</span><span class="o">}</span> <span class="m">836536</span>
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">&#34;25600&#34;</span><span class="o">}</span> <span class="m">1</span>.81803349e+08
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">&#34;102400&#34;</span><span class="o">}</span> <span class="m">1</span>.99503881e+08
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">&#34;409600&#34;</span><span class="o">}</span> <span class="m">2</span>.05460811e+08
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">&#34;1.6384e+06&#34;</span><span class="o">}</span> <span class="m">2</span>.0996758e+08
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">&#34;6.5536e+06&#34;</span><span class="o">}</span> <span class="m">1</span>.478032501e+10
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">&#34;2.62144e+07&#34;</span><span class="o">}</span> <span class="m">1</span>.4781616372e+10
+prometheus_tsdb_compaction_chunk_range_seconds_bucket<span class="o">{</span><span class="nv">le</span><span class="o">=</span><span class="s2">&#34;+Inf&#34;</span><span class="o">}</span> <span class="m">1</span>.4781616372e+10
+prometheus_tsdb_compaction_chunk_range_seconds_sum <span class="m">2</span>.6226729879339772e+16
+prometheus_tsdb_compaction_chunk_range_seconds_count <span class="m">1</span>.4781616372e+10</code></pre></td></tr></table>
+</div>
+</div>
+<p>与Summary类型的指标相似之处在于Histogram类型的样本同样会反应当前指标的记录的总数(以_count作为后缀)以及其值的总量（以_sum作为后缀）。不同在于Histogram指标直接反应了在不同区间内样本的个数，区间通过标签len进行定义。</p>
+
+<p>同时对于Histogram的指标，我们还可以通过histogram_quantile()函数计算出其值的分位数。不同在于Histogram通过histogram_quantile函数是在服务器端计算的分位数。 而Sumamry的分位数则是直接在客户端计算完成。因此对于分位数的计算而言，Summary在通过PromQL进行查询时有更好的性能表现，而Histogram则会消耗更多的资源。反之对于客户端而言Histogram消耗的资源更少。在选择这两种方式时用户应该按照自己的实际场景进行选择。</p>
+
+<h2 id="promql语言">promQL语言</h2>
+
+<blockquote>
+<p>PromQL是Prometheus内置的数据查询语言，其提供对时间序列数据丰富的查询，聚合以及逻辑运算能力的支持。并且被广泛应用在Prometheus的日常应用当中，包括对数据查询、可视化、告警处理当中。可以这么说，PromQL是Prometheus所有应用场景的基础，理解和掌握PromQL是Prometheus入门的第一课。</p>
+</blockquote>
+
+<p>支持数学运算</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">+ <span class="o">(</span>加法<span class="o">)</span>
+- <span class="o">(</span>减法<span class="o">)</span>
+* <span class="o">(</span>乘法<span class="o">)</span>
+/ <span class="o">(</span>除法<span class="o">)</span>
+% <span class="o">(</span>求余<span class="o">)</span>
+^ <span class="o">(</span>幂运算<span class="o">)</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>支持运算符</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">== (相等)
+!= (不相等)
+&gt; (大于)
+&lt; (小于)
+&gt;= (大于等于)
+&lt;= (小于等于)</pre></td></tr></table>
+</div>
+</div>
+<p>支持集合运算符</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">and (并且)
+or (或者)
+unless (排除)</pre></td></tr></table>
+</div>
+</div>
+<p>使用bool类型 返回0或1</p>
+
+<p>如果http请求总数大于1000 则返回1，否则返回0  如下所示</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">http_requests_total &gt; bool <span class="m">1000</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>在PromQL操作符中优先级由高到低依次为</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">^
+*, /, %
++, -
+==, !=, &lt;=, &lt;, &gt;=, &gt;
+and, unless
+or</pre></td></tr></table>
+</div>
+</div>
+<p>聚合操作</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">sum (求和)
+min (最小值)
+max (最大值)
+avg (平均值)
+stddev (标准差)
+stdvar (标准差异)
+count (计数)
+count_values (对value进行计数)
+bottomk (后n条时序)
+topk (前n条时序)
+quantile (分布统计)</pre></td></tr></table>
+</div>
+</div>
+<p>内置函数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">increase
+rate/irate
+predict_linear 预测</pre></td></tr></table>
+</div>
+</div>
+<p>label动态替换</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
+<td class="lntd">
+<pre class="chroma">label_replace(v instant-vector, dst_label string, replacement string, src_label string, regex string)</pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">周利山</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2019-12-10
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/wechatpay.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/prometheus/">prometheus</a>
+          <a href="/tags/%E7%9B%91%E6%8E%A7/">监控</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/prometheus%E7%9B%91%E6%8E%A7/">
+            <span class="next-text nav-default">Prometheus监控</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="zhou_mfk@163.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://zhou-mfk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">周利山</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
