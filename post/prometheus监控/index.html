@@ -591,7 +591,7 @@ Flags:
 </span><span class="w">
 </span><span class="w">    </span><span class="c"># metrics_path defaults to &#39;/metrics&#39;</span><span class="w">
 </span><span class="w">    </span><span class="c"># scheme defaults to &#39;http&#39;.</span><span class="w">
-</span><span class="w">        </span><span class="c"># 静态配置</span><span class="w">
+</span><span class="w">		</span><span class="c"># 静态配置</span><span class="w">
 </span><span class="w">    </span>static_configs<span class="p">:</span><span class="w">
 </span><span class="w">      </span>-<span class="w"> </span>targets<span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;127.0.0.1:9090&#39;</span><span class="p">]</span><span class="w">
 </span><span class="w">        </span>labels<span class="p">:</span><span class="w">
@@ -832,7 +832,7 @@ curl -s consul_url/v1/catalog/node/主机ip地址</code></pre></td></tr></table>
             <span class="s2">&#34;目标ip1:port&#34;</span>
         <span class="p">]</span>
     <span class="p">},</span>
-    <span class="p">{</span>
+  	<span class="p">{</span>
         <span class="nt">&#34;labels&#34;</span><span class="p">:</span> <span class="p">{</span>
             <span class="nt">&#34;group&#34;</span><span class="p">:</span> <span class="s2">&#34;slb&#34;</span>
         <span class="p">},</span>
@@ -919,13 +919,13 @@ curl -s consul_url/v1/catalog/node/主机ip地址</code></pre></td></tr></table>
 </span><span class="w">  </span>-<span class="w"> </span><span class="s1">&#39;/usr/local/alertmanager/devmy.tmpl&#39;</span><span class="w">
 </span><span class="w"></span><span class="c"># 路由规则</span><span class="w">
 </span><span class="w"></span>route<span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="c"># 告警分组 按告警名称和主机组来分</span><span class="w">
+</span><span class="w">	</span><span class="c"># 告警分组 按告警名称和主机组来分</span><span class="w">
 </span><span class="w">  </span>group_by<span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;alertname&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;group&#39;</span><span class="p">]</span><span class="w">
 </span><span class="w">  </span>group_wait<span class="p">:</span><span class="w"> </span>10s<span class="w">
 </span><span class="w">  </span>group_interval<span class="p">:</span><span class="w"> </span>1m<span class="w">
 </span><span class="w">  </span>repeat_interval<span class="p">:</span><span class="w"> </span>8763h<span class="w">  </span><span class="c"># 重复发送告警的间隔时间 配置这个时间也即是发送一条告警</span><span class="w">
 </span><span class="w">  </span>receiver<span class="p">:</span><span class="w"> </span>PRD<span class="w">  </span><span class="c"># 默认的接收者</span><span class="w">
-</span><span class="w">    </span><span class="c"># 使用正则可以把不同的告警发送到不同的接收者</span><span class="w">
+</span><span class="w">	</span><span class="c"># 使用正则可以把不同的告警发送到不同的接收者</span><span class="w">
 </span><span class="w">  </span>routes<span class="p">:</span><span class="w">
 </span><span class="w">    </span>-<span class="w"> </span>match_re<span class="p">:</span><span class="w">
 </span><span class="w">        </span>alertname<span class="p">:</span><span class="w"> </span>^(SLB_Port_Down)$<span class="w">
