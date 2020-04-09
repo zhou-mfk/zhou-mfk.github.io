@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Elasticsearch快照及数据恢复 - Zhou Li Shan</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="周利山" /><meta name="description" content="elasticsearch 快照 参考官方文档 需要配置共享存储，并创建快照仓库，之后才能创建快照 1. 设置共享存储（NFS） 安装nfs及其配置 1 2 3 4 5 6 yum install nfs-utils -y cat /etc/exports /data/elastic_backup 192.168.1.*(rw,sync,all_squash) chmod" /><meta name="keywords" content="elasticsearch, nfs, 快照, 数据恢复, 日志, elk" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.55.6 with theme even" />
+
+
+<link rel="canonical" href="https://zhou-mfk.github.io/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Elasticsearch快照及数据恢复" />
+<meta property="og:description" content="elasticsearch 快照 参考官方文档 需要配置共享存储，并创建快照仓库，之后才能创建快照 1. 设置共享存储（NFS） 安装nfs及其配置 1 2 3 4 5 6 yum install nfs-utils -y cat /etc/exports /data/elastic_backup 192.168.1.*(rw,sync,all_squash) chmod" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhou-mfk.github.io/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" />
+<meta property="article:published_time" content="2020-04-09T17:36:50&#43;08:00"/>
+<meta property="article:modified_time" content="2020-04-09T17:36:50&#43;08:00"/>
+
+<meta itemprop="name" content="Elasticsearch快照及数据恢复">
+<meta itemprop="description" content="elasticsearch 快照 参考官方文档 需要配置共享存储，并创建快照仓库，之后才能创建快照 1. 设置共享存储（NFS） 安装nfs及其配置 1 2 3 4 5 6 yum install nfs-utils -y cat /etc/exports /data/elastic_backup 192.168.1.*(rw,sync,all_squash) chmod">
+
+
+<meta itemprop="datePublished" content="2020-04-09T17:36:50&#43;08:00" />
+<meta itemprop="dateModified" content="2020-04-09T17:36:50&#43;08:00" />
+<meta itemprop="wordCount" content="723">
+
+
+
+<meta itemprop="keywords" content="elasticsearch,日志,elk,nfs," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Elasticsearch快照及数据恢复"/>
+<meta name="twitter:description" content="elasticsearch 快照 参考官方文档 需要配置共享存储，并创建快照仓库，之后才能创建快照 1. 设置共享存储（NFS） 安装nfs及其配置 1 2 3 4 5 6 yum install nfs-utils -y cat /etc/exports /data/elastic_backup 192.168.1.*(rw,sync,all_squash) chmod"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">花开花落，云卷云舒</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">花开花落，云卷云舒</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Elasticsearch快照及数据恢复</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-09 </span>
+        <div class="post-category">
+            <a href="/categories/elk/"> ELK </a>
+            </div>
+          <span class="more-meta"> 约 723 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#elasticsearch-快照">elasticsearch 快照</a>
+<ul>
+<li><a href="#1-设置共享存储-nfs">1. 设置共享存储（NFS）</a></li>
+<li><a href="#挂载nfs">挂载nfs</a></li>
+<li><a href="#elasticsearch-修改配置">elasticsearch 修改配置</a></li>
+<li><a href="#创建仓库">创建仓库</a></li>
+</ul></li>
+<li><a href="#数据恢复">数据恢复</a></li>
+</ul></li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+
+<h2 id="elasticsearch-快照">elasticsearch 快照</h2>
+
+<p>参考官方文档 需要配置共享存储，并创建快照仓库，之后才能创建快照</p>
+
+<h3 id="1-设置共享存储-nfs">1. 设置共享存储（NFS）</h3>
+
+<p>安装nfs及其配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">yum install nfs-utils -y
+
+cat /etc/exports
+/data/elastic_backup <span class="m">192</span>.168.1.*<span class="o">(</span>rw,sync,all_squash<span class="o">)</span>
+chmod <span class="m">777</span> elastic_backup
+systemctl start nfs</code></pre></td></tr></table>
+</div>
+</div>
+<p>all_squash 表示客户机写入nfs的数据全部映射为nobody用户
+这里设置 all_squash并把目录设置为777 是为防止elasticsearch 集群的每个节点启动的uid和gid 不一致导致在创建快照仓库时无法创建成功。</p>
+
+<p>在这里说明下，并不是要求elasticsearch集群中中每个节点启动的用户id和group id 必须是一致的 只要写入的文件是同一个用户即可，所以这里设置all_squash</p>
+
+<h3 id="挂载nfs">挂载nfs</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">yum install nfs-utils  <span class="c1"># 安装nfs工具</span>
+mkdir /data/es_snapshot
+mount -t nfs nfs-server-ip:/data/elastic_backup /data/es_snapshot</code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="elasticsearch-修改配置">elasticsearch 修改配置</h3>
+
+<p>在elasticsearch.yml文件中增以下配置,并重启elasticsearch</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml">path.repo<span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;/data/es_snapshot&#34;</span><span class="p">]</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>其实如果在已有数据的elasticsearch集群中配置此项，并且数据量比较大的集群中，需要一台一台的重启数据，在重启之用需要把数据同步关闭，如下指令:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">curl -XPUTlocalhost:9200/_cluster/settings -d<span class="s1">&#39;{&#34;transient&#34;:{&#34;cluster.routing.allocation.disable_allocation&#34;:true}}&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<p>重启完成后需要打开数据同步,并等待数据同步完成后再继续下一个节点</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">curl -XPUTlocalhost:9200/_cluster/settings -d<span class="s1">&#39;{&#34;transient&#34;:{&#34;cluster.routing.allocation.disable_allocation&#34;:false}}&#39;</span></code></pre></td></tr></table>
+</div>
+</div>
+<h3 id="创建仓库">创建仓库</h3>
+
+<p>使用指令如下:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">#创建仓库</span>
+PUT /_snapshot/my_backup
+<span class="o">{</span>
+  <span class="s2">&#34;type&#34;</span>: <span class="s2">&#34;fs&#34;</span>,
+  <span class="s2">&#34;settings&#34;</span>: <span class="o">{</span>
+    <span class="s2">&#34;location&#34;</span>: <span class="s2">&#34;/data/es_snapshot&#34;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1"># 查看仓库</span>
+GET /_snapshot/my_backup</code></pre></td></tr></table>
+</div>
+</div>
+<p>如果你是使用了Cerebro 那你可以在这里面进行直接创建仓库, 如下所示：
+<img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20200407233441.png" alt="" /></p>
+
+<p>创建仓库</p>
+
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20200407233339.png" alt="" /></p>
+
+<p>创建完成后</p>
+
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20200408095637.png" alt="" /></p>
+
+<p>在快照管理中可以查看已有的快照和创建快照的入口</p>
+
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20200407233625.png" alt="" /></p>
+
+<p>创建快照指令如下:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 创建快照</span>
+PUT /_snapshot/my_backup/snapshot_1?wait_for_completion<span class="o">=</span><span class="nb">true</span> 
+<span class="o">{</span>
+  <span class="s2">&#34;indices&#34;</span>: <span class="s2">&#34;index_1,index_2&#34;</span>, <span class="c1"># 指定索引名称</span>
+  <span class="s2">&#34;ignore_unavailable&#34;</span>: true,
+  <span class="s2">&#34;include_global_state&#34;</span>: false,
+  <span class="s2">&#34;metadata&#34;</span>: <span class="o">{</span>
+    <span class="s2">&#34;taken_by&#34;</span>: <span class="s2">&#34;kimchy&#34;</span>,
+    <span class="s2">&#34;taken_because&#34;</span>: <span class="s2">&#34;backup before upgrading&#34;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+<span class="c1"># 查看快照</span>
+GET /_snapshot/my_backup/snapshot_1</code></pre></td></tr></table>
+</div>
+</div>
+<h2 id="数据恢复">数据恢复</h2>
+
+<p>如果在不同集群恢复，需要把nfs共享过去并同样的配置好repo.path即可使用快照。</p>
+
+<p>使用页面</p>
+
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20200407234348.png" alt="" /></p>
+
+<p>使用指令:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">POST /_snapshot/my_backup/snapshot_1/_restore
+<span class="o">{</span>
+  <span class="s2">&#34;indices&#34;</span>: <span class="s2">&#34;index_1,index_2&#34;</span>,
+  <span class="s2">&#34;ignore_unavailable&#34;</span>: true,
+  <span class="s2">&#34;include_global_state&#34;</span>: true,
+  <span class="s2">&#34;rename_pattern&#34;</span>: <span class="s2">&#34;index_(.+)&#34;</span>,
+  <span class="s2">&#34;rename_replacement&#34;</span>: <span class="s2">&#34;restored_index_</span><span class="nv">$1</span><span class="s2">&#34;</span>
+<span class="o">}</span></code></pre></td></tr></table>
+</div>
+</div>
+<p><em>指令中的相关参数可以参考官方文档</em></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">周利山</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-04-09
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/wechatpay.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/elasticsearch/">elasticsearch</a>
+          <a href="/tags/%E6%97%A5%E5%BF%97/">日志</a>
+          <a href="/tags/elk/">elk</a>
+          <a href="/tags/nfs/">nfs</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/">
+            <span class="next-text nav-default">Consul的安装及配置</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="zhou_mfk@163.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://zhou-mfk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">周利山</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

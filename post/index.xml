@@ -6,10 +6,28 @@
     <description>Recent content in Posts on Zhou Li Shan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 27 Dec 2019 13:03:41 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 09 Apr 2020 17:36:50 +0800</lastBuildDate>
     
 	<atom:link href="https://zhou-mfk.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Elasticsearch快照及数据恢复</title>
+      <link>https://zhou-mfk.github.io/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/</link>
+      <pubDate>Thu, 09 Apr 2020 17:36:50 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/</guid>
+      <description>elasticsearch 快照 参考官方文档 需要配置共享存储，并创建快照仓库，之后才能创建快照 1. 设置共享存储（NFS） 安装nfs及其配置 1 2 3 4 5 6 yum install nfs-utils -y cat /etc/exports /data/elastic_backup 192.168.1.*(rw,sync,all_squash) chmod</description>
+    </item>
+    
+    <item>
+      <title>Consul的安装及配置</title>
+      <link>https://zhou-mfk.github.io/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Wed, 08 Jan 2020 21:05:45 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/</guid>
+      <description>认识consul consul官方地址 ### 什么consul Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置</description>
+    </item>
     
     <item>
       <title>Prometheus基于consul的自动发现</title>

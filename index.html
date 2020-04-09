@@ -45,7 +45,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://zhou-mfk.github.io/" />
 
-<meta property="og:updated_time" content="2019-12-27T13:03:41&#43;08:00"/>
+<meta property="og:updated_time" content="2020-04-09T17:36:50&#43;08:00"/>
 
 <meta itemprop="name" content="Zhou Li Shan">
 <meta itemprop="description" content="">
@@ -115,6 +115,52 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/">Elasticsearch快照及数据恢复</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-04-09 </span>
+      <div class="post-category">
+          <a href="/categories/elk/"> ELK </a>
+          </div>
+        <span class="more-meta"> 约 723 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      elasticsearch 快照 参考官方文档 需要配置共享存储，并创建快照仓库，之后才能创建快照 1. 设置共享存储（NFS） 安装nfs及其配置 1 2 3 4 5 6 yum install nfs-utils -y cat /etc/exports /data/elastic_backup 192.168.1.*(rw,sync,all_squash) chmod
+    </div>
+    <div class="read-more">
+      <a href="/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/">Consul的安装及配置</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-01-08 </span>
+      <div class="post-category">
+          <a href="/categories/consul/"> consul </a>
+          </div>
+        <span class="more-meta"> 约 1220 字 </span>
+        <span class="more-meta"> 预计阅读 3 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      认识consul consul官方地址 ### 什么consul Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置
+    </div>
+    <div class="read-more">
+      <a href="/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/">Prometheus基于consul的自动发现</a></h1>
     <div class="post-meta">
       <span class="post-time"> 2019-12-27 </span>
@@ -178,52 +224,6 @@
     </div>
     <div class="read-more">
       <a href="/post/prometheus%E7%9B%91%E6%8E%A7/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/python%E4%B8%AD%E4%BD%BF%E7%94%A8ldap%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/">Python中使用ldap实现用户认证</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-11-19 </span>
-      <div class="post-category">
-          <a href="/categories/python/"> Python </a>
-          </div>
-        <span class="more-meta"> 约 397 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      使用python实现域账号认证，并增加对ldaps的支持 版本信息如下: python 3 python-ldap 3.2.0 安装python-ldap 参考文档 python-ldap 1 python -m pip install python-ldap 代码实例 ldapauth 函数
-    </div>
-    <div class="read-more">
-      <a href="/post/python%E4%B8%AD%E4%BD%BF%E7%94%A8ldap%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/elasticsearch%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">Elasticsearch常见问题与解决方法</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-10-19 </span>
-      <div class="post-category">
-          <a href="/categories/elk/"> ELK </a>
-          </div>
-        <span class="more-meta"> 约 1829 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Elasticsearch常见问题与解决方法 工作中遇到的问题及解决方法，本程文章持续会更新 问题及解决方法 索引字段 默认为1000，如果超过了这
-    </div>
-    <div class="read-more">
-      <a href="/post/elasticsearch%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

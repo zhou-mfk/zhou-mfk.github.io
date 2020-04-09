@@ -3,13 +3,81 @@
   
   <url>
     <loc>https://zhou-mfk.github.io/categories/</loc>
-    <lastmod>2019-12-27T13:03:41+08:00</lastmod>
+    <lastmod>2020-04-09T17:36:50+08:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
+    <loc>https://zhou-mfk.github.io/categories/elk/</loc>
+    <lastmod>2020-04-09T17:36:50+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/</loc>
+    <lastmod>2020-04-09T17:36:50+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://zhou-mfk.github.io/post/</loc>
-    <lastmod>2019-12-27T13:03:41+08:00</lastmod>
+    <lastmod>2020-04-09T17:36:50+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/tags/</loc>
+    <lastmod>2020-04-09T17:36:50+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/</loc>
+    <lastmod>2020-04-09T17:36:50+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/tags/elasticsearch/</loc>
+    <lastmod>2020-04-09T17:36:50+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/tags/elk/</loc>
+    <lastmod>2020-04-09T17:36:50+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/tags/nfs/</loc>
+    <lastmod>2020-04-09T17:36:50+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/tags/%E6%97%A5%E5%BF%97/</loc>
+    <lastmod>2020-04-09T17:36:50+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/</loc>
+    <lastmod>2020-01-08T21:05:45+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/categories/consul/</loc>
+    <lastmod>2020-01-08T21:05:45+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/tags/consul/</loc>
+    <lastmod>2020-01-08T21:05:45+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -18,24 +86,6 @@
     <lastmod>2019-12-27T13:03:41+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://zhou-mfk.github.io/tags/</loc>
-    <lastmod>2019-12-27T13:03:41+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://zhou-mfk.github.io/</loc>
-    <lastmod>2019-12-27T13:03:41+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://zhou-mfk.github.io/tags/consul/</loc>
-    <lastmod>2019-12-27T13:03:41+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -102,28 +152,10 @@
   </url>
   
   <url>
-    <loc>https://zhou-mfk.github.io/categories/elk/</loc>
-    <lastmod>2019-10-19T20:39:51+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://zhou-mfk.github.io/post/elasticsearch%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</loc>
     <lastmod>2019-10-19T20:39:51+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://zhou-mfk.github.io/tags/elasticsearch/</loc>
-    <lastmod>2019-10-19T20:39:51+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://zhou-mfk.github.io/tags/elk/</loc>
-    <lastmod>2019-10-18T20:52:27+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -161,12 +193,6 @@
     <lastmod>2019-10-18T20:52:27+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://zhou-mfk.github.io/tags/%E6%97%A5%E5%BF%97/</loc>
-    <lastmod>2019-10-18T20:52:27+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
