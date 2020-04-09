@@ -6,12 +6,17 @@
     <description>Recent content in Categories on Zhou Li Shan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
+<<<<<<< HEAD
     <lastBuildDate>Thu, 09 Apr 2020 17:36:50 +0800</lastBuildDate>
+=======
+    <lastBuildDate>Wed, 08 Jan 2020 21:05:45 +0800</lastBuildDate>
+>>>>>>> 8b55076846feffe270b766b8b690e03f959f7662
     
 	<atom:link href="https://zhou-mfk.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+<<<<<<< HEAD
       <title>ELK</title>
       <link>https://zhou-mfk.github.io/categories/elk/</link>
       <pubDate>Thu, 09 Apr 2020 17:36:50 +0800</pubDate>
@@ -21,6 +26,8 @@
     </item>
     
     <item>
+=======
+>>>>>>> 8b55076846feffe270b766b8b690e03f959f7662
       <title>consul</title>
       <link>https://zhou-mfk.github.io/categories/consul/</link>
       <pubDate>Wed, 08 Jan 2020 21:05:45 +0800</pubDate>
