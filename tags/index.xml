@@ -6,10 +6,46 @@
     <description>Recent content in Tags on Zhou Li Shan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 09 Apr 2020 17:36:50 +0800</lastBuildDate>
+    <lastBuildDate>Sat, 11 Apr 2020 12:22:04 +0800</lastBuildDate>
     
 	<atom:link href="https://zhou-mfk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>nginx</title>
+      <link>https://zhou-mfk.github.io/tags/nginx/</link>
+      <pubDate>Sat, 11 Apr 2020 12:22:04 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx_upstream_check_module</title>
+      <link>https://zhou-mfk.github.io/tags/nginx_upstream_check_module/</link>
+      <pubDate>Sat, 11 Apr 2020 12:22:04 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/nginx_upstream_check_module/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openresty</title>
+      <link>https://zhou-mfk.github.io/tags/openresty/</link>
+      <pubDate>Sat, 11 Apr 2020 12:22:04 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/openresty/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>upstram</title>
+      <link>https://zhou-mfk.github.io/tags/upstram/</link>
+      <pubDate>Sat, 11 Apr 2020 12:22:04 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/upstram/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>elasticsearch</title>
