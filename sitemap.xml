@@ -50,16 +50,16 @@
   </url>
   
   <url>
-    <loc>https://zhou-mfk.github.io/tags/upstram/</loc>
-    <lastmod>2020-04-11T12:22:04+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://zhou-mfk.github.io/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/</loc>
     <lastmod>2020-04-11T12:22:04+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/tags/upstram/</loc>
+    <lastmod>2020-04-11T12:22:04+08:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
