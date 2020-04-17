@@ -6,10 +6,19 @@
     <description>Recent content in Python on Zhou Li Shan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 19 Nov 2019 17:02:32 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 17 Apr 2020 21:13:30 +0800</lastBuildDate>
     
 	<atom:link href="https://zhou-mfk.github.io/categories/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Python与Rabbitmq</title>
+      <link>https://zhou-mfk.github.io/post/python%E4%B8%8Erabbitmq/</link>
+      <pubDate>Fri, 17 Apr 2020 21:13:30 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/post/python%E4%B8%8Erabbitmq/</guid>
+      <description>使用docker安装rabbitmq 拉取镜像 1 docker pull rabbitmq:management # 直接使用带web管理的 生成容器 1 2 mkdir /home/rabbitmq_data docker run -itd --name rabbitmq -p 5672:5672 -p 15672:15672 -v /home/rabbitmq_data:/var/lib/rabbitmq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin rabbitmq:management RABBITMQ_DEFAULT_USER 用户名 RABBITMQ_DEFAULT_PASS 密码 访</description>
+    </item>
     
     <item>
       <title>Python中使用ldap实现用户认证</title>

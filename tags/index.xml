@@ -6,10 +6,37 @@
     <description>Recent content in Tags on Zhou Li Shan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sat, 11 Apr 2020 12:22:04 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 17 Apr 2020 21:13:30 +0800</lastBuildDate>
     
 	<atom:link href="https://zhou-mfk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>kombu</title>
+      <link>https://zhou-mfk.github.io/tags/kombu/</link>
+      <pubDate>Fri, 17 Apr 2020 21:13:30 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/kombu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://zhou-mfk.github.io/tags/python/</link>
+      <pubDate>Fri, 17 Apr 2020 21:13:30 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rabbitmq</title>
+      <link>https://zhou-mfk.github.io/tags/rabbitmq/</link>
+      <pubDate>Fri, 17 Apr 2020 21:13:30 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/rabbitmq/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>nginx</title>
@@ -116,15 +143,6 @@
       <pubDate>Tue, 19 Nov 2019 17:02:32 +0800</pubDate>
       
       <guid>https://zhou-mfk.github.io/tags/ldap/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://zhou-mfk.github.io/tags/python/</link>
-      <pubDate>Tue, 19 Nov 2019 17:02:32 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/python/</guid>
       <description></description>
     </item>
     

@@ -16,7 +16,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="周利山" /><meta name="keywords" content="Linux, 运维, Python开发" />
+<meta name="author" content="周利山" /><meta name="keywords" content="Linux, 运维, Python开发, k8s, Kubernetes" />
 
 
 
@@ -45,7 +45,7 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://zhou-mfk.github.io/" />
 
-<meta property="og:updated_time" content="2020-04-11T12:22:04&#43;08:00"/>
+<meta property="og:updated_time" content="2020-04-17T21:13:30&#43;08:00"/>
 
 <meta itemprop="name" content="Zhou Li Shan">
 <meta itemprop="description" content="">
@@ -113,6 +113,29 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/python%E4%B8%8Erabbitmq/">Python与Rabbitmq</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-04-17 </span>
+      <div class="post-category">
+          <a href="/categories/python/"> Python </a>
+          </div>
+        <span class="more-meta"> 约 507 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      使用docker安装rabbitmq 拉取镜像 1 docker pull rabbitmq:management # 直接使用带web管理的 生成容器 1 2 mkdir /home/rabbitmq_data docker run -itd --name rabbitmq -p 5672:5672 -p 15672:15672 -v /home/rabbitmq_data:/var/lib/rabbitmq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin rabbitmq:management RABBITMQ_DEFAULT_USER 用户名 RABBITMQ_DEFAULT_PASS 密码 访
+    </div>
+    <div class="read-more">
+      <a href="/post/python%E4%B8%8Erabbitmq/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/">openresty 1.15.8 安装及增加upstream_check_module和upsync_module</a></h1>
@@ -201,29 +224,6 @@
     </div>
     <div class="read-more">
       <a href="/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/prometheus%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8Apromql/">Prometheus的数据类型及promQL</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-12-10 </span>
-      <div class="post-category">
-          <a href="/categories/prometheus/"> prometheus </a>
-          </div>
-        <span class="more-meta"> 约 1541 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Prometheus通过指标名称（metrics name）以及对应的一组标签（labelset）唯一定义一条时间序列。指标名称反映了监控样本
-    </div>
-    <div class="read-more">
-      <a href="/post/prometheus%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8Apromql/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
