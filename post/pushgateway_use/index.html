@@ -51,7 +51,7 @@
 
 <meta itemprop="datePublished" content="2020-08-27T22:38:40&#43;08:00" />
 <meta itemprop="dateModified" content="2020-08-27T22:38:40&#43;08:00" />
-<meta itemprop="wordCount" content="1413">
+<meta itemprop="wordCount" content="1386">
 
 
 
@@ -128,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/prometheus/"> prometheus </a>
             </div>
-          <span class="more-meta"> 约 1413 字 </span>
+          <span class="more-meta"> 约 1386 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
@@ -163,9 +163,9 @@
 
 <p>我们都知道prometheus是主动的向被监控端拉取监控数据的，如果有需要向prometheus推送数据只能通过pushgateway的方式。</p>
 
-<p>我们可以使用Prometheus监控到们大部分的应用和主机，但是部有会一些监控数据是无法通过在主机节点上部署一个exporter就能解决的。</p>
+<p>我们可以使用Prometheus监控到们大部分的应用和主机，但是总有会一些监控数据是无法通过在主机节点上部署一个exporter就能解决的。</p>
 
-<p>比如我这边在工作中就遇到监控oracle的相关数据时就比较很不好监控，一些监控所需要的数据需要通过sql语句才能获得到。所以这边使用pushgate可以很好的解决我的问题。</p>
+<p>比如我这边在工作中就遇到监控oracle的相关数据时就比较很不好监控，一些监控所需要的数据需要通过sql语句才能获得到。所以这边使用pushgateway可以很好的解决我的问题。</p>
 
 <h3 id="下载和安装">下载和安装</h3>
 <div class="highlight"><div class="chroma">
@@ -352,7 +352,7 @@ journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span></co
 
 <p><code>honor_labels: true</code></p>
 
-<p>以上都是或网络上介绍的都是curl的命令来推送数据的，下面来使用reqeusts来推送数据。</p>
+<p>官网或网络上介绍的都是curl的命令来推送数据的，下面来使用reqeusts来推送数据。</p>
 
 <h3 id="使用python的requests来推送数据">使用python的requests来推送数据</h3>
 <div class="highlight"><div class="chroma">
@@ -481,7 +481,7 @@ journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span></co
     <span class="k">return</span> <span class="bp">False</span></code></pre></td></tr></table>
 </div>
 </div>
-<p>还可以python 的prometheus的prometheus_client  这个涉猎的不多。如果需要的可自行在官方文档上学习。</p>
+<p>还可以python 的 prometheus_client  这个涉猎的不多。如果需要可自行在官方文档上学习。</p>
 
 <hr />
 
