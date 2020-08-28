@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>python on Zhou Li Shan</title>
@@ -6,10 +6,28 @@
     <description>Recent content in python on Zhou Li Shan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 19 Nov 2019 17:02:32 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 27 Aug 2020 22:38:40 +0800</lastBuildDate>
     
 	<atom:link href="https://zhou-mfk.github.io/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Pushgateway的使用案例</title>
+      <link>https://zhou-mfk.github.io/post/pushgateway_use/</link>
+      <pubDate>Thu, 27 Aug 2020 22:38:40 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/post/pushgateway_use/</guid>
+      <description>参考: pushgatewy GITHUB 我们都知道prometheus是主动的向被监控端拉取监控数据的，如果有需要向prometheus推送数据只能通过pushgatew</description>
+    </item>
+    
+    <item>
+      <title>Python与Rabbitmq</title>
+      <link>https://zhou-mfk.github.io/post/python%E4%B8%8Erabbitmq/</link>
+      <pubDate>Fri, 17 Apr 2020 21:13:30 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/post/python%E4%B8%8Erabbitmq/</guid>
+      <description>使用docker安装rabbitmq 拉取镜像 1 docker pull rabbitmq:management # 直接使用带web管理的 生成容器 1 2 mkdir /home/rabbitmq_data docker run -itd --name rabbitmq -p 5672:5672 -p 15672:15672 -v /home/rabbitmq_data:/var/lib/rabbitmq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin rabbitmq:management RABBITMQ_DEFAULT_USER 用户名 RABBITMQ_DEFAULT_PASS 密码 访</description>
+    </item>
     
     <item>
       <title>Python中使用ldap实现用户认证</title>

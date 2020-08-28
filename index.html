@@ -16,14 +16,14 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="周利山" /><meta name="keywords" content="Linux, 运维, Python开发" />
+<meta name="author" content="周利山" /><meta name="keywords" content="Linux, 运维, Python开发, k8s, Kubernetes" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.55.6 with theme even" />
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
 
 
 <link rel="canonical" href="https://zhou-mfk.github.io/" />
@@ -44,12 +44,9 @@
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://zhou-mfk.github.io/" />
-
-<meta property="og:updated_time" content="2020-04-09T17:36:50&#43;08:00"/>
-
+<meta property="og:updated_time" content="2020-08-27T22:38:40+08:00" />
 <meta itemprop="name" content="Zhou Li Shan">
 <meta itemprop="description" content="">
-
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Zhou Li Shan"/>
 <meta name="twitter:description" content=""/>
@@ -115,20 +112,89 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/">Elasticsearch快照及数据恢复</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/pushgateway_use/">Pushgateway的使用案例</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2020-04-09 </span>
+      <span class="post-time"> 2020-08-27 </span>
       <div class="post-category">
-          <a href="/categories/elk/"> ELK </a>
+          <a href="/categories/prometheus/"> prometheus </a>
           </div>
-        <span class="more-meta"> 约 727 字 </span>
+        <span class="more-meta"> 约 1391 字 </span>
+        <span class="more-meta"> 预计阅读 3 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      参考: pushgatewy GITHUB 我们都知道prometheus是主动的向被监控端拉取监控数据的，如果有需要向prometheus推送数据只能通过pushgatew
+    </div>
+    <div class="read-more">
+      <a href="/post/pushgateway_use/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/python%E4%B8%8Erabbitmq/">Python与Rabbitmq</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-04-17 </span>
+      <div class="post-category">
+          <a href="/categories/python/"> Python </a>
+          </div>
+        <span class="more-meta"> 约 507 字 </span>
         <span class="more-meta"> 预计阅读 2 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      elasticsearch 快照 参考官方文档 需要配置共享存储，并创建快照仓库，之后才能创建快照 1. 设置共享存储（NFS） 安装nfs及其配置 1 2 3 4 5 6 yum install nfs-utils -y cat /etc/exports /data/elastic_backup 192.168.1.*(rw,sync,all_squash) chmod
+      使用docker安装rabbitmq 拉取镜像 1 docker pull rabbitmq:management # 直接使用带web管理的 生成容器 1 2 mkdir /home/rabbitmq_data docker run -itd --name rabbitmq -p 5672:5672 -p 15672:15672 -v /home/rabbitmq_data:/var/lib/rabbitmq -e RABBITMQ_DEFAULT_USER=admin -e RABBITMQ_DEFAULT_PASS=admin rabbitmq:management RABBITMQ_DEFAULT_USER 用户名 RABBITMQ_DEFAULT_PASS 密码 访
+    </div>
+    <div class="read-more">
+      <a href="/post/python%E4%B8%8Erabbitmq/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/">openresty 1.15.8 安装及增加upstream_check_module和upsync_module</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-04-11 </span>
+      <div class="post-category">
+          <a href="/categories/nginx/"> Nginx </a>
+          </div>
+        <span class="more-meta"> 约 696 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      openresty 1.15.8 安装及增加upstream_check_module和upsync_module 下载健康检测模块这个必须要用王晓开的这个开源模块 nginx_upstream_check_module 1 git clone
+    </div>
+    <div class="read-more">
+      <a href="/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/">Elasticsearch快照及数据恢复</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-04-09 </span>
+      <div class="post-category">
+          <a href="/categories/elk/"> ELK </a>
+          </div>
+        <span class="more-meta"> 约 730 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      elasticsearch 快照 参考官方文档 需要配置共享存储，并创建快照仓库，之后才能创建快照 1. 设置共享存储（NFS） 安装nfs及其配置 1 2 3 4 5 6 7 yum install nfs-utils -y cat /etc/exports /data/elastic_backup 192.168.1.*(rw,sync,all_squash)
     </div>
     <div class="read-more">
       <a href="/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" class="read-more-link">阅读更多</a>
@@ -144,86 +210,17 @@
       <div class="post-category">
           <a href="/categories/consul/"> consul </a>
           </div>
-        <span class="more-meta"> 约 1220 字 </span>
+        <span class="more-meta"> 约 1240 字 </span>
         <span class="more-meta"> 预计阅读 3 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      认识consul consul官方地址 ### 什么consul Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置
+      认识consul consul官方地址 什么consul Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置。
     </div>
     <div class="read-more">
       <a href="/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/">Prometheus基于consul的自动发现</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-12-27 </span>
-      <div class="post-category">
-          <a href="/categories/prometheus/"> prometheus </a>
-          </div>
-        <span class="more-meta"> 约 1785 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      consul 集群 Consul是由HashiCorp开发的一个支持多数据中心的分布式服务发现和键值对存储服务的开源软件，被大量应用于基于微服务的软件架构
-    </div>
-    <div class="read-more">
-      <a href="/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/prometheus%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8Apromql/">Prometheus的数据类型及promQL</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-12-10 </span>
-      <div class="post-category">
-          <a href="/categories/prometheus/"> prometheus </a>
-          </div>
-        <span class="more-meta"> 约 1541 字 </span>
-        <span class="more-meta"> 预计阅读 4 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      Prometheus通过指标名称（metrics name）以及对应的一组标签（labelset）唯一定义一条时间序列。指标名称反映了监控样本
-    </div>
-    <div class="read-more">
-      <a href="/post/prometheus%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8Apromql/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/prometheus%E7%9B%91%E6%8E%A7/">Prometheus监控</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-11-22 </span>
-      <div class="post-category">
-          <a href="/categories/prometheus/"> prometheus </a>
-          </div>
-        <span class="more-meta"> 约 7144 字 </span>
-        <span class="more-meta"> 预计阅读 15 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      参考: Prometheus 官方文档 promethues-book 简介 Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog
-    </div>
-    <div class="read-more">
-      <a href="/post/prometheus%E7%9B%91%E6%8E%A7/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>

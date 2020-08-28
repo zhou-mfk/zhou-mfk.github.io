@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>openresty 1.15.8 安装及增加upstream_check_module和upsync_module - Zhou Li Shan</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="周利山" /><meta name="description" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module 下载健康检测模块这个必须要用王晓开的这个开源模块 nginx_upstream_check_module 1 git clone" /><meta name="keywords" content="openresty, nginx_upstream_check_module, upstram, 健康检测" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://zhou-mfk.github.io/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module" />
+<meta property="og:description" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module 下载健康检测模块这个必须要用王晓开的这个开源模块 nginx_upstream_check_module 1 git clone" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhou-mfk.github.io/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/" />
+<meta property="article:published_time" content="2020-04-11T12:22:04+08:00" />
+<meta property="article:modified_time" content="2020-04-11T12:22:04+08:00" />
+<meta itemprop="name" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module">
+<meta itemprop="description" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module 下载健康检测模块这个必须要用王晓开的这个开源模块 nginx_upstream_check_module 1 git clone">
+<meta itemprop="datePublished" content="2020-04-11T12:22:04+08:00" />
+<meta itemprop="dateModified" content="2020-04-11T12:22:04+08:00" />
+<meta itemprop="wordCount" content="696">
+
+
+
+<meta itemprop="keywords" content="nginx,openresty,nginx_upstream_check_module,upstram," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module"/>
+<meta name="twitter:description" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module 下载健康检测模块这个必须要用王晓开的这个开源模块 nginx_upstream_check_module 1 git clone"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">花开花落，云卷云舒</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">花开花落，云卷云舒</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">openresty 1.15.8 安装及增加upstream_check_module和upsync_module</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-04-11 </span>
+        <div class="post-category">
+            <a href="/categories/nginx/"> Nginx </a>
+            </div>
+          <span class="more-meta"> 约 696 字 </span>
+          <span class="more-meta"> 预计阅读 2 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#openresty-1158-安装及增加upstream_check_module和upsync_module">openresty 1.15.8 安装及增加upstream_check_module和upsync_module</a></li>
+    <li><a href="#安装方法">安装方法</a></li>
+    <li><a href="#开始验证">开始验证</a></li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="openresty-1158-安装及增加upstream_check_module和upsync_module">openresty 1.15.8 安装及增加upstream_check_module和upsync_module</h2>
+<p><strong>下载健康检测模块这个必须要用王晓开的这个开源模块</strong></p>
+<ul>
+<li>nginx_upstream_check_module</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">git clone https://github.com/xiaokai-wang/nginx_upstream_check_module.git
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>nginx-upsync-module-2.1.2</li>
+</ul>
+<p>下载 nginx-upsync-module 用来动态更新upstream中的server</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">wget https://github.com/weibocom/nginx-upsync-module/archive/v2.1.2.tar.gz
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="安装方法">安装方法</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 解压
+tar xvf openresty-1.15.8.2.tar.gz
+tar xvf v2.1.2.tar.gz
+# 把两个模块复制到补丁目录
+
+cp -r nginx_upstream_check_module openresty-1.15.8.2/bundle/
+cp -r nginx-upsync-module-2.1.2 openresty-1.15.8.2/bundle/
+
+# 给nginx 打上健康检测模块
+cd openresty-1.15.8.2/bundle/nginx-1.15.8/
+patch -p1&lt;../nginx_upstream_check_module/check_1.12.1+.patch
+
+# 开始编译安装
+./configure --prefix=/usr/local/openresty-1.15 \
+--with-http_stub_status_module --with-debug  \
+--http-client-body-temp-path=/usr/local/openresty-1.15/nginx/client_temp \
+--http-proxy-temp-path=/usr/local/openresty-1.15/nginx/proxy_temp \
+--http-fastcgi-temp-path=/usr/local/openresty-1.15/nginx/fastcgi_temp \
+--http-uwsgi-temp-path=/usr/local/openresty-1.15/nginx/uwsgi_temp \
+--http-scgi-temp-path=/usr/local/openresty-1.15/nginx/scgi_temp \
+--user=nginx --group=nginx \
+--with-http_ssl_module --with-http_realip_module \
+--with-http_addition_module --with-http_sub_module \ 
+--with-http_dav_module --with-http_flv_module \
+--with-http_mp4_module --with-http_gunzip_module \
+--with-http_gzip_static_module --with-http_random_index_module \
+--with-http_secure_link_module  --with-http_auth_request_module \
+--with-mail --with-mail_ssl_module  --with-file-aio --with-ipv6 \
+--with-luajit --with-cc-opt=&#39;-O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector \
+--param=ssp-buffer-size=4 -m64 -mtune=generic&#39;  \
+--add-module=./bundle/nginx-upsync-module-2.1.2 \
+--add-module=./bundle/nginx_upstream_check_module
+
+gmake
+gmake install
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="开始验证">开始验证</h2>
+<p>先用docker 启动两个nginx 命令如下:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker pull nginx
+docker run -itd --name nginx01 -p 8081:80 -v /data/nginx01/html:/usr/share/nginx/html nginx
+
+docker run -itd --name nginx02 -p 8082:80 -v /data/nginx02/html:/usr/share/nginx/html nginx 
+
+<span class="c1"># 分别在两个html目录放入一个html文件</span>
+<span class="nb">echo</span> <span class="s2">&#34;&lt;h1&gt;nginx01&lt;/h1&gt;&#34;</span> &gt;&gt; /data/nginx01/html/index.html
+<span class="nb">echo</span> <span class="s2">&#34;&lt;h1&gt;nginx02&lt;/h1&gt;&#34;</span> &gt;&gt; /data/nginx02/html/index.html
+</code></pre></td></tr></table>
+</div>
+</div><p>增加以nginx配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 查看nginx状态及upstream_show
+server {
+     listen 8089;
+	 location = /upstream_show {
+            upstream_show;
+	 }
+
+	 location /nginx_status {
+            stub_status;
+            access_log   off;
+	 }
+
+	 location /nstatus {
+             check_status;
+             access_log   off;
+	 }
+}
+
+# 增加一个nginx代理及upstream
+server {
+	listen       8080 backlog=65533;
+   	server_name  localhost;
+
+	location  / {
+        proxy_pass http://web;
+        access_log  logs/nginx.log  main;
+        error_log  logs/nginx_error.log;
+	}
+}
+upstream web {
+	least_conn;
+	server 127.0.0.1:8081;
+	server 127.0.0.1:8082;
+    check interval=5000 rise=1 fall=3 timeout=4000;
+}
+
+</code></pre></td></tr></table>
+</div>
+</div><p>启动nginx</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">nginx -t  # 检测配置文件是否正常
+nginx   # 启动nginx
+nginx -s reload # 重载nginx
+nginx -s stop # 停止nginx
+
+</code></pre></td></tr></table>
+</div>
+</div><p>使用浏览器打开 http://youip:8080/</p>
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20200411121436.png" alt=""></p>
+<p>查看upstream 节点健康状态</p>
+<p>http://youip:8089/nstatus</p>
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20200411121401.png" alt=""></p>
+<p>http://youip:8089/upstream_show  这个是openresty 显示的upstream信息</p>
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20200411121559.png" alt=""></p>
+<p>现在可以stop一个docker 启动的nginx来验证nginx的upstream 健康检测模块是否正常使用</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker stop nginx01
+</code></pre></td></tr></table>
+</div>
+</div><p>通过浏览器可以看到ningx01已是down了 说明可以正常检测到异常的节点</p>
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20200411121740.png" alt=""></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker start nginx01
+</code></pre></td></tr></table>
+</div>
+</div><p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20200411121902.png" alt=""></p>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">周利山</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2020-04-11
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/wechatpay.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/nginx/">nginx</a>
+          <a href="/tags/openresty/">openresty</a>
+          <a href="/tags/nginx_upstream_check_module/">nginx_upstream_check_module</a>
+          <a href="/tags/upstram/">upstram</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/python%E4%B8%8Erabbitmq/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Python与Rabbitmq</span>
+            <span class="prev-text nav-mobile">上一篇</span>
+          </a>
+        <a class="next" href="/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/">
+            <span class="next-text nav-default">Elasticsearch快照及数据恢复</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="zhou_mfk@163.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://zhou-mfk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019 - 
+    2020
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">周利山</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Zhou Li Shan</title>
@@ -6,10 +6,109 @@
     <description>Recent content in Tags on Zhou Li Shan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 09 Apr 2020 17:36:50 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 27 Aug 2020 22:38:40 +0800</lastBuildDate>
     
 	<atom:link href="https://zhou-mfk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>prometheus</title>
+      <link>https://zhou-mfk.github.io/tags/prometheus/</link>
+      <pubDate>Thu, 27 Aug 2020 22:38:40 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/prometheus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pushgateway</title>
+      <link>https://zhou-mfk.github.io/tags/pushgateway/</link>
+      <pubDate>Thu, 27 Aug 2020 22:38:40 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/pushgateway/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://zhou-mfk.github.io/tags/python/</link>
+      <pubDate>Thu, 27 Aug 2020 22:38:40 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>requests</title>
+      <link>https://zhou-mfk.github.io/tags/requests/</link>
+      <pubDate>Thu, 27 Aug 2020 22:38:40 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/requests/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>监控</title>
+      <link>https://zhou-mfk.github.io/tags/%E7%9B%91%E6%8E%A7/</link>
+      <pubDate>Thu, 27 Aug 2020 22:38:40 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/%E7%9B%91%E6%8E%A7/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kombu</title>
+      <link>https://zhou-mfk.github.io/tags/kombu/</link>
+      <pubDate>Fri, 17 Apr 2020 21:13:30 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/kombu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rabbitmq</title>
+      <link>https://zhou-mfk.github.io/tags/rabbitmq/</link>
+      <pubDate>Fri, 17 Apr 2020 21:13:30 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/rabbitmq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>https://zhou-mfk.github.io/tags/nginx/</link>
+      <pubDate>Sat, 11 Apr 2020 12:22:04 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx_upstream_check_module</title>
+      <link>https://zhou-mfk.github.io/tags/nginx_upstream_check_module/</link>
+      <pubDate>Sat, 11 Apr 2020 12:22:04 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/nginx_upstream_check_module/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openresty</title>
+      <link>https://zhou-mfk.github.io/tags/openresty/</link>
+      <pubDate>Sat, 11 Apr 2020 12:22:04 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/openresty/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>upstram</title>
+      <link>https://zhou-mfk.github.io/tags/upstram/</link>
+      <pubDate>Sat, 11 Apr 2020 12:22:04 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/tags/upstram/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>elasticsearch</title>
@@ -57,38 +156,11 @@
     </item>
     
     <item>
-      <title>prometheus</title>
-      <link>https://zhou-mfk.github.io/tags/prometheus/</link>
-      <pubDate>Fri, 27 Dec 2019 13:03:41 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/prometheus/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>监控</title>
-      <link>https://zhou-mfk.github.io/tags/%E7%9B%91%E6%8E%A7/</link>
-      <pubDate>Fri, 27 Dec 2019 13:03:41 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/%E7%9B%91%E6%8E%A7/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>ldap</title>
       <link>https://zhou-mfk.github.io/tags/ldap/</link>
       <pubDate>Tue, 19 Nov 2019 17:02:32 +0800</pubDate>
       
       <guid>https://zhou-mfk.github.io/tags/ldap/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://zhou-mfk.github.io/tags/python/</link>
-      <pubDate>Tue, 19 Nov 2019 17:02:32 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/python/</guid>
       <description></description>
     </item>
     
