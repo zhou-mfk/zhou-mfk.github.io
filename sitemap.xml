@@ -3,6 +3,7 @@
   
   <url>
     <loc>https://zhou-mfk.github.io/categories/</loc>
+<<<<<<< HEAD
     <lastmod>2020-11-16T20:54:19+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -10,11 +11,22 @@
   <url>
     <loc>https://zhou-mfk.github.io/post/fighting/</loc>
     <lastmod>2020-11-16T20:54:19+08:00</lastmod>
+=======
+    <lastmod>2020-08-27T22:38:40+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
+    <loc>https://zhou-mfk.github.io/post/</loc>
+    <lastmod>2020-08-27T22:38:40+08:00</lastmod>
+>>>>>>> dba2bc5684629853ae481066f5f4d002d9cbdf3c
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+<<<<<<< HEAD
     <loc>https://zhou-mfk.github.io/post/</loc>
     <lastmod>2020-11-16T20:54:19+08:00</lastmod>
     <priority>0</priority>
@@ -53,11 +65,44 @@
   
   <url>
     <loc>https://zhou-mfk.github.io/categories/prometheus/</loc>
+=======
+    <loc>https://zhou-mfk.github.io/tags/prometheus/</loc>
     <lastmod>2020-08-27T22:38:40+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
+    <loc>https://zhou-mfk.github.io/categories/prometheus/</loc>
+    <lastmod>2020-08-27T22:38:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/tags/pushgateway/</loc>
+    <lastmod>2020-08-27T22:38:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/post/pushgateway_use/</loc>
+    <lastmod>2020-08-27T22:38:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/tags/python/</loc>
+>>>>>>> dba2bc5684629853ae481066f5f4d002d9cbdf3c
+    <lastmod>2020-08-27T22:38:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+<<<<<<< HEAD
     <loc>https://zhou-mfk.github.io/tags/prometheus/</loc>
     <lastmod>2020-08-27T22:38:40+08:00</lastmod>
     <priority>0</priority>
@@ -65,32 +110,47 @@
   
   <url>
     <loc>https://zhou-mfk.github.io/tags/pushgateway/</loc>
-    <lastmod>2020-08-27T22:38:40+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://zhou-mfk.github.io/tags/python/</loc>
-    <lastmod>2020-08-27T22:38:40+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
+=======
     <loc>https://zhou-mfk.github.io/tags/requests/</loc>
+>>>>>>> dba2bc5684629853ae481066f5f4d002d9cbdf3c
     <lastmod>2020-08-27T22:38:40+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/tags/</loc>
+    <lastmod>2020-08-27T22:38:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/</loc>
+    <lastmod>2020-08-27T22:38:40+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/tags/%E7%9B%91%E6%8E%A7/</loc>
     <lastmod>2020-08-27T22:38:40+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/tags/kombu/</loc>
+    <lastmod>2020-04-17T21:13:30+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/categories/python/</loc>
     <lastmod>2020-04-17T21:13:30+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -101,39 +161,38 @@
   </url>
   
   <url>
-    <loc>https://zhou-mfk.github.io/tags/kombu/</loc>
-    <lastmod>2020-04-17T21:13:30+08:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://zhou-mfk.github.io/tags/rabbitmq/</loc>
     <lastmod>2020-04-17T21:13:30+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/categories/nginx/</loc>
     <lastmod>2020-04-11T12:22:04+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/tags/nginx/</loc>
     <lastmod>2020-04-11T12:22:04+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/tags/nginx_upstream_check_module/</loc>
     <lastmod>2020-04-11T12:22:04+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/tags/openresty/</loc>
     <lastmod>2020-04-11T12:22:04+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -146,13 +205,15 @@
   <url>
     <loc>https://zhou-mfk.github.io/tags/upstram/</loc>
     <lastmod>2020-04-11T12:22:04+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://zhou-mfk.github.io/categories/elk/</loc>
+    <loc>https://zhou-mfk.github.io/tags/elasticsearch/</loc>
     <lastmod>2020-04-09T17:36:50+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -163,31 +224,35 @@
   </url>
   
   <url>
-    <loc>https://zhou-mfk.github.io/tags/elasticsearch/</loc>
+    <loc>https://zhou-mfk.github.io/categories/elk/</loc>
     <lastmod>2020-04-09T17:36:50+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/tags/elk/</loc>
     <lastmod>2020-04-09T17:36:50+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/tags/nfs/</loc>
     <lastmod>2020-04-09T17:36:50+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/tags/%E6%97%A5%E5%BF%97/</loc>
     <lastmod>2020-04-09T17:36:50+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://zhou-mfk.github.io/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/</loc>
+    <loc>https://zhou-mfk.github.io/tags/consul/</loc>
     <lastmod>2020-01-08T21:05:45+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -196,13 +261,19 @@
   <url>
     <loc>https://zhou-mfk.github.io/categories/consul/</loc>
     <lastmod>2020-01-08T21:05:45+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
+<<<<<<< HEAD
     <loc>https://zhou-mfk.github.io/tags/consul/</loc>
+=======
+    <loc>https://zhou-mfk.github.io/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/</loc>
+>>>>>>> dba2bc5684629853ae481066f5f4d002d9cbdf3c
     <lastmod>2020-01-08T21:05:45+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -227,22 +298,24 @@
   </url>
   
   <url>
-    <loc>https://zhou-mfk.github.io/post/python%E4%B8%AD%E4%BD%BF%E7%94%A8ldap%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/</loc>
+    <loc>https://zhou-mfk.github.io/tags/ldap/</loc>
     <lastmod>2019-11-19T17:02:32+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://zhou-mfk.github.io/tags/ldap/</loc>
+    <loc>https://zhou-mfk.github.io/tags/python-ldap/</loc>
     <lastmod>2019-11-19T17:02:32+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://zhou-mfk.github.io/tags/python-ldap/</loc>
+    <loc>https://zhou-mfk.github.io/post/python%E4%B8%AD%E4%BD%BF%E7%94%A8ldap%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/</loc>
     <lastmod>2019-11-19T17:02:32+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -255,31 +328,36 @@
   <url>
     <loc>https://zhou-mfk.github.io/tags/filebeat/</loc>
     <lastmod>2019-10-18T20:52:27+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/tags/kafka/</loc>
     <lastmod>2019-10-18T20:52:27+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/tags/kibana/</loc>
     <lastmod>2019-10-18T20:52:27+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/tags/logstash/</loc>
     <lastmod>2019-10-18T20:52:27+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/tags/zookeeper/</loc>
     <lastmod>2019-10-18T20:52:27+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -290,27 +368,31 @@
   </url>
   
   <url>
-    <loc>https://zhou-mfk.github.io/categories/hugo/</loc>
+    <loc>https://zhou-mfk.github.io/tags/github/</loc>
     <lastmod>2019-10-17T20:56:45+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://zhou-mfk.github.io/tags/github/</loc>
+    <loc>https://zhou-mfk.github.io/categories/hugo/</loc>
     <lastmod>2019-10-17T20:56:45+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/tags/hugo/</loc>
     <lastmod>2019-10-17T20:56:45+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://zhou-mfk.github.io/tags/picgo/</loc>
     <lastmod>2019-10-17T20:56:45+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -330,7 +412,8 @@
   <url>
     <loc>https://zhou-mfk.github.io/tags/git/</loc>
     <lastmod>2019-10-11T21:44:22+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
@@ -350,7 +433,8 @@
   <url>
     <loc>https://zhou-mfk.github.io/page/</loc>
     <lastmod>2019-10-11T12:32:29+08:00</lastmod>
-    <priority>0</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
 </urlset>

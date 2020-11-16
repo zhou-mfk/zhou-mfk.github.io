@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Zhou Li Shan</title>
@@ -44,7 +44,7 @@
       <pubDate>Sat, 11 Apr 2020 12:22:04 +0800</pubDate>
       
       <guid>https://zhou-mfk.github.io/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/</guid>
-      <description>openresty 1.15.8 安装及增加upstream_check_module和upsync_module 下载健康检测模块这个必须要用王晓开的这个开源模块 * nginx_upstream_check_module 1 git</description>
+      <description>openresty 1.15.8 安装及增加upstream_check_module和upsync_module 下载健康检测模块这个必须要用王晓开的这个开源模块 nginx_upstream_check_module 1 git clone</description>
     </item>
     
     <item>
@@ -53,7 +53,7 @@
       <pubDate>Thu, 09 Apr 2020 17:36:50 +0800</pubDate>
       
       <guid>https://zhou-mfk.github.io/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/</guid>
-      <description>elasticsearch 快照 参考官方文档 需要配置共享存储，并创建快照仓库，之后才能创建快照 1. 设置共享存储（NFS） 安装nfs及其配置 1 2 3 4 5 6 yum install nfs-utils -y cat /etc/exports /data/elastic_backup 192.168.1.*(rw,sync,all_squash) chmod</description>
+      <description>elasticsearch 快照 参考官方文档 需要配置共享存储，并创建快照仓库，之后才能创建快照 1. 设置共享存储（NFS） 安装nfs及其配置 1 2 3 4 5 6 7 yum install nfs-utils -y cat /etc/exports /data/elastic_backup 192.168.1.*(rw,sync,all_squash)</description>
     </item>
     
     <item>
@@ -62,7 +62,7 @@
       <pubDate>Wed, 08 Jan 2020 21:05:45 +0800</pubDate>
       
       <guid>https://zhou-mfk.github.io/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/</guid>
-      <description>认识consul consul官方地址 ### 什么consul Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置</description>
+      <description>认识consul consul官方地址 什么consul Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置。</description>
     </item>
     
     <item>
