@@ -6,10 +6,19 @@
     <description>Recent content on Zhou Li Shan</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 27 Aug 2020 22:38:40 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 16 Nov 2020 20:54:19 +0800</lastBuildDate>
     
 	<atom:link href="https://zhou-mfk.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Fighting</title>
+      <link>https://zhou-mfk.github.io/post/fighting/</link>
+      <pubDate>Mon, 16 Nov 2020 20:54:19 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/post/fighting/</guid>
+      <description>健身日志 2020-11-16 开始跑步 准备3公里 用时: ____</description>
+    </item>
     
     <item>
       <title>Pushgateway的使用案例</title>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>健身 on Zhou Li Shan</title>
+    <link>https://zhou-mfk.github.io/tags/%E5%81%A5%E8%BA%AB/</link>
+    <description>Recent content in 健身 on Zhou Li Shan</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Mon, 16 Nov 2020 20:54:19 +0800</lastBuildDate>
+    
+	<atom:link href="https://zhou-mfk.github.io/tags/%E5%81%A5%E8%BA%AB/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fighting</title>
+      <link>https://zhou-mfk.github.io/post/fighting/</link>
+      <pubDate>Mon, 16 Nov 2020 20:54:19 +0800</pubDate>
+      
+      <guid>https://zhou-mfk.github.io/post/fighting/</guid>
+      <description>健身日志 2020-11-16 开始跑步 准备3公里 用时: ____</description>
+    </item>
+    
+  </channel>
+</rss>
