@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.55.6 with theme even" />
 
 
 <link rel="canonical" href="https://zhou-mfk.github.io/post/%E4%BD%BF%E7%94%A8picgo&#43;github%E5%88%B6%E4%BD%9C%E5%9B%BE%E5%BA%8A/" />
@@ -42,12 +42,15 @@
 <meta property="og:description" content="使用picGo&#43;GitHub制作图床 PicGo介绍 官方站点 下载及安装 参考文档 使用GitHub github上创建一个仓库 设置Token 个人主页" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhou-mfk.github.io/post/%E4%BD%BF%E7%94%A8picgo&#43;github%E5%88%B6%E4%BD%9C%E5%9B%BE%E5%BA%8A/" />
-<meta property="article:published_time" content="2019-10-17T20:56:45+08:00" />
-<meta property="article:modified_time" content="2019-10-17T20:56:45+08:00" />
+<meta property="article:published_time" content="2019-10-17T20:56:45&#43;08:00"/>
+<meta property="article:modified_time" content="2019-10-17T20:56:45&#43;08:00"/>
+
 <meta itemprop="name" content="使用picGo&#43;GitHub制作图床">
 <meta itemprop="description" content="使用picGo&#43;GitHub制作图床 PicGo介绍 官方站点 下载及安装 参考文档 使用GitHub github上创建一个仓库 设置Token 个人主页">
-<meta itemprop="datePublished" content="2019-10-17T20:56:45+08:00" />
-<meta itemprop="dateModified" content="2019-10-17T20:56:45+08:00" />
+
+
+<meta itemprop="datePublished" content="2019-10-17T20:56:45&#43;08:00" />
+<meta itemprop="dateModified" content="2019-10-17T20:56:45&#43;08:00" />
 <meta itemprop="wordCount" content="380">
 
 
@@ -135,59 +138,88 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-  <ul>
-    <li><a href="#picgo介绍">PicGo介绍</a></li>
-    <li><a href="#使用github">使用GitHub</a></li>
-    <li><a href="#配置picgo--github">配置PicGo + GitHub</a></li>
-    <li><a href="#picgo-结合typora">PIcGo 结合Typora</a></li>
-    <li><a href="#参考">参考</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#picgo介绍">PicGo介绍</a></li>
+<li><a href="#使用github">使用GitHub</a></li>
+<li><a href="#配置picgo-github">配置PicGo + GitHub</a></li>
+<li><a href="#picgo-结合typora">PIcGo 结合Typora</a></li>
+<li><a href="#参考">参考</a></li>
+</ul></li>
+</ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <p>使用picGo+GitHub制作图床</p>
+      
+
+<p>使用picGo+GitHub制作图床</p>
+
 <h2 id="picgo介绍">PicGo介绍</h2>
+
 <p><a href="https://molunerfinn.com/PicGo/">官方站点</a></p>
+
 <p>下载及安装 参考<a href="https://picgo.github.io/PicGo-Doc/zh/guide/">文档</a></p>
+
 <h2 id="使用github">使用GitHub</h2>
+
 <ul>
-<li>
-<p>github上创建一个仓库</p>
-<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017215146.png" alt=""></p>
-</li>
-<li>
-<p>设置Token</p>
-<p>个人主页 Settings</p>
-<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017215246.png" alt=""></p>
-<p>Developer settings &ndash;&gt; Generate token</p>
-<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017215453.png" alt=""></p>
-<p>点击创建token就显示出当前的token 请记牢，因为就显示一次</p>
-</li>
+<li>github上创建一个仓库</li>
 </ul>
-<h2 id="配置picgo--github">配置PicGo + GitHub</h2>
+
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017215146.png" alt="" /></p>
+
+<ul>
+<li>设置Token</li>
+</ul>
+
+<p>个人主页 Settings</p>
+
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017215246.png" alt="" /></p>
+
+<p>Developer settings &ndash;&gt; Generate token</p>
+
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017215453.png" alt="" /></p>
+
+<p>点击创建token就显示出当前的token 请记牢，因为就显示一次</p>
+
+<h2 id="配置picgo-github">配置PicGo + GitHub</h2>
+
 <p>打开picGo的GitHub图床的配置如下：</p>
-<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017214236.png" alt="github图床"></p>
+
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017214236.png" alt="github图床" /></p>
+
 <p>存储路径即在仓库里创建的目录，</p>
+
 <p>自定义域名，使用github 使用如下的模式:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">https://raw.githubusercontent.com/github用户名/仓库名/分支名称
-</code></pre></td></tr></table>
+<pre class="chroma">https://raw.githubusercontent.com/github用户名/仓库名/分支名称</pre></td></tr></table>
 </div>
-</div><h2 id="picgo-结合typora">PIcGo 结合Typora</h2>
+</div>
+<h2 id="picgo-结合typora">PIcGo 结合Typora</h2>
+
 <p>写文档特别是markdown的我是使用的Typora的，这两个工具结合起来，更为顺手</p>
-<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017220349.png" alt=""></p>
+
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017220349.png" alt="" /></p>
+
 <p>设置快捷为 Ctrl + Shift + C</p>
-<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017220455.png" alt=""></p>
+
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017220455.png" alt="" /></p>
+
 <p>截图快捷键 + 上传快捷键，就可以把链接复制到Typora即可使用，这很快捷！</p>
+
 <h2 id="参考">参考</h2>
+
 <p><a href="https://juejin.im/entry/5c4ec5aaf265da614420689f">PicGo+GitHub图床，让Markdown飞</a></p>
+
 <blockquote>
 <p>本文为原创文章，转载注明出处</p>
+
 <p>如果帮到你了，还请多支持</p>
 </blockquote>
 

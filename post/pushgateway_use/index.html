@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.55.6 with theme even" />
 
 
 <link rel="canonical" href="https://zhou-mfk.github.io/post/pushgateway_use/" />
@@ -42,13 +42,16 @@
 <meta property="og:description" content="参考: pushgatewy GITHUB 我们都知道prometheus是主动的向被监控端拉取监控数据的，如果有需要向prometheus推送数据只能通过pushgatew" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhou-mfk.github.io/post/pushgateway_use/" />
-<meta property="article:published_time" content="2020-08-27T22:38:40+08:00" />
-<meta property="article:modified_time" content="2020-08-27T22:38:40+08:00" />
+<meta property="article:published_time" content="2020-08-27T22:38:40&#43;08:00"/>
+<meta property="article:modified_time" content="2020-08-27T22:38:40&#43;08:00"/>
+
 <meta itemprop="name" content="Pushgateway的使用案例">
 <meta itemprop="description" content="参考: pushgatewy GITHUB 我们都知道prometheus是主动的向被监控端拉取监控数据的，如果有需要向prometheus推送数据只能通过pushgatew">
-<meta itemprop="datePublished" content="2020-08-27T22:38:40+08:00" />
-<meta itemprop="dateModified" content="2020-08-27T22:38:40+08:00" />
-<meta itemprop="wordCount" content="1391">
+
+
+<meta itemprop="datePublished" content="2020-08-27T22:38:40&#43;08:00" />
+<meta itemprop="dateModified" content="2020-08-27T22:38:40&#43;08:00" />
+<meta itemprop="wordCount" content="1386">
 
 
 
@@ -125,7 +128,7 @@
         <div class="post-category">
             <a href="/categories/prometheus/"> prometheus </a>
             </div>
-          <span class="more-meta"> 约 1391 字 </span>
+          <span class="more-meta"> 约 1386 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
@@ -135,28 +138,39 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li><a href="#下载和安装">下载和安装</a></li>
-        <li><a href="#启动和配置">启动和配置</a></li>
-        <li><a href="#数据推送">数据推送</a></li>
-        <li><a href="#使用python的requests来推送数据">使用python的requests来推送数据</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li>
+<ul>
+<li><a href="#下载和安装">下载和安装</a></li>
+<li><a href="#启动和配置">启动和配置</a>
+<ul>
+<li><a href="#启动和服务">启动和服务</a></li>
+</ul></li>
+<li><a href="#数据推送">数据推送</a></li>
+<li><a href="#使用python的requests来推送数据">使用python的requests来推送数据</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <p><strong>参考:</strong> <a href="https://github.com/prometheus/pushgateway">pushgatewy GITHUB</a></p>
+      
+
+<p><strong>参考:</strong> <a href="https://github.com/prometheus/pushgateway">pushgatewy GITHUB</a></p>
+
 <p>我们都知道prometheus是主动的向被监控端拉取监控数据的，如果有需要向prometheus推送数据只能通过pushgateway的方式。</p>
+
 <p>我们可以使用Prometheus监控到们大部分的应用和主机，但是总有会一些监控数据是无法通过在主机节点上部署一个exporter就能解决的。</p>
+
 <p>比如我这边在工作中就遇到监控oracle的相关数据时就比较很不好监控，一些监控所需要的数据需要通过sql语句才能获得到。所以这边使用pushgateway可以很好的解决我的问题。</p>
+
 <h3 id="下载和安装">下载和安装</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -169,28 +183,30 @@
 wget https://github.com/prometheus/pushgateway/releases/download/v1.2.0/pushgateway-1.2.0.linux-amd64.tar.gz
 <span class="c1"># 安装</span>
 tar xvf pushgateway-1.2.0.linux-amd64.tar.gz -C /usr/local
-ln -sv /usr/local/pushgateway-1.2.0.linux-amd64 /usr/local/pushgateway
-</code></pre></td></tr></table>
+ln -sv /usr/local/pushgateway-1.2.0.linux-amd64 /usr/local/pushgateway</code></pre></td></tr></table>
 </div>
-</div><h3 id="启动和配置">启动和配置</h3>
+</div>
+<h3 id="启动和配置">启动和配置</h3>
+
 <h4 id="启动和服务">启动和服务</h4>
+
 <p>启动</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">#可以直接启动</span>
 /usr/local/pushgateway 
-<span class="c1"># 默认是在前台启动 监听的端口为9091</span>
-</code></pre></td></tr></table>
+<span class="c1"># 默认是在前台启动 监听的端口为9091</span></code></pre></td></tr></table>
 </div>
-</div><p>pushgateway命令</p>
+</div>
+<p>pushgateway命令</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -227,13 +243,13 @@ Flags:
       --push.disable-consistency-check   不要检查推送的度量标准的一致性 这个参数比较危险 
       --log.level<span class="o">=</span>info         日志级别
       --log.format<span class="o">=</span>logfmt        Output format of log messages. One of: <span class="o">[</span>logfmt, json<span class="o">]</span>
-      --version                  Show application version.
-</code></pre></td></tr></table>
+      --version                  Show application version.</code></pre></td></tr></table>
 </div>
-</div><p>使用systemctl来启动，脚本如下:</p>
+</div>
+<p>使用systemctl来启动，脚本如下:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -248,7 +264,6 @@ Flags:
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
-</span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-shell" data-lang="shell">$ vim /usr/lib/systemd/system/pushgateway.service
@@ -265,39 +280,42 @@ Flags:
 <span class="nv">ExecStart</span><span class="o">=</span>/usr/local/pushgateway/pushgateway --web.enable-lifecycle --web.enable-admin-api --persistence.file<span class="o">=</span>/usr/local/pushgateway/metrics_data --persistence.interval<span class="o">=</span>3m
 <span class="nv">Restart</span><span class="o">=</span>on-failure
 <span class="o">[</span>Install<span class="o">]</span>
-<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
-
-</code></pre></td></tr></table>
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target</code></pre></td></tr></table>
 </div>
-</div><p>上面启动脚本我们指定了 本地存储位置和更新时间</p>
+</div>
+<p>上面启动脚本我们指定了 本地存储位置和更新时间</p>
+
 <p>启动</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-shell" data-lang="shell">systemctl daemon-reload 
 systemctl start pushgateway.service
 systemctl status pushgateway.service  <span class="c1"># 查看状态</span>
  systemctl <span class="nb">enable</span> pushgateway.service  <span class="c1"># 开机自动启动</span>
-journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span>
-
-</code></pre></td></tr></table>
+journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span></code></pre></td></tr></table>
 </div>
-</div><p><strong>也可以使用docker来启动 详细参数github地址</strong></p>
+</div>
+<p><strong>也可以使用docker来启动 详细参数github地址</strong></p>
+
 <h3 id="数据推送">数据推送</h3>
+
 <p>pushgateway 提供了数据推送接口 即 http://:9091/metrics   通过PUT 或 POST方法推送数据 DELETE可删除数据</p>
+
 <p>格式如下:</p>
+
 <p><code>http://:9091/metrics/job/&lt;JOB_NAME&gt;{/&lt;LABEL_NAME&gt;/&lt;LABEL_VALUE&gt;}</code></p>
+
 <p>具体可以参考官网或其他文章。这里给出prometheus与pushgateway的配置</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -305,34 +323,41 @@ journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span>
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">  </span>- <span class="k">job_name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;pushgateway&#39;</span><span class="w">
-</span><span class="w">    </span><span class="k">honor_labels</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">    </span><span class="k">static_configs</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="k">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;192.168.1.100:9091&#39;</span><span class="p">]</span><span class="w">
-</span><span class="w">        </span><span class="k">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">          </span><span class="k">group</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;pushgateway&#39;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">  </span>-<span class="w"> </span>job_name<span class="p">:</span><span class="w"> </span><span class="s1">&#39;pushgateway&#39;</span><span class="w">
+</span><span class="w">    </span>honor_labels<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">    </span>static_configs<span class="p">:</span><span class="w">
+</span><span class="w">      </span>-<span class="w"> </span>targets<span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;192.168.1.100:9091&#39;</span><span class="p">]</span><span class="w">
+</span><span class="w">        </span>labels<span class="p">:</span><span class="w">
+</span><span class="w">          </span>group<span class="p">:</span><span class="w"> </span><span class="s1">&#39;pushgateway&#39;</span></code></pre></td></tr></table>
 </div>
-</div><p><code> honor_labels: true</code>  如果不配置则为false 。 此配置的说明 官方有很详细的说明: <a href="https://github.com/prometheus/pushgateway#about-the-job-and-instance-labels">About the job and instance labels</a> 和prometheus的 <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config">scrape_config</a></p>
+</div>
+<p><code>honor_labels: true</code>  如果不配置则为false 。 此配置的说明 官方有很详细的说明: <a href="https://github.com/prometheus/pushgateway#about-the-job-and-instance-labels">About the job and instance labels</a> 和prometheus的 <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config">scrape_config</a></p>
+
 <p>当不配置时或为false时 我们通过api 推送我们的监控数据，如下所示:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">echo</span> <span class="s2">&#34;test_metric 123456&#34;</span> <span class="p">|</span> curl --data-binary @- http://192.168.1.100:9091/metrics/job/test_job
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">echo</span> <span class="s2">&#34;test_metric 123456&#34;</span> <span class="p">|</span> curl --data-binary @- http://192.168.1.100:9091/metrics/job/test_job</code></pre></td></tr></table>
 </div>
-</div><p>不过我们会发现，除了 <code>test_metric</code> 外，同时还新增了 <code>push_time_seconds</code>  和 <code>push_failure_time_seconds</code> 两个指标，这两个是 PushGateway 系统自动生成的相关指标</p>
+</div>
+<p>不过我们会发现，除了 <code>test_metric</code> 外，同时还新增了 <code>push_time_seconds</code>  和 <code>push_failure_time_seconds</code> 两个指标，这两个是 PushGateway 系统自动生成的相关指标</p>
+
 <p>我们prometheus查询的结果：</p>
+
 <p><code>test_metric{exported_job=&quot;test_job&quot;,instance=&quot;pushgateway&quot;,job=&quot;pushgateway&quot;}</code></p>
+
 <p>为了使用推送的上来的job和instance 不被 prometheus本身监控pushgateway的标签数据覆盖则需要设置</p>
+
 <p><code>honor_labels: true</code></p>
+
 <p>官网或网络上介绍的都是curl的命令来推送数据的，下面来使用reqeusts来推送数据。</p>
+
 <h3 id="使用python的requests来推送数据">使用python的requests来推送数据</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -392,7 +417,6 @@ journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span>
 </span><span class="lnt">58
 </span><span class="lnt">59
 </span><span class="lnt">60
-</span><span class="lnt">61
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># -*- coding: utf-8 -*-</span>
@@ -454,12 +478,12 @@ journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span>
     <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&#34;DELETE&#34;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">202</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">True</span>
-    <span class="k">return</span> <span class="bp">False</span>
-
-</code></pre></td></tr></table>
+    <span class="k">return</span> <span class="bp">False</span></code></pre></td></tr></table>
 </div>
-</div><p>还可以python 的 prometheus_client  这个涉猎的不多。如果需要可自行在官方文档上学习。</p>
-<hr>
+</div>
+<p>还可以python 的 prometheus_client  这个涉猎的不多。如果需要可自行在官方文档上学习。</p>
+
+<hr />
 
     </div>
 
