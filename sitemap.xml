@@ -8,14 +8,14 @@
   </url>
   
   <url>
-    <loc>https://zhou-mfk.github.io/post/fighting/</loc>
+    <loc>https://zhou-mfk.github.io/page/fighting/</loc>
     <lastmod>2020-11-16T20:54:19+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://zhou-mfk.github.io/post/</loc>
+    <loc>https://zhou-mfk.github.io/page/</loc>
     <lastmod>2020-11-16T20:54:19+08:00</lastmod>
     <priority>0</priority>
   </url>
@@ -41,6 +41,12 @@
   <url>
     <loc>https://zhou-mfk.github.io/tags/%E5%81%A5%E8%BA%AB/</loc>
     <lastmod>2020-11-16T20:54:19+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://zhou-mfk.github.io/post/</loc>
+    <lastmod>2020-08-27T22:38:40+08:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -345,12 +351,6 @@
     <lastmod>2019-10-11T12:32:29+08:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://zhou-mfk.github.io/page/</loc>
-    <lastmod>2019-10-11T12:32:29+08:00</lastmod>
-    <priority>0</priority>
   </url>
   
 </urlset>
