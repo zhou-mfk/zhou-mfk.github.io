@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.55.6 with theme even" />
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
 
 
 <link rel="canonical" href="https://zhou-mfk.github.io/post/filebeat&#43;kafka&#43;logstash&#43;elasticsearch&#43;kibana%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" />
@@ -42,16 +42,13 @@
 <meta property="og:description" content="整理下使用Filebeat&#43;kafka&#43;logstash&#43;elasticsearch&#43;kibana来搭建日志系统， 加上zookeeper是6" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhou-mfk.github.io/post/filebeat&#43;kafka&#43;logstash&#43;elasticsearch&#43;kibana%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" />
-<meta property="article:published_time" content="2019-10-18T20:52:27&#43;08:00"/>
-<meta property="article:modified_time" content="2019-10-18T20:52:27&#43;08:00"/>
-
+<meta property="article:published_time" content="2019-10-18T20:52:27+08:00" />
+<meta property="article:modified_time" content="2019-10-18T20:52:27+08:00" />
 <meta itemprop="name" content="使用Filebeat&#43;kafka&#43;logstash&#43;elasticsearch&#43;kibana搭建日志系统">
 <meta itemprop="description" content="整理下使用Filebeat&#43;kafka&#43;logstash&#43;elasticsearch&#43;kibana来搭建日志系统， 加上zookeeper是6">
-
-
-<meta itemprop="datePublished" content="2019-10-18T20:52:27&#43;08:00" />
-<meta itemprop="dateModified" content="2019-10-18T20:52:27&#43;08:00" />
-<meta itemprop="wordCount" content="5672">
+<meta itemprop="datePublished" content="2019-10-18T20:52:27+08:00" />
+<meta itemprop="dateModified" content="2019-10-18T20:52:27+08:00" />
+<meta itemprop="wordCount" content="5283">
 
 
 
@@ -128,8 +125,8 @@
         <div class="post-category">
             <a href="/categories/elk/"> ELK </a>
             </div>
-          <span class="more-meta"> 约 5672 字 </span>
-          <span class="more-meta"> 预计阅读 12 分钟 </span>
+          <span class="more-meta"> 约 5283 字 </span>
+          <span class="more-meta"> 预计阅读 11 分钟 </span>
         
       </div>
     </header>
@@ -138,135 +135,133 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#组件说明">组件说明</a></li>
-<li><a href="#kafka-zookeeper">kafka + zookeeper</a>
-<ul>
-<li><a href="#zookeeper">zookeeper</a></li>
-<li><a href="#kafka">kafka</a></li>
-<li><a href="#kafka-manager">kafka-manager</a></li>
-</ul></li>
-<li><a href="#elk">ELK</a>
-<ul>
-<li><a href="#elasticsearch">elasticsearch</a>
-<ul>
-<li><a href="#安装">安装</a></li>
-<li><a href="#启用x-pack">启用x-pack</a>
-<ul>
-<li><a href="#设置密码">设置密码</a></li>
-<li><a href="#破解x-pack">破解x-pack</a></li>
-</ul></li>
-</ul></li>
-<li><a href="#logstash">logstash</a></li>
-<li><a href="#kibana">kibana</a></li>
-</ul></li>
-<li><a href="#filebeat">Filebeat</a>
-<ul>
-<li><a href="#安装filebeat">安装filebeat</a></li>
-<li><a href="#收集日志配置">收集日志配置</a></li>
-</ul></li>
-<li><a href="#docker-compose安装elasticsearch">docker-compose安装elasticsearch</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#组件说明">组件说明</a></li>
+    <li><a href="#kafka--zookeeper">kafka + zookeeper</a>
+      <ul>
+        <li><a href="#zookeeper">zookeeper</a></li>
+        <li><a href="#kafka">kafka</a></li>
+        <li><a href="#kafka-manager">kafka-manager</a></li>
+      </ul>
+    </li>
+    <li><a href="#elk">ELK</a>
+      <ul>
+        <li><a href="#elasticsearch">elasticsearch</a></li>
+        <li><a href="#logstash">logstash</a></li>
+        <li><a href="#kibana">kibana</a></li>
+      </ul>
+    </li>
+    <li><a href="#filebeat">Filebeat</a>
+      <ul>
+        <li><a href="#安装filebeat">安装filebeat</a></li>
+        <li><a href="#收集日志配置">收集日志配置</a></li>
+      </ul>
+    </li>
+    <li><a href="#docker-compose安装elasticsearch">docker-compose安装elasticsearch</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>整理下使用Filebeat+kafka+logstash+elasticsearch+kibana来搭建日志系统， 加上zookeeper是6个组件来完成一套日志系统，这也是在线上业务正式使用的日志系统。</p>
-
+      <p>整理下使用Filebeat+kafka+logstash+elasticsearch+kibana来搭建日志系统， 加上zookeeper是6个组件来完成一套日志系统，这也是在线上业务正式使用的日志系统。</p>
 <h2 id="组件说明">组件说明</h2>
-
 <ul>
-<li><p>filebeat 是收集日志的工具需要安装在每个被收集日志的节点上，也可以启动docker 镜像来部署此组件。在这里收集到的日志直接传送到kafka消息中间件。</p></li>
-
-<li><p>kafka 消息中间件 需要zookeeper配合使用</p></li>
-
-<li><p>logstash  在这里作为接收和处理日志，并把处理好的日志写入elasticsearch集群中</p></li>
-
-<li><p>elasticsearch 日志收放的数据库，这里使用了5个数据节点和3个master节点，master节点和数据节点分开，这个下面会详细说明。 elasticsearch 会开启x-pack功能</p></li>
-
-<li><p>kibana 作为日志展示组件，也可以使用比较优秀的grafana</p></li>
-
-<li><p>组件版本信息</p>
-
+<li>
+<p>filebeat 是收集日志的工具需要安装在每个被收集日志的节点上，也可以启动docker 镜像来部署此组件。在这里收集到的日志直接传送到kafka消息中间件。</p>
+</li>
+<li>
+<p>kafka 消息中间件 需要zookeeper配合使用</p>
+</li>
+<li>
+<p>logstash  在这里作为接收和处理日志，并把处理好的日志写入elasticsearch集群中</p>
+</li>
+<li>
+<p>elasticsearch 日志收放的数据库，这里使用了5个数据节点和3个master节点，master节点和数据节点分开，这个下面会详细说明。 elasticsearch 会开启x-pack功能</p>
+</li>
+<li>
+<p>kibana 作为日志展示组件，也可以使用比较优秀的grafana</p>
+</li>
+<li>
+<p>组件版本信息</p>
 <ul>
-<li><p>jdk 1.8</p></li>
-
-<li><p>zookeeper v3.4.13</p></li>
-
-<li><p>kafka v2.1.1</p></li>
-
-<li><p>kafka-manager v1.3.3.22</p></li>
-
-<li><p>elasticsearch  v6.6.0</p></li>
-
-<li><p>logstash v6.6.0</p></li>
-
-<li><p>kibana v6.6.0</p></li>
-</ul></li>
+<li>
+<p>jdk 1.8</p>
+</li>
+<li>
+<p>zookeeper v3.4.13</p>
+</li>
+<li>
+<p>kafka v2.1.1</p>
+</li>
+<li>
+<p>kafka-manager v1.3.3.22</p>
+</li>
+<li>
+<p>elasticsearch  v6.6.0</p>
+</li>
+<li>
+<p>logstash v6.6.0</p>
+</li>
+<li>
+<p>kibana v6.6.0</p>
+</li>
 </ul>
-
+</li>
+</ul>
 <p>使用jdk1.8 这个需要先安装</p>
-
-<h2 id="kafka-zookeeper">kafka + zookeeper</h2>
-
+<h2 id="kafka--zookeeper">kafka + zookeeper</h2>
 <h3 id="zookeeper">zookeeper</h3>
-
 <ul>
-<li>下载</li>
-</ul>
+<li>
+<p>下载</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  <span class="nb">cd</span> /usr/local/src
-  wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.4.13/zookeeper-3.4.13.tar.gz</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /usr/local/src
+wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.4.13/zookeeper-3.4.13.tar.gz
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>创建所需要的用户及数据目录</li>
-</ul>
+</div></li>
+<li>
+<p>创建所需要的用户及数据目录</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  useradd zookeeper -s /sbin/nologin
-  mkdir /opt/zookeeper/logs -pv
-  chown zookeeper:zookeeper /opt/zookeeper/ -R</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">useradd zookeeper -s /sbin/nologin
+mkdir /opt/zookeeper/logs -pv
+chown zookeeper:zookeeper /opt/zookeeper/ -R
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>安装</li>
-</ul>
+</div></li>
+<li>
+<p>安装</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  <span class="nb">cd</span> /usr/local/src
-  tar xvf zookeeper-3.4.13.tar.gz -C /usr/local/
-  chown zookeeper:zookeeper /usr/local/zookeeper-3.4.13 -R
-  ln -sv /usr/local/zookeeper-3.4.13 /usr/local/zookeeper</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /usr/local/src
+tar xvf zookeeper-3.4.13.tar.gz -C /usr/local/
+chown zookeeper:zookeeper /usr/local/zookeeper-3.4.13 -R
+ln -sv /usr/local/zookeeper-3.4.13 /usr/local/zookeeper
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>配置</li>
-</ul>
+</div></li>
+<li>
+<p>配置</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -286,47 +281,45 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  <span class="nb">cd</span> /usr/local/zookeeper/conf
-  cp zoo_sample.cfg zoo.cfg
-  <span class="c1"># 配置zoo.cfg</span>
-  <span class="nv">tickTime</span><span class="o">=</span><span class="m">2000</span>
-  <span class="nv">initLimit</span><span class="o">=</span><span class="m">10</span>
-  <span class="nv">syncLimit</span><span class="o">=</span><span class="m">5</span>
-  <span class="nv">dataDir</span><span class="o">=</span>/opt/zookeeper
-  <span class="nv">dataLogDir</span><span class="o">=</span>/opt/zookeeper/logs
-  <span class="nv">clientPort</span><span class="o">=</span><span class="m">2181</span>
-  <span class="c1"># ---- 如果以下不配置启动的zookeeper则是单机模式</span>
-  <span class="c1"># 集群</span>
-  <span class="nv">initLimit</span><span class="o">=</span><span class="m">10</span>
-  <span class="nv">syncLimit</span><span class="o">=</span><span class="m">5</span>
-  server.1<span class="o">=</span><span class="m">10</span>.10.10.11:2888:3888
-  server.2<span class="o">=</span><span class="m">10</span>.10.10.12:2888:3888
-  server.3<span class="o">=</span><span class="m">10</span>.10.10.13:2888:3888
-  server.4<span class="o">=</span><span class="m">10</span>.10.10.14:2888:3888
-  server.5<span class="o">=</span><span class="m">10</span>.10.10.15:2888:3888</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /usr/local/zookeeper/conf
+cp zoo_sample.cfg zoo.cfg
+<span class="c1"># 配置zoo.cfg</span>
+<span class="nv">tickTime</span><span class="o">=</span><span class="m">2000</span>
+<span class="nv">initLimit</span><span class="o">=</span><span class="m">10</span>
+<span class="nv">syncLimit</span><span class="o">=</span><span class="m">5</span>
+<span class="nv">dataDir</span><span class="o">=</span>/opt/zookeeper
+<span class="nv">dataLogDir</span><span class="o">=</span>/opt/zookeeper/logs
+<span class="nv">clientPort</span><span class="o">=</span><span class="m">2181</span>
+<span class="c1"># ---- 如果以下不配置启动的zookeeper则是单机模式</span>
+<span class="c1"># 集群</span>
+<span class="nv">initLimit</span><span class="o">=</span><span class="m">10</span>
+<span class="nv">syncLimit</span><span class="o">=</span><span class="m">5</span>
+server.1<span class="o">=</span>10.10.10.11:2888:3888
+server.2<span class="o">=</span>10.10.10.12:2888:3888
+server.3<span class="o">=</span>10.10.10.13:2888:3888
+server.4<span class="o">=</span>10.10.10.14:2888:3888
+server.5<span class="o">=</span>10.10.10.15:2888:3888
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>**server.id=host:port:port **</p>
-
+</div><p>**server.id=host:port:port **</p>
 <p><strong>id 被称为 Server ID, 用来标识服务器在集群中的序号。同时每台 ZooKeeper 服务器上, 都需要在数据目录(即 dataDir 指定的目录) 下创建一个 myid 文件, 该文件只有一行内容, 即对应于每台服务器的Server ID</strong></p>
-
 <p>创建myid</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  <span class="nb">cd</span> /opt/zookeeper
-  <span class="nb">echo</span> <span class="m">1</span> &gt; myid</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /opt/zookeeper
+<span class="nb">echo</span> <span class="m">1</span> &gt; myid
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>增加服务脚本</li>
-</ul>
+</div></li>
+<li>
+<p>增加服务脚本</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -344,92 +337,93 @@
 </span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  vim /etc/systemd/system/zookeeper.service
+<pre class="chroma"><code class="language-shell" data-lang="shell">vim /etc/systemd/system/zookeeper.service
   
-  <span class="o">[</span>Unit<span class="o">]</span>
-  <span class="nv">Description</span><span class="o">=</span>zookeeper
-  <span class="nv">After</span><span class="o">=</span>syslog.target network.target
-  <span class="o">[</span>Service<span class="o">]</span>
-  <span class="nv">Type</span><span class="o">=</span>forking
-  <span class="nv">Environment</span><span class="o">=</span><span class="nv">ZOO_LOG_DIR</span><span class="o">=</span>/opt/zookeeper/logs <span class="c1"># 增加启动时日志输出位置</span>
-  <span class="nv">Environment</span><span class="o">=</span><span class="nv">JAVA_HOME</span><span class="o">=</span>/opt/jdk/jdk1.8 <span class="c1"># 指定jdk</span>
-  <span class="nv">ExecStart</span><span class="o">=</span>/usr/local/zookeeper/bin/zkServer.sh start
-  <span class="nv">ExecStop</span><span class="o">=</span>/usr/local/zookeeper/bin/zkServer.sh stop
-  <span class="nv">Restart</span><span class="o">=</span>always
-  <span class="nv">User</span><span class="o">=</span>zookeeper
-  <span class="nv">Group</span><span class="o">=</span>zookeeper
-  <span class="o">[</span>Install<span class="o">]</span>
-  <span class="nv">WantedBy</span><span class="o">=</span>multi-user.target</code></pre></td></tr></table>
+<span class="o">[</span>Unit<span class="o">]</span>
+<span class="nv">Description</span><span class="o">=</span>zookeeper
+<span class="nv">After</span><span class="o">=</span>syslog.target network.target
+<span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">Type</span><span class="o">=</span>forking
+<span class="nv">Environment</span><span class="o">=</span><span class="nv">ZOO_LOG_DIR</span><span class="o">=</span>/opt/zookeeper/logs <span class="c1"># 增加启动时日志输出位置</span>
+<span class="nv">Environment</span><span class="o">=</span><span class="nv">JAVA_HOME</span><span class="o">=</span>/opt/jdk/jdk1.8 <span class="c1"># 指定jdk</span>
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/local/zookeeper/bin/zkServer.sh start
+<span class="nv">ExecStop</span><span class="o">=</span>/usr/local/zookeeper/bin/zkServer.sh stop
+<span class="nv">Restart</span><span class="o">=</span>always
+<span class="nv">User</span><span class="o">=</span>zookeeper
+<span class="nv">Group</span><span class="o">=</span>zookeeper
+<span class="o">[</span>Install<span class="o">]</span>
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>启动</li>
-</ul>
+</div></li>
+<li>
+<p>启动</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  systemctl start zookeeper 
-  <span class="c1"># 设置开机启动</span>
-  systemctl <span class="nb">enable</span> zookeeper</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">systemctl start zookeeper 
+<span class="c1"># 设置开机启动</span>
+systemctl <span class="nb">enable</span> zookeeper
+</code></pre></td></tr></table>
 </div>
-</div>
+</div></li>
+</ul>
 <h3 id="kafka">kafka</h3>
-
 <ul>
-<li>下载</li>
-</ul>
+<li>
+<p>下载</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  <span class="nb">cd</span> /usr/local/src
-  wget http://mirrors.tuna.tsinghua.edu.cn/apache/kafka/2.1.1/kafka_2.11-2.1.1.tgz</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /usr/local/src
+wget http://mirrors.tuna.tsinghua.edu.cn/apache/kafka/2.1.1/kafka_2.11-2.1.1.tgz
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>创建用户及数据目录</li>
-</ul>
+</div></li>
+<li>
+<p>创建用户及数据目录</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  useradd kafka -s /sbin/nologin
-  mkdir /opt/kafka/kafka-logs -pv
-  chown kafka.kafka /opt/kafka/kafka-logs -R</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">useradd kafka -s /sbin/nologin
+mkdir /opt/kafka/kafka-logs -pv
+chown kafka.kafka /opt/kafka/kafka-logs -R
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>安装</li>
-</ul>
+</div></li>
+<li>
+<p>安装</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  <span class="nb">cd</span> /usr/local/src
-  tar xvf kafka_2.11-2.1.1.tgz -C /usr/local/
-  chown kafka:kafka /usr/local/kafka_2.11-2.1.1 -R
-  ln -sv /usr/local/kafka_2.11-2.1.1 /usr/local/kafka </code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /usr/local/src
+tar xvf kafka_2.11-2.1.1.tgz -C /usr/local/
+chown kafka:kafka /usr/local/kafka_2.11-2.1.1 -R
+ln -sv /usr/local/kafka_2.11-2.1.1 /usr/local/kafka 
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>配置</li>
-</ul>
+</div></li>
+<li>
+<p>配置</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -452,35 +446,35 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  <span class="c1"># cd /usr/local/kafka/config/</span>
-  <span class="c1"># cat server.properties  在节点 10.10.10.11</span>
-  broker.id<span class="o">=</span><span class="m">1</span> <span class="c1"># 集群中唯一id</span>
-  <span class="nv">listeners</span><span class="o">=</span>PLAINTEXT://10.10.10.11:9092 <span class="c1"># 不同的节点需要不同的地址，需要注意</span>
-  num.network.threads<span class="o">=</span><span class="m">5</span>
-  num.io.threads<span class="o">=</span><span class="m">12</span>
-  socket.send.buffer.bytes<span class="o">=</span><span class="m">102400</span>
-  socket.receive.buffer.bytes<span class="o">=</span><span class="m">102400</span>
-  socket.request.max.bytes<span class="o">=</span><span class="m">104857600</span>
-  log.dirs<span class="o">=</span>/opt/kafka/kafka-logs
-  num.partitions<span class="o">=</span><span class="m">1</span>
-  num.recovery.threads.per.data.dir<span class="o">=</span><span class="m">1</span>
-  offsets.topic.replication.factor<span class="o">=</span><span class="m">1</span>
-  transaction.state.log.replication.factor<span class="o">=</span><span class="m">1</span>
-  transaction.state.log.min.isr<span class="o">=</span><span class="m">1</span>
-  log.retention.hours<span class="o">=</span><span class="m">168</span>
-  log.segment.bytes<span class="o">=</span><span class="m">1073741824</span>
-  log.retention.check.interval.ms<span class="o">=</span><span class="m">300000</span>
-  zookeeper.connect<span class="o">=</span><span class="m">10</span>.10.10.11:2181,10.10.10.12:2181,10.10.10.13:2181,10.10.10.14:2181,10.10.10.15:2181
-  zookeeper.connection.timeout.ms<span class="o">=</span><span class="m">6000</span>
-  group.initial.rebalance.delay.ms<span class="o">=</span><span class="m">0</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># cd /usr/local/kafka/config/</span>
+<span class="c1"># cat server.properties  在节点 10.10.10.11</span>
+broker.id<span class="o">=</span><span class="m">1</span> <span class="c1"># 集群中唯一id</span>
+<span class="nv">listeners</span><span class="o">=</span>PLAINTEXT://10.10.10.11:9092 <span class="c1"># 不同的节点需要不同的地址，需要注意</span>
+num.network.threads<span class="o">=</span><span class="m">5</span>
+num.io.threads<span class="o">=</span><span class="m">12</span>
+socket.send.buffer.bytes<span class="o">=</span><span class="m">102400</span>
+socket.receive.buffer.bytes<span class="o">=</span><span class="m">102400</span>
+socket.request.max.bytes<span class="o">=</span><span class="m">104857600</span>
+log.dirs<span class="o">=</span>/opt/kafka/kafka-logs
+num.partitions<span class="o">=</span><span class="m">1</span>
+num.recovery.threads.per.data.dir<span class="o">=</span><span class="m">1</span>
+offsets.topic.replication.factor<span class="o">=</span><span class="m">1</span>
+transaction.state.log.replication.factor<span class="o">=</span><span class="m">1</span>
+transaction.state.log.min.isr<span class="o">=</span><span class="m">1</span>
+log.retention.hours<span class="o">=</span><span class="m">168</span>
+log.segment.bytes<span class="o">=</span><span class="m">1073741824</span>
+log.retention.check.interval.ms<span class="o">=</span><span class="m">300000</span>
+zookeeper.connect<span class="o">=</span>10.10.10.11:2181,10.10.10.12:2181,10.10.10.13:2181,10.10.10.14:2181,10.10.10.15:2181
+zookeeper.connection.timeout.ms<span class="o">=</span><span class="m">6000</span>
+group.initial.rebalance.delay.ms<span class="o">=</span><span class="m">0</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>增加服务器脚本</li>
-</ul>
+</div></li>
+<li>
+<p>增加服务器脚本</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -496,90 +490,91 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  <span class="c1"># vim /etc/systemd/system/kafka.service</span>
-  <span class="o">[</span>Unit<span class="o">]</span>
-  <span class="nv">Description</span><span class="o">=</span>kafka
-  <span class="nv">After</span><span class="o">=</span>syslog.target network.target
-  <span class="o">[</span>Service<span class="o">]</span>
-  <span class="nv">Type</span><span class="o">=</span>forking
-  <span class="nv">Environment</span><span class="o">=</span><span class="nv">JAVA_HOME</span><span class="o">=</span>/opt/jdk/jdk1.8
-  <span class="nv">ExecStart</span><span class="o">=</span>/usr/local/kafka/bin/kafka-server-start.sh -daemon /usr/local/kafka/config/server.properties
-  <span class="nv">ExecStop</span><span class="o">=</span>/usr/local/kafka/bin/kafka-server-stop.sh /usr/local/kafka/config/server.properties <span class="p">&amp;</span>
-  <span class="nv">Restart</span><span class="o">=</span>always
-  <span class="nv">User</span><span class="o">=</span>kafka
-  <span class="nv">Group</span><span class="o">=</span>kafka
-  <span class="o">[</span>Install<span class="o">]</span>
-  <span class="nv">WantedBy</span><span class="o">=</span>multi-user.target</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># vim /etc/systemd/system/kafka.service</span>
+<span class="o">[</span>Unit<span class="o">]</span>
+<span class="nv">Description</span><span class="o">=</span>kafka
+<span class="nv">After</span><span class="o">=</span>syslog.target network.target
+<span class="o">[</span>Service<span class="o">]</span>
+<span class="nv">Type</span><span class="o">=</span>forking
+<span class="nv">Environment</span><span class="o">=</span><span class="nv">JAVA_HOME</span><span class="o">=</span>/opt/jdk/jdk1.8
+<span class="nv">ExecStart</span><span class="o">=</span>/usr/local/kafka/bin/kafka-server-start.sh -daemon /usr/local/kafka/config/server.properties
+<span class="nv">ExecStop</span><span class="o">=</span>/usr/local/kafka/bin/kafka-server-stop.sh /usr/local/kafka/config/server.properties <span class="p">&amp;</span>
+<span class="nv">Restart</span><span class="o">=</span>always
+<span class="nv">User</span><span class="o">=</span>kafka
+<span class="nv">Group</span><span class="o">=</span>kafka
+<span class="o">[</span>Install<span class="o">]</span>
+<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>启动</li>
-</ul>
+</div></li>
+<li>
+<p>启动</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  systemctl start kafka.service
-  <span class="c1"># 设置开机启动</span>
-  systemctl <span class="nb">enable</span> kafka.service</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">systemctl start kafka.service
+<span class="c1"># 设置开机启动</span>
+systemctl <span class="nb">enable</span> kafka.service
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="kafka-manager">kafka-manager</h3>
-
-<ul>
-<li>下载</li>
+</div></li>
 </ul>
+<h3 id="kafka-manager">kafka-manager</h3>
+<ul>
+<li>
+<p>下载</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  <span class="nb">cd</span> /usr/local/src
-  wget https://github.com/yahoo/kafka-manager/archive/1.3.3.22.zip</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /usr/local/src
+wget https://github.com/yahoo/kafka-manager/archive/1.3.3.22.zip
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>编译安装</li>
-</ul>
+</div></li>
+<li>
+<p>编译安装</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  unzip <span class="m">1</span>.3.3.22.zip
-  <span class="nb">cd</span> kafka-manager-1.3.3.22/
-  ./sbt clean dist <span class="c1"># 编译</span>
-  等待编译完成 ... 需要外网</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">unzip 1.3.3.22.zip
+<span class="nb">cd</span> kafka-manager-1.3.3.22/
+./sbt clean dist <span class="c1"># 编译</span>
+等待编译完成 ... 需要外网
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>安装</li>
-</ul>
+</div></li>
+<li>
+<p>安装</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  cp  /usr/local/src/kafka-manager-1.3.3.22/target/universal/kafka-manager-1.3.3.22.zip /usr/local
-  unzip /usr/local/kafka-manager-1.3.3.22.zip
-  ln -sv /usr/local/kafka-manager-1.3.3.22 /usr/local/kafka-manager</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">cp  /usr/local/src/kafka-manager-1.3.3.22/target/universal/kafka-manager-1.3.3.22.zip /usr/local
+unzip /usr/local/kafka-manager-1.3.3.22.zip
+ln -sv /usr/local/kafka-manager-1.3.3.22 /usr/local/kafka-manager
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>配置</li>
-</ul>
+</div></li>
+<li>
+<p>配置</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -588,42 +583,40 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  <span class="nb">cd</span> /usr/local/kafka-manager/conf
-  <span class="c1"># 配置kafka-manager.zkhost</span>
-  kafka-manager.zkhosts<span class="o">=</span><span class="s2">&#34;10.10.10.11:2181,10.10.10.12:2181,10.10.10.13:2181,10.10.10.14:2181,10.10.10.15:2181&#34;</span>
-  <span class="c1"># 启用认证及用户名密码</span>
-  basicAuthentication.enabled<span class="o">=</span><span class="nb">true</span>
-  basicAuthentication.username<span class="o">=</span><span class="s2">&#34;kafkalog&#34;</span>
-  basicAuthentication.password<span class="o">=</span><span class="s2">&#34;logkafka&#34;</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /usr/local/kafka-manager/conf
+<span class="c1"># 配置kafka-manager.zkhost</span>
+kafka-manager.zkhosts<span class="o">=</span><span class="s2">&#34;10.10.10.11:2181,10.10.10.12:2181,10.10.10.13:2181,10.10.10.14:2181,10.10.10.15:2181&#34;</span>
+<span class="c1"># 启用认证及用户名密码</span>
+basicAuthentication.enabled<span class="o">=</span><span class="nb">true</span>
+basicAuthentication.username<span class="o">=</span><span class="s2">&#34;kafkalog&#34;</span>
+basicAuthentication.password<span class="o">=</span><span class="s2">&#34;logkafka&#34;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>启动</li>
-</ul>
+</div></li>
+<li>
+<p>启动</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  <span class="nb">cd</span> /usr/local/kafka-manager
-  nohup bin/kafka-manager -Dconfig<span class="o">=</span>config/application.conf <span class="p">&amp;</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">cd</span> /usr/local/kafka-manager
+nohup bin/kafka-manager -Dconfig<span class="o">=</span>config/application.conf <span class="p">&amp;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
+</div></li>
+</ul>
 <h2 id="elk">ELK</h2>
-
 <p>这三个组件使用yum来安装</p>
-
 <h3 id="elasticsearch">elasticsearch</h3>
-
 <h4 id="安装">安装</h4>
-
 <ul>
-<li>配置yum源</li>
-</ul>
+<li>
+<p>配置yum源</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -635,38 +628,38 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  <span class="c1"># cat /etc/yum.repos.d/elasticsearch.repo</span> 
-  <span class="o">[</span>elasticsearch-6.x<span class="o">]</span>
-  <span class="nv">name</span><span class="o">=</span>Elasticsearch repository <span class="k">for</span> <span class="m">6</span>.x packages
-  <span class="nv">baseurl</span><span class="o">=</span>https://artifacts.elastic.co/packages/6.x/yum
-  <span class="nv">gpgcheck</span><span class="o">=</span><span class="m">1</span>
-  <span class="nv">gpgkey</span><span class="o">=</span>https://artifacts.elastic.co/GPG-KEY-elasticsearch
-  <span class="nv">enabled</span><span class="o">=</span><span class="m">1</span>
-  <span class="nv">autorefresh</span><span class="o">=</span><span class="m">1</span>
-  <span class="nv">type</span><span class="o">=</span>rpm-md
-  </code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># cat /etc/yum.repos.d/elasticsearch.repo</span> 
+<span class="o">[</span>elasticsearch-6.x<span class="o">]</span>
+<span class="nv">name</span><span class="o">=</span>Elasticsearch repository <span class="k">for</span> 6.x packages
+<span class="nv">baseurl</span><span class="o">=</span>https://artifacts.elastic.co/packages/6.x/yum
+<span class="nv">gpgcheck</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">gpgkey</span><span class="o">=</span>https://artifacts.elastic.co/GPG-KEY-elasticsearch
+<span class="nv">enabled</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">autorefresh</span><span class="o">=</span><span class="m">1</span>
+<span class="nv">type</span><span class="o">=</span>rpm-md
+  
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>安装elasticsearch</li>
-</ul>
+</div></li>
+<li>
+<p>安装elasticsearch</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  yum install elasticsearch -y</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">yum install elasticsearch -y
+</code></pre></td></tr></table>
 </div>
-</div>
+</div></li>
+<li>
+<p>配置elasticsearch</p>
 <ul>
-<li><p>配置elasticsearch</p>
-
-<ul>
-<li>默认配置</li>
-</ul>
+<li>
+<p>默认配置</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -678,74 +671,73 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">cluster.name<span class="p">:</span><span class="w"> </span>mycluster<span class="w">  </span><span class="c"># 集群名称</span><span class="w">
-</span><span class="w"></span>node.name<span class="p">:</span><span class="w"> </span>es01<span class="w">  </span><span class="c"># 节点名称</span><span class="w">
-</span><span class="w"></span>node.master<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w"></span>node.data<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w"></span>path.data<span class="p">:</span><span class="w"> </span>/data/elastic<span class="w">
-</span><span class="w"></span>path.logs<span class="p">:</span><span class="w"> </span>/data/logs<span class="w">
-</span><span class="w"></span>network.host<span class="p">:</span><span class="w"> </span><span class="m">10.10</span>.<span class="m">10.11</span><span class="w">
-</span><span class="w"></span>http.port<span class="p">:</span><span class="w"> </span><span class="m">9200</span><span class="w">
-</span><span class="w"></span>discovery.zen.ping.unicast.hosts<span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;10.10.10.8&#34;</span><span class="p">,</span><span class="s2">&#34;10.10.10.9&#34;</span><span class="p">,</span><span class="s2">&#34;10.10.10.10&#34;</span><span class="p">]</span><span class="w">  </span><span class="c"># 加入集群</span><span class="w">
-</span><span class="w"></span>discovery.zen.minimum_master_nodes<span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">  </span><span class="c"># 主节点最小3个</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">cluster.name</span><span class="p">:</span><span class="w"> </span>mycluster<span class="w">  </span><span class="c"># 集群名称</span><span class="w">
+</span><span class="w"></span><span class="k">node.name</span><span class="p">:</span><span class="w"> </span>es01<span class="w">  </span><span class="c"># 节点名称</span><span class="w">
+</span><span class="w"></span><span class="k">node.master</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w"></span><span class="k">node.data</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w"></span><span class="k">path.data</span><span class="p">:</span><span class="w"> </span>/data/elastic<span class="w">
+</span><span class="w"></span><span class="k">path.logs</span><span class="p">:</span><span class="w"> </span>/data/logs<span class="w">
+</span><span class="w"></span><span class="k">network.host</span><span class="p">:</span><span class="w"> </span><span class="m">10.10.10.11</span><span class="w">
+</span><span class="w"></span><span class="k">http.port</span><span class="p">:</span><span class="w"> </span><span class="m">9200</span><span class="w">
+</span><span class="w"></span><span class="k">discovery.zen.ping.unicast.hosts</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;10.10.10.8&#34;</span><span class="p">,</span><span class="s2">&#34;10.10.10.9&#34;</span><span class="p">,</span><span class="s2">&#34;10.10.10.10&#34;</span><span class="p">]</span><span class="w">  </span><span class="c"># 加入集群</span><span class="w">
+</span><span class="w"></span><span class="k">discovery.zen.minimum_master_nodes</span><span class="p">:</span><span class="w"> </span><span class="m">3</span><span class="w">  </span><span class="c"># 主节点最小3个</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>master 节点</li>
-</ul>
+</div></li>
+<li>
+<p>master 节点</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">node.master<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w"></span>node.data<span class="p">:</span><span class="w"> </span><span class="kc">false</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">node.master</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w"></span><span class="k">node.data</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>data 节点</li>
-</ul>
+</div></li>
+<li>
+<p>data 节点</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-shell" data-lang="shell">node.master: data
-node.data: true</code></pre></td></tr></table>
+node.data: <span class="nb">true</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>client 节点</li>
-</ul>
+</div></li>
+<li>
+<p>client 节点</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-shell" data-lang="shell">node.master: <span class="nb">false</span>
-node.data: false</code></pre></td></tr></table>
+node.data: <span class="nb">false</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>设置所谓的冷温热</li>
-</ul>
-
+</div></li>
+<li>
+<p>设置所谓的冷温热</p>
 <p>主要是配置 node.attr.box_type</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># node.attr.box_type: hot   # 设置为hot 作为热节点 也可以使用其他单词，这只是一个标记或标签</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># node.attr.box_type: hot   # 设置为hot 作为热节点 也可以使用其他单词，这只是一个标记或标签</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>数据写入不同的节点：</p>
+</div><p>数据写入不同的节点：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -756,28 +748,31 @@ node.data: false</code></pre></td></tr></table>
 如果对数据没有定义index template或者模板里没有定义<span class="sb">`</span><span class="s2">&#34;routing.allocation.require.box_type&#34;</span>: <span class="s2">&#34;hot&#34;</span><span class="sb">`</span> 则数据存放在所有节点上，此时如果对数据进行存储到指定的节点上则需要通过命令设置
 curl -XPUT -d <span class="s1">&#39;{&#34;settings&#34;: {&#34;index.routing.allocation.require.box_type&#34;: &#34;hot&#34; }}&#39;</span> http://youip:9200/you_index/_settings?pretty
 之后数据就会写入带有<span class="s2">&#34;node.attr.box_type: hot&#34;</span>的节点上
-通过上面的命令也就可以把指定的索引迁移到指定的数据节点上</code></pre></td></tr></table>
+通过上面的命令也就可以把指定的索引迁移到指定的数据节点上
+</code></pre></td></tr></table>
 </div>
 </div></li>
-
-<li><p>启动</p></li>
 </ul>
+</li>
+<li>
+<p>启动</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  systemctl start elasticsearch.service
-  systemctl enbale elasticsearch.service</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">systemctl start elasticsearch.service
+systemctl enbale elasticsearch.service
+</code></pre></td></tr></table>
 </div>
-</div>
+</div></li>
+</ul>
 <h4 id="启用x-pack">启用x-pack</h4>
-
 <h5 id="设置密码">设置密码</h5>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -790,33 +785,30 @@ xpack.security.enabled: <span class="nb">true</span>
 <span class="c1"># 重启集群</span> 
 systemctl restart elasticsearch
 <span class="c1"># 使用如下命令进行密码设置</span>
-/usr/share/elasticsearch/bin/elasticsearch-setup-passwords interactive</code></pre></td></tr></table>
+/usr/share/elasticsearch/bin/elasticsearch-setup-passwords interactive
+</code></pre></td></tr></table>
 </div>
-</div>
-<h5 id="破解x-pack">破解x-pack</h5>
-
+</div><h5 id="破解x-pack">破解x-pack</h5>
 <p>由于x-pack试用只有一年的时间，到期后如果不购买，整个elasticsearch集群就会打不开会导致整个日志系统不可用</p>
-
 <p>操作如下:</p>
-
 <ul>
-<li><p>下载反编译工具</p>
+<li>
+<p>下载反编译工具</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
-</span></pre></td>
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">下载 luyten 下载页面：https://github.com/deathmarine/Luyten/releases 软件下载下来，打开软件</pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">下载 luyten 下载页面：https://github.com/deathmarine/Luyten/releases 软件下载下来，打开软件
+</code></pre></td></tr></table>
 </div>
 </div></li>
-
-<li><p>开始破解</p></li>
-</ul>
-
+<li>
+<p>开始破解</p>
 <p>把x-pack-core-6.6.0.jar 这个我安装在/usr/share/elasticsearch/modules/x-pack-core/x-pack-core-6.6.0.jar 丢进去，就能看到我们jar包的源代码了。 我们需要把2个文件提取出来进行修改。 org.elasticsearch.license.LicenseVerifier org.elasticsearch.xpack.core.XPackBuild 修改LicenseVerifier</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -827,21 +819,21 @@ systemctl restart elasticsearch
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">  <span class="kd">public</span> <span class="kd">class</span> <span class="nc">LicenseVerifier</span>
-  <span class="o">{</span>
-      <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">verifyLicense</span><span class="o">(</span><span class="kd">final</span> <span class="n">License</span> <span class="n">license</span><span class="o">,</span> <span class="kd">final</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">encryptedPublicKeyData</span><span class="o">)</span> <span class="o">{</span>
-          <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-      <span class="o">}</span>
-      <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">verifyLicense</span><span class="o">(</span><span class="kd">final</span> <span class="n">License</span> <span class="n">license</span><span class="o">)</span> <span class="o">{</span>
-          <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-      <span class="o">}</span>
-  <span class="o">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">LicenseVerifier</span>
+<span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">verifyLicense</span><span class="o">(</span><span class="kd">final</span> <span class="n">License</span> <span class="n">license</span><span class="o">,</span> <span class="kd">final</span> <span class="kt">byte</span><span class="o">[]</span> <span class="n">encryptedPublicKeyData</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">boolean</span> <span class="nf">verifyLicense</span><span class="o">(</span><span class="kd">final</span> <span class="n">License</span> <span class="n">license</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>修改XPackBuild</p>
+</div><p>修改XPackBuild</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -853,52 +845,50 @@ systemctl restart elasticsearch
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java">  <span class="kd">static</span> <span class="o">{</span>
-          <span class="kd">final</span> <span class="n">Path</span> <span class="n">path</span> <span class="o">=</span> <span class="n">getElasticsearchCodebase</span><span class="o">();</span>
-          <span class="n">String</span> <span class="n">shortHash</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-          <span class="n">String</span> <span class="n">date</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span><span class="nl">
-</span><span class="nl">          Label_0109:</span> <span class="o">{</span>
-              <span class="n">shortHash</span> <span class="o">=</span> <span class="s">&#34;Unknown&#34;</span><span class="o">;</span>
-              <span class="n">date</span> <span class="o">=</span> <span class="s">&#34;Unknown&#34;</span><span class="o">;</span>
-          <span class="o">}</span>
-          <span class="n">CURRENT</span> <span class="o">=</span> <span class="k">new</span> <span class="n">XPackBuild</span><span class="o">(</span><span class="n">shortHash</span><span class="o">,</span> <span class="n">date</span><span class="o">);</span>
-      <span class="o">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">static</span> <span class="o">{</span>
+        <span class="kd">final</span> <span class="n">Path</span> <span class="n">path</span> <span class="o">=</span> <span class="n">getElasticsearchCodebase</span><span class="o">();</span>
+        <span class="n">String</span> <span class="n">shortHash</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">String</span> <span class="n">date</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+        <span class="n">Label_0109</span><span class="o">:</span> <span class="o">{</span>
+            <span class="n">shortHash</span> <span class="o">=</span> <span class="s">&#34;Unknown&#34;</span><span class="o">;</span>
+            <span class="n">date</span> <span class="o">=</span> <span class="s">&#34;Unknown&#34;</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="n">CURRENT</span> <span class="o">=</span> <span class="k">new</span> <span class="n">XPackBuild</span><span class="o">(</span><span class="n">shortHash</span><span class="o">,</span> <span class="n">date</span><span class="o">);</span>
+    <span class="o">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>重新编译这两个文件</p>
+</div><p>重新编译这两个文件</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  javac -cp <span class="s2">&#34;/usr/share/elasticsearch/modules/x-pack-core/x-pack-core-6.6.0.jar:/usr/share/elasticsearch/lib/*&#34;</span> LicenseVerifier.java
-  javac -cp <span class="s2">&#34;/usr/share/elasticsearch/modules/x-pack-core/x-pack-core-6.6.0.jar:/usr/share/elasticsearch/lib/*&#34;</span> XPackBuild.java</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">javac -cp <span class="s2">&#34;/usr/share/elasticsearch/modules/x-pack-core/x-pack-core-6.6.0.jar:/usr/share/elasticsearch/lib/*&#34;</span> LicenseVerifier.java
+javac -cp <span class="s2">&#34;/usr/share/elasticsearch/modules/x-pack-core/x-pack-core-6.6.0.jar:/usr/share/elasticsearch/lib/*&#34;</span> XPackBuild.java
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>将编译好的文件重新压缩到jar中</p>
+</div><p>将编译好的文件重新压缩到jar中</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  jar xvf x-pack-core-6.6.0.jar
-  <span class="c1"># 覆盖后 压缩</span>
-  jar -cf x-pack-core-6.6.0.jar *</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">jar xvf x-pack-core-6.6.0.jar
+<span class="c1"># 覆盖后 压缩</span>
+jar -cf x-pack-core-6.6.0.jar *
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>此时，已破解完成，还需要导入授权文件即可</p>
-
-<ul>
-<li>导入授权文件</li>
-</ul>
-
+</div><p>此时，已破解完成，还需要导入授权文件即可</p>
+</li>
+<li>
+<p>导入授权文件</p>
 <p>从官网申请licence <a href="https://license.elastic.co/registration">https://license.elastic.co/registration</a> 并修改licence</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-json" data-lang="json"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -913,38 +903,37 @@ systemctl restart elasticsearch
 </span><span class="lnt">13
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-json" data-lang="json">  <span class="p">{</span>
-      <span class="nt">&#34;license&#34;</span><span class="p">:{</span>
-          <span class="nt">&#34;uid&#34;</span><span class="p">:</span><span class="s2">&#34;15651de2-0eeb-450b-8eec-4230e658a78&#34;</span><span class="p">,</span>
-          <span class="nt">&#34;type&#34;</span><span class="p">:</span><span class="s2">&#34;platinum&#34;</span><span class="p">,</span> <span class="err">#</span> <span class="err">白金版</span> <span class="err">可以使用所有功能</span>
-          <span class="nt">&#34;issue_date_in_millis&#34;</span><span class="p">:</span><span class="mi">1550102400000</span><span class="p">,</span>
-          <span class="nt">&#34;expiry_date_in_millis&#34;</span><span class="p">:</span><span class="mi">3475121398000</span><span class="p">,</span> <span class="err">#</span> <span class="err">2080年过期</span>
-          <span class="nt">&#34;max_nodes&#34;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
-          <span class="nt">&#34;issued_to&#34;</span><span class="p">:</span><span class="s2">&#34;lishan zhou (b)&#34;</span><span class="p">,</span>
-          <span class="nt">&#34;issuer&#34;</span><span class="p">:</span><span class="s2">&#34;Web Form&#34;</span><span class="p">,</span>
-          <span class="nt">&#34;signature&#34;</span><span class="p">:</span><span class="s2">&#34;AAAAAwAAAA2y1EXkrzMmMPy5DXiwAAABmC9ZN0hjZDBGYnVyRXpCOW5Bb3FjZDAxOWpSbTVoMVZwUzRxVk1PSmkxaktJR
-</span><span class="s2">          &#34;</span><span class="err">start_date_in_millis&#34;</span><span class="p">:</span><span class="mi">1550102400000</span>
-      <span class="p">}</span>
-  <span class="p">}</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;license&#34;</span><span class="p">:{</span>
+        <span class="nt">&#34;uid&#34;</span><span class="p">:</span><span class="s2">&#34;15651de2-0eeb-450b-8eec-4230e658a78&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;type&#34;</span><span class="p">:</span><span class="s2">&#34;platinum&#34;</span><span class="p">,</span> <span class="err">#</span> <span class="err">白金版</span> <span class="err">可以使用所有功能</span>
+        <span class="nt">&#34;issue_date_in_millis&#34;</span><span class="p">:</span><span class="mi">1550102400000</span><span class="p">,</span>
+        <span class="nt">&#34;expiry_date_in_millis&#34;</span><span class="p">:</span><span class="mi">3475121398000</span><span class="p">,</span> <span class="err">#</span> <span class="err">2080年过期</span>
+        <span class="nt">&#34;max_nodes&#34;</span><span class="p">:</span><span class="mi">100</span><span class="p">,</span>
+        <span class="nt">&#34;issued_to&#34;</span><span class="p">:</span><span class="s2">&#34;lishan zhou (b)&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;issuer&#34;</span><span class="p">:</span><span class="s2">&#34;Web Form&#34;</span><span class="p">,</span>
+        <span class="nt">&#34;signature&#34;</span><span class="p">:</span><span class="s2">&#34;AAAAAwAAAA2y1EXkrzMmMPy5DXiwAAABmC9ZN0hjZDBGYnVyRXpCOW5Bb3FjZDAxOWpSbTVoMVZwUzRxVk1PSmkxaktJR
+</span><span class="s2">        &#34;</span><span class="err">start_date_in_millis&#34;</span><span class="p">:</span><span class="mi">1550102400000</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>上传到elasticsearch集群</p>
+</div><p>上传到elasticsearch集群</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  curl -u username:passwd -XPUT ‘http://es-ip:port/_xpack/license’ -H “Content-Type: application/json” -d @/tmp/license.json</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">curl -u username:passwd -XPUT ‘http://es-ip:port/_xpack/license’ -H “Content-Type: application/json” -d @/tmp/license.json
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>之后需要重启elasticsearch 重启后发现日志报错说是需要ssl/TLS打开</p>
-
-<ul>
-<li>打开ssl</li>
-</ul>
+</div><p>之后需要重启elasticsearch 重启后发现日志报错说是需要ssl/TLS打开</p>
+</li>
+<li>
+<p>打开ssl</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -957,40 +946,40 @@ systemctl restart elasticsearch
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  /usr/share/elasticsearch/bin/elasticsearch-certutil ca
-  /usr/share/elasticsearch/bin/elasticsearch-certutil cert --ca elastic-stack-ca.p12
-  <span class="c1"># 然后把ca文件复制到各个节点中， 在elasticsearch增加如下配置；</span>
-  xpack.security.transport.ssl.enabled: <span class="nb">true</span>
-  xpack.security.transport.ssl.verification_mode: certificate
-  xpack.security.transport.ssl.keystore.path: elastic-certificates.p12 <span class="c1"># 这个相对于/etc/elasticsearch这个路径</span>
-  xpack.security.transport.ssl.truststore.path: elastic-certificates.p12 <span class="c1"># 这个相对于/etc/elasticsearch这个路径</span>
+<pre class="chroma"><code class="language-shell" data-lang="shell">/usr/share/elasticsearch/bin/elasticsearch-certutil ca
+/usr/share/elasticsearch/bin/elasticsearch-certutil cert --ca elastic-stack-ca.p12
+<span class="c1"># 然后把ca文件复制到各个节点中， 在elasticsearch增加如下配置；</span>
+xpack.security.transport.ssl.enabled: <span class="nb">true</span>
+xpack.security.transport.ssl.verification_mode: certificate
+xpack.security.transport.ssl.keystore.path: elastic-certificates.p12 <span class="c1"># 这个相对于/etc/elasticsearch这个路径</span>
+xpack.security.transport.ssl.truststore.path: elastic-certificates.p12 <span class="c1"># 这个相对于/etc/elasticsearch这个路径</span>
   
-  <span class="c1"># 再次重启发现在集群状态正常</span>
-  <span class="c1"># 查看x-pack过期</span>
-  curl -XGET -u username:passwd <span class="s1">&#39;http://10.10.10.11:9200/_license&#39;</span></code></pre></td></tr></table>
+<span class="c1"># 再次重启发现在集群状态正常</span>
+<span class="c1"># 查看x-pack过期</span>
+curl -XGET -u username:passwd <span class="s1">&#39;http://10.10.10.11:9200/_license&#39;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>以上整个elasticsearch集群就安装完成并实现了x-pack认证功能</p>
-
-<h3 id="logstash">logstash</h3>
-
-<ul>
-<li>安装<br /></li>
+</div><p>以上整个elasticsearch集群就安装完成并实现了x-pack认证功能</p>
+</li>
 </ul>
+<h3 id="logstash">logstash</h3>
+<ul>
+<li>
+<p>安装</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  yum install logstash -y </code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">yum install logstash -y 
+</code></pre></td></tr></table>
 </div>
-</div>
-<ul>
-<li>配置文件说明</li>
-</ul>
+</div></li>
+<li>
+<p>配置文件说明</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -1000,20 +989,20 @@ systemctl restart elasticsearch
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  ll /etc/logstash
-  drwxrwxr-x <span class="m">2</span> root root <span class="m">20480</span> Dec <span class="m">18</span> <span class="m">14</span>:32 conf.d <span class="c1"># 存放pipeline配置的目录，比如 h5-web.conf</span>
-  -rw-r--r-- <span class="m">1</span> root root <span class="m">1846</span> Dec <span class="m">17</span> <span class="m">15</span>:54 jvm.options <span class="c1"># 配置logstash 启动时的内存大小及其他jvm相关的配置</span>
-  -rw-r--r-- <span class="m">1</span> root root <span class="m">4568</span> Dec <span class="m">7</span> <span class="m">05</span>:07 log4j2.properties <span class="c1"># logstash 日志相关的配置</span>
-  -rw-r--r-- <span class="m">1</span> root root <span class="m">342</span> Dec <span class="m">7</span> <span class="m">05</span>:07 logstash-sample.conf <span class="c1"># 一个默认的pipeline配置</span>
-  -rw-r--r-- <span class="m">1</span> root root <span class="m">8210</span> Dec <span class="m">18</span> <span class="m">13</span>:12 logstash.yml <span class="c1"># 主配置文件</span>
-  -rw-r--r-- <span class="m">1</span> root root <span class="m">285</span> Dec <span class="m">7</span> <span class="m">05</span>:07 pipelines.yml <span class="c1"># pipeline配置</span>
-  -rw------- <span class="m">1</span> root root <span class="m">1696</span> Dec <span class="m">7</span> <span class="m">05</span>:07 startup.options <span class="c1"># logstash启动相关参数</span> </code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">ll /etc/logstash
+drwxrwxr-x <span class="m">2</span> root root <span class="m">20480</span> Dec <span class="m">18</span> 14:32 conf.d <span class="c1"># 存放pipeline配置的目录，比如 h5-web.conf</span>
+-rw-r--r-- <span class="m">1</span> root root <span class="m">1846</span> Dec <span class="m">17</span> 15:54 jvm.options <span class="c1"># 配置logstash 启动时的内存大小及其他jvm相关的配置</span>
+-rw-r--r-- <span class="m">1</span> root root <span class="m">4568</span> Dec <span class="m">7</span> 05:07 log4j2.properties <span class="c1"># logstash 日志相关的配置</span>
+-rw-r--r-- <span class="m">1</span> root root <span class="m">342</span> Dec <span class="m">7</span> 05:07 logstash-sample.conf <span class="c1"># 一个默认的pipeline配置</span>
+-rw-r--r-- <span class="m">1</span> root root <span class="m">8210</span> Dec <span class="m">18</span> 13:12 logstash.yml <span class="c1"># 主配置文件</span>
+-rw-r--r-- <span class="m">1</span> root root <span class="m">285</span> Dec <span class="m">7</span> 05:07 pipelines.yml <span class="c1"># pipeline配置</span>
+-rw------- <span class="m">1</span> root root <span class="m">1696</span> Dec <span class="m">7</span> 05:07 startup.options <span class="c1"># logstash启动相关参数</span> 
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>主配置文件</p>
+</div><p>主配置文件</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1063,78 +1052,78 @@ systemctl restart elasticsearch
 </span><span class="lnt">48
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">  </span>node.name<span class="p">:</span><span class="w"> </span>es01<span class="w">
-</span><span class="w">  </span>path.data<span class="p">:</span><span class="w"> </span>/var/lib/logstash<span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">node.name</span><span class="p">:</span><span class="w"> </span>es01<span class="w">
+</span><span class="w"></span><span class="k">path.data</span><span class="p">:</span><span class="w"> </span>/var/lib/logstash<span class="w">
 </span><span class="w">  
-</span><span class="w">  </span>pipeline.workers<span class="p">:</span><span class="w"> </span><span class="m">48</span><span class="w">    </span><span class="c"># 按cpu core数</span><span class="w">
-</span><span class="w">  </span>pipeline.output.workers<span class="p">:</span><span class="w"> </span><span class="m">48</span><span class="w">  </span><span class="c"># 按cpu core数</span><span class="w">
-</span><span class="w">  </span>pipeline.batch.size<span class="p">:</span><span class="w"> </span><span class="m">9000</span><span class="w">  </span><span class="c"># 每提交到elasticsearch的数据 默认为125 适当的调整这个数据可能提高elasticsearch的写入效率</span><span class="w">
-</span><span class="w">  </span>pipeline.batch.delay<span class="p">:</span><span class="w"> </span><span class="m">10000</span><span class="w">  </span><span class="c"># 每次延迟多少时间(毫秒)提交，适当的调整这个数据可能提高elasticsearch的写入效率</span><span class="w">
-</span><span class="w">  </span><span class="c"># pipeline.unsafe_shutdown: false</span><span class="w">
+</span><span class="w"></span><span class="k">pipeline.workers</span><span class="p">:</span><span class="w"> </span><span class="m">48</span><span class="w">    </span><span class="c"># 按cpu core数</span><span class="w">
+</span><span class="w"></span><span class="k">pipeline.output.workers</span><span class="p">:</span><span class="w"> </span><span class="m">48</span><span class="w">  </span><span class="c"># 按cpu core数</span><span class="w">
+</span><span class="w"></span><span class="k">pipeline.batch.size</span><span class="p">:</span><span class="w"> </span><span class="m">9000</span><span class="w">  </span><span class="c"># 每提交到elasticsearch的数据 默认为125 适当的调整这个数据可能提高elasticsearch的写入效率</span><span class="w">
+</span><span class="w"></span><span class="k">pipeline.batch.delay</span><span class="p">:</span><span class="w"> </span><span class="m">10000</span><span class="w">  </span><span class="c"># 每次延迟多少时间(毫秒)提交，适当的调整这个数据可能提高elasticsearch的写入效率</span><span class="w">
+</span><span class="w"></span><span class="c"># pipeline.unsafe_shutdown: false</span><span class="w">
 </span><span class="w">  
-</span><span class="w">  </span>config.support_escapes<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">   </span><span class="c"># 不转义功能如 \n 就是字符串&#39;\n&#39;，而不是换行</span><span class="w">
-</span><span class="w">  </span><span class="c"># 队列配置，保持默认即可</span><span class="w">
-</span><span class="w">  </span><span class="c"># queue.type: memory</span><span class="w">
-</span><span class="w">  </span><span class="c"># queue.max_events: 0</span><span class="w">
-</span><span class="w">  </span><span class="c">#</span><span class="w">
-</span><span class="w">  </span><span class="c"># queue.max_bytes: 1024mb</span><span class="w">
-</span><span class="w">  </span><span class="c"># queue.checkpoint.acks: 1024</span><span class="w">
-</span><span class="w">  </span><span class="c"># queue.checkpoint.writes: 1024</span><span class="w">
-</span><span class="w">  </span><span class="c"># queue.checkpoint.interval: 1000</span><span class="w">
-</span><span class="w">  </span><span class="c"># dead_letter_queue.enable: false</span><span class="w">
-</span><span class="w">  </span><span class="c"># dead_letter_queue.max_bytes: 1024mb</span><span class="w">
-</span><span class="w">  </span><span class="c"># path.dead_letter_queue:</span><span class="w">
-</span><span class="w">  </span><span class="c">#</span><span class="w">
-</span><span class="w">  </span><span class="c"># ------------ Metrics Settings --------------</span><span class="w">
-</span><span class="w">  </span><span class="c">#</span><span class="w">
-</span><span class="w">  </span><span class="c"># Bind address for the metrics REST endpoint</span><span class="w">
-</span><span class="w">  </span><span class="c"># http.host: &#34;127.0.0.1&#34;</span><span class="w">
-</span><span class="w">  </span><span class="c"># http.port: 9600-9700</span><span class="w">
-</span><span class="w">  </span><span class="c"># ------------ Debugging Settings --------------</span><span class="w">
-</span><span class="w">  </span><span class="c">#</span><span class="w">
-</span><span class="w">  </span><span class="c"># Options for log.level:</span><span class="w">
-</span><span class="w">  </span><span class="c">#   * fatal</span><span class="w">
-</span><span class="w">  </span><span class="c">#   * error</span><span class="w">
-</span><span class="w">  </span><span class="c">#   * warn</span><span class="w">
-</span><span class="w">  </span><span class="c">#   * info (default)</span><span class="w">
-</span><span class="w">  </span><span class="c">#   * debug</span><span class="w">
-</span><span class="w">  </span><span class="c">#   * trace</span><span class="w">
-</span><span class="w">  </span><span class="c">#</span><span class="w">
-</span><span class="w">  </span><span class="c"># log.level: info</span><span class="w">
-</span><span class="w">  </span>path.logs<span class="p">:</span><span class="w"> </span>/var/log/logstash<span class="w">
+</span><span class="w"></span><span class="k">config.support_escapes</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">   </span><span class="c"># 不转义功能如 \n 就是字符串&#39;\n&#39;，而不是换行</span><span class="w">
+</span><span class="w"></span><span class="c"># 队列配置，保持默认即可</span><span class="w">
+</span><span class="w"></span><span class="c"># queue.type: memory</span><span class="w">
+</span><span class="w"></span><span class="c"># queue.max_events: 0</span><span class="w">
+</span><span class="w"></span><span class="c">#</span><span class="w">
+</span><span class="w"></span><span class="c"># queue.max_bytes: 1024mb</span><span class="w">
+</span><span class="w"></span><span class="c"># queue.checkpoint.acks: 1024</span><span class="w">
+</span><span class="w"></span><span class="c"># queue.checkpoint.writes: 1024</span><span class="w">
+</span><span class="w"></span><span class="c"># queue.checkpoint.interval: 1000</span><span class="w">
+</span><span class="w"></span><span class="c"># dead_letter_queue.enable: false</span><span class="w">
+</span><span class="w"></span><span class="c"># dead_letter_queue.max_bytes: 1024mb</span><span class="w">
+</span><span class="w"></span><span class="c"># path.dead_letter_queue:</span><span class="w">
+</span><span class="w"></span><span class="c">#</span><span class="w">
+</span><span class="w"></span><span class="c"># ------------ Metrics Settings --------------</span><span class="w">
+</span><span class="w"></span><span class="c">#</span><span class="w">
+</span><span class="w"></span><span class="c"># Bind address for the metrics REST endpoint</span><span class="w">
+</span><span class="w"></span><span class="c"># http.host: &#34;127.0.0.1&#34;</span><span class="w">
+</span><span class="w"></span><span class="c"># http.port: 9600-9700</span><span class="w">
+</span><span class="w"></span><span class="c"># ------------ Debugging Settings --------------</span><span class="w">
+</span><span class="w"></span><span class="c">#</span><span class="w">
+</span><span class="w"></span><span class="c"># Options for log.level:</span><span class="w">
+</span><span class="w"></span><span class="c">#   * fatal</span><span class="w">
+</span><span class="w"></span><span class="c">#   * error</span><span class="w">
+</span><span class="w"></span><span class="c">#   * warn</span><span class="w">
+</span><span class="w"></span><span class="c">#   * info (default)</span><span class="w">
+</span><span class="w"></span><span class="c">#   * debug</span><span class="w">
+</span><span class="w"></span><span class="c">#   * trace</span><span class="w">
+</span><span class="w"></span><span class="c">#</span><span class="w">
+</span><span class="w"></span><span class="c"># log.level: info</span><span class="w">
+</span><span class="w"></span><span class="k">path.logs</span><span class="p">:</span><span class="w"> </span>/var/log/logstash<span class="w">
 </span><span class="w">  
-</span><span class="w">  </span><span class="c"># 启动监控</span><span class="w">
-</span><span class="w">  </span>xpack.monitoring.enabled<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">  </span>xpack.monitoring.elasticsearch.username<span class="p">:</span><span class="w"> </span>logstash_system<span class="w">
-</span><span class="w">  </span>xpack.monitoring.elasticsearch.password<span class="p">:</span><span class="w"> </span>passwd<span class="w">
-</span><span class="w">  </span>xpack.monitoring.elasticsearch.url<span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;http://10.10.10.11:9200&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;http://10.10.10.12:9200&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;http://10.10.10.13:9200&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;http://10.10.10.14:9200&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;10.10.10.15:9200&#34;</span><span class="p">]</span><span class="w">
-</span><span class="w">  </span>xpack.monitoring.elasticsearch.sniffing<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">  </span>xpack.monitoring.collection.interval<span class="p">:</span><span class="w"> </span>10s<span class="w">
-</span><span class="w">  </span>xpack.monitoring.collection.pipeline.details.enabled<span class="p">:</span><span class="w"> </span><span class="kc">true</span></code></pre></td></tr></table>
+</span><span class="w"></span><span class="c"># 启动监控</span><span class="w">
+</span><span class="w"></span><span class="k">xpack.monitoring.enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w"></span><span class="k">xpack.monitoring.elasticsearch.username</span><span class="p">:</span><span class="w"> </span>logstash_system<span class="w">
+</span><span class="w"></span><span class="k">xpack.monitoring.elasticsearch.password</span><span class="p">:</span><span class="w"> </span>passwd<span class="w">
+</span><span class="w"></span><span class="k">xpack.monitoring.elasticsearch.url</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;http://10.10.10.11:9200&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;http://10.10.10.12:9200&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;http://10.10.10.13:9200&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;http://10.10.10.14:9200&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;10.10.10.15:9200&#34;</span><span class="p">]</span><span class="w">
+</span><span class="w"></span><span class="k">xpack.monitoring.elasticsearch.sniffing</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w"></span><span class="k">xpack.monitoring.collection.interval</span><span class="p">:</span><span class="w"> </span>10s<span class="w">
+</span><span class="w"></span><span class="k">xpack.monitoring.collection.pipeline.details.enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
-</div>
-<p>pipeline配置</p>
+</div><p>pipeline配置</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  cat pipelines.yml
+<pre class="chroma"><code class="language-shell" data-lang="shell">cat pipelines.yml
   
-  - pipeline.id: main
-    path.config: <span class="s2">&#34;/etc/logstash/conf.d/*.conf&#34;</span></code></pre></td></tr></table>
+- pipeline.id: main
+  path.config: <span class="s2">&#34;/etc/logstash/conf.d/*.conf&#34;</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>配置从kafka从读取日志并写入elasticsearch，这里使用三个配置文件，分别为input.conf filter.conf output.conf 文件内容分别为:</p>
-
+</div><p>配置从kafka从读取日志并写入elasticsearch，这里使用三个配置文件，分别为input.conf filter.conf output.conf 文件内容分别为:</p>
 <ul>
-<li><p>input.conf</p>
+<li>
+<p>input.conf</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1150,9 +1139,9 @@ systemctl restart elasticsearch
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">input {
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">input {
         kafka {
                 id =&gt; &#34;you_id&#34;
                 bootstrap_servers =&gt; &#34;kafka1:9092,kafka2:9092&#34;
@@ -1167,14 +1156,15 @@ systemctl restart elasticsearch
                 max_poll_records =&gt; &#34;100&#34;
                 type =&gt; &#34;you_type&#34;
         }       
-}</pre></td></tr></table>
+}
+</code></pre></td></tr></table>
 </div>
 </div></li>
-
-<li><p>filter.conf</p>
+<li>
+<p>filter.conf</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1210,9 +1200,9 @@ systemctl restart elasticsearch
 </span><span class="lnt">34
 </span><span class="lnt">35
 </span><span class="lnt">36
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">filter {
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">filter {
         json {
                 source =&gt; &#34;message&#34;
         }
@@ -1247,14 +1237,15 @@ systemctl restart elasticsearch
                 remove_field =&gt; [&#34;beat&#34;, &#34;host&#34;, &#34;message&#34;, &#34;input&#34;, &#34;prospector&#34;, &#34;offset&#34;, &#34;agent&#34;, &#34;fields&#34;]  # 清理不需要的字段 
         }
 }
-    </pre></td></tr></table>
+    
+</code></pre></td></tr></table>
 </div>
 </div></li>
-
-<li><p>output.conf</p>
+<li>
+<p>output.conf</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1279,9 +1270,9 @@ systemctl restart elasticsearch
 </span><span class="lnt">23
 </span><span class="lnt">24
 </span><span class="lnt">25
-</span></pre></td>
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma">output {
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">output {
         if [type] == &#34;you_type&#34; {
                 elasticsearch {
                         hosts =&gt; [&#34;10.10.10.11:9200&#34;,&#34;10.10.10.12:9200&#34;,&#34;10.10.10.13:9200&#34;,&#34;10.10.10.14:9200&#34;,&#34;10.10.10.15:9200&#34;]
@@ -1305,56 +1296,56 @@ systemctl restart elasticsearch
                 }
         }
 }
-    </pre></td></tr></table>
+    
+</code></pre></td></tr></table>
 </div>
 </div></li>
-
-<li><p>一些说明</p>
-
-<p>上面的配置中带有type字段是为了不同的应用，使用if判断然后可以写入不同的索引中，还有一种更简洁的用法，就是使用%{[@metadata][topic]}。 <code>%{[@metadata][topic]}</code> 在logstash1.5版本开始，有一个特殊的字段，叫做@metadata。@metadata包含的内容不会作为事件的一部分输出。详情查看 <a href="https://www.elastic.co/guide/en/logstash/6.6/plugins-inputs-kafka.html#_metadata_fields">logstash input kafka配置</a></p></li>
-
-<li><p>启动</p></li>
+<li>
+<p>一些说明</p>
+<p>上面的配置中带有type字段是为了不同的应用，使用if判断然后可以写入不同的索引中，还有一种更简洁的用法，就是使用%{[@metadata][topic]}。 <code>%{[@metadata][topic]}</code> 在logstash1.5版本开始，有一个特殊的字段，叫做@metadata。@metadata包含的内容不会作为事件的一部分输出。详情查看 <a href="https://www.elastic.co/guide/en/logstash/6.6/plugins-inputs-kafka.html#_metadata_fields">logstash input kafka配置</a></p>
+</li>
 </ul>
+</li>
+<li>
+<p>启动</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">  systemctl start logstash
-  systemctl <span class="nb">enable</span> logstash</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">systemctl start logstash
+systemctl <span class="nb">enable</span> logstash
+</code></pre></td></tr></table>
 </div>
-</div>
+</div></li>
+</ul>
 <h3 id="kibana">kibana</h3>
-
 <p>安装</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">yum install kibana -y </code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">yum install kibana -y 
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>配置较为简单省略</p>
-
+</div><p>配置较为简单省略</p>
 <h2 id="filebeat">Filebeat</h2>
-
 <h3 id="安装filebeat">安装filebeat</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">yum install filebeat -y</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">yum install filebeat -y
+</code></pre></td></tr></table>
 </div>
-</div>
-<h3 id="收集日志配置">收集日志配置</h3>
-
+</div><h3 id="收集日志配置">收集日志配置</h3>
 <p>主要收集日志为json格式的配置</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1397,64 +1388,63 @@ systemctl restart elasticsearch
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c">#=========================== Filebeat inputs =============================</span><span class="w">
-</span><span class="w"></span>filebeat.inputs<span class="p">:</span><span class="w">
-</span><span class="w"></span>-<span class="w"> </span>type<span class="p">:</span><span class="w"> </span>log<span class="w">
-</span><span class="w">  </span>enabled<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">  </span>paths<span class="p">:</span><span class="w">
-</span><span class="w">    </span>-<span class="w"> </span>/opt/logs/spring/blgroup-message-api/blgroup-message-api_VM_10_201_35_204_rhel.log<span class="w">
-</span><span class="w">    </span>-<span class="w"> </span>/opt/logs/spring/blgroup-message-api/blgroup-message-api_error_VM_10_201_35_204_rhel.log<span class="w">
+</span><span class="w"></span><span class="k">filebeat.inputs</span><span class="p">:</span><span class="w">
+</span><span class="w"></span>- <span class="k">type</span><span class="p">:</span><span class="w"> </span>log<span class="w">
+</span><span class="w">  </span><span class="k">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span><span class="k">paths</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- /opt/logs/spring/blgroup-message-api/blgroup-message-api_VM_10_201_35_204_rhel.log<span class="w">
+</span><span class="w">    </span>- /opt/logs/spring/blgroup-message-api/blgroup-message-api_error_VM_10_201_35_204_rhel.log<span class="w">
 </span><span class="w">  </span><span class="c"># 使用JSON格式</span><span class="w">
-</span><span class="w">  </span>json.keys_under_root<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">  </span>json.overwrite_keys<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span><span class="k">json.keys_under_root</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span><span class="k">json.overwrite_keys</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
 </span><span class="w">  </span><span class="c"># 增加字段</span><span class="w">
-</span><span class="w">  </span>fields<span class="p">:</span><span class="w">
-</span><span class="w">    </span>topic<span class="p">:</span><span class="w"> </span>you_topics<span class="w">
-</span><span class="w">    </span>ip<span class="p">:</span><span class="w"> </span><span class="m">10.10</span>.<span class="m">10.5</span><span class="w">
+</span><span class="w">  </span><span class="k">fields</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">topic</span><span class="p">:</span><span class="w"> </span>you_topics<span class="w">
+</span><span class="w">    </span><span class="k">ip</span><span class="p">:</span><span class="w"> </span><span class="m">10.10.10.5</span><span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="c">#============================= Filebeat modules ===============================</span><span class="w">
-</span><span class="w"></span>filebeat.config.modules<span class="p">:</span><span class="w">
-</span><span class="w">  </span>path<span class="p">:</span><span class="w"> </span>${path.config}/modules.d/<span class="cp">*.yml</span><span class="w">
-</span><span class="w">  </span>reload.enabled<span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="w"></span><span class="k">filebeat.config.modules</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">path</span><span class="p">:</span><span class="w"> </span>${path.config}/modules.d/<span class="cp">*.yml</span><span class="w">
+</span><span class="w">  </span><span class="k">reload.enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
 </span><span class="w">
-</span><span class="w"></span>setup.kibana<span class="p">:</span><span class="w">
+</span><span class="w"></span><span class="k">setup.kibana</span><span class="p">:</span><span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="c">#================================ Kafka Outputs =====================================</span><span class="w">
 </span><span class="w"></span><span class="c"># Configure output to kafka</span><span class="w">
-</span><span class="w"></span>output.kafka<span class="p">:</span><span class="w">
-</span><span class="w">  </span>enabled<span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">  </span>hosts<span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;10.10.10.11:9092&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;10.10.10.12:9092&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;10.10.10.13:9092&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;10.10.10.14:9092&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;10.10.10.105:9092&#34;</span><span class="p">]</span><span class="w">
+</span><span class="w"></span><span class="k">output.kafka</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">enabled</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="w">  </span><span class="k">hosts</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;10.10.10.11:9092&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;10.10.10.12:9092&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;10.10.10.13:9092&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;10.10.10.14:9092&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;10.10.10.105:9092&#34;</span><span class="p">]</span><span class="w">
 </span><span class="w">  </span><span class="c"># 不同的应用使用不同的topic</span><span class="w">
-</span><span class="w">  </span>topic<span class="p">:</span><span class="w"> </span><span class="s1">&#39;%{[fields][topic]}&#39;</span><span class="w">
+</span><span class="w">  </span><span class="k">topic</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;%{[fields][topic]}&#39;</span><span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="c">#================================ Processors =====================================</span><span class="w">
 </span><span class="w"></span><span class="c"># Configure processors to enhance or manipulate events generated by the beat.</span><span class="w">
-</span><span class="w"></span>processors<span class="p">:</span><span class="w">
-</span><span class="w">  </span>-<span class="w"> </span>add_host_metadata<span class="p">:</span><span class="w"> </span>~<span class="w">
-</span><span class="w">  </span>-<span class="w"> </span>add_cloud_metadata<span class="p">:</span><span class="w"> </span>~<span class="w">
+</span><span class="w"></span><span class="k">processors</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="k">add_host_metadata</span><span class="p">:</span><span class="w"> </span>~<span class="w">
+</span><span class="w">  </span>- <span class="k">add_cloud_metadata</span><span class="p">:</span><span class="w"> </span>~<span class="w">
 </span><span class="w">
 </span><span class="w">
 </span><span class="w"></span><span class="c">#================================ Logging =====================================</span><span class="w">
 </span><span class="w"></span><span class="c"># Available log levels are: error, warning, info, debug</span><span class="w">
-</span><span class="w"></span>logging.level<span class="p">:</span><span class="w"> </span>warning</code></pre></td></tr></table>
+</span><span class="w"></span><span class="k">logging.level</span><span class="p">:</span><span class="w"> </span>warning<span class="w">
+</span></code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="docker-compose安装elasticsearch">docker-compose安装elasticsearch</h2>
-
+</div><h2 id="docker-compose安装elasticsearch">docker-compose安装elasticsearch</h2>
 <p>安装三个节点，第一个节点的9200端口开放出来</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-shell" data-lang="shell">mkdir elastic
-<span class="nb">cd</span> elastic</code></pre></td></tr></table>
+<span class="nb">cd</span> elastic
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>docker-compose.yml如下:</p>
+</div><p>docker-compose.yml如下:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -1554,146 +1544,147 @@ systemctl restart elasticsearch
 </span><span class="lnt">98
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">version<span class="p">:</span><span class="w"> </span><span class="s1">&#39;2.2&#39;</span><span class="w">
-</span><span class="w"></span>services<span class="p">:</span><span class="w">
-</span><span class="w">  </span>elastic1<span class="p">:</span><span class="w">
-</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>docker.elastic.co/elasticsearch/elasticsearch<span class="p">:</span><span class="m">6.5</span>.<span class="m">4</span><span class="w">
-</span><span class="w">    </span>container_name<span class="p">:</span><span class="w"> </span>elastic1<span class="w">
-</span><span class="w">    </span>environment<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>cluster.name=docker-cluster<span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>bootstrap.memory_lock=<span class="kc">true</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>node.name=elastic1<span class="w">
-</span><span class="w">      </span>-<span class="w"> </span><span class="s2">&#34;discovery.zen.minimum_master_nodes=3&#34;</span><span class="w"> </span><span class="c"># 设置最小主节点个数</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span><span class="s2">&#34;ES_JAVA_OPTS=-Xms512m -Xmx512m&#34;</span><span class="w"> </span><span class="c"># 设置内存大小</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>xpack.security.enabled=<span class="kc">true</span><span class="w"> </span><span class="c"># 设置使用xpack</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>xpack.monitoring.enabled=<span class="kc">true</span><span class="w"> </span><span class="c"># 启动监控</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>xpack.monitoring.collection.enabled=<span class="kc">true</span><span class="w"> </span><span class="c"># 启用监控收集数据</span><span class="w">
-</span><span class="w">    </span>ulimits<span class="p">:</span><span class="w">
-</span><span class="w">      </span>memlock<span class="p">:</span><span class="w">
-</span><span class="w">        </span>soft<span class="p">:</span><span class="w"> </span>-<span class="m">1</span><span class="w">
-</span><span class="w">        </span>hard<span class="p">:</span><span class="w"> </span>-<span class="m">1</span><span class="w">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;2.2&#39;</span><span class="w">
+</span><span class="w"></span><span class="k">services</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">elastic1</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>docker.elastic.co/elasticsearch/elasticsearch<span class="p">:</span><span class="m">6.5.4</span><span class="w">
+</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>elastic1<span class="w">
+</span><span class="w">    </span><span class="k">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- cluster.name=docker-cluster<span class="w">
+</span><span class="w">      </span>- bootstrap.memory_lock=<span class="kc">true</span><span class="w">
+</span><span class="w">      </span>- node.name=elastic1<span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;discovery.zen.minimum_master_nodes=3&#34;</span><span class="w"> </span><span class="c"># 设置最小主节点个数</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;ES_JAVA_OPTS=-Xms512m -Xmx512m&#34;</span><span class="w"> </span><span class="c"># 设置内存大小</span><span class="w">
+</span><span class="w">      </span>- xpack.security.enabled=<span class="kc">true</span><span class="w"> </span><span class="c"># 设置使用xpack</span><span class="w">
+</span><span class="w">      </span>- xpack.monitoring.enabled=<span class="kc">true</span><span class="w"> </span><span class="c"># 启动监控</span><span class="w">
+</span><span class="w">      </span>- xpack.monitoring.collection.enabled=<span class="kc">true</span><span class="w"> </span><span class="c"># 启用监控收集数据</span><span class="w">
+</span><span class="w">    </span><span class="k">ulimits</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">memlock</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">soft</span><span class="p">:</span><span class="w"> </span>-<span class="m">1</span><span class="w">
+</span><span class="w">        </span><span class="k">hard</span><span class="p">:</span><span class="w"> </span>-<span class="m">1</span><span class="w">
 </span><span class="w">
-</span><span class="w">    </span>volumes<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>esdata1<span class="p">:</span>/usr/share/elasticsearch/data<span class="w">
+</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- esdata1<span class="p">:</span>/usr/share/elasticsearch/data<span class="w">
 </span><span class="w">
-</span><span class="w">    </span>ports<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span><span class="m">9200</span><span class="p">:</span><span class="m">9200</span><span class="w"> </span><span class="c"># 端口映射</span><span class="w">
-</span><span class="w">    </span>networks<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>esnet<span class="w">
+</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">9200</span><span class="p">:</span><span class="m">9200</span><span class="w"> </span><span class="c"># 端口映射</span><span class="w">
+</span><span class="w">    </span><span class="k">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- esnet<span class="w">
 </span><span class="w">
-</span><span class="w">  </span>elastic2<span class="p">:</span><span class="w">
-</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>docker.elastic.co/elasticsearch/elasticsearch<span class="p">:</span><span class="m">6.5</span>.<span class="m">4</span><span class="w">
-</span><span class="w">    </span>container_name<span class="p">:</span><span class="w"> </span>elastic2<span class="w">
-</span><span class="w">    </span>environment<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>cluster.name=docker-cluster<span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>bootstrap.memory_lock=<span class="kc">true</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>node.name=elastic2<span class="w">
-</span><span class="w">      </span>-<span class="w"> </span><span class="s2">&#34;discovery.zen.minimum_master_nodes=3&#34;</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span><span class="s2">&#34;ES_JAVA_OPTS=-Xms512m -Xmx512m&#34;</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span><span class="s2">&#34;discovery.zen.ping.unicast.hosts=elastic1&#34;</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>xpack.security.enabled=<span class="kc">true</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>xpack.monitoring.enabled=<span class="kc">true</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>xpack.monitoring.collection.enabled=<span class="kc">true</span><span class="w">
-</span><span class="w">    </span>ulimits<span class="p">:</span><span class="w">
-</span><span class="w">      </span>memlock<span class="p">:</span><span class="w">
-</span><span class="w">        </span>soft<span class="p">:</span><span class="w"> </span>-<span class="m">1</span><span class="w">
-</span><span class="w">        </span>hard<span class="p">:</span><span class="w"> </span>-<span class="m">1</span><span class="w">
-</span><span class="w">    </span>volumes<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>esdata2<span class="p">:</span>/usr/share/elasticsearch/data<span class="w">
-</span><span class="w">    </span>depends_on<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>elastic1<span class="w">
-</span><span class="w">    </span>networks<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>esnet<span class="w">
+</span><span class="w">  </span><span class="k">elastic2</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>docker.elastic.co/elasticsearch/elasticsearch<span class="p">:</span><span class="m">6.5.4</span><span class="w">
+</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>elastic2<span class="w">
+</span><span class="w">    </span><span class="k">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- cluster.name=docker-cluster<span class="w">
+</span><span class="w">      </span>- bootstrap.memory_lock=<span class="kc">true</span><span class="w">
+</span><span class="w">      </span>- node.name=elastic2<span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;discovery.zen.minimum_master_nodes=3&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;ES_JAVA_OPTS=-Xms512m -Xmx512m&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;discovery.zen.ping.unicast.hosts=elastic1&#34;</span><span class="w">
+</span><span class="w">      </span>- xpack.security.enabled=<span class="kc">true</span><span class="w">
+</span><span class="w">      </span>- xpack.monitoring.enabled=<span class="kc">true</span><span class="w">
+</span><span class="w">      </span>- xpack.monitoring.collection.enabled=<span class="kc">true</span><span class="w">
+</span><span class="w">    </span><span class="k">ulimits</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">memlock</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">soft</span><span class="p">:</span><span class="w"> </span>-<span class="m">1</span><span class="w">
+</span><span class="w">        </span><span class="k">hard</span><span class="p">:</span><span class="w"> </span>-<span class="m">1</span><span class="w">
+</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- esdata2<span class="p">:</span>/usr/share/elasticsearch/data<span class="w">
+</span><span class="w">    </span><span class="k">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- elastic1<span class="w">
+</span><span class="w">    </span><span class="k">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- esnet<span class="w">
 </span><span class="w">
-</span><span class="w">  </span>elastic3<span class="p">:</span><span class="w">
-</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>docker.elastic.co/elasticsearch/elasticsearch<span class="p">:</span><span class="m">6.5</span>.<span class="m">4</span><span class="w">
-</span><span class="w">    </span>container_name<span class="p">:</span><span class="w"> </span>elastic3<span class="w">
-</span><span class="w">    </span>environment<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>cluster.name=docker-cluster<span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>node.name=elastic3<span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>bootstrap.memory_lock=<span class="kc">true</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span><span class="s2">&#34;discovery.zen.minimum_master_nodes=3&#34;</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span><span class="s2">&#34;ES_JAVA_OPTS=-Xms512m -Xmx512m&#34;</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span><span class="s2">&#34;discovery.zen.ping.unicast.hosts=elastic1&#34;</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>xpack.security.enabled=<span class="kc">true</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>xpack.monitoring.enabled=<span class="kc">true</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>xpack.monitoring.collection.enabled=<span class="kc">true</span><span class="w">
-</span><span class="w">    </span>ulimits<span class="p">:</span><span class="w">
-</span><span class="w">      </span>memlock<span class="p">:</span><span class="w">
-</span><span class="w">        </span>soft<span class="p">:</span><span class="w"> </span>-<span class="m">1</span><span class="w">
-</span><span class="w">        </span>hard<span class="p">:</span><span class="w"> </span>-<span class="m">1</span><span class="w">
-</span><span class="w">    </span>volumes<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>esdata3<span class="p">:</span>/usr/share/elasticsearch/data<span class="w">
-</span><span class="w">    </span>depends_on<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>elastic1<span class="w">
-</span><span class="w">    </span>networks<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>esnet<span class="w">
-</span><span class="w">  </span>kibana<span class="p">:</span><span class="w">
-</span><span class="w">    </span>image<span class="p">:</span><span class="w"> </span>docker.elastic.co/kibana/kibana<span class="p">:</span><span class="m">6.5</span>.<span class="m">4</span><span class="w">
-</span><span class="w">    </span>container_name<span class="p">:</span><span class="w"> </span>kibana<span class="w">
-</span><span class="w">    </span>ports<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span><span class="m">5601</span><span class="p">:</span><span class="m">5601</span><span class="w">
-</span><span class="w">    </span>environment<span class="p">:</span><span class="w">
-</span><span class="w">      </span>SERVER_NAME<span class="p">:</span><span class="w"> </span>kibana<span class="w">
-</span><span class="w">      </span>ELASTICSEARCH_URL<span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//<span class="m">10.10</span>.<span class="m">10.2</span><span class="p">:</span><span class="m">9200</span><span class="w">
-</span><span class="w">      </span>ELASTICSEARCH_USERNAME<span class="p">:</span><span class="w"> </span>username<span class="w">
-</span><span class="w">      </span>ELASTICSEARCH_PASSWORD<span class="p">:</span><span class="w"> </span>you&#39;re<span class="w"> </span>password<span class="w">
+</span><span class="w">  </span><span class="k">elastic3</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>docker.elastic.co/elasticsearch/elasticsearch<span class="p">:</span><span class="m">6.5.4</span><span class="w">
+</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>elastic3<span class="w">
+</span><span class="w">    </span><span class="k">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- cluster.name=docker-cluster<span class="w">
+</span><span class="w">      </span>- node.name=elastic3<span class="w">
+</span><span class="w">      </span>- bootstrap.memory_lock=<span class="kc">true</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;discovery.zen.minimum_master_nodes=3&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;ES_JAVA_OPTS=-Xms512m -Xmx512m&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;discovery.zen.ping.unicast.hosts=elastic1&#34;</span><span class="w">
+</span><span class="w">      </span>- xpack.security.enabled=<span class="kc">true</span><span class="w">
+</span><span class="w">      </span>- xpack.monitoring.enabled=<span class="kc">true</span><span class="w">
+</span><span class="w">      </span>- xpack.monitoring.collection.enabled=<span class="kc">true</span><span class="w">
+</span><span class="w">    </span><span class="k">ulimits</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">memlock</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">soft</span><span class="p">:</span><span class="w"> </span>-<span class="m">1</span><span class="w">
+</span><span class="w">        </span><span class="k">hard</span><span class="p">:</span><span class="w"> </span>-<span class="m">1</span><span class="w">
+</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- esdata3<span class="p">:</span>/usr/share/elasticsearch/data<span class="w">
+</span><span class="w">    </span><span class="k">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- elastic1<span class="w">
+</span><span class="w">    </span><span class="k">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- esnet<span class="w">
+</span><span class="w">  </span><span class="k">kibana</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>docker.elastic.co/kibana/kibana<span class="p">:</span><span class="m">6.5.4</span><span class="w">
+</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>kibana<span class="w">
+</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">5601</span><span class="p">:</span><span class="m">5601</span><span class="w">
+</span><span class="w">    </span><span class="k">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">SERVER_NAME</span><span class="p">:</span><span class="w"> </span>kibana<span class="w">
+</span><span class="w">      </span><span class="k">ELASTICSEARCH_URL</span><span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//<span class="m">10.10.10.2</span><span class="p">:</span><span class="m">9200</span><span class="w">
+</span><span class="w">      </span><span class="k">ELASTICSEARCH_USERNAME</span><span class="p">:</span><span class="w"> </span>username<span class="w">
+</span><span class="w">      </span><span class="k">ELASTICSEARCH_PASSWORD</span><span class="p">:</span><span class="w"> </span>you&#39;re<span class="w"> </span>password<span class="w">
 </span><span class="w">
-</span><span class="w">    </span>depends_on<span class="p">:</span><span class="w">
-</span><span class="w">      </span>-<span class="w"> </span>elastic1<span class="w">
+</span><span class="w">    </span><span class="k">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- elastic1<span class="w">
 </span><span class="w">
-</span><span class="w"></span>volumes<span class="p">:</span><span class="w">
-</span><span class="w">  </span>esdata1<span class="p">:</span><span class="w">
-</span><span class="w">    </span>driver<span class="p">:</span><span class="w"> </span>local<span class="w">
-</span><span class="w">  </span>esdata2<span class="p">:</span><span class="w">
-</span><span class="w">    </span>driver<span class="p">:</span><span class="w"> </span>local<span class="w">
-</span><span class="w">  </span>esdata3<span class="p">:</span><span class="w">
-</span><span class="w">    </span>driver<span class="p">:</span><span class="w"> </span>local<span class="w">
+</span><span class="w"></span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">esdata1</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">driver</span><span class="p">:</span><span class="w"> </span>local<span class="w">
+</span><span class="w">  </span><span class="k">esdata2</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">driver</span><span class="p">:</span><span class="w"> </span>local<span class="w">
+</span><span class="w">  </span><span class="k">esdata3</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">driver</span><span class="p">:</span><span class="w"> </span>local<span class="w">
 </span><span class="w">
-</span><span class="w"></span>networks<span class="p">:</span><span class="w">
-</span><span class="w">  </span>esnet<span class="p">:</span></code></pre></td></tr></table>
+</span><span class="w"></span><span class="k">networks</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">esnet</span><span class="p">:</span><span class="w">
+</span></code></pre></td></tr></table>
 </div>
-</div>
-<p>执行命令:</p>
+</div><p>执行命令:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">docker-compose up -d</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker-compose up -d
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>开启 x-pack后需要执行以下命令, 来启用试用licence</p>
+</div><p>开启 x-pack后需要执行以下命令, 来启用试用licence</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"> curl -u username:passwd -H <span class="s2">&#34;Content-Type:application/json&#34;</span> -XPOST  http://127.0.0.1:9200/_xpack/license/start_trial?acknowledge<span class="o">=</span>true</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell"> curl -u username:passwd -H <span class="s2">&#34;Content-Type:application/json&#34;</span> -XPOST  http://127.0.0.1:9200/_xpack/license/start_trial?acknowledge<span class="o">=</span><span class="nb">true</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>查看所运行的容器信息</p>
+</div><p>查看所运行的容器信息</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span><span class="lnt">6
-</span></pre></td>
+</span><span class="lnt">7
+</span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"># docker ps -a
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># docker ps -a
 CONTAINER ID        IMAGE                                                 COMMAND                  CREATED             STATUS              PORTS                              NAMES
 c5351bab0826        docker.elastic.co/elasticsearch/elasticsearch:6.5.4   &#34;/usr/local/bin/dock…&#34;   14 minutes ago      Up 14 minutes       9200/tcp, 9300/tcp                 elastic3
 927b944eb914        docker.elastic.co/kibana/kibana:6.5.4                 &#34;/usr/local/bin/kiba…&#34;   14 minutes ago      Up 14 minutes       0.0.0.0:5601-&gt;5601/tcp             kibana
 7e4cbb191213        docker.elastic.co/elasticsearch/elasticsearch:6.5.4   &#34;/usr/local/bin/dock…&#34;   14 minutes ago      Up 14 minutes       9200/tcp, 9300/tcp                 elastic2
-a578c7df15e5        docker.elastic.co/elasticsearch/elasticsearch:6.5.4   &#34;/usr/local/bin/dock…&#34;   14 minutes ago      Up 14 minutes       0.0.0.0:9200-&gt;9200/tcp, 9300/tcp   elastic1</pre></td></tr></table>
-</div>
-</div>
-<blockquote>
-<p>本文为原创文章，转载注明出处</p>
+a578c7df15e5        docker.elastic.co/elasticsearch/elasticsearch:6.5.4   &#34;/usr/local/bin/dock…&#34;   14 minutes ago      Up 14 minutes       0.0.0.0:9200-&gt;9200/tcp, 9300/tcp   elastic1
 
+</code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>本文为原创文章，转载注明出处</p>
 <p>如果帮到你了，还请多支持</p>
 </blockquote>
 

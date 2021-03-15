@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.55.6 with theme even" />
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
 
 
 <link rel="canonical" href="https://zhou-mfk.github.io/post/python%E4%B8%AD%E4%BD%BF%E7%94%A8ldap%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/" />
@@ -42,15 +42,12 @@
 <meta property="og:description" content="使用python实现域账号认证，并增加对ldaps的支持 版本信息如下: python 3 python-ldap 3.2.0 安装python-ldap 参考文档 python-ldap 1 python -m pip install python-ldap 代码实例 ldapauth 函数" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhou-mfk.github.io/post/python%E4%B8%AD%E4%BD%BF%E7%94%A8ldap%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/" />
-<meta property="article:published_time" content="2019-11-19T17:02:32&#43;08:00"/>
-<meta property="article:modified_time" content="2019-11-19T17:02:32&#43;08:00"/>
-
+<meta property="article:published_time" content="2019-11-19T17:02:32+08:00" />
+<meta property="article:modified_time" content="2019-11-19T17:02:32+08:00" />
 <meta itemprop="name" content="Python中使用ldap实现用户认证">
 <meta itemprop="description" content="使用python实现域账号认证，并增加对ldaps的支持 版本信息如下: python 3 python-ldap 3.2.0 安装python-ldap 参考文档 python-ldap 1 python -m pip install python-ldap 代码实例 ldapauth 函数">
-
-
-<meta itemprop="datePublished" content="2019-11-19T17:02:32&#43;08:00" />
-<meta itemprop="dateModified" content="2019-11-19T17:02:32&#43;08:00" />
+<meta itemprop="datePublished" content="2019-11-19T17:02:32+08:00" />
+<meta itemprop="dateModified" content="2019-11-19T17:02:32+08:00" />
 <meta itemprop="wordCount" content="397">
 
 
@@ -138,45 +135,35 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#安装python-ldap">安装python-ldap</a></li>
-<li><a href="#代码实例">代码实例</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#安装python-ldap">安装python-ldap</a></li>
+    <li><a href="#代码实例">代码实例</a></li>
+  </ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      
-
-<p>使用python实现域账号认证，并增加对ldaps的支持</p>
-
+      <p>使用python实现域账号认证，并增加对ldaps的支持</p>
 <p>版本信息如下:</p>
-
 <ul>
 <li>python 3</li>
 <li>python-ldap 3.2.0</li>
 </ul>
-
 <h2 id="安装python-ldap">安装python-ldap</h2>
-
 <p>参考文档 <a href="https://www.python-ldap.org/en/python-ldap-3.2.0/index.html">python-ldap</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">ldap</span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">ldap</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<h2 id="代码实例">代码实例</h2>
-
+</div><h2 id="代码实例">代码实例</h2>
 <p>ldapauth 函数中增加了对ldaps的支持</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -249,11 +236,10 @@
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;desc&#39;</span> <span class="ow">in</span> <span class="n">e</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;msg&#39;</span><span class="p">:</span> <span class="n">e</span><span class="p">[</span><span class="s1">&#39;desc&#39;</span><span class="p">]}</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;msg&#39;</span><span class="p">:</span> <span class="s1">&#39;auth error&#39;</span><span class="p">}</span></code></pre></td></tr></table>
+            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;msg&#39;</span><span class="p">:</span> <span class="s1">&#39;auth error&#39;</span><span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
-</div>
-<p>以上就是使用python-ldap实现域认证</p>
-
+</div><p>以上就是使用python-ldap实现域认证</p>
 <p>有时间会试下ldap3这个模块</p>
 
     </div>
