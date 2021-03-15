@@ -23,7 +23,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.55.6 with theme even" />
 
 
 <link rel="canonical" href="https://zhou-mfk.github.io/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/" />
@@ -42,12 +42,15 @@
 <meta property="og:description" content="consul 集群 Consul是由HashiCorp开发的一个支持多数据中心的分布式服务发现和键值对存储服务的开源软件，被大量应用于基于微服务的软件架构" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://zhou-mfk.github.io/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/" />
-<meta property="article:published_time" content="2019-12-27T13:03:41+08:00" />
-<meta property="article:modified_time" content="2019-12-27T13:03:41+08:00" />
+<meta property="article:published_time" content="2019-12-27T13:03:41&#43;08:00"/>
+<meta property="article:modified_time" content="2019-12-27T13:03:41&#43;08:00"/>
+
 <meta itemprop="name" content="Prometheus基于consul的自动发现">
 <meta itemprop="description" content="consul 集群 Consul是由HashiCorp开发的一个支持多数据中心的分布式服务发现和键值对存储服务的开源软件，被大量应用于基于微服务的软件架构">
-<meta itemprop="datePublished" content="2019-12-27T13:03:41+08:00" />
-<meta itemprop="dateModified" content="2019-12-27T13:03:41+08:00" />
+
+
+<meta itemprop="datePublished" content="2019-12-27T13:03:41&#43;08:00" />
+<meta itemprop="dateModified" content="2019-12-27T13:03:41&#43;08:00" />
 <meta itemprop="wordCount" content="1785">
 
 
@@ -135,45 +138,53 @@
   <h2 class="post-toc-title">文章目录</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
-  <ul>
-    <li><a href="#consul-集群">consul 集群</a>
-      <ul>
-        <li><a href="#安装docker-compose实现">安装（docker-compose实现）</a></li>
-      </ul>
-    </li>
-    <li><a href="#与prometheus集成">与prometheus集成</a></li>
-    <li><a href="#relabel">Relabel</a>
-      <ul>
-        <li><a href="#prometheus-的relabeling机制">prometheus 的Relabeling机制</a></li>
-      </ul>
-    </li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#consul-集群">consul 集群</a>
+<ul>
+<li><a href="#安装-docker-compose实现">安装（docker-compose实现）</a></li>
+</ul></li>
+<li><a href="#与prometheus集成">与prometheus集成</a></li>
+<li><a href="#relabel">Relabel</a>
+<ul>
+<li><a href="#prometheus-的relabeling机制">prometheus 的Relabeling机制</a></li>
+</ul></li>
+</ul></li>
+</ul>
 </nav>
   </div>
 </div>
     <div class="post-content">
-      <h2 id="consul-集群">consul 集群</h2>
+      
+
+<h2 id="consul-集群">consul 集群</h2>
+
 <p>Consul是由HashiCorp开发的一个支持多数据中心的分布式服务发现和键值对存储服务的开源软件，被大量应用于基于微服务的软件架构当中。</p>
-<h3 id="安装docker-compose实现">安装（docker-compose实现）</h3>
+
+<h3 id="安装-docker-compose实现">安装（docker-compose实现）</h3>
+
 <p>docker-compose的安装请参考:</p>
+
 <p><a href="https://docs.docker.com/compose/install/">docker-compose 安装及使用</a></p>
+
 <p>创建目录</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
 <pre class="chroma"><code class="language-shell" data-lang="shell">mkdir consul
 <span class="nb">cd</span> consul
-mkdir node1 node2 node3 client
-</code></pre></td></tr></table>
+mkdir node1 node2 node3 client</code></pre></td></tr></table>
 </div>
-</div><p>docker-compose.yml如下所示:</p>
+</div>
+<p>docker-compose.yml如下所示:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code class="language-ymal" data-lang="ymal"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -246,7 +257,7 @@ mkdir node1 node2 node3 client
 </span><span class="lnt">71
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">version: &#39;3&#39;
+<pre class="chroma"><code class="language-ymal" data-lang="ymal">version: &#39;3&#39;
 services:
   consul_node1:
     container_name: consul_node1
@@ -316,23 +327,24 @@ services:
       - consul_node1
     depends_on:
       - consul_node1
-    command: consul agent -data-dir=/consul/data -datacenter=&#34;prometheus&#34; -node=consul_client -retry-join=consul_node1 -retry-interval=30s -ui -bind=&#34;0.0.0.0&#34; -client=&#34;0.0.0.0&#34;
-</code></pre></td></tr></table>
+    command: consul agent -data-dir=/consul/data -datacenter=&#34;prometheus&#34; -node=consul_client -retry-join=consul_node1 -retry-interval=30s -ui -bind=&#34;0.0.0.0&#34; -client=&#34;0.0.0.0&#34;</code></pre></td></tr></table>
 </div>
-</div><p>启动consul集群</p>
+</div>
+<p>启动consul集群</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">docker-compose up -d
-</code></pre></td></tr></table>
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker-compose up -d</code></pre></td></tr></table>
 </div>
-</div><h2 id="与prometheus集成">与prometheus集成</h2>
+</div>
+<h2 id="与prometheus集成">与prometheus集成</h2>
+
 <p>修改prometheus.yml配置文件增加如下配置</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -350,9 +362,9 @@ services:
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
-</span></code></pre></td>
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">  - job_name: &#39;consul_linux&#39;
+<pre class="chroma">  - job_name: &#39;consul_linux&#39;
     consul_sd_configs:
     - server: &#39;127.0.0.1:8500&#39;
       datacenter: prometheus
@@ -369,32 +381,36 @@ services:
     - source_labels: [&#39;__meta_consul_tags&#39;]
       regex: &#39;,(.*),&#39;
       target_label: &#39;group&#39;
-      replacement: &#39;$1&#39;
-</code></pre></td></tr></table>
+      replacement: &#39;$1&#39;</pre></td></tr></table>
 </div>
-</div><h2 id="relabel">Relabel</h2>
+</div>
+<h2 id="relabel">Relabel</h2>
+
 <h3 id="prometheus-的relabeling机制">prometheus 的Relabeling机制</h3>
+
 <p>在Prometheus所有的Target实例中，都包含一些默认的Metadata标签信息。可以通过Prometheus UI的Targets页面中查看这些实例的Metadata标签的内容：</p>
-<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191227131728.png" alt=""></p>
+
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191227131728.png" alt="" /></p>
+
 <p>默认情况下，当Prometheus加载Target实例完成后，这些Target时候都会包含一些默认的标签</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span></code></pre></td>
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">__address__：当前Target实例的访问地址&lt;host&gt;:&lt;port&gt;
+<pre class="chroma">__address__：当前Target实例的访问地址&lt;host&gt;:&lt;port&gt;
 __scheme__：采集目标服务访问地址的HTTP Scheme，HTTP或者HTTPS
 __metrics_path__：采集目标服务访问地址的访问路径
-__param_&lt;name&gt;：采集任务目标服务的中包含的请求参数
-</code></pre></td></tr></table>
+__param_&lt;name&gt;：采集任务目标服务的中包含的请求参数</pre></td></tr></table>
 </div>
-</div><p>通过Consul动态发现的服务实例还会包含以下Metadata标签信息：</p>
+</div>
+<p>通过Consul动态发现的服务实例还会包含以下Metadata标签信息：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -403,9 +419,9 @@ __param_&lt;name&gt;：采集任务目标服务的中包含的请求参数
 </span><span class="lnt">7
 </span><span class="lnt">8
 </span><span class="lnt">9
-</span></code></pre></td>
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">__meta_consul_address：consul地址
+<pre class="chroma">__meta_consul_address：consul地址
 __meta_consul_dc：consul中服务所在的数据中心
 __meta_consulmetadata：服务的metadata
 __meta_consul_node：服务所在consul节点的信息
@@ -413,13 +429,13 @@ __meta_consul_service_address：服务访问地址
 __meta_consul_service_id：服务ID
 __meta_consul_service_port：服务端口
 __meta_consul_service：服务名称
-__meta_consul_tags：服务包含的标签信息
-</code></pre></td></tr></table>
+__meta_consul_tags：服务包含的标签信息</pre></td></tr></table>
 </div>
-</div><p>完整的relabel_config配置如下所示：</p>
+</div>
+<p>完整的relabel_config配置如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -443,9 +459,9 @@ __meta_consul_tags：服务包含的标签信息
 </span><span class="lnt">22
 </span><span class="lnt">23
 </span><span class="lnt">24
-</span></code></pre></td>
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># The source labels select values from existing labels. Their content is concatenated
+<pre class="chroma"># The source labels select values from existing labels. Their content is concatenated
 # using the configured separator and matched against the configured regular expression
 # for the replace, keep, and drop actions.
 [ source_labels: &#39;[&#39; &lt;labelname&gt; [, ...] &#39;]&#39; ]
@@ -468,15 +484,17 @@ __meta_consul_tags：服务包含的标签信息
 [ replacement: &lt;string&gt; | default = $1 ]
 
 # Action to perform based on regex matching.
-[ action: &lt;relabel_action&gt; | default = replace ]
-</code></pre></td></tr></table>
+[ action: &lt;relabel_action&gt; | default = replace ]</pre></td></tr></table>
 </div>
-</div><p>其中action定义了当前relabel_config对Metadata标签的处理方式，默认的action行为为replace。</p>
+</div>
+<p>其中action定义了当前relabel_config对Metadata标签的处理方式，默认的action行为为replace。</p>
+
 <p>replace行为会根据regex的配置匹配source_labels标签的值（多个source_label的值会按照separator进行拼接），并且将匹配到的值写入到target_label当中，如果有多个匹配组，则可以使用${1}, ${2}确定写入的内容。如果没匹配到任何内容则不对target_label进行重新。</p>
+
 <p>其中action 包含以下:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -491,17 +509,16 @@ drop
 labeldrop
 labelkeep
 labemap
-hashmod
-</code></pre></td></tr></table>
+hashmod</code></pre></td></tr></table>
 </div>
-</div><p>其中<strong>keep and drop</strong>  是用来过滤Target实例的</p>
+</div>
+<p>其中<strong>keep and drop</strong>  是用来过滤Target实例的</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
+<pre class="chroma"><span class="lnt">1
+</span></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">当action设置为keep时，Prometheus会丢弃source_labels的值中没有匹配到regex正则表达式内容的Target实例，而当action设置为drop时，则会丢弃那些source_labels的值匹配到regex正则表达式内容的Target实例。可以简单理解为keep用于选择，而drop用于排除。
-</code></pre></td></tr></table>
+<pre class="chroma">当action设置为keep时，Prometheus会丢弃source_labels的值中没有匹配到regex正则表达式内容的Target实例，而当action设置为drop时，则会丢弃那些source_labels的值匹配到regex正则表达式内容的Target实例。可以简单理解为keep用于选择，而drop用于排除。</pre></td></tr></table>
 </div>
 </div>
     </div>
