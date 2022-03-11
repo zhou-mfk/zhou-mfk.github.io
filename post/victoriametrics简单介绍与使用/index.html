@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>VictoriaMetrics简单介绍与使用 - Zhou Li Shan</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="周利山" /><meta name="description" content="VictoriaMetrics 是一种快速、经济高效且可扩展的监控解决方案和时间序列数据库 兼容 Prometheus及 PromQL VictoriaMetrics 具有以下突出特点： 可以作为 Prometheus 的长期存储 可以作为 Grafana 中" /><meta name="keywords" content="VictoriaMetrics, Prometheus" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.74.3 with theme even" />
+
+
+<link rel="canonical" href="https://zhou-mfk.github.io/post/victoriametrics%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="VictoriaMetrics简单介绍与使用" />
+<meta property="og:description" content="VictoriaMetrics 是一种快速、经济高效且可扩展的监控解决方案和时间序列数据库 兼容 Prometheus及 PromQL VictoriaMetrics 具有以下突出特点： 可以作为 Prometheus 的长期存储 可以作为 Grafana 中" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhou-mfk.github.io/post/victoriametrics%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/" />
+<meta property="article:published_time" content="2022-03-11T09:57:32+08:00" />
+<meta property="article:modified_time" content="2022-03-11T09:57:32+08:00" />
+<meta itemprop="name" content="VictoriaMetrics简单介绍与使用">
+<meta itemprop="description" content="VictoriaMetrics 是一种快速、经济高效且可扩展的监控解决方案和时间序列数据库 兼容 Prometheus及 PromQL VictoriaMetrics 具有以下突出特点： 可以作为 Prometheus 的长期存储 可以作为 Grafana 中">
+<meta itemprop="datePublished" content="2022-03-11T09:57:32+08:00" />
+<meta itemprop="dateModified" content="2022-03-11T09:57:32+08:00" />
+<meta itemprop="wordCount" content="2199">
+
+
+
+<meta itemprop="keywords" content="VictoriaMetrics,Prometheus," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="VictoriaMetrics简单介绍与使用"/>
+<meta name="twitter:description" content="VictoriaMetrics 是一种快速、经济高效且可扩展的监控解决方案和时间序列数据库 兼容 Prometheus及 PromQL VictoriaMetrics 具有以下突出特点： 可以作为 Prometheus 的长期存储 可以作为 Grafana 中"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">花开花落，云卷云舒</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">首页</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">归档</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">标签</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">分类</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">花开花落，云卷云舒</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">首页</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">归档</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">标签</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">分类</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">VictoriaMetrics简单介绍与使用</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-11 </span>
+        <div class="post-category">
+            <a href="/categories/victoriametrics/"> VictoriaMetrics </a>
+            </div>
+          <span class="more-meta"> 约 2199 字 </span>
+          <span class="more-meta"> 预计阅读 5 分钟 </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">文章目录</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#组件">组件</a>
+      <ul>
+        <li><a href="#单机版">单机版</a></li>
+        <li><a href="#实例验证">实例验证</a></li>
+        <li><a href="#集群版">集群版</a></li>
+        <li><a href="#实例验证-1">实例验证</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>VictoriaMetrics 是一种快速、经济高效且可扩展的监控解决方案和时间序列数据库</p>
+<p><strong>兼容 Prometheus及 PromQL</strong></p>
+<p>VictoriaMetrics 具有以下突出特点：</p>
+<ul>
+<li>
+<p>可以作为 Prometheus 的长期存储</p>
+</li>
+<li>
+<p>可以作为 Grafana 中 Prometheus 的替代品，因为它支持 Prometheus 查询 API</p>
+</li>
+<li>
+<p>可以用作 Grafana 中 Graphite 的替代品，因为它支持 Graphite API</p>
+</li>
+<li>
+<p>它具有易于设置和操作的特点：</p>
+<ul>
+<li>
+<p>VictoriaMetrics 由一个没有外部依赖的小型可执行文件组成</p>
+</li>
+<li>
+<p>所有配置都是通过具有合理默认值的显式命令行标志完成的</p>
+</li>
+<li>
+<p><code>-storageDataPath</code> 所有数据都存储在命令行标志指向的单个目录中。</p>
+</li>
+<li>
+<p>可以使用vmbackup / vmrestore工具轻松快速地从即时快照备份到 S3 或 GCS</p>
+</li>
+<li>
+<p>它实现了基于 PromQL 的查询语言</p>
+</li>
+<li>
+<p>MetricsQL，在 PromQL 之上提供了改进的功能</p>
+</li>
+<li>
+<p>它提供全局查询视图。多个 Prometheus 实例或任何其他数据源可能会将数据摄取到  VictoriaMetrics。稍后可以通过单个查询来查询此数据。</p>
+</li>
+<li>
+<p>数据摄取和数据查询提供了高性能和良好的纵向和横向可扩展性。性能比 InfluxDB 和 TimescaleDB 高 20 倍</p>
+</li>
+<li>
+<p>处理数百万个独特的时间序列时，使用的 RAM 比 InfluxDB 少 10 倍，比 Prometheus、Thanos 或 Cortex 少 7 倍</p>
+</li>
+<li>
+<p>针对高流失率的时间序列进行了优化</p>
+</li>
+<li>
+<p>提供了高数据压缩，因此与 TimescaleDB 相比，可以将多达 70 倍的数据点塞入有限的存储空间，与 Prometheus、Thanos 或 Cortex 相比，所需的存储空间减少多达 7 倍</p>
+</li>
+<li>
+<p>它针对具有高延迟 IO 和低 IOPS 的存储进行了优化</p>
+</li>
+<li>
+<p>单节点 VictoriaMetrics 可以替代使用竞争解决方案构建的中等规模集群。</p>
+</li>
+<li>
+<p>由于存储架构，它可以保护存储在非正常关机（即 OOM、硬件重置或<code>kill -9</code>）时免受数据损坏。</p>
+</li>
+<li>
+<p>通过以下协议支持指标的抓取、拉取和回填</p>
+</li>
+<li>
+<p>从 Prometheus Export那里抓取的指标</p>
+</li>
+<li>
+<p>Prometheus 远程写入 API</p>
+</li>
+<li>
+<p>基于HTTP、TCP 和 UDP 的InfluxDB 线路协议</p>
+</li>
+<li>
+<p>Graphite plaintext protocol</p>
+</li>
+<li>
+<p>OpenTSDB 放置消息</p>
+</li>
+<li>
+<p>HTTP OpenTSDB /api/put 请求</p>
+</li>
+<li>
+<p>JSON 行格式</p>
+</li>
+<li>
+<p>任意 CSV 数据</p>
+</li>
+<li>
+<p>Native binary format</p>
+</li>
+<li>
+<p>支持指标的重新标记</p>
+</li>
+<li>
+<p>可以通过串联限制器处理高基数问题和高流失率问题</p>
+</li>
+<li>
+<p>理想地适用于来自 APM、Kubernetes、物联网传感器、联网汽车、工业遥测、财务数据和各种企业工作负载的大量时间序列数据</p>
+</li>
+<li>
+<p>有开源集群版</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="组件">组件</h2>
+<h3 id="单机版">单机版</h3>
+<p>VictoriaMetrics</p>
+<p><code>-storageDataPath</code> 指定存储的路径</p>
+<p><code>-retentionPeriod</code> 保留存储的数据。旧数据会被自动删除。默认保留期为 1 个月。数据在删除之前会延迟一个月。例如1月1号的数据会到3月1号删除</p>
+<p>默认端口为: <code>8428</code></p>
+<p>Prometheus.yml配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">remote_write</span><span class="p">:</span><span class="w">
+</span><span class="w"> </span>- <span class="k">url</span><span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//&lt;victoriametrics-addr&gt;<span class="p">:</span><span class="m">8428</span>/api/v1/write<span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>Prometheus 将传入的数据写入本地存储并并行复制到远程存储。这意味着<code>--storage.tsdb.retention.time</code>即使远程存储不可用，数据在本地存储中仍然可用</p>
+<p>如果您计划从多个 Prometheus 实例向 VictoriaMetrics 发送数据，则将以下行添加到 Prometheus config global 部分:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">global</span><span class="p">:</span><span class="w">
+</span><span class="w"> </span><span class="k">external_labels</span><span class="p">:</span><span class="w">
+</span><span class="w">   </span><span class="k">datacenter</span><span class="p">:</span><span class="w"> </span>dc<span class="m">-123</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>这指示 Prometheus 在将<code>datacenter=dc-123</code>每个样本发送到远程存储之前为其添加标签。标签名称可以是任意的 -<code>datacenter</code>只是一个示例。标签值在 Prometheus 实例中必须是唯一的，因此可以按此标签过滤和分组时间序列</p>
+<p>对于高负载的 Prometheus 实例（每秒 200k+ 样本），可以应用以下调优：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">remote_write</span><span class="p">:</span><span class="w">
+</span><span class="w"> </span>- <span class="k">url</span><span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//&lt;victoriametrics-addr&gt;<span class="p">:</span><span class="m">8428</span>/api/v1/write<span class="w">
+</span><span class="w">   </span><span class="k">queue_config</span><span class="p">:</span><span class="w">
+</span><span class="w">     </span><span class="k">max_samples_per_send</span><span class="p">:</span><span class="w"> </span><span class="m">10000</span><span class="w">
+</span><span class="w">     </span><span class="k">capacity</span><span class="p">:</span><span class="w"> </span><span class="m">20000</span><span class="w">
+</span><span class="w">     </span><span class="k">max_shards</span><span class="p">:</span><span class="w"> </span><span class="m">30</span><span class="w">
+</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>使用远程写入可将 Prometheus 的内存使用量增加约 25%。</p>
+<p>如果您遇到 Prometheus 内存消耗过高的问题，请尝试降低<code>max_samples_per_send</code>和<code>capacity</code>参数, 请记住，这两个参数紧密相连。</p>
+<h3 id="实例验证">实例验证</h3>
+<p><strong>单机版 docker-compose.yml</strong></p>
+<p>准备目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">mkdir prom_config prom_data grafana_data victoria-metrics-data
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="w">
+</span><span class="w"></span><span class="k">services</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">victoriametrics-server</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>victoriametrics<span class="w">
+</span><span class="w">      </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>victoriametrics/victoria-metrics<span class="p">:</span>latest<span class="w">
+</span><span class="w">      </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="s2">&#34;8428:8428&#34;</span><span class="w">
+</span><span class="w">      </span><span class="k">user</span><span class="p">:</span><span class="w"> </span>root<span class="w">
+</span><span class="w">      </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- /etc/localtime<span class="p">:</span>/etc/localtime<span class="p">:</span>ro<span class="w">
+</span><span class="w">        </span>- ./victoria-metrics-data<span class="p">:</span>/victoria-metrics-data<span class="w">
+</span><span class="w">      </span><span class="k">ulimits</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">nproc</span><span class="p">:</span><span class="w"> </span><span class="m">65535</span><span class="w">
+</span><span class="w">        </span><span class="k">nofile</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="k">soft</span><span class="p">:</span><span class="w"> </span><span class="m">20000</span><span class="w">
+</span><span class="w">          </span><span class="k">hard</span><span class="p">:</span><span class="w"> </span><span class="m">40000</span><span class="w">
+</span><span class="w"> 
+</span><span class="w">    </span><span class="k">prometheus-server</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>prom/prometheus<span class="p">:</span>latest<span class="w">
+</span><span class="w">      </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>prometheus<span class="w">
+</span><span class="w">      </span><span class="k">hostname</span><span class="p">:</span><span class="w"> </span>prometheus<span class="w">
+</span><span class="w">      </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w">      </span><span class="c"># user: &#34;1000:1000&#34;</span><span class="w">
+</span><span class="w">      </span><span class="k">user</span><span class="p">:</span><span class="w"> </span>root<span class="w">
+</span><span class="w">      </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="s2">&#34;9090:9090&#34;</span><span class="w">
+</span><span class="w">      </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- /etc/localtime<span class="p">:</span>/etc/localtime<span class="p">:</span>ro<span class="w">
+</span><span class="w">        </span>- ./prom_config<span class="p">:</span>/etc/prometheus<span class="w">
+</span><span class="w">        </span>- ./prom_data<span class="p">:</span>/prometheus<span class="w">
+</span><span class="w">      </span><span class="k">command</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="s1">&#39;--config.file=/etc/prometheus/prometheus.yml&#39;</span><span class="w">
+</span><span class="w">        </span>- <span class="s1">&#39;--storage.tsdb.path=/prometheus&#39;</span><span class="w">
+</span><span class="w">        </span>- <span class="s1">&#39;--storage.tsdb.retention.time=600s&#39;</span><span class="w">
+</span><span class="w">        </span>- <span class="s1">&#39;--storage.tsdb.no-lockfile&#39;</span><span class="w">
+</span><span class="w">        </span>- <span class="s1">&#39;--log.level=info&#39;</span><span class="w">
+</span><span class="w">        </span>- <span class="s1">&#39;--web.enable-lifecycle&#39;</span><span class="w">
+</span><span class="w">        </span>- <span class="s1">&#39;--query.max-concurrency=100&#39;</span><span class="w">
+</span><span class="w">        </span>- <span class="s1">&#39;--web.max-connections=1024&#39;</span><span class="w">
+</span><span class="w">        </span>- <span class="s1">&#39;--log.format=json&#39;</span><span class="w">
+</span><span class="w">        </span>- <span class="s1">&#39;--web.enable-admin-api&#39;</span><span class="w">
+</span><span class="w">      </span><span class="k">ulimits</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span><span class="k">nproc</span><span class="p">:</span><span class="w"> </span><span class="m">65535</span><span class="w">
+</span><span class="w">        </span><span class="k">nofile</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="k">soft</span><span class="p">:</span><span class="w"> </span><span class="m">20000</span><span class="w">
+</span><span class="w">          </span><span class="k">hard</span><span class="p">:</span><span class="w"> </span><span class="m">40000</span><span class="w">
+</span><span class="w"></span><span class="c">#      command: [&#34;--storage.tsdb.retention.time=10m&#34;]</span><span class="w">
+</span><span class="w"> 
+</span><span class="w">    </span><span class="k">grafana</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>grafana<span class="w">
+</span><span class="w">      </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>grafana/grafana<span class="p">:</span>latest<span class="w">
+</span><span class="w">      </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="s2">&#34;3000:3000&#34;</span><span class="w">
+</span><span class="w">      </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- /etc/localtime<span class="p">:</span>/etc/localtime<span class="p">:</span>ro<span class="w">
+</span><span class="w">        </span>- ./grafana_data<span class="p">:</span>/var/lib/grafana<span class="w">
+</span><span class="w">      </span><span class="k">environment</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- GF_SECURITY_ADMIN_PASSWORD=admin123<span class="w">
+</span><span class="w">      </span><span class="k">user</span><span class="p">:</span><span class="w"> </span>root<span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>prometheus.yml 配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># my global config</span><span class="w">
+</span><span class="w"></span><span class="k">global</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">scrape_interval</span><span class="p">:</span><span class="w"> </span>15s<span class="w"> </span><span class="c"># Set the scrape interval to every 15 seconds. Default is every 1 minute.</span><span class="w">
+</span><span class="w">  </span><span class="k">evaluation_interval</span><span class="p">:</span><span class="w"> </span>15s<span class="w"> </span><span class="c"># Evaluate rules every 15 seconds. The default is every 1 minute.</span><span class="w">
+</span><span class="w">  </span><span class="c"># scrape_timeout is set to the global default (10s).</span><span class="w">
+</span><span class="w">  </span><span class="c"># 增加扩展的标签</span><span class="w">
+</span><span class="w">  </span><span class="k">external_labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">bl_monitor</span><span class="p">:</span><span class="w"> </span>os_monitor<span class="w">
+</span><span class="w"> 
+</span><span class="w"> 
+</span><span class="w"></span><span class="c"># Alertmanager configuration</span><span class="w">
+</span><span class="w"></span><span class="k">alerting</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">alertmanagers</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="k">static_configs</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="k">targets</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="c"># - alertmanager:9093</span><span class="w">
+</span><span class="w"> 
+</span><span class="w"></span><span class="c"># Load rules once and periodically evaluate them according to the global &#39;evaluation_interval&#39;.</span><span class="w">
+</span><span class="w"></span><span class="k">rule_files</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="c"># - &#34;first_rules.yml&#34;</span><span class="w">
+</span><span class="w">  </span><span class="c"># - &#34;second_rules.yml&#34;</span><span class="w">
+</span><span class="w"> 
+</span><span class="w"></span><span class="c"># A scrape configuration containing exactly one endpoint to scrape:</span><span class="w">
+</span><span class="w"></span><span class="c"># Here it&#39;s Prometheus itself.</span><span class="w">
+</span><span class="w"></span><span class="k">scrape_configs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="c"># The job name is added as a label `job=&lt;job_name&gt;` to any timeseries scraped from this config.</span><span class="w">
+</span><span class="w">  </span>- <span class="k">job_name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;prometheus&#34;</span><span class="w">
+</span><span class="w"> 
+</span><span class="w">    </span><span class="c"># metrics_path defaults to &#39;/metrics&#39;</span><span class="w">
+</span><span class="w">    </span><span class="c"># scheme defaults to &#39;http&#39;.</span><span class="w">
+</span><span class="w"> 
+</span><span class="w">    </span><span class="k">static_configs</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="k">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;localhost:9090&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;you_address_ip:8428&#34;</span><span class="p">]</span><span class="w">
+</span><span class="w"> 
+</span><span class="w"></span><span class="c"># 设置victoriametrics</span><span class="w">
+</span><span class="w"></span><span class="k">remote_write</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span>- <span class="k">url</span><span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//you_address_ip<span class="p">:</span><span class="m">8428</span>/api/v1/write<span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><h3 id="集群版">集群版</h3>
+<p><code>具有多租户功能</code></p>
+<p><code>vminsert</code> 数据写入接口， 可以一个或多个 多个时需要前加http 负载均衡器 vmauth/nginx <code>默认端口8480</code>
+<code>vmselect</code> 数据读取接口，可以一个或多个 多个时需要前加http 负载均衡器 vmauth/nginx <code>默认端口8481</code>
+<code>vmstorge</code> 数据存储接口 最少两个节点， 多个节点，则需要在vmselect, vminsert中全部配置，新节点或删除节点时也需要修改 vmselect, vminsert 的配置  <code>默认端口8482</code></p>
+<p><code>vmagent</code> 是类似 promtheus 的组件，可作为 promethues 的代替品</p>
+<p><code>vmalert</code> 是告警组件依赖 alertmanager</p>
+<p><code>vmauth</code> 是一个负载均衡器为 vminsert 和 vmselect</p>
+<h3 id="实例验证-1">实例验证</h3>
+<p>集群版本docker-compose.yml</p>
+<p>使用了 vmagent 代替了 Prometheus 在配置时需要指定租户</p>
+<p>准备目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">mkdir grafanadata strgdata-1 strgdata-2 vmagentdata
+</code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">
+</span><span class="w"></span><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3.5&#39;</span><span class="w">
+</span><span class="w"></span><span class="k">services</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">vmagent</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>vmagent<span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>victoriametrics/vmagent<span class="w">
+</span><span class="w">    </span><span class="k">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;vminsert&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">8429</span><span class="p">:</span><span class="m">8429</span><span class="w">
+</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- ./vmagentdata<span class="p">:</span>/vmagentdata<span class="w">
+</span><span class="w">      </span>- ./prometheus.yml<span class="p">:</span>/etc/prometheus/prometheus.yml<span class="w">
+</span><span class="w">    </span><span class="k">command</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s1">&#39;--promscrape.config=/etc/prometheus/prometheus.yml&#39;</span><span class="w">
+</span><span class="w">      </span>- <span class="s1">&#39;--remoteWrite.url=http://vminsert:8480/insert/0/prometheus/&#39;</span><span class="w">
+</span><span class="w">    </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w"> 
+</span><span class="w">  </span><span class="k">grafana</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>grafana<span class="m">-1</span><span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>grafana/grafana<span class="p">:</span><span class="m">8.3.2</span><span class="w">
+</span><span class="w">    </span><span class="k">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;vmselect&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">3001</span><span class="p">:</span><span class="m">3000</span><span class="w">
+</span><span class="w">    </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- ./grafanadata<span class="p">:</span>/var/lib/grafana<span class="w">
+</span><span class="w"> 
+</span><span class="w">  </span><span class="k">vmstorage-1</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>vmstorage<span class="m">-1</span><span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>victoriametrics/vmstorage<span class="w">
+</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">8482</span><span class="w">
+</span><span class="w">      </span>- <span class="m">8400</span><span class="w">
+</span><span class="w">      </span>- <span class="m">8401</span><span class="w">
+</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- ./strgdata<span class="m">-1</span><span class="p">:</span>/storage<span class="w">
+</span><span class="w">    </span><span class="k">command</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s1">&#39;--storageDataPath=/storage&#39;</span><span class="w">
+</span><span class="w">    </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w">  </span><span class="k">vmstorage-2</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>vmstorage<span class="m">-2</span><span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>victoriametrics/vmstorage<span class="w">
+</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">8482</span><span class="w">
+</span><span class="w">      </span>- <span class="m">8400</span><span class="w">
+</span><span class="w">      </span>- <span class="m">8401</span><span class="w">
+</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- ./strgdata<span class="m">-2</span><span class="p">:</span>/storage<span class="w">
+</span><span class="w">    </span><span class="k">command</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s1">&#39;--storageDataPath=/storage&#39;</span><span class="w">
+</span><span class="w">    </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w">  </span><span class="k">vminsert</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>vminsert<span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>victoriametrics/vminsert<span class="w">
+</span><span class="w">    </span><span class="k">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;vmstorage-1&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;vmstorage-2&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">command</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s1">&#39;--storageNode=vmstorage-1:8400&#39;</span><span class="w">
+</span><span class="w">      </span>- <span class="s1">&#39;--storageNode=vmstorage-2:8400&#39;</span><span class="w">
+</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">8480</span><span class="w">
+</span><span class="w">    </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w">  </span><span class="k">vmselect</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>vmselect<span class="w">
+</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>victoriametrics/vmselect<span class="w">
+</span><span class="w">    </span><span class="k">depends_on</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;vmstorage-1&#34;</span><span class="w">
+</span><span class="w">      </span>- <span class="s2">&#34;vmstorage-2&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">command</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="s1">&#39;--storageNode=vmstorage-1:8401&#39;</span><span class="w">
+</span><span class="w">      </span>- <span class="s1">&#39;--storageNode=vmstorage-2:8401&#39;</span><span class="w">
+</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="m">8481</span><span class="p">:</span><span class="m">8481</span><span class="w">
+</span><span class="w">    </span><span class="k">restart</span><span class="p">:</span><span class="w"> </span>always<span class="w">
+</span><span class="w"> 
+</span><span class="w">  </span><span class="c"># vmalert:</span><span class="w">
+</span><span class="w">  </span><span class="c">#   container_name: vmalert</span><span class="w">
+</span><span class="w">  </span><span class="c">#   image: victoriametrics/vmalert</span><span class="w">
+</span><span class="w">  </span><span class="c">#   depends_on:</span><span class="w">
+</span><span class="w">  </span><span class="c">#     - &#34;vmselect&#34;</span><span class="w">
+</span><span class="w">  </span><span class="c">#   ports:</span><span class="w">
+</span><span class="w">  </span><span class="c">#     - 8880:8880</span><span class="w">
+</span><span class="w">  </span><span class="c">#   volumes:</span><span class="w">
+</span><span class="w">  </span><span class="c">#     - ./alerts.yml:/etc/alerts/alerts.yml</span><span class="w">
+</span><span class="w">  </span><span class="c">#   command:</span><span class="w">
+</span><span class="w">  </span><span class="c">#     - &#39;--datasource.url=http://vmselect:8481/select/0/prometheus&#39;</span><span class="w">
+</span><span class="w">  </span><span class="c">#     - &#39;--remoteRead.url=http://vmselect:8481/select/0/prometheus&#39;</span><span class="w">
+</span><span class="w">  </span><span class="c">#     - &#39;--remoteWrite.url=http://vminsert:8480/insert/0/prometheus&#39;</span><span class="w">
+</span><span class="w">  </span><span class="c">#     - &#39;--notifier.url=http://alertmanager:9093/&#39;</span><span class="w">
+</span><span class="w">  </span><span class="c">#     - &#39;--rule=/etc/alerts/*.yml&#39;</span><span class="w">
+</span><span class="w">  </span><span class="c">#     # display source of alerts in grafana</span><span class="w">
+</span><span class="w">  </span><span class="c">#     - &#39;-external.url=http://127.0.0.1:3000&#39; #grafana outside container</span><span class="w">
+</span><span class="w">  </span><span class="c">#     # when copypaste the line below be aware of &#39;$$&#39; for escaping in &#39;$expr&#39;</span><span class="w">
+</span><span class="w">  </span><span class="c">#     - &#39;--external.alert.source=explore?orgId=1&amp;left=[&#34;now-1h&#34;,&#34;now&#34;,&#34;VictoriaMetrics&#34;,{&#34;expr&#34;:&#34;{{$$expr|quotesEscape|crlfEscape|queryEscape}}&#34;},{&#34;mode&#34;:&#34;Metrics&#34;},{&#34;ui&#34;:[true,true,true,&#34;none&#34;]}]&#39;</span><span class="w">
+</span><span class="w">  </span><span class="c">#   restart: always</span><span class="w">
+</span><span class="w"> 
+</span><span class="w">  </span><span class="c"># alertmanager:</span><span class="w">
+</span><span class="w">  </span><span class="c">#   container_name: alertmanager</span><span class="w">
+</span><span class="w">  </span><span class="c">#   image:  prom/alertmanager</span><span class="w">
+</span><span class="w">  </span><span class="c">#   volumes:</span><span class="w">
+</span><span class="w">  </span><span class="c">#     - ./alertmanager.yml:/config/alertmanager.yml</span><span class="w">
+</span><span class="w">  </span><span class="c">#   command:</span><span class="w">
+</span><span class="w">  </span><span class="c">#     - &#39;--config.file=/config/alertmanager.yml&#39;</span><span class="w">
+</span><span class="w">  </span><span class="c">#   ports:</span><span class="w">
+</span><span class="w">  </span><span class="c">#     - 9093:9093</span><span class="w">
+</span><span class="w">  </span><span class="c">#   restart: always</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div><p><strong>prometheus.yml</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># my global config</span><span class="w">
+</span><span class="w"></span><span class="k">global</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">scrape_interval</span><span class="p">:</span><span class="w"> </span>15s<span class="w"> </span><span class="c"># Set the scrape interval to every 15 seconds. Default is every 1 minute.</span><span class="w">
+</span><span class="w">  </span><span class="k">evaluation_interval</span><span class="p">:</span><span class="w"> </span>15s<span class="w"> </span><span class="c"># Evaluate rules every 15 seconds. The default is every 1 minute.</span><span class="w">
+</span><span class="w">  </span><span class="c"># scrape_timeout is set to the global default (10s).</span><span class="w">
+</span><span class="w">  </span><span class="c"># 增加扩展的标签</span><span class="w">
+</span><span class="w">  </span><span class="k">external_labels</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="k">bl_monitor</span><span class="p">:</span><span class="w"> </span>os_monitor<span class="w">
+</span><span class="w"> 
+</span><span class="w"> 
+</span><span class="w"></span><span class="c"># Alertmanager configuration</span><span class="w">
+</span><span class="w"></span><span class="k">alerting</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="k">alertmanagers</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="k">static_configs</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="k">targets</span><span class="p">:</span><span class="w">
+</span><span class="w">          </span><span class="c"># - alertmanager:9093</span><span class="w">
+</span><span class="w"> 
+</span><span class="w"></span><span class="c"># Load rules once and periodically evaluate them according to the global &#39;evaluation_interval&#39;.</span><span class="w">
+</span><span class="w"></span><span class="k">rule_files</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="c"># - &#34;first_rules.yml&#34;</span><span class="w">
+</span><span class="w">  </span><span class="c"># - &#34;second_rules.yml&#34;</span><span class="w">
+</span><span class="w"> 
+</span><span class="w"></span><span class="c"># A scrape configuration containing exactly one endpoint to scrape:</span><span class="w">
+</span><span class="w"></span><span class="c"># Here it&#39;s Prometheus itself.</span><span class="w">
+</span><span class="w"></span><span class="k">scrape_configs</span><span class="p">:</span><span class="w">
+</span><span class="w">  </span><span class="c"># The job name is added as a label `job=&lt;job_name&gt;` to any timeseries scraped from this config.</span><span class="w">
+</span><span class="w">  </span>- <span class="k">job_name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;prometheus&#34;</span><span class="w">
+</span><span class="w"> 
+</span><span class="w">    </span><span class="c"># metrics_path defaults to &#39;/metrics&#39;</span><span class="w">
+</span><span class="w">    </span><span class="c"># scheme defaults to &#39;http&#39;.</span><span class="w">
+</span><span class="w"> 
+</span><span class="w">    </span><span class="k">static_configs</span><span class="p">:</span><span class="w">
+</span><span class="w">      </span>- <span class="k">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;vmagent:8429&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;vmstorage-1:8482&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;vmstorage-2:8482&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;vmselect:8481&#34;</span><span class="p">,</span><span class="w"> </span><span class="s2">&#34;vminsert:8480&#34;</span><span class="p">]</span><span class="w">
+</span><span class="w"> 
+</span><span class="w">  </span>- <span class="k">job_name</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;prometheus-consul&#34;</span><span class="w">
+</span><span class="w">    </span><span class="k">consul_sd_configs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="k">server</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;consul_address_ip:8500&#39;</span><span class="w">
+</span><span class="w">      </span><span class="k">datacenter</span><span class="p">:</span><span class="w"> </span>prometheus<span class="w">
+</span><span class="w">      </span><span class="k">services</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;Linux&#39;</span><span class="p">]</span><span class="w">
+</span><span class="w">    </span><span class="k">relabel_configs</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span>- <span class="k">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;__meta_consul_node&#39;</span><span class="p">]</span><span class="w">
+</span><span class="w">      </span><span class="k">regex</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;(1.1.11.*)&#39;</span><span class="w">
+</span><span class="w">      </span><span class="k">action</span><span class="p">:</span><span class="w"> </span>keep<span class="w">
+</span><span class="w">
+</span></code></pre></td></tr></table>
+</div>
+</div>
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">文章作者</span>
+    <span class="item-content">周利山</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">上次更新</span>
+    <span class="item-content">
+        2022-03-11
+        
+    </span>
+  </p>
+  
+  
+</div>
+<div class="post-reward">
+  <input type="checkbox" name="reward" id="reward" hidden />
+  <label class="reward-button" for="reward">赞赏支持</label>
+  <div class="qr-code">
+    
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/wechatpay.png">
+        <span>微信打赏</span>
+      </label>
+    <label class="qr-code-image" for="reward">
+        <img class="image" src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/alipay.png">
+        <span>支付宝打赏</span>
+      </label>
+  </div>
+</div><footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/victoriametrics/">VictoriaMetrics</a>
+          <a href="/tags/prometheus/">Prometheus</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/python_paramiko%E7%9A%84%E4%BD%BF%E7%94%A8/">
+            <span class="next-text nav-default">Python paramiko的使用</span>
+            <span class="next-text nav-mobile">下一篇</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="zhou_mfk@163.com" class="iconfont icon-email" title="email"></a>
+  <a href="https://zhou-mfk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://gohugo.io">Hugo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2019 - 
+    2022
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">周利山</span>
+  </span>
+</div>
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
