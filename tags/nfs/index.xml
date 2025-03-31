@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>nfs on Zhou Li Shan</title>
-    <link>https://zhou-mfk.github.io/tags/nfs/</link>
-    <description>Recent content in nfs on Zhou Li Shan</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Nfs on Zhou Li Shan</title>
+    <link>http://localhost:1313/tags/nfs/</link>
+    <description>Recent content in Nfs on Zhou Li Shan</description>
+    <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Thu, 09 Apr 2020 17:36:50 +0800</lastBuildDate>
-    
-	<atom:link href="https://zhou-mfk.github.io/tags/nfs/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:1313/tags/nfs/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Elasticsearch快照及数据恢复</title>
-      <link>https://zhou-mfk.github.io/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/</link>
+      <link>http://localhost:1313/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/</link>
       <pubDate>Thu, 09 Apr 2020 17:36:50 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/</guid>
-      <description>elasticsearch 快照 参考官方文档 需要配置共享存储，并创建快照仓库，之后才能创建快照 1. 设置共享存储（NFS） 安装nfs及其配置 1 2 3 4 5 6 7 yum install nfs-utils -y cat /etc/exports /data/elastic_backup 192.168.1.*(rw,sync,all_squash)</description>
+      <guid>http://localhost:1313/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/</guid>
+      <description>&lt;h2 id=&#34;elasticsearch-快照&#34;&gt;elasticsearch 快照&lt;/h2&gt;&#xA;&lt;p&gt;参考官方文档 需要配置共享存储，并创建快照仓库，之后才能创建快照&lt;/p&gt;&#xA;&lt;h3 id=&#34;1-设置共享存储nfs&#34;&gt;1. 设置共享存储（NFS）&lt;/h3&gt;&#xA;&lt;p&gt;安装nfs及其配置&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5&#xA;&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;yum install nfs-utils -y&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;cat /etc/exports&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;/data/elastic_backup 192.168.1.*&lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;rw,sync,all_squash&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;chmod &lt;span class=&#34;m&#34;&gt;777&lt;/span&gt; elastic_backup&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;systemctl start nfs&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;p&gt;all_squash 表示客户机写入nfs的数据全部映射为nobody用户&#xA;这里设置 all_squash并把目录设置为777 是为防止elasticsearch 集群的每个节点启动的uid和gid 不一致导致在创建快照仓库时无法创建成功。&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

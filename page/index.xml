@@ -2,23 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pages on Zhou Li Shan</title>
-    <link>https://zhou-mfk.github.io/page/</link>
+    <link>http://localhost:1313/page/</link>
     <description>Recent content in Pages on Zhou Li Shan</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 11 Oct 2019 12:32:29 +0800</lastBuildDate>
-    
-	<atom:link href="https://zhou-mfk.github.io/page/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 16 Nov 2020 20:54:19 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/page/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Fighting</title>
+      <link>http://localhost:1313/page/fighting/</link>
+      <pubDate>Mon, 16 Nov 2020 20:54:19 +0800</pubDate>
+      <guid>http://localhost:1313/page/fighting/</guid>
+      <description>&lt;h3 id=&#34;健身日志&#34;&gt;健身日志&lt;/h3&gt;&#xA;&lt;h4 id=&#34;2020-11-24&#34;&gt;2020-11-24&lt;/h4&gt;&#xA;&lt;p&gt;慢跑 6.05公里 45‘23’‘&lt;/p&gt;&#xA;&lt;h4 id=&#34;2020-11-19&#34;&gt;2020-11-19&lt;/h4&gt;&#xA;&lt;p&gt;慢跑 6.08公里 48’13‘’&lt;/p&gt;&#xA;&lt;h4 id=&#34;2020-11-18&#34;&gt;2020-11-18&lt;/h4&gt;&#xA;&lt;p&gt;慢跑 5.08 公里 41‘45’‘&lt;/p&gt;&#xA;&lt;h4 id=&#34;2020-11-17&#34;&gt;2020-11-17&lt;/h4&gt;&#xA;&lt;p&gt;慢跑 5.06 公里 用时: 40&#39;2&#39;&#39;&lt;/p&gt;&#xA;&lt;h4 id=&#34;2020-11-16&#34;&gt;2020-11-16&lt;/h4&gt;&#xA;&lt;p&gt;开始跑步  慢跑 3.3公里 用时:  26&#39;49&#39;&#39;&lt;/p&gt;</description>
+    </item>
     <item>
       <title>About</title>
-      <link>https://zhou-mfk.github.io/page/about/</link>
+      <link>http://localhost:1313/page/about/</link>
       <pubDate>Fri, 11 Oct 2019 12:32:29 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/page/about/</guid>
-      <description>关于我 周利山 Email: zhou_mfk@163.com</description>
+      <guid>http://localhost:1313/page/about/</guid>
+      <description>&lt;h1 id=&#34;关于我&#34;&gt;关于我&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;周利山&lt;/li&gt;&#xA;&lt;li&gt;Email: &lt;a href=&#34;mailto:zhou_mfk@163.com&#34;&gt;zhou_mfk@163.com&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
     </item>
-    
   </channel>
 </rss>

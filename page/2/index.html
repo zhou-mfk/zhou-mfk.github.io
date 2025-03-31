@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Zhou Li Shan</title>
@@ -16,19 +16,19 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="周利山" /><meta name="keywords" content="Linux, 运维, Python开发, k8s, Kubernetes" />
+<meta name="author" content="" /><meta name="keywords" content="Linux, 运维, Python开发, k8s, Kubernetes" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
-<link rel="canonical" href="https://zhou-mfk.github.io/" />
-  <link href="https://zhou-mfk.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Zhou Li Shan" />
-  <link href="https://zhou-mfk.github.io/index.xml" rel="feed" type="application/rss+xml" title="Zhou Li Shan" />
+<link rel="canonical" href="http://localhost:1313/" />
+  <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="Zhou Li Shan" />
+  <link href="http://localhost:1313/index.xml" rel="feed" type="application/rss+xml" title="Zhou Li Shan" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -36,20 +36,22 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Zhou Li Shan" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://zhou-mfk.github.io/" />
-<meta property="og:updated_time" content="2022-03-11T09:57:32+08:00" />
-<meta itemprop="name" content="Zhou Li Shan">
-<meta itemprop="description" content="">
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Zhou Li Shan"/>
-<meta name="twitter:description" content=""/>
+<meta property="og:url" content="http://localhost:1313/">
+  <meta property="og:site_name" content="Zhou Li Shan">
+  <meta property="og:title" content="Zhou Li Shan">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="Zhou Li Shan">
+  <meta itemprop="datePublished" content="2023-07-18T20:39:32+08:00">
+  <meta itemprop="dateModified" content="2023-07-18T20:39:32+08:00">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Zhou Li Shan">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -84,12 +86,21 @@
         <li class="mobile-menu-item">分类</li>
       </a>
   </ul>
+
+  
+
+
 </nav>
+
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
   <a href="/" class="logo">花开花落，云卷云舒</a>
 </div>
+
+
+
+
 
 <nav class="site-navbar">
   <ul id="menu" class="menu">
@@ -104,6 +115,7 @@
       </li>
   </ul>
 </nav>
+
     </header>
 
     <main id="main" class="main">
@@ -112,20 +124,82 @@
           <section id="posts" class="posts">
     <article class="post">
   <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/">Elasticsearch快照及数据恢复</a></h1>
+    <h1 class="post-title"><a class="post-link" href="/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/">openresty 1.15.8 安装及增加upstream_check_module和upsync_module</a></h1>
     <div class="post-meta">
-      <span class="post-time"> 2020-04-09 </span>
+      <span class="post-time"> 2020-04-11 </span>
       <div class="post-category">
-          <a href="/categories/elk/"> ELK </a>
+          <a href="/categories/nginx/"> Nginx </a>
           </div>
-        <span class="more-meta"> 约 730 字 </span>
+        <span class="more-meta"> 约 694 字 </span>
         <span class="more-meta"> 预计阅读 2 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      elasticsearch 快照 参考官方文档 需要配置共享存储，并创建快照仓库，之后才能创建快照 1. 设置共享存储（NFS） 安装nfs及其配置 1 2 3 4 5 6 7 yum install nfs-utils -y cat /etc/exports /data/elastic_backup 192.168.1.*(rw,sync,all_squash)
+      <h2 id="openresty-1158-安装及增加upstream_check_module和upsync_module">openresty 1.15.8 安装及增加upstream_check_module和upsync_module</h2>
+<p><strong>下载健康检测模块这个必须要用王晓开的这个开源模块</strong></p>
+<ul>
+<li>nginx_upstream_check_module</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone https://github.com/xiaokai-wang/nginx_upstream_check_module.git
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>nginx-upsync-module-2.1.2</li>
+</ul>
+<p>下载 nginx-upsync-module 用来动态更新upstream中的server</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/">Elasticsearch快照及数据恢复</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2020-04-09 </span>
+      <div class="post-category">
+          <a href="/categories/elk/"> ELK </a>
+          </div>
+        <span class="more-meta"> 约 728 字 </span>
+        <span class="more-meta"> 预计阅读 2 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <h2 id="elasticsearch-快照">elasticsearch 快照</h2>
+<p>参考官方文档 需要配置共享存储，并创建快照仓库，之后才能创建快照</p>
+<h3 id="1-设置共享存储nfs">1. 设置共享存储（NFS）</h3>
+<p>安装nfs及其配置</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">yum install nfs-utils -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cat /etc/exports
+</span></span><span class="line"><span class="cl">/data/elastic_backup 192.168.1.*<span class="o">(</span>rw,sync,all_squash<span class="o">)</span>
+</span></span><span class="line"><span class="cl">chmod <span class="m">777</span> elastic_backup
+</span></span><span class="line"><span class="cl">systemctl start nfs
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>all_squash 表示客户机写入nfs的数据全部映射为nobody用户
+这里设置 all_squash并把目录设置为777 是为防止elasticsearch 集群的每个节点启动的uid和gid 不一致导致在创建快照仓库时无法创建成功。</p>
     </div>
     <div class="read-more">
       <a href="/post/elasticsearch%E5%BF%AB%E7%85%A7%E5%8F%8A%E6%95%B0%E6%8D%AE%E6%81%A2%E5%A4%8D/" class="read-more-link">阅读更多</a>
@@ -141,14 +215,18 @@
       <div class="post-category">
           <a href="/categories/consul/"> consul </a>
           </div>
-        <span class="more-meta"> 约 1240 字 </span>
+        <span class="more-meta"> 约 1363 字 </span>
         <span class="more-meta"> 预计阅读 3 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      认识consul consul官方地址 什么consul Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置。
+      <h2 id="认识consul">认识consul</h2>
+<p><a href="https://www.consul.io/">consul官方地址</a></p>
+<h3 id="什么consul">什么consul</h3>
+<p>Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置。</p>
+<p>Consul由Go语言开发，部署起来非常容易，只需要极少的可执行程序和配置文件，具有绿色、轻量级的特点</p>
     </div>
     <div class="read-more">
       <a href="/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/" class="read-more-link">阅读更多</a>
@@ -171,7 +249,8 @@
   
   <div class="post-content">
     <div class="post-summary">
-      consul 集群 Consul是由HashiCorp开发的一个支持多数据中心的分布式服务发现和键值对存储服务的开源软件，被大量应用于基于微服务的软件架构
+      <h2 id="consul-集群">consul 集群</h2>
+<p>Consul是由HashiCorp开发的一个支持多数据中心的分布式服务发现和键值对存储服务的开源软件，被大量应用于基于微服务的软件架构当中。</p>
     </div>
     <div class="read-more">
       <a href="/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/" class="read-more-link">阅读更多</a>
@@ -194,33 +273,11 @@
   
   <div class="post-content">
     <div class="post-summary">
-      Prometheus通过指标名称（metrics name）以及对应的一组标签（labelset）唯一定义一条时间序列。指标名称反映了监控样本
+      <blockquote>
+<p>Prometheus通过指标名称（metrics name）以及对应的一组标签（labelset）唯一定义一条时间序列。指标名称反映了监控样本的基本标识，而label则在这个基本特征上为采集到的数据提供了多种特征维度。用户可以基于这些特征维度过滤，聚合，统计从而产生新的计算后的一条时间序列。</p>
     </div>
     <div class="read-more">
       <a href="/post/prometheus%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8Apromql/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/prometheus%E7%9B%91%E6%8E%A7/">Prometheus监控</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-11-22 </span>
-      <div class="post-category">
-          <a href="/categories/prometheus/"> prometheus </a>
-          </div>
-        <span class="more-meta"> 约 6128 字 </span>
-        <span class="more-meta"> 预计阅读 13 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      参考: Prometheus 官方文档 promethues-book 简介 Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog
-    </div>
-    <div class="read-more">
-      <a href="/post/prometheus%E7%9B%91%E6%8E%A7/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -246,7 +303,9 @@
     <footer id="footer" class="footer">
       <div class="social-links">
       <a href="zhou_mfk@163.com" class="iconfont icon-email" title="email"></a>
-  <a href="https://zhou-mfk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  
+    <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  
 </div>
 
 <div class="copyright">
@@ -264,13 +323,10 @@
   <span class="copyright-year">
     &copy; 
     2019 - 
-    2022
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">周利山</span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -281,7 +337,10 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

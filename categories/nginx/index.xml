@@ -2,23 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Nginx on Zhou Li Shan</title>
-    <link>https://zhou-mfk.github.io/categories/nginx/</link>
+    <link>http://localhost:1313/categories/nginx/</link>
     <description>Recent content in Nginx on Zhou Li Shan</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Sat, 11 Apr 2020 12:22:04 +0800</lastBuildDate>
-    
-	<atom:link href="https://zhou-mfk.github.io/categories/nginx/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:1313/categories/nginx/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>openresty 1.15.8 安装及增加upstream_check_module和upsync_module</title>
-      <link>https://zhou-mfk.github.io/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/</link>
+      <link>http://localhost:1313/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/</link>
       <pubDate>Sat, 11 Apr 2020 12:22:04 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/</guid>
-      <description>openresty 1.15.8 安装及增加upstream_check_module和upsync_module 下载健康检测模块这个必须要用王晓开的这个开源模块 nginx_upstream_check_module 1 git clone</description>
+      <guid>http://localhost:1313/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/</guid>
+      <description>&lt;h2 id=&#34;openresty-1158-安装及增加upstream_check_module和upsync_module&#34;&gt;openresty 1.15.8 安装及增加upstream_check_module和upsync_module&lt;/h2&gt;&#xA;&lt;p&gt;&lt;strong&gt;下载健康检测模块这个必须要用王晓开的这个开源模块&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;nginx_upstream_check_module&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;&#xA;&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1&#xA;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&#xA;&lt;td class=&#34;lntd&#34;&gt;&#xA;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;git clone https://github.com/xiaokai-wang/nginx_upstream_check_module.git&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&#xA;&lt;/div&gt;&#xA;&lt;/div&gt;&lt;ul&gt;&#xA;&lt;li&gt;nginx-upsync-module-2.1.2&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;下载 nginx-upsync-module 用来动态更新upstream中的server&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

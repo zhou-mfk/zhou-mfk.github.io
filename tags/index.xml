@@ -2,275 +2,228 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Zhou Li Shan</title>
-    <link>https://zhou-mfk.github.io/tags/</link>
+    <link>http://localhost:1313/tags/</link>
     <description>Recent content in Tags on Zhou Li Shan</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en</language>
-    <lastBuildDate>Fri, 11 Mar 2022 09:57:32 +0800</lastBuildDate>
-    
-	<atom:link href="https://zhou-mfk.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 18 Jul 2023 20:39:32 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>prometheus</title>
-      <link>https://zhou-mfk.github.io/tags/prometheus/</link>
-      <pubDate>Fri, 11 Mar 2022 09:57:32 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/prometheus/</guid>
+      <title>算法</title>
+      <link>http://localhost:1313/tags/%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Tue, 18 Jul 2023 20:39:32 +0800</pubDate>
+      <guid>http://localhost:1313/tags/%E7%AE%97%E6%B3%95/</guid>
       <description></description>
     </item>
-    
+    <item>
+      <title>Prometheus</title>
+      <link>http://localhost:1313/tags/prometheus/</link>
+      <pubDate>Fri, 11 Mar 2022 09:57:32 +0800</pubDate>
+      <guid>http://localhost:1313/tags/prometheus/</guid>
+      <description></description>
+    </item>
     <item>
       <title>VictoriaMetrics</title>
-      <link>https://zhou-mfk.github.io/tags/victoriametrics/</link>
+      <link>http://localhost:1313/tags/victoriametrics/</link>
       <pubDate>Fri, 11 Mar 2022 09:57:32 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/victoriametrics/</guid>
+      <guid>http://localhost:1313/tags/victoriametrics/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>paramiko</title>
-      <link>https://zhou-mfk.github.io/tags/paramiko/</link>
+      <title>Paramiko</title>
+      <link>http://localhost:1313/tags/paramiko/</link>
       <pubDate>Mon, 15 Mar 2021 10:40:32 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/paramiko/</guid>
+      <guid>http://localhost:1313/tags/paramiko/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>python</title>
-      <link>https://zhou-mfk.github.io/tags/python/</link>
+      <title>Python</title>
+      <link>http://localhost:1313/tags/python/</link>
       <pubDate>Mon, 15 Mar 2021 10:40:32 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/python/</guid>
+      <guid>http://localhost:1313/tags/python/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>pushgateway</title>
-      <link>https://zhou-mfk.github.io/tags/pushgateway/</link>
-      <pubDate>Thu, 27 Aug 2020 22:38:40 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/pushgateway/</guid>
+      <title>健身</title>
+      <link>http://localhost:1313/tags/%E5%81%A5%E8%BA%AB/</link>
+      <pubDate>Mon, 16 Nov 2020 20:54:19 +0800</pubDate>
+      <guid>http://localhost:1313/tags/%E5%81%A5%E8%BA%AB/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>requests</title>
-      <link>https://zhou-mfk.github.io/tags/requests/</link>
+      <title>Pushgateway</title>
+      <link>http://localhost:1313/tags/pushgateway/</link>
       <pubDate>Thu, 27 Aug 2020 22:38:40 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/requests/</guid>
+      <guid>http://localhost:1313/tags/pushgateway/</guid>
       <description></description>
     </item>
-    
+    <item>
+      <title>Requests</title>
+      <link>http://localhost:1313/tags/requests/</link>
+      <pubDate>Thu, 27 Aug 2020 22:38:40 +0800</pubDate>
+      <guid>http://localhost:1313/tags/requests/</guid>
+      <description></description>
+    </item>
     <item>
       <title>监控</title>
-      <link>https://zhou-mfk.github.io/tags/%E7%9B%91%E6%8E%A7/</link>
+      <link>http://localhost:1313/tags/%E7%9B%91%E6%8E%A7/</link>
       <pubDate>Thu, 27 Aug 2020 22:38:40 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/%E7%9B%91%E6%8E%A7/</guid>
+      <guid>http://localhost:1313/tags/%E7%9B%91%E6%8E%A7/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>kombu</title>
-      <link>https://zhou-mfk.github.io/tags/kombu/</link>
+      <title>Kombu</title>
+      <link>http://localhost:1313/tags/kombu/</link>
       <pubDate>Fri, 17 Apr 2020 21:13:30 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/kombu/</guid>
+      <guid>http://localhost:1313/tags/kombu/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>rabbitmq</title>
-      <link>https://zhou-mfk.github.io/tags/rabbitmq/</link>
+      <title>Rabbitmq</title>
+      <link>http://localhost:1313/tags/rabbitmq/</link>
       <pubDate>Fri, 17 Apr 2020 21:13:30 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/rabbitmq/</guid>
+      <guid>http://localhost:1313/tags/rabbitmq/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>nginx</title>
-      <link>https://zhou-mfk.github.io/tags/nginx/</link>
+      <title>Nginx</title>
+      <link>http://localhost:1313/tags/nginx/</link>
       <pubDate>Sat, 11 Apr 2020 12:22:04 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/nginx/</guid>
+      <guid>http://localhost:1313/tags/nginx/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>nginx_upstream_check_module</title>
-      <link>https://zhou-mfk.github.io/tags/nginx_upstream_check_module/</link>
+      <title>Nginx_upstream_check_module</title>
+      <link>http://localhost:1313/tags/nginx_upstream_check_module/</link>
       <pubDate>Sat, 11 Apr 2020 12:22:04 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/nginx_upstream_check_module/</guid>
+      <guid>http://localhost:1313/tags/nginx_upstream_check_module/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>openresty</title>
-      <link>https://zhou-mfk.github.io/tags/openresty/</link>
+      <title>Openresty</title>
+      <link>http://localhost:1313/tags/openresty/</link>
       <pubDate>Sat, 11 Apr 2020 12:22:04 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/openresty/</guid>
+      <guid>http://localhost:1313/tags/openresty/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>upstram</title>
-      <link>https://zhou-mfk.github.io/tags/upstram/</link>
+      <title>Upstram</title>
+      <link>http://localhost:1313/tags/upstram/</link>
       <pubDate>Sat, 11 Apr 2020 12:22:04 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/upstram/</guid>
+      <guid>http://localhost:1313/tags/upstram/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>elasticsearch</title>
-      <link>https://zhou-mfk.github.io/tags/elasticsearch/</link>
+      <title>Elasticsearch</title>
+      <link>http://localhost:1313/tags/elasticsearch/</link>
       <pubDate>Thu, 09 Apr 2020 17:36:50 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/elasticsearch/</guid>
+      <guid>http://localhost:1313/tags/elasticsearch/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>elk</title>
-      <link>https://zhou-mfk.github.io/tags/elk/</link>
+      <title>Elk</title>
+      <link>http://localhost:1313/tags/elk/</link>
       <pubDate>Thu, 09 Apr 2020 17:36:50 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/elk/</guid>
+      <guid>http://localhost:1313/tags/elk/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>nfs</title>
-      <link>https://zhou-mfk.github.io/tags/nfs/</link>
+      <title>Nfs</title>
+      <link>http://localhost:1313/tags/nfs/</link>
       <pubDate>Thu, 09 Apr 2020 17:36:50 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/nfs/</guid>
+      <guid>http://localhost:1313/tags/nfs/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>日志</title>
-      <link>https://zhou-mfk.github.io/tags/%E6%97%A5%E5%BF%97/</link>
+      <link>http://localhost:1313/tags/%E6%97%A5%E5%BF%97/</link>
       <pubDate>Thu, 09 Apr 2020 17:36:50 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/%E6%97%A5%E5%BF%97/</guid>
+      <guid>http://localhost:1313/tags/%E6%97%A5%E5%BF%97/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>consul</title>
-      <link>https://zhou-mfk.github.io/tags/consul/</link>
+      <title>Consul</title>
+      <link>http://localhost:1313/tags/consul/</link>
       <pubDate>Wed, 08 Jan 2020 21:05:45 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/consul/</guid>
+      <guid>http://localhost:1313/tags/consul/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>ldap</title>
-      <link>https://zhou-mfk.github.io/tags/ldap/</link>
+      <title>Ldap</title>
+      <link>http://localhost:1313/tags/ldap/</link>
       <pubDate>Tue, 19 Nov 2019 17:02:32 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/ldap/</guid>
+      <guid>http://localhost:1313/tags/ldap/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>python-ldap</title>
-      <link>https://zhou-mfk.github.io/tags/python-ldap/</link>
+      <title>Python-Ldap</title>
+      <link>http://localhost:1313/tags/python-ldap/</link>
       <pubDate>Tue, 19 Nov 2019 17:02:32 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/python-ldap/</guid>
+      <guid>http://localhost:1313/tags/python-ldap/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>filebeat</title>
-      <link>https://zhou-mfk.github.io/tags/filebeat/</link>
+      <title>Filebeat</title>
+      <link>http://localhost:1313/tags/filebeat/</link>
       <pubDate>Fri, 18 Oct 2019 20:52:27 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/filebeat/</guid>
+      <guid>http://localhost:1313/tags/filebeat/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>kafka</title>
-      <link>https://zhou-mfk.github.io/tags/kafka/</link>
+      <title>Kafka</title>
+      <link>http://localhost:1313/tags/kafka/</link>
       <pubDate>Fri, 18 Oct 2019 20:52:27 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/kafka/</guid>
+      <guid>http://localhost:1313/tags/kafka/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>kibana</title>
-      <link>https://zhou-mfk.github.io/tags/kibana/</link>
+      <title>Kibana</title>
+      <link>http://localhost:1313/tags/kibana/</link>
       <pubDate>Fri, 18 Oct 2019 20:52:27 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/kibana/</guid>
+      <guid>http://localhost:1313/tags/kibana/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>logstash</title>
-      <link>https://zhou-mfk.github.io/tags/logstash/</link>
+      <title>Logstash</title>
+      <link>http://localhost:1313/tags/logstash/</link>
       <pubDate>Fri, 18 Oct 2019 20:52:27 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/logstash/</guid>
+      <guid>http://localhost:1313/tags/logstash/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>zookeeper</title>
-      <link>https://zhou-mfk.github.io/tags/zookeeper/</link>
+      <title>Zookeeper</title>
+      <link>http://localhost:1313/tags/zookeeper/</link>
       <pubDate>Fri, 18 Oct 2019 20:52:27 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/zookeeper/</guid>
+      <guid>http://localhost:1313/tags/zookeeper/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>github</title>
-      <link>https://zhou-mfk.github.io/tags/github/</link>
+      <title>Github</title>
+      <link>http://localhost:1313/tags/github/</link>
       <pubDate>Thu, 17 Oct 2019 20:56:45 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/github/</guid>
+      <guid>http://localhost:1313/tags/github/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>hugo</title>
-      <link>https://zhou-mfk.github.io/tags/hugo/</link>
+      <title>Hugo</title>
+      <link>http://localhost:1313/tags/hugo/</link>
       <pubDate>Thu, 17 Oct 2019 20:56:45 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/hugo/</guid>
+      <guid>http://localhost:1313/tags/hugo/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>picGo</title>
-      <link>https://zhou-mfk.github.io/tags/picgo/</link>
+      <title>PicGo</title>
+      <link>http://localhost:1313/tags/picgo/</link>
       <pubDate>Thu, 17 Oct 2019 20:56:45 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/picgo/</guid>
+      <guid>http://localhost:1313/tags/picgo/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>git</title>
-      <link>https://zhou-mfk.github.io/tags/git/</link>
+      <title>Git</title>
+      <link>http://localhost:1313/tags/git/</link>
       <pubDate>Fri, 11 Oct 2019 21:44:22 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/tags/git/</guid>
+      <guid>http://localhost:1313/tags/git/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

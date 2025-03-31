@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Pushgateway的使用案例 - Zhou Li Shan</title>
@@ -16,17 +16,19 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="周利山" /><meta name="description" content="参考: pushgatewy GITHUB 我们都知道prometheus是主动的向被监控端拉取监控数据的，如果有需要向prometheus推送数据只能通过pushgatew" /><meta name="keywords" content="prometheus, pushgateway, 监控, python, requests" />
+<meta name="author" content="" /><meta name="description" content="参考: pushgatewy GITHUB
+我们都知道prometheus是主动的向被监控端拉取监控数据的，如果有需要向prometheus推送数据只能通过pushgateway的方式。
+" /><meta name="keywords" content="prometheus, pushgateway, 监控, python, requests" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
-<link rel="canonical" href="https://zhou-mfk.github.io/post/pushgateway_use/" />
+<link rel="canonical" href="http://localhost:1313/post/pushgateway_use/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -34,28 +36,38 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Pushgateway的使用案例" />
-<meta property="og:description" content="参考: pushgatewy GITHUB 我们都知道prometheus是主动的向被监控端拉取监控数据的，如果有需要向prometheus推送数据只能通过pushgatew" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://zhou-mfk.github.io/post/pushgateway_use/" />
-<meta property="article:published_time" content="2020-08-27T22:38:40+08:00" />
-<meta property="article:modified_time" content="2020-08-27T22:38:40+08:00" />
-<meta itemprop="name" content="Pushgateway的使用案例">
-<meta itemprop="description" content="参考: pushgatewy GITHUB 我们都知道prometheus是主动的向被监控端拉取监控数据的，如果有需要向prometheus推送数据只能通过pushgatew">
-<meta itemprop="datePublished" content="2020-08-27T22:38:40+08:00" />
-<meta itemprop="dateModified" content="2020-08-27T22:38:40+08:00" />
-<meta itemprop="wordCount" content="1391">
+<meta property="og:url" content="http://localhost:1313/post/pushgateway_use/">
+  <meta property="og:site_name" content="Zhou Li Shan">
+  <meta property="og:title" content="Pushgateway的使用案例">
+  <meta property="og:description" content="参考: pushgatewy GITHUB
+我们都知道prometheus是主动的向被监控端拉取监控数据的，如果有需要向prometheus推送数据只能通过pushgateway的方式。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2020-08-27T22:38:40+08:00">
+    <meta property="article:modified_time" content="2020-08-27T22:38:40+08:00">
+    <meta property="article:tag" content="Prometheus">
+    <meta property="article:tag" content="Pushgateway">
+    <meta property="article:tag" content="监控">
+    <meta property="article:tag" content="Python">
+    <meta property="article:tag" content="Requests">
 
-
-
-<meta itemprop="keywords" content="prometheus,pushgateway,监控,python,requests," />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Pushgateway的使用案例"/>
-<meta name="twitter:description" content="参考: pushgatewy GITHUB 我们都知道prometheus是主动的向被监控端拉取监控数据的，如果有需要向prometheus推送数据只能通过pushgatew"/>
+  <meta itemprop="name" content="Pushgateway的使用案例">
+  <meta itemprop="description" content="参考: pushgatewy GITHUB
+我们都知道prometheus是主动的向被监控端拉取监控数据的，如果有需要向prometheus推送数据只能通过pushgateway的方式。">
+  <meta itemprop="datePublished" content="2020-08-27T22:38:40+08:00">
+  <meta itemprop="dateModified" content="2020-08-27T22:38:40+08:00">
+  <meta itemprop="wordCount" content="1397">
+  <meta itemprop="keywords" content="prometheus,pushgateway,监控,python,requests">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Pushgateway的使用案例">
+  <meta name="twitter:description" content="参考: pushgatewy GITHUB
+我们都知道prometheus是主动的向被监控端拉取监控数据的，如果有需要向prometheus推送数据只能通过pushgateway的方式。">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -90,12 +102,21 @@
         <li class="mobile-menu-item">分类</li>
       </a>
   </ul>
+
+  
+
+
 </nav>
+
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
   <a href="/" class="logo">花开花落，云卷云舒</a>
 </div>
+
+
+
+
 
 <nav class="site-navbar">
   <ul id="menu" class="menu">
@@ -110,6 +131,7 @@
       </li>
   </ul>
 </nav>
+
     </header>
 
     <main id="main" class="main">
@@ -125,7 +147,7 @@
         <div class="post-category">
             <a href="/categories/prometheus/"> prometheus </a>
             </div>
-          <span class="more-meta"> 约 1391 字 </span>
+          <span class="more-meta"> 约 1397 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
@@ -156,7 +178,7 @@
 <h3 id="下载和安装">下载和安装</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -164,33 +186,33 @@
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 下载</span>
-<span class="nb">cd</span> /usr/local/src
-wget https://github.com/prometheus/pushgateway/releases/download/v1.2.0/pushgateway-1.2.0.linux-amd64.tar.gz
-<span class="c1"># 安装</span>
-tar xvf pushgateway-1.2.0.linux-amd64.tar.gz -C /usr/local
-ln -sv /usr/local/pushgateway-1.2.0.linux-amd64 /usr/local/pushgateway
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 下载</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /usr/local/src
+</span></span><span class="line"><span class="cl">wget https://github.com/prometheus/pushgateway/releases/download/v1.2.0/pushgateway-1.2.0.linux-amd64.tar.gz
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装</span>
+</span></span><span class="line"><span class="cl">tar xvf pushgateway-1.2.0.linux-amd64.tar.gz -C /usr/local
+</span></span><span class="line"><span class="cl">ln -sv /usr/local/pushgateway-1.2.0.linux-amd64 /usr/local/pushgateway
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="启动和配置">启动和配置</h3>
 <h4 id="启动和服务">启动和服务</h4>
 <p>启动</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">#可以直接启动</span>
-/usr/local/pushgateway 
-<span class="c1"># 默认是在前台启动 监听的端口为9091</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1">#可以直接启动</span>
+</span></span><span class="line"><span class="cl">/usr/local/pushgateway 
+</span></span><span class="line"><span class="cl"><span class="c1"># 默认是在前台启动 监听的端口为9091</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>pushgateway命令</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -210,30 +232,30 @@ ln -sv /usr/local/pushgateway-1.2.0.linux-amd64 /usr/local/pushgateway
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">usage: pushgateway <span class="o">[</span>&lt;flags&gt;<span class="o">]</span>
-
-The Pushgateway
-
-Flags:
-  -h, --help                    
-      --web.listen-address<span class="o">=</span><span class="s2">&#34;:9091&#34;</span>    监控的地址和端口
-      --web.telemetry-path<span class="o">=</span><span class="s2">&#34;/metrics&#34;</span>   获得metrics的路径
-      --web.external-url<span class="o">=</span>        The URL under which the Pushgateway is externally reachable.
-      --web.route-prefix<span class="o">=</span><span class="s2">&#34;&#34;</span>      Prefix <span class="k">for</span> the internal routes of web endpoints. Defaults to the path of --web.external-url.
-      --web.enable-lifecycle    可以通过http来关闭pushgateway
-      --web.enable-admin-api    启动admin api
-      --persistence.file<span class="o">=</span><span class="s2">&#34;&#34;</span>      指定存储的文件 默认存储在内存中,如果pushgateway异常,重启则数据不会被保留
-      --persistence.interval<span class="o">=</span>5m  指定存储的文件更新的频率
-      --push.disable-consistency-check   不要检查推送的度量标准的一致性 这个参数比较危险 
-      --log.level<span class="o">=</span>info         日志级别
-      --log.format<span class="o">=</span>logfmt        Output format of log messages. One of: <span class="o">[</span>logfmt, json<span class="o">]</span>
-      --version                  Show application version.
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">usage: pushgateway <span class="o">[</span>&lt;flags&gt;<span class="o">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">The Pushgateway
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Flags:
+</span></span><span class="line"><span class="cl">  -h, --help                    
+</span></span><span class="line"><span class="cl">      --web.listen-address<span class="o">=</span><span class="s2">&#34;:9091&#34;</span>    监控的地址和端口
+</span></span><span class="line"><span class="cl">      --web.telemetry-path<span class="o">=</span><span class="s2">&#34;/metrics&#34;</span>   获得metrics的路径
+</span></span><span class="line"><span class="cl">      --web.external-url<span class="o">=</span>        The URL under which the Pushgateway is externally reachable.
+</span></span><span class="line"><span class="cl">      --web.route-prefix<span class="o">=</span><span class="s2">&#34;&#34;</span>      Prefix <span class="k">for</span> the internal routes of web endpoints. Defaults to the path of --web.external-url.
+</span></span><span class="line"><span class="cl">      --web.enable-lifecycle    可以通过http来关闭pushgateway
+</span></span><span class="line"><span class="cl">      --web.enable-admin-api    启动admin api
+</span></span><span class="line"><span class="cl">      --persistence.file<span class="o">=</span><span class="s2">&#34;&#34;</span>      指定存储的文件 默认存储在内存中,如果pushgateway异常,重启则数据不会被保留
+</span></span><span class="line"><span class="cl">      --persistence.interval<span class="o">=</span>5m  指定存储的文件更新的频率
+</span></span><span class="line"><span class="cl">      --push.disable-consistency-check   不要检查推送的度量标准的一致性 这个参数比较危险 
+</span></span><span class="line"><span class="cl">      --log.level<span class="o">=</span>info         日志级别
+</span></span><span class="line"><span class="cl">      --log.format<span class="o">=</span>logfmt        Output format of log messages. One of: <span class="o">[</span>logfmt, json<span class="o">]</span>
+</span></span><span class="line"><span class="cl">      --version                  Show application version.
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用systemctl来启动，脚本如下:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -248,46 +270,42 @@ Flags:
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
-</span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">$ vim /usr/lib/systemd/system/pushgateway.service
-<span class="o">[</span>Unit<span class="o">]</span>
-<span class="nv">Description</span><span class="o">=</span>pushgateway
-<span class="nv">After</span><span class="o">=</span>network.target
-<span class="o">[</span>Service<span class="o">]</span>
-<span class="nv">LimitCORE</span><span class="o">=</span>infinity
-<span class="nv">LimitNOFILE</span><span class="o">=</span><span class="m">65535</span>
-<span class="nv">LimitNPROC</span><span class="o">=</span><span class="m">65535</span>
-<span class="nv">Type</span><span class="o">=</span>simple
-<span class="nv">User</span><span class="o">=</span>prometheus
-<span class="nv">Group</span><span class="o">=</span>prometheus
-<span class="nv">ExecStart</span><span class="o">=</span>/usr/local/pushgateway/pushgateway --web.enable-lifecycle --web.enable-admin-api --persistence.file<span class="o">=</span>/usr/local/pushgateway/metrics_data --persistence.interval<span class="o">=</span>3m
-<span class="nv">Restart</span><span class="o">=</span>on-failure
-<span class="o">[</span>Install<span class="o">]</span>
-<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ vim /usr/lib/systemd/system/pushgateway.service
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Unit<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Description</span><span class="o">=</span>pushgateway
+</span></span><span class="line"><span class="cl"><span class="nv">After</span><span class="o">=</span>network.target
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Service<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">LimitCORE</span><span class="o">=</span>infinity
+</span></span><span class="line"><span class="cl"><span class="nv">LimitNOFILE</span><span class="o">=</span><span class="m">65535</span>
+</span></span><span class="line"><span class="cl"><span class="nv">LimitNPROC</span><span class="o">=</span><span class="m">65535</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Type</span><span class="o">=</span>simple
+</span></span><span class="line"><span class="cl"><span class="nv">User</span><span class="o">=</span>prometheus
+</span></span><span class="line"><span class="cl"><span class="nv">Group</span><span class="o">=</span>prometheus
+</span></span><span class="line"><span class="cl"><span class="nv">ExecStart</span><span class="o">=</span>/usr/local/pushgateway/pushgateway --web.enable-lifecycle --web.enable-admin-api --persistence.file<span class="o">=</span>/usr/local/pushgateway/metrics_data --persistence.interval<span class="o">=</span>3m
+</span></span><span class="line"><span class="cl"><span class="nv">Restart</span><span class="o">=</span>on-failure
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Install<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>上面启动脚本我们指定了 本地存储位置和更新时间</p>
 <p>启动</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
-</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">systemctl daemon-reload 
-systemctl start pushgateway.service
-systemctl status pushgateway.service  <span class="c1"># 查看状态</span>
- systemctl <span class="nb">enable</span> pushgateway.service  <span class="c1"># 开机自动启动</span>
-journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">systemctl daemon-reload 
+</span></span><span class="line"><span class="cl">systemctl start pushgateway.service
+</span></span><span class="line"><span class="cl">systemctl status pushgateway.service  <span class="c1"># 查看状态</span>
+</span></span><span class="line"><span class="cl"> systemctl <span class="nb">enable</span> pushgateway.service  <span class="c1"># 开机自动启动</span>
+</span></span><span class="line"><span class="cl">journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><strong>也可以使用docker来启动 详细参数github地址</strong></p>
 <h3 id="数据推送">数据推送</h3>
@@ -297,7 +315,7 @@ journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span>
 <p>具体可以参考官网或其他文章。这里给出prometheus与pushgateway的配置</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -305,23 +323,23 @@ journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span>
 </span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">  </span>- <span class="k">job_name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;pushgateway&#39;</span><span class="w">
-</span><span class="w">    </span><span class="k">honor_labels</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w">    </span><span class="k">static_configs</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="k">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;192.168.1.100:9091&#39;</span><span class="p">]</span><span class="w">
-</span><span class="w">        </span><span class="k">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">          </span><span class="k">group</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;pushgateway&#39;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;pushgateway&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">honor_labels</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;192.168.1.100:9091&#39;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;pushgateway&#39;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><code> honor_labels: true</code>  如果不配置则为false 。 此配置的说明 官方有很详细的说明: <a href="https://github.com/prometheus/pushgateway#about-the-job-and-instance-labels">About the job and instance labels</a> 和prometheus的 <a href="https://prometheus.io/docs/prometheus/latest/configuration/configuration/#scrape_config">scrape_config</a></p>
 <p>当不配置时或为false时 我们通过api 推送我们的监控数据，如下所示:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nb">echo</span> <span class="s2">&#34;test_metric 123456&#34;</span> <span class="p">|</span> curl --data-binary @- http://192.168.1.100:9091/metrics/job/test_job
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;test_metric 123456&#34;</span> <span class="p">|</span> curl --data-binary @- http://192.168.1.100:9091/metrics/job/test_job
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>不过我们会发现，除了 <code>test_metric</code> 外，同时还新增了 <code>push_time_seconds</code>  和 <code>push_failure_time_seconds</code> 两个指标，这两个是 PushGateway 系统自动生成的相关指标</p>
 <p>我们prometheus查询的结果：</p>
@@ -332,7 +350,7 @@ journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span>
 <h3 id="使用python的requests来推送数据">使用python的requests来推送数据</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -392,71 +410,69 @@ journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span>
 </span><span class="lnt">58
 </span><span class="lnt">59
 </span><span class="lnt">60
-</span><span class="lnt">61
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-
-<span class="n">PUSH_GATEWAY_URL</span> <span class="o">=</span> <span class="s1">&#39;http://192.168.1.100:9091/metrics&#39;</span>
-
-
-<span class="k">def</span> <span class="nf">push_metrics</span><span class="p">(</span><span class="n">metric_name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">labels</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">type_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;
-</span><span class="s2">    把数据push到prometheus上进行监控
-</span><span class="s2">    :param metric_name: 监控项名称
-</span><span class="s2">    :param value: 值 只能为数字
-</span><span class="s2">    :param job: 对应的job
-</span><span class="s2">    :param instance: 实例名，一般为ip地址
-</span><span class="s2">    :param labels: 标签
-</span><span class="s2">    :param type_str: 监控数据说明可为空 --&gt; # TYPE some_metric counter/gauge
-</span><span class="s2">    :return:
-</span><span class="s2">    &#34;&#34;&#34;</span>
-    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;X-Requested-With&#39;</span><span class="p">:</span> <span class="s1">&#39;Python requests&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;Content-type&#39;</span><span class="p">:</span> <span class="s1">&#39;text/xml&#39;</span>
-    <span class="p">}</span>
-    <span class="c1"># 组合访问地址</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&#34;{PUSH_GATEWAY_URL}/job/{job}/instance/{instance}&#34;</span>
-    <span class="k">if</span> <span class="n">labels</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">labels</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">url</span> <span class="o">+=</span> <span class="n">f</span><span class="s2">&#34;/{k}/{v}&#34;</span>
-
-    <span class="n">payload</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&#34;{type_str}</span><span class="se">\n</span><span class="s2">{metric_name} {value}</span><span class="se">\n</span><span class="s2">&#34;</span>
-
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&#34;POST&#34;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">True</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">False</span>
-
-
-<span class="k">def</span> <span class="nf">delete_metrics</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">labels</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
-    <span class="s2">&#34;&#34;&#34;
-</span><span class="s2">    删除指定的job和实例的数据
-</span><span class="s2">    :param job: 对应的job
-</span><span class="s2">    :param instance: 实例名，一般为ip地址
-</span><span class="s2">    :param labels: 标签
-</span><span class="s2">    :return:
-</span><span class="s2">    &#34;&#34;&#34;</span>
-
-    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;X-Requested-With&#39;</span><span class="p">:</span> <span class="s1">&#39;Python requests&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;Content-type&#39;</span><span class="p">:</span> <span class="s1">&#39;text/xml&#39;</span>
-    <span class="p">}</span>
-
-    <span class="c1"># 组合访问地址</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="n">f</span><span class="s2">&#34;{PUSH_GATEWAY_URL}/job/{job}/instance/{instance}&#34;</span>
-    <span class="k">if</span> <span class="n">labels</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">labels</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">url</span> <span class="o">+=</span> <span class="n">f</span><span class="s2">&#34;/{k}/{v}&#34;</span>
-
-    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&#34;DELETE&#34;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">202</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">True</span>
-    <span class="k">return</span> <span class="bp">False</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># -*- coding: utf-8 -*-</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">requests</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">PUSH_GATEWAY_URL</span> <span class="o">=</span> <span class="s1">&#39;http://192.168.1.100:9091/metrics&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">push_metrics</span><span class="p">(</span><span class="n">metric_name</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">job</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">labels</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">type_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    把数据push到prometheus上进行监控
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :param metric_name: 监控项名称
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :param value: 值 只能为数字
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :param job: 对应的job
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :param instance: 实例名，一般为ip地址
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :param labels: 标签
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :param type_str: 监控数据说明可为空 --&gt; # TYPE some_metric counter/gauge
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :return:
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;X-Requested-With&#39;</span><span class="p">:</span> <span class="s1">&#39;Python requests&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;Content-type&#39;</span><span class="p">:</span> <span class="s1">&#39;text/xml&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 组合访问地址</span>
+</span></span><span class="line"><span class="cl">    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">PUSH_GATEWAY_URL</span><span class="si">}</span><span class="s2">/job/</span><span class="si">{</span><span class="n">job</span><span class="si">}</span><span class="s2">/instance/</span><span class="si">{</span><span class="n">instance</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">labels</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">labels</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="n">url</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&#34;/</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">payload</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">type_str</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="n">metric_name</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="se">\n</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&#34;POST&#34;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">delete_metrics</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">labels</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="cl"><span class="s2">    删除指定的job和实例的数据
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :param job: 对应的job
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :param instance: 实例名，一般为ip地址
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :param labels: 标签
+</span></span></span><span class="line"><span class="cl"><span class="s2">    :return:
+</span></span></span><span class="line"><span class="cl"><span class="s2">    &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;X-Requested-With&#39;</span><span class="p">:</span> <span class="s1">&#39;Python requests&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;Content-type&#39;</span><span class="p">:</span> <span class="s1">&#39;text/xml&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 组合访问地址</span>
+</span></span><span class="line"><span class="cl">    <span class="n">url</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">PUSH_GATEWAY_URL</span><span class="si">}</span><span class="s2">/job/</span><span class="si">{</span><span class="n">job</span><span class="si">}</span><span class="s2">/instance/</span><span class="si">{</span><span class="n">instance</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">labels</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">labels</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">            <span class="n">url</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&#34;/</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="s2">&#34;DELETE&#34;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">202</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="kc">False</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>还可以python 的 prometheus_client  这个涉猎的不多。如果需要可自行在官方文档上学习。</p>
 <hr>
@@ -466,7 +482,7 @@ journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span>
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
-    <span class="item-content">周利山</span>
+    <span class="item-content"></span>
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
@@ -527,7 +543,7 @@ journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span>
     <footer id="footer" class="footer">
       <div class="social-links">
       <a href="zhou_mfk@163.com" class="iconfont icon-email" title="email"></a>
-  <a href="https://zhou-mfk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  
 </div>
 
 <div class="copyright">
@@ -545,13 +561,10 @@ journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span>
   <span class="copyright-year">
     &copy; 
     2019 - 
-    2022
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">周利山</span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -562,7 +575,10 @@ journalctl -xf -u pushgateway.service <span class="c1"># 查看日志</span>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

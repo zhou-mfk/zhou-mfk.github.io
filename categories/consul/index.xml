@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>consul on Zhou Li Shan</title>
-    <link>https://zhou-mfk.github.io/categories/consul/</link>
-    <description>Recent content in consul on Zhou Li Shan</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Consul on Zhou Li Shan</title>
+    <link>http://localhost:1313/categories/consul/</link>
+    <description>Recent content in Consul on Zhou Li Shan</description>
+    <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Wed, 08 Jan 2020 21:05:45 +0800</lastBuildDate>
-    
-	<atom:link href="https://zhou-mfk.github.io/categories/consul/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:1313/categories/consul/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Consul的安装及配置</title>
-      <link>https://zhou-mfk.github.io/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/</link>
+      <link>http://localhost:1313/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Wed, 08 Jan 2020 21:05:45 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/</guid>
-      <description>认识consul consul官方地址 什么consul Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置。</description>
+      <guid>http://localhost:1313/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/</guid>
+      <description>&lt;h2 id=&#34;认识consul&#34;&gt;认识consul&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.consul.io/&#34;&gt;consul官方地址&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;什么consul&#34;&gt;什么consul&lt;/h3&gt;&#xA;&lt;p&gt;Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置。&lt;/p&gt;&#xA;&lt;p&gt;Consul由Go语言开发，部署起来非常容易，只需要极少的可执行程序和配置文件，具有绿色、轻量级的特点&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

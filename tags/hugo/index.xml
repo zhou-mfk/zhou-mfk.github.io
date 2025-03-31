@@ -1,33 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>hugo on Zhou Li Shan</title>
-    <link>https://zhou-mfk.github.io/tags/hugo/</link>
-    <description>Recent content in hugo on Zhou Li Shan</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Hugo on Zhou Li Shan</title>
+    <link>http://localhost:1313/tags/hugo/</link>
+    <description>Recent content in Hugo on Zhou Li Shan</description>
+    <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Thu, 17 Oct 2019 20:56:45 +0800</lastBuildDate>
-    
-	<atom:link href="https://zhou-mfk.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:1313/tags/hugo/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用picGo&#43;GitHub制作图床</title>
-      <link>https://zhou-mfk.github.io/post/%E4%BD%BF%E7%94%A8picgo&#43;github%E5%88%B6%E4%BD%9C%E5%9B%BE%E5%BA%8A/</link>
+      <link>http://localhost:1313/post/%E4%BD%BF%E7%94%A8picgo&#43;github%E5%88%B6%E4%BD%9C%E5%9B%BE%E5%BA%8A/</link>
       <pubDate>Thu, 17 Oct 2019 20:56:45 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/post/%E4%BD%BF%E7%94%A8picgo&#43;github%E5%88%B6%E4%BD%9C%E5%9B%BE%E5%BA%8A/</guid>
-      <description>使用picGo+GitHub制作图床 PicGo介绍 官方站点 下载及安装 参考文档 使用GitHub github上创建一个仓库 设置Token 个人主页</description>
+      <guid>http://localhost:1313/post/%E4%BD%BF%E7%94%A8picgo&#43;github%E5%88%B6%E4%BD%9C%E5%9B%BE%E5%BA%8A/</guid>
+      <description>&lt;p&gt;使用picGo+GitHub制作图床&lt;/p&gt;&#xA;&lt;h2 id=&#34;picgo介绍&#34;&gt;PicGo介绍&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://molunerfinn.com/PicGo/&#34;&gt;官方站点&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;下载及安装 参考&lt;a href=&#34;https://picgo.github.io/PicGo-Doc/zh/guide/&#34;&gt;文档&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;使用github&#34;&gt;使用GitHub&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;github上创建一个仓库&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017215146.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;设置Token&lt;/p&gt;&#xA;&lt;p&gt;个人主页 Settings&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017215246.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;Developer settings &amp;ndash;&amp;gt; Generate token&lt;/p&gt;&#xA;&lt;p&gt;&lt;img src=&#34;https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017215453.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;&#xA;&lt;p&gt;点击创建token就显示出当前的token 请记牢，因为就显示一次&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>使用hugo搭建blog</title>
-      <link>https://zhou-mfk.github.io/post/%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BAblog/</link>
+      <link>http://localhost:1313/post/%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BAblog/</link>
       <pubDate>Fri, 11 Oct 2019 21:44:22 +0800</pubDate>
-      
-      <guid>https://zhou-mfk.github.io/post/%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BAblog/</guid>
+      <guid>http://localhost:1313/post/%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BAblog/</guid>
       <description>&lt;p&gt;hugo 的使用到发布到github&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

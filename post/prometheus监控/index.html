@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Prometheus监控 - Zhou Li Shan</title>
@@ -16,17 +16,22 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="周利山" /><meta name="description" content="参考: Prometheus 官方文档 promethues-book 简介 Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog" /><meta name="keywords" content="prometheus, 监控" />
+<meta name="author" content="" /><meta name="description" content="参考:
+Prometheus
+官方文档
+promethues-book
+简介 Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog系统演变而来），从2012年开始由前Google工程师在Soundcloud以开源软件的形式进行研发，并且于2015年早期对外发布早期版本。2016年5月继Kubernetes之后成为第二个正式加入CNCF基金会的项目，同年6月正式发布1.0版本。2017年底发布了基于全新存储层的2.0版本，能更好地与容器平台、云平台配合
+" /><meta name="keywords" content="prometheus, 监控" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
-<link rel="canonical" href="https://zhou-mfk.github.io/post/prometheus%E7%9B%91%E6%8E%A7/" />
+<link rel="canonical" href="http://localhost:1313/post/prometheus%E7%9B%91%E6%8E%A7/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -34,28 +39,44 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Prometheus监控" />
-<meta property="og:description" content="参考: Prometheus 官方文档 promethues-book 简介 Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://zhou-mfk.github.io/post/prometheus%E7%9B%91%E6%8E%A7/" />
-<meta property="article:published_time" content="2019-11-22T10:46:18+08:00" />
-<meta property="article:modified_time" content="2019-11-22T10:46:18+08:00" />
-<meta itemprop="name" content="Prometheus监控">
-<meta itemprop="description" content="参考: Prometheus 官方文档 promethues-book 简介 Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog">
-<meta itemprop="datePublished" content="2019-11-22T10:46:18+08:00" />
-<meta itemprop="dateModified" content="2019-11-22T10:46:18+08:00" />
-<meta itemprop="wordCount" content="6128">
+<meta property="og:url" content="http://localhost:1313/post/prometheus%E7%9B%91%E6%8E%A7/">
+  <meta property="og:site_name" content="Zhou Li Shan">
+  <meta property="og:title" content="Prometheus监控">
+  <meta property="og:description" content="参考:
+Prometheus
+官方文档
+promethues-book
+简介 Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog系统演变而来），从2012年开始由前Google工程师在Soundcloud以开源软件的形式进行研发，并且于2015年早期对外发布早期版本。2016年5月继Kubernetes之后成为第二个正式加入CNCF基金会的项目，同年6月正式发布1.0版本。2017年底发布了基于全新存储层的2.0版本，能更好地与容器平台、云平台配合">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2019-11-22T10:46:18+08:00">
+    <meta property="article:modified_time" content="2019-11-22T10:46:18+08:00">
+    <meta property="article:tag" content="Prometheus">
+    <meta property="article:tag" content="监控">
 
-
-
-<meta itemprop="keywords" content="prometheus,监控," />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Prometheus监控"/>
-<meta name="twitter:description" content="参考: Prometheus 官方文档 promethues-book 简介 Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog"/>
+  <meta itemprop="name" content="Prometheus监控">
+  <meta itemprop="description" content="参考:
+Prometheus
+官方文档
+promethues-book
+简介 Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog系统演变而来），从2012年开始由前Google工程师在Soundcloud以开源软件的形式进行研发，并且于2015年早期对外发布早期版本。2016年5月继Kubernetes之后成为第二个正式加入CNCF基金会的项目，同年6月正式发布1.0版本。2017年底发布了基于全新存储层的2.0版本，能更好地与容器平台、云平台配合">
+  <meta itemprop="datePublished" content="2019-11-22T10:46:18+08:00">
+  <meta itemprop="dateModified" content="2019-11-22T10:46:18+08:00">
+  <meta itemprop="wordCount" content="5494">
+  <meta itemprop="keywords" content="prometheus,监控">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Prometheus监控">
+  <meta name="twitter:description" content="参考:
+Prometheus
+官方文档
+promethues-book
+简介 Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog系统演变而来），从2012年开始由前Google工程师在Soundcloud以开源软件的形式进行研发，并且于2015年早期对外发布早期版本。2016年5月继Kubernetes之后成为第二个正式加入CNCF基金会的项目，同年6月正式发布1.0版本。2017年底发布了基于全新存储层的2.0版本，能更好地与容器平台、云平台配合">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -90,12 +111,21 @@
         <li class="mobile-menu-item">分类</li>
       </a>
   </ul>
+
+  
+
+
 </nav>
+
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
   <a href="/" class="logo">花开花落，云卷云舒</a>
 </div>
+
+
+
+
 
 <nav class="site-navbar">
   <ul id="menu" class="menu">
@@ -110,6 +140,7 @@
       </li>
   </ul>
 </nav>
+
     </header>
 
     <main id="main" class="main">
@@ -125,8 +156,8 @@
         <div class="post-category">
             <a href="/categories/prometheus/"> prometheus </a>
             </div>
-          <span class="more-meta"> 约 6128 字 </span>
-          <span class="more-meta"> 预计阅读 13 分钟 </span>
+          <span class="more-meta"> 约 5494 字 </span>
+          <span class="more-meta"> 预计阅读 11 分钟 </span>
         
       </div>
     </header>
@@ -172,8 +203,7 @@
 <p><a href="https://yunlzheng.gitbook.io/prometheus-book/">promethues-book</a></p>
 <h2 id="简介">简介</h2>
 <blockquote>
-<p>Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog系统演变而来），从2012年开始由前Google工程师在Soundcloud以开源软件的形式进行研发，并且于2015年早期对外发布早期版本。2016年5月继Kubernetes之后成为第二个正式加入CNCF基金会的项目，同年6月正式发布1.0版本。2017年底发布了基于全新存储层的2.0版本，能更好地与容器平台、云平台配合</p>
-</blockquote>
+<p>Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog系统演变而来），从2012年开始由前Google工程师在Soundcloud以开源软件的形式进行研发，并且于2015年早期对外发布早期版本。2016年5月继Kubernetes之后成为第二个正式加入CNCF基金会的项目，同年6月正式发布1.0版本。2017年底发布了基于全新存储层的2.0版本，能更好地与容器平台、云平台配合</p></blockquote>
 <p>我们从官方站点上的一张图来认识下prometheus</p>
 <p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191122111215.png" alt="prometheus"></p>
 <ul>
@@ -206,11 +236,9 @@
 <p>Service Discovery 服务自动发现功能 prometheus各种SD 如下所示:</p>
 <p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191122113445.png" alt=""></p>
 <blockquote>
-<p>consul_sd_config 是使用consul存储被监控端的信息</p>
-</blockquote>
+<p>consul_sd_config 是使用consul存储被监控端的信息</p></blockquote>
 <blockquote>
-<p>file_sd_config 是使用文件来存储被监控端的信息，json格式</p>
-</blockquote>
+<p>file_sd_config 是使用文件来存储被监控端的信息，json格式</p></blockquote>
 </li>
 </ul>
 <h2 id="prometheus的优势">Prometheus的优势</h2>
@@ -219,39 +247,34 @@
 <p>易于管理</p>
 <blockquote>
 <p>Prometheus核心部分只有一个单独的二进制文件，不存在任何的第三方依赖(数据库，缓存等等)。唯一需要的就是本地磁盘，因此不会有潜在级联故障的风险。</p>
-<p>Prometheus基于Pull模型的架构方式，可以在任何地方（本地电脑，开发环境，测试环境）搭建我们的监控系统。对于一些复杂的情况，还可以使用Prometheus服务发现(Service Discovery)的能力动态管理监控目标。</p>
-</blockquote>
+<p>Prometheus基于Pull模型的架构方式，可以在任何地方（本地电脑，开发环境，测试环境）搭建我们的监控系统。对于一些复杂的情况，还可以使用Prometheus服务发现(Service Discovery)的能力动态管理监控目标。</p></blockquote>
 </li>
 <li>
 <p>监控服务内部</p>
 <blockquote>
-<p>Pometheus鼓励用户监控服务的内部状态，基于Prometheus丰富的Client库，用户可以轻松的在应用程序中添加对Prometheus的支持，从而让用户可以获取服务和应用内部真正的运行状态。</p>
-</blockquote>
+<p>Pometheus鼓励用户监控服务的内部状态，基于Prometheus丰富的Client库，用户可以轻松的在应用程序中添加对Prometheus的支持，从而让用户可以获取服务和应用内部真正的运行状态。</p></blockquote>
 </li>
 <li>
 <p>强大的数据类型</p>
 <blockquote>
-<p>所有采集的监控数据均以指标(metric)的形式保存在内置的时间序列数据库当中(TSDB)。所有的样本除了基本的指标名称以外，还包含一组用于描述该样本特征的标签。如下所示：</p>
-</blockquote>
+<p>所有采集的监控数据均以指标(metric)的形式保存在内置的时间序列数据库当中(TSDB)。所有的样本除了基本的指标名称以外，还包含一组用于描述该样本特征的标签。如下所示：</p></blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">http_request_status{code=&#39;200&#39;,content_path=&#39;/api/path&#39;, environment=&#39;produment&#39;} =&gt; [value1@timestamp1,value2@timestamp2...]
-  
-http_request_status{code=&#39;200&#39;,content_path=&#39;/api/path2&#39;, environment=&#39;produment&#39;} =&gt; [value1@timestamp1,value2@timestamp2...]
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">http_request_status{code=&#39;200&#39;,content_path=&#39;/api/path&#39;, environment=&#39;produment&#39;} =&gt; [value1@timestamp1,value2@timestamp2...]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">http_request_status{code=&#39;200&#39;,content_path=&#39;/api/path2&#39;, environment=&#39;produment&#39;} =&gt; [value1@timestamp1,value2@timestamp2...]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>每一条时间序列由指标名称(Metrics Name)以及一组标签(Labels)唯一标识。</p>
-<p>每条时间序列按照时间的先后顺序存储一系列的样本值。</p>
-</blockquote>
+<p>每条时间序列按照时间的先后顺序存储一系列的样本值。</p></blockquote>
 <blockquote>
-<p>表示维度的标签可能来源于你的监控对象的状态，比如code=404或者content_path=/api/path。也可能来源于的你的环境定义，比如environment=produment。基于这些Labels我们可以方便地对监控数据进行聚合，过滤，裁剪。</p>
-</blockquote>
+<p>表示维度的标签可能来源于你的监控对象的状态，比如code=404或者content_path=/api/path。也可能来源于的你的环境定义，比如environment=produment。基于这些Labels我们可以方便地对监控数据进行聚合，过滤，裁剪。</p></blockquote>
 </li>
 <li>
 <p>强大的查询语言promQL</p>
@@ -268,8 +291,7 @@ http_request_status{code=&#39;200&#39;,content_path=&#39;/api/path2&#39;, enviro
 <li>
 <p>CPU占用率前5位的服务有哪些？(过滤)</p>
 </li>
-</ul>
-</blockquote>
+</ul></blockquote>
 </li>
 <li>
 <p>高效</p>
@@ -282,41 +304,34 @@ http_request_status{code=&#39;200&#39;,content_path=&#39;/api/path2&#39;, enviro
 <li>
 <p>每秒处理数十万的数据点。</p>
 </li>
-</ol>
-</blockquote>
+</ol></blockquote>
 </li>
 <li>
 <p>可扩展</p>
 <blockquote>
 <p>Prometheus是如此简单，因此你可以在每个数据中心、每个团队运行独立的Prometheus Sevrer。Prometheus对于联邦集群的支持，可以让多个Prometheus实例产生一个逻辑集群，当单实例Prometheus Server处理的任务量过大时，通过使用功能分区(sharding)+联邦集群(federation)可以对其进行扩展。</p>
-<p>远程存储读写</p>
-</blockquote>
+<p>远程存储读写</p></blockquote>
 </li>
 <li>
 <p>易于集成</p>
 <blockquote>
 <p>使用Prometheus可以快速搭建监控服务，并且可以非常方便地在应用程序中进行集成。</p>
-<p>目前支持： Java， JMX， Python， Go，Ruby， .Net， Node.js等等语言的客户端SDK，基于这些SDK可以快速让应用程序纳入到Prometheus的监控当中，或者开发自己的监控数据收集程序。同时这些客户端收集的监控数据，不仅仅支持Prometheus，还能支持Graphite这些其他的监控工具。</p>
-</blockquote>
+<p>目前支持： Java， JMX， Python， Go，Ruby， .Net， Node.js等等语言的客户端SDK，基于这些SDK可以快速让应用程序纳入到Prometheus的监控当中，或者开发自己的监控数据收集程序。同时这些客户端收集的监控数据，不仅仅支持Prometheus，还能支持Graphite这些其他的监控工具。</p></blockquote>
 <blockquote>
-<p>同时Prometheus还支持与其他的监控系统进行集成：Graphite， Statsd， Collected， Scollector， muini， Nagios等。</p>
-</blockquote>
+<p>同时Prometheus还支持与其他的监控系统进行集成：Graphite， Statsd， Collected， Scollector， muini， Nagios等。</p></blockquote>
 <blockquote>
-<p>Prometheus社区还提供了大量第三方实现的监控数据采集支持：JMX， CloudWatch， EC2， MySQL， PostgresSQL， Haskell， Bash， SNMP， Consul， Haproxy， Mesos， Bind， CouchDB， Django， Memcached， RabbitMQ， Redis， RethinkDB， Rsyslog等等。</p>
-</blockquote>
+<p>Prometheus社区还提供了大量第三方实现的监控数据采集支持：JMX， CloudWatch， EC2， MySQL， PostgresSQL， Haskell， Bash， SNMP， Consul， Haproxy， Mesos， Bind， CouchDB， Django， Memcached， RabbitMQ， Redis， RethinkDB， Rsyslog等等。</p></blockquote>
 </li>
 <li>
 <p>可视化</p>
 <blockquote>
 <p>自带UI。</p>
-<p>也可以使用Grafana</p>
-</blockquote>
+<p>也可以使用Grafana</p></blockquote>
 </li>
 <li>
 <p>开放性</p>
 <blockquote>
-<p>支持多种输出格式，不局限于prometheus提供的格式，也可以输出到Graphite</p>
-</blockquote>
+<p>支持多种输出格式，不局限于prometheus提供的格式，也可以输出到Graphite</p></blockquote>
 </li>
 </ul>
 <h2 id="不足之处">不足之处</h2>
@@ -329,7 +344,7 @@ http_request_status{code=&#39;200&#39;,content_path=&#39;/api/path2&#39;, enviro
 <p>下载  <a href="https://prometheus.io/download/">官方下载</a>  Version:2.14.0</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -345,26 +360,26 @@ http_request_status{code=&#39;200&#39;,content_path=&#39;/api/path2&#39;, enviro
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">$ wget https://github.com/prometheus/prometheus/releases/download/v2.14.0/prometheus-2.14.0.linux-amd64.tar.gz
-$ tar xvf prometheus-2.14.0.linux-amd64.tar.gz -C /usr/local/
-$ <span class="nb">cd</span> /usr/local/
-$ ln -sv prometheus-2.14.0.linux-amd64 prometheus <span class="c1"># 软链接</span>
-$ <span class="nb">cd</span> prometheus
-$ ls -l
-drwxr-xr-x <span class="m">2</span> <span class="m">3434</span> <span class="m">3434</span>       <span class="m">36</span> Nov <span class="m">12</span> 00:17 console_libraries
-drwxr-xr-x <span class="m">2</span> <span class="m">3434</span> <span class="m">3434</span>     <span class="m">4096</span> Nov <span class="m">12</span> 00:17 consoles
--rw-r--r-- <span class="m">1</span> <span class="m">3434</span> <span class="m">3434</span>    <span class="m">11357</span> Nov <span class="m">12</span> 00:17 LICENSE
--rw-r--r-- <span class="m">1</span> <span class="m">3434</span> <span class="m">3434</span>     <span class="m">3184</span> Nov <span class="m">12</span> 00:17 NOTICE
--rwxr-xr-x <span class="m">1</span> <span class="m">3434</span> <span class="m">3434</span> <span class="m">80046526</span> Nov <span class="m">11</span> 22:29 prometheus  <span class="c1"># 核心服务二进制文件</span>
--rw-r--r-- <span class="m">1</span> <span class="m">3434</span> <span class="m">3434</span>      <span class="m">926</span> Nov <span class="m">12</span> 00:17 prometheus.yml <span class="c1"># 核心服务的配置文件</span>
--rwxr-xr-x <span class="m">1</span> <span class="m">3434</span> <span class="m">3434</span> <span class="m">47302797</span> Nov <span class="m">11</span> 22:30 promtool  <span class="c1"># prometheus监控的工具，用来检测metrics,测试配置文件是否可用等</span>
--rwxr-xr-x <span class="m">1</span> <span class="m">3434</span> <span class="m">3434</span> <span class="m">13502492</span> Nov <span class="m">11</span> 22:30 tsdb <span class="c1"># 新增加的一个查看和压测tsdb的命令行工具</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ wget https://github.com/prometheus/prometheus/releases/download/v2.14.0/prometheus-2.14.0.linux-amd64.tar.gz
+</span></span><span class="line"><span class="cl">$ tar xvf prometheus-2.14.0.linux-amd64.tar.gz -C /usr/local/
+</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> /usr/local/
+</span></span><span class="line"><span class="cl">$ ln -sv prometheus-2.14.0.linux-amd64 prometheus <span class="c1"># 软链接</span>
+</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> prometheus
+</span></span><span class="line"><span class="cl">$ ls -l
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> <span class="m">3434</span> <span class="m">3434</span>       <span class="m">36</span> Nov <span class="m">12</span> 00:17 console_libraries
+</span></span><span class="line"><span class="cl">drwxr-xr-x <span class="m">2</span> <span class="m">3434</span> <span class="m">3434</span>     <span class="m">4096</span> Nov <span class="m">12</span> 00:17 consoles
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> <span class="m">3434</span> <span class="m">3434</span>    <span class="m">11357</span> Nov <span class="m">12</span> 00:17 LICENSE
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> <span class="m">3434</span> <span class="m">3434</span>     <span class="m">3184</span> Nov <span class="m">12</span> 00:17 NOTICE
+</span></span><span class="line"><span class="cl">-rwxr-xr-x <span class="m">1</span> <span class="m">3434</span> <span class="m">3434</span> <span class="m">80046526</span> Nov <span class="m">11</span> 22:29 prometheus  <span class="c1"># 核心服务二进制文件</span>
+</span></span><span class="line"><span class="cl">-rw-r--r-- <span class="m">1</span> <span class="m">3434</span> <span class="m">3434</span>      <span class="m">926</span> Nov <span class="m">12</span> 00:17 prometheus.yml <span class="c1"># 核心服务的配置文件</span>
+</span></span><span class="line"><span class="cl">-rwxr-xr-x <span class="m">1</span> <span class="m">3434</span> <span class="m">3434</span> <span class="m">47302797</span> Nov <span class="m">11</span> 22:30 promtool  <span class="c1"># prometheus监控的工具，用来检测metrics,测试配置文件是否可用等</span>
+</span></span><span class="line"><span class="cl">-rwxr-xr-x <span class="m">1</span> <span class="m">3434</span> <span class="m">3434</span> <span class="m">13502492</span> Nov <span class="m">11</span> 22:30 tsdb <span class="c1"># 新增加的一个查看和压测tsdb的命令行工具</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="prometheus-命令行参数详解">prometheus 命令行参数详解</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -407,53 +422,53 @@ drwxr-xr-x <span class="m">2</span> <span class="m">3434</span> <span class="m">
 </span><span class="lnt">41
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">usage: prometheus <span class="o">[</span>&lt;flags&gt;<span class="o">]</span>
-The Prometheus monitoring server
-Flags:
-  -h, --help                     帮助信息
-      --version                  显示版本信息
-      --config.file<span class="o">=</span><span class="s2">&#34;prometheus.yml&#34;</span> 指定配置文件 默认为prometheus.yml 
-      --web.listen-address<span class="o">=</span><span class="s2">&#34;0.0.0.0:9090&#34;</span> Web端监听的地址和端口
-      --web.read-timeout<span class="o">=</span>5m      读请求和关闭空闲链接的超时时间 
-      --web.max-connections<span class="o">=</span><span class="m">512</span>  web 最大的连接数
-      --web.external-url<span class="o">=</span>&lt;URL&gt;   外部url.
-      --web.route-prefix<span class="o">=</span>&lt;path&gt;  前缀地址  Defaults to path of --web.external-url.
-      --web.user-assets<span class="o">=</span>&lt;path&gt;   Path to static asset directory, available at /user.
-      --web.enable-lifecycle     允许通过http访问来reload 或 关闭 promethues.
-      --web.enable-admin-api     Enable API endpoints <span class="k">for</span> admin control actions.
-      --web.console.templates<span class="o">=</span><span class="s2">&#34;consoles&#34;</span> Path to the console template directory, available at /consoles.
-      --web.console.libraries<span class="o">=</span><span class="s2">&#34;console_libraries&#34;</span> Path to the console library directory.
-      --web.page-title<span class="o">=</span><span class="s2">&#34;Prometheus Time Series Collection and Processing Server&#34;</span> Document title of Prometheus instance.
-      --web.cors.origin<span class="o">=</span><span class="s2">&#34;.*&#34;</span>     Regex <span class="k">for</span> CORS origin. It is fully anchored. Example: <span class="s1">&#39;https?://(domain1|domain2)\.com&#39;</span>
-      --storage.tsdb.path<span class="o">=</span><span class="s2">&#34;data/&#34;</span>  数据存储路径 
-      --storage.tsdb.retention<span class="o">=</span>STORAGE.TSDB.RETENTION 数据存放时间 到3.0版本后被废弃 use <span class="s2">&#34;storage.tsdb.retention.time&#34;</span> instead.
-      --storage.tsdb.retention.time<span class="o">=</span>STORAGE.TSDB.RETENTION.TIME 数据存放时间 会覆盖<span class="s2">&#34;storage.tsdb.retention&#34;</span> <span class="nb">time</span> defaults to 15d.
-      --storage.tsdb.retention.size<span class="o">=</span>STORAGE.TSDB.RETENTION.SIZE 数据存储大小支持: KB, MB, GB, TB, PB <span class="o">[</span>实验性参数<span class="o">]</span>
-      --storage.tsdb.no-lockfile 不设置锁文件在数据目录中
-      --storage.tsdb.allow-overlapping-blocks 允许覆盖数据块  <span class="o">[</span>实验性参数<span class="o">]</span>
-      --storage.tsdb.wal-compression 压缩 tsdb WAL
-      #
-      --storage.remote.flush-deadline<span class="o">=</span>&lt;duration&gt; 刷新时间是多久 在关闭或重载配置时 
-      --storage.remote.read-sample-limit<span class="o">=</span>5e7 远程读设置最大个数
-      --storage.remote.read-concurrent-limit<span class="o">=</span><span class="m">10</span> Maximum number of concurrent remote <span class="nb">read</span> calls. <span class="m">0</span> means no limit.
-      --storage.remote.read-max-bytes-in-frame<span class="o">=</span><span class="m">1048576</span> Maximum number of bytes in a single frame <span class="k">for</span> streaming remote <span class="nb">read</span> response types before marshalling. Note that client might have limit on frame size as well. 1MB as recommended by protobuf by default.
-      --rules.alert.for-outage-tolerance<span class="o">=</span>1h 最大时间容忍prometheus停电恢复 <span class="k">for</span> 状态警报。
-      --rules.alert.for-grace-period<span class="o">=</span>10m 警报和恢复“for”状态之间的最小持续时间。仅对配置“for”时间大于宽限期的警报维护此功能。
-      --rules.alert.resend-delay<span class="o">=</span>1m 在向Alertmanager重新发送警报之前需要等待的最短时间。
-      --alertmanager.notification-queue-capacity<span class="o">=</span><span class="m">10000</span> 队列中等待的Alertmanager通知的容量。
-      --alertmanager.timeout<span class="o">=</span>10s 发送告警到alertmanager的超时时间
-      --query.lookback-delta<span class="o">=</span>5m  表达式求值期间检索指标的最大回滚持续时间。
-      --query.timeout<span class="o">=</span>2m         查询超时时间
-      --query.max-concurrency<span class="o">=</span><span class="m">20</span> 并发执行的最大查询数
-      --query.max-samples<span class="o">=</span><span class="m">50000000</span> 单个查询可以加载到内存中的样本的最大数量
-      --log.level<span class="o">=</span>info           日志级别: <span class="o">[</span>debug, info, warn, error<span class="o">]</span>
-      --log.format<span class="o">=</span>logfmt        日志输出格式: <span class="o">[</span>logfmt, json<span class="o">]</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">usage: prometheus <span class="o">[</span>&lt;flags&gt;<span class="o">]</span>
+</span></span><span class="line"><span class="cl">The Prometheus monitoring server
+</span></span><span class="line"><span class="cl">Flags:
+</span></span><span class="line"><span class="cl">  -h, --help                     帮助信息
+</span></span><span class="line"><span class="cl">      --version                  显示版本信息
+</span></span><span class="line"><span class="cl">      --config.file<span class="o">=</span><span class="s2">&#34;prometheus.yml&#34;</span> 指定配置文件 默认为prometheus.yml 
+</span></span><span class="line"><span class="cl">      --web.listen-address<span class="o">=</span><span class="s2">&#34;0.0.0.0:9090&#34;</span> Web端监听的地址和端口
+</span></span><span class="line"><span class="cl">      --web.read-timeout<span class="o">=</span>5m      读请求和关闭空闲链接的超时时间 
+</span></span><span class="line"><span class="cl">      --web.max-connections<span class="o">=</span><span class="m">512</span>  web 最大的连接数
+</span></span><span class="line"><span class="cl">      --web.external-url<span class="o">=</span>&lt;URL&gt;   外部url.
+</span></span><span class="line"><span class="cl">      --web.route-prefix<span class="o">=</span>&lt;path&gt;  前缀地址  Defaults to path of --web.external-url.
+</span></span><span class="line"><span class="cl">      --web.user-assets<span class="o">=</span>&lt;path&gt;   Path to static asset directory, available at /user.
+</span></span><span class="line"><span class="cl">      --web.enable-lifecycle     允许通过http访问来reload 或 关闭 promethues.
+</span></span><span class="line"><span class="cl">      --web.enable-admin-api     Enable API endpoints <span class="k">for</span> admin control actions.
+</span></span><span class="line"><span class="cl">      --web.console.templates<span class="o">=</span><span class="s2">&#34;consoles&#34;</span> Path to the console template directory, available at /consoles.
+</span></span><span class="line"><span class="cl">      --web.console.libraries<span class="o">=</span><span class="s2">&#34;console_libraries&#34;</span> Path to the console library directory.
+</span></span><span class="line"><span class="cl">      --web.page-title<span class="o">=</span><span class="s2">&#34;Prometheus Time Series Collection and Processing Server&#34;</span> Document title of Prometheus instance.
+</span></span><span class="line"><span class="cl">      --web.cors.origin<span class="o">=</span><span class="s2">&#34;.*&#34;</span>     Regex <span class="k">for</span> CORS origin. It is fully anchored. Example: <span class="s1">&#39;https?://(domain1|domain2)\.com&#39;</span>
+</span></span><span class="line"><span class="cl">      --storage.tsdb.path<span class="o">=</span><span class="s2">&#34;data/&#34;</span>  数据存储路径 
+</span></span><span class="line"><span class="cl">      --storage.tsdb.retention<span class="o">=</span>STORAGE.TSDB.RETENTION 数据存放时间 到3.0版本后被废弃 use <span class="s2">&#34;storage.tsdb.retention.time&#34;</span> instead.
+</span></span><span class="line"><span class="cl">      --storage.tsdb.retention.time<span class="o">=</span>STORAGE.TSDB.RETENTION.TIME 数据存放时间 会覆盖<span class="s2">&#34;storage.tsdb.retention&#34;</span> <span class="nb">time</span> defaults to 15d.
+</span></span><span class="line"><span class="cl">      --storage.tsdb.retention.size<span class="o">=</span>STORAGE.TSDB.RETENTION.SIZE 数据存储大小支持: KB, MB, GB, TB, PB <span class="o">[</span>实验性参数<span class="o">]</span>
+</span></span><span class="line"><span class="cl">      --storage.tsdb.no-lockfile 不设置锁文件在数据目录中
+</span></span><span class="line"><span class="cl">      --storage.tsdb.allow-overlapping-blocks 允许覆盖数据块  <span class="o">[</span>实验性参数<span class="o">]</span>
+</span></span><span class="line"><span class="cl">      --storage.tsdb.wal-compression 压缩 tsdb WAL
+</span></span><span class="line"><span class="cl">      <span class="c1">#</span>
+</span></span><span class="line"><span class="cl">      --storage.remote.flush-deadline<span class="o">=</span>&lt;duration&gt; 刷新时间是多久 在关闭或重载配置时 
+</span></span><span class="line"><span class="cl">      --storage.remote.read-sample-limit<span class="o">=</span>5e7 远程读设置最大个数
+</span></span><span class="line"><span class="cl">      --storage.remote.read-concurrent-limit<span class="o">=</span><span class="m">10</span> Maximum number of concurrent remote <span class="nb">read</span> calls. <span class="m">0</span> means no limit.
+</span></span><span class="line"><span class="cl">      --storage.remote.read-max-bytes-in-frame<span class="o">=</span><span class="m">1048576</span> Maximum number of bytes in a single frame <span class="k">for</span> streaming remote <span class="nb">read</span> response types before marshalling. Note that client might have limit on frame size as well. 1MB as recommended by protobuf by default.
+</span></span><span class="line"><span class="cl">      --rules.alert.for-outage-tolerance<span class="o">=</span>1h 最大时间容忍prometheus停电恢复 <span class="k">for</span> 状态警报。
+</span></span><span class="line"><span class="cl">      --rules.alert.for-grace-period<span class="o">=</span>10m 警报和恢复“for”状态之间的最小持续时间。仅对配置“for”时间大于宽限期的警报维护此功能。
+</span></span><span class="line"><span class="cl">      --rules.alert.resend-delay<span class="o">=</span>1m 在向Alertmanager重新发送警报之前需要等待的最短时间。
+</span></span><span class="line"><span class="cl">      --alertmanager.notification-queue-capacity<span class="o">=</span><span class="m">10000</span> 队列中等待的Alertmanager通知的容量。
+</span></span><span class="line"><span class="cl">      --alertmanager.timeout<span class="o">=</span>10s 发送告警到alertmanager的超时时间
+</span></span><span class="line"><span class="cl">      --query.lookback-delta<span class="o">=</span>5m  表达式求值期间检索指标的最大回滚持续时间。
+</span></span><span class="line"><span class="cl">      --query.timeout<span class="o">=</span>2m         查询超时时间
+</span></span><span class="line"><span class="cl">      --query.max-concurrency<span class="o">=</span><span class="m">20</span> 并发执行的最大查询数
+</span></span><span class="line"><span class="cl">      --query.max-samples<span class="o">=</span><span class="m">50000000</span> 单个查询可以加载到内存中的样本的最大数量
+</span></span><span class="line"><span class="cl">      --log.level<span class="o">=</span>info           日志级别: <span class="o">[</span>debug, info, warn, error<span class="o">]</span>
+</span></span><span class="line"><span class="cl">      --log.format<span class="o">=</span>logfmt        日志输出格式: <span class="o">[</span>logfmt, json<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="prometheus-配置文件详解">Prometheus 配置文件详解</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -522,95 +537,93 @@ Flags:
 </span><span class="lnt">67
 </span><span class="lnt">68
 </span><span class="lnt">69
-</span><span class="lnt">70
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># 全局配置</span><span class="w">
-</span><span class="w"></span><span class="k">global</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">scrape_interval</span><span class="p">:</span><span class="w">     </span>15s<span class="w"> </span><span class="c"># 抓取频率为15s 默认1分钟</span><span class="w">
-</span><span class="w">  </span><span class="k">evaluation_interval</span><span class="p">:</span><span class="w"> </span>15s<span class="w"> </span><span class="c"># 每15读取规则文件 . 默认1分钟</span><span class="w">
-</span><span class="w">  
-</span><span class="w">  </span><span class="c"># 在与外部系统(联邦、远程存储、Alertmanager)通信时，将这些标签附加到任何时间序列或警报上。</span><span class="w">
-</span><span class="w">  </span><span class="k">external_labels</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">monitor</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;monitor-prd&#39;</span><span class="w">
-</span><span class="w">      
-</span><span class="w"></span><span class="c"># Alertmanager configuration</span><span class="w">
-</span><span class="w"></span><span class="k">alerting</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">alertmanagers</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="k">static_configs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="k">targets</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="m">127.0.0.1</span><span class="p">:</span><span class="m">9093</span><span class="w">
-</span><span class="w">      
-</span><span class="w"></span><span class="c"># Load rules once and periodically evaluate them according to the global &#39;evaluation_interval&#39;.</span><span class="w">
-</span><span class="w"></span><span class="k">rule_files</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="c"># - &#34;first.rules.yml&#34;</span><span class="w">
-</span><span class="w">  </span><span class="c"># - &#34;second.rules.yml&#34;</span><span class="w">
-</span><span class="w">  </span>- <span class="s2">&#34;alert.rules.yml&#34;</span><span class="w">
-</span><span class="w"> 
-</span><span class="w"></span><span class="c"># 抓取配置</span><span class="w">
-</span><span class="w"></span><span class="k">scrape_configs</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="c"># The job name is added as a label `job=&lt;job_name&gt;` to any timeseries scraped from this config.</span><span class="w">
-</span><span class="w">  </span>- <span class="k">job_name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;prometheus&#39;</span><span class="w">
-</span><span class="w">
-</span><span class="w">    </span><span class="c"># metrics_path defaults to &#39;/metrics&#39;</span><span class="w">
-</span><span class="w">    </span><span class="c"># scheme defaults to &#39;http&#39;.</span><span class="w">
-</span><span class="w">		</span><span class="c"># 静态配置</span><span class="w">
-</span><span class="w">    </span><span class="k">static_configs</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="k">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;127.0.0.1:9090&#39;</span><span class="p">]</span><span class="w">
-</span><span class="w">        </span><span class="k">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">          </span><span class="k">group</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;prometheus&#39;</span><span class="w">
-</span><span class="w">  </span><span class="c"># 配置consul_sd_config  需要事先把consul集群配置好</span><span class="w">
-</span><span class="w">  </span>- <span class="k">job_name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;prometheus-consul&#39;</span><span class="w">
-</span><span class="w">    </span><span class="k">consul_sd_configs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="k">server</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;127.0.0.1:8500&#39;</span><span class="w"> </span><span class="c"># consul的服务地址</span><span class="w">
-</span><span class="w">      </span><span class="k">datacenter</span><span class="p">:</span><span class="w"> </span>prometheus<span class="w">  </span><span class="c"># 数据中心名称</span><span class="w">
-</span><span class="w">      </span><span class="k">services</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;linux&#39;</span><span class="p">]</span><span class="w">
-</span><span class="w">    </span><span class="k">relabel_configs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="k">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;__meta_consul_service&#39;</span><span class="p">]</span><span class="w">  </span><span class="c"># 读取服务</span><span class="w">
-</span><span class="w">      </span><span class="k">regex</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;(.*)&#39;</span><span class="w">
-</span><span class="w">      </span><span class="k">target_label</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;job&#39;</span><span class="w">
-</span><span class="w">      </span><span class="k">replacement</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$1&#39;</span><span class="w">
-</span><span class="w">    </span>- <span class="k">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;__meta_consul_node&#39;</span><span class="p">]</span><span class="w">  </span><span class="c"># 读取节点</span><span class="w">
-</span><span class="w">      </span><span class="k">regex</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;(.*)&#39;</span><span class="w">
-</span><span class="w">      </span><span class="k">target_label</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;instance&#39;</span><span class="w">
-</span><span class="w">      </span><span class="k">replacement</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$1&#39;</span><span class="w">
-</span><span class="w">    </span>- <span class="k">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;__meta_consul_tags&#39;</span><span class="p">]</span><span class="w">  </span><span class="c"># 读取tag</span><span class="w">
-</span><span class="w">      </span><span class="k">regex</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;,(.*),&#39;</span><span class="w">
-</span><span class="w">      </span><span class="k">target_label</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;group&#39;</span><span class="w">
-</span><span class="w">      </span><span class="k">replacement</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$1&#39;</span><span class="w">
-</span><span class="w">      
-</span><span class="w">  </span><span class="c"># 配置文件file_sd_config  这里配置了blackbox_exporter</span><span class="w">
-</span><span class="w">  </span>- <span class="k">job_name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;slb&#39;</span><span class="w">
-</span><span class="w">    </span><span class="k">scrape_interval</span><span class="p">:</span><span class="w"> </span>30s<span class="w">
-</span><span class="w">    </span><span class="k">metrics_path</span><span class="p">:</span><span class="w"> </span>/probe<span class="w">
-</span><span class="w">    </span><span class="k">params</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">module</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>tcp_connect<span class="p">]</span><span class="w">
-</span><span class="w">    </span><span class="k">file_sd_configs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="k">files</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;/usr/local/prometheus/net.json&#34;</span><span class="p">]</span><span class="w">
-</span><span class="w">    </span><span class="k">relabel_configs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="k">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>__address__<span class="p">]</span><span class="w">
-</span><span class="w">      </span><span class="k">target_label</span><span class="p">:</span><span class="w"> </span>__param_target<span class="w">
-</span><span class="w">    </span>- <span class="k">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>__param_target<span class="p">]</span><span class="w">
-</span><span class="w">      </span><span class="k">target_label</span><span class="p">:</span><span class="w"> </span>instance<span class="w">
-</span><span class="w">    </span>- <span class="k">target_label</span><span class="p">:</span><span class="w"> </span>__address__<span class="w">
-</span><span class="w">      </span><span class="k">replacement</span><span class="p">:</span><span class="w"> </span><span class="m">127.0.0.1</span><span class="p">:</span><span class="m">9115</span><span class="w">  </span><span class="c"># Blackbox 地址</span><span class="w">
-</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 全局配置</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">global</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">scrape_interval</span><span class="p">:</span><span class="w">     </span><span class="l">15s</span><span class="w"> </span><span class="c"># 抓取频率为15s 默认1分钟</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">evaluation_interval</span><span class="p">:</span><span class="w"> </span><span class="l">15s</span><span class="w"> </span><span class="c"># 每15读取规则文件 . 默认1分钟</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 在与外部系统(联邦、远程存储、Alertmanager)通信时，将这些标签附加到任何时间序列或警报上。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">external_labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">monitor</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;monitor-prd&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Alertmanager configuration</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">alerting</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">alertmanagers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">static_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">targets</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="m">127.0.0.1</span><span class="p">:</span><span class="m">9093</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># Load rules once and periodically evaluate them according to the global &#39;evaluation_interval&#39;.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">rule_files</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># - &#34;first.rules.yml&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># - &#34;second.rules.yml&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s2">&#34;alert.rules.yml&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 抓取配置</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">scrape_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># The job name is added as a label `job=&lt;job_name&gt;` to any timeseries scraped from this config.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;prometheus&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># metrics_path defaults to &#39;/metrics&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># scheme defaults to &#39;http&#39;.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">		</span><span class="c"># 静态配置</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">static_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="nt">targets</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;127.0.0.1:9090&#39;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">          </span><span class="nt">group</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;prometheus&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 配置consul_sd_config  需要事先把consul集群配置好</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;prometheus-consul&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">consul_sd_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">server</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;127.0.0.1:8500&#39;</span><span class="w"> </span><span class="c"># consul的服务地址</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">datacenter</span><span class="p">:</span><span class="w"> </span><span class="l">prometheus </span><span class="w"> </span><span class="c"># 数据中心名称</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">services</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;linux&#39;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">relabel_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;__meta_consul_service&#39;</span><span class="p">]</span><span class="w">  </span><span class="c"># 读取服务</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;(.*)&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;job&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">replacement</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$1&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;__meta_consul_node&#39;</span><span class="p">]</span><span class="w">  </span><span class="c"># 读取节点</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;(.*)&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;instance&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">replacement</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$1&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;__meta_consul_tags&#39;</span><span class="p">]</span><span class="w">  </span><span class="c"># 读取tag</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">regex</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;,(.*),&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;group&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">replacement</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;$1&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 配置文件file_sd_config  这里配置了blackbox_exporter</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">job_name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;slb&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">scrape_interval</span><span class="p">:</span><span class="w"> </span><span class="l">30s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">metrics_path</span><span class="p">:</span><span class="w"> </span><span class="l">/probe</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">params</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">module</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">tcp_connect]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">file_sd_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">files</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;/usr/local/prometheus/net.json&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">relabel_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">__address__]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l">__param_target</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">source_labels</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="l">__param_target]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l">instance</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">target_label</span><span class="p">:</span><span class="w"> </span><span class="l">__address__</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">replacement</span><span class="p">:</span><span class="w"> </span><span class="m">127.0.0.1</span><span class="p">:</span><span class="m">9115</span><span class="w">  </span><span class="c"># Blackbox 地址</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="检测配置文件">检测配置文件</h3>
 <p>使用promtool工具进行检测</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">/usr/local/prometheus/promtool check config /usr/local/prometheus/prometheus.yml
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">/usr/local/prometheus/promtool check config /usr/local/prometheus/prometheus.yml
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="配置服务启动脚本">配置服务启动脚本</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -629,41 +642,39 @@ Flags:
 </span><span class="lnt">17
 </span><span class="lnt">18
 </span><span class="lnt">19
-</span><span class="lnt">20
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">$ useradd prometheus <span class="c1"># 增加用户</span>
-$ chown prometheus.prometheus /usr/local/prometheus -R
-$ mkdir /data_prometheus 
-$ chow prometheus.prometheus /data_prometheus -R
-$ cat /usr/lib/systemd/system/prometheus.service
-<span class="o">[</span>Unit<span class="o">]</span>
-<span class="nv">Description</span><span class="o">=</span>prometheus
-<span class="nv">After</span><span class="o">=</span>network.target
-<span class="o">[</span>Service<span class="o">]</span>
-<span class="nv">LimitCORE</span><span class="o">=</span>infinity
-<span class="nv">LimitNOFILE</span><span class="o">=</span><span class="m">65535</span>
-<span class="nv">LimitNPROC</span><span class="o">=</span><span class="m">65535</span>
-<span class="nv">Type</span><span class="o">=</span>simple
-<span class="nv">User</span><span class="o">=</span>prometheus
-<span class="nv">Group</span><span class="o">=</span>prometheus
-<span class="nv">ExecStart</span><span class="o">=</span>/usr/local/prometheus/prometheus --config.file<span class="o">=</span>/usr/local/prometheus/prometheus.yml --storage.tsdb.path<span class="o">=</span>/data_prometheus --storage.tsdb.retention.time<span class="o">=</span>7d --storage.tsdb.no-lockfile --alertmanager.timeout<span class="o">=</span>10s --log.level<span class="o">=</span>info --web.enable-lifecycle --query.max-concurrency<span class="o">=</span><span class="m">100</span> --web.max-connections<span class="o">=</span><span class="m">1024</span> --log.format<span class="o">=</span>json --web.enable-admin-api
-<span class="nv">Restart</span><span class="o">=</span>on-failure
-<span class="o">[</span>Install<span class="o">]</span>
-<span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">$ useradd prometheus <span class="c1"># 增加用户</span>
+</span></span><span class="line"><span class="cl">$ chown prometheus.prometheus /usr/local/prometheus -R
+</span></span><span class="line"><span class="cl">$ mkdir /data_prometheus 
+</span></span><span class="line"><span class="cl">$ chow prometheus.prometheus /data_prometheus -R
+</span></span><span class="line"><span class="cl">$ cat /usr/lib/systemd/system/prometheus.service
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Unit<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Description</span><span class="o">=</span>prometheus
+</span></span><span class="line"><span class="cl"><span class="nv">After</span><span class="o">=</span>network.target
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Service<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">LimitCORE</span><span class="o">=</span>infinity
+</span></span><span class="line"><span class="cl"><span class="nv">LimitNOFILE</span><span class="o">=</span><span class="m">65535</span>
+</span></span><span class="line"><span class="cl"><span class="nv">LimitNPROC</span><span class="o">=</span><span class="m">65535</span>
+</span></span><span class="line"><span class="cl"><span class="nv">Type</span><span class="o">=</span>simple
+</span></span><span class="line"><span class="cl"><span class="nv">User</span><span class="o">=</span>prometheus
+</span></span><span class="line"><span class="cl"><span class="nv">Group</span><span class="o">=</span>prometheus
+</span></span><span class="line"><span class="cl"><span class="nv">ExecStart</span><span class="o">=</span>/usr/local/prometheus/prometheus --config.file<span class="o">=</span>/usr/local/prometheus/prometheus.yml --storage.tsdb.path<span class="o">=</span>/data_prometheus --storage.tsdb.retention.time<span class="o">=</span>7d --storage.tsdb.no-lockfile --alertmanager.timeout<span class="o">=</span>10s --log.level<span class="o">=</span>info --web.enable-lifecycle --query.max-concurrency<span class="o">=</span><span class="m">100</span> --web.max-connections<span class="o">=</span><span class="m">1024</span> --log.format<span class="o">=</span>json --web.enable-admin-api
+</span></span><span class="line"><span class="cl"><span class="nv">Restart</span><span class="o">=</span>on-failure
+</span></span><span class="line"><span class="cl"><span class="o">[</span>Install<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="启动">启动</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">systemctl start prometheus
-systemctl enabled prometheus  <span class="c1"># 添加开机自启</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">systemctl start prometheus
+</span></span><span class="line"><span class="cl">systemctl enabled prometheus  <span class="c1"># 添加开机自启</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="被监控端配置">被监控端配置</h2>
 <p>被监控端需要安装exporter 或应用程序(已直接支持prometheus)</p>
@@ -682,7 +693,7 @@ systemctl enabled prometheus  <span class="c1"># 添加开机自启</span>
 <p>只需要把主机信息注册到consul中，注册如下所示:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -703,26 +714,26 @@ systemctl enabled prometheus  <span class="c1"># 添加开机自启</span>
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 组合数据</span>
-<span class="c1"># json数据</span>
-<span class="nv">ajson</span> <span class="o">=</span> <span class="s1">&#39;{
-</span><span class="s1">    &#34;ID&#34;: &#34;唯一uuid&#34;,
-</span><span class="s1">    &#34;Address&#34;:&#34;主机ip地址&#34;,
-</span><span class="s1">    &#34;Node&#34;:&#34;主机ip地址&#34;,
-</span><span class="s1">    &#34;Service&#34;:{
-</span><span class="s1">        &#34;Service&#34;:&#34;PRD-linux&#34;, # 服务名称
-</span><span class="s1">        &#34;ID&#34;:&#34;主机的hostname&#34;,  
-</span><span class="s1">        &#34;tags&#34;:[&#34;主机的标签&#34;], # 
-</span><span class="s1">        &#34;port&#34;:1239,  # 监听的端口
-</span><span class="s1">        &#34;address&#34;:&#34;主机ip地址&#34; 
-</span><span class="s1">    }
-</span><span class="s1">}&#39;</span>
-
-<span class="c1"># 开始注册</span>
-curl -s -m <span class="m">5</span> -X PUT -d <span class="s2">&#34;</span><span class="nv">$ajson</span><span class="s2">&#34;</span> consul_url/v1/catalog/register
-<span class="c1"># 查看注册的节点</span>
-curl -s consul_url/v1/catalog/node/主机ip地址
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 组合数据</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># json数据</span>
+</span></span><span class="line"><span class="cl"><span class="nv">ajson</span> <span class="o">=</span> <span class="s1">&#39;{
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#34;ID&#34;: &#34;唯一uuid&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#34;Address&#34;:&#34;主机ip地址&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#34;Node&#34;:&#34;主机ip地址&#34;,
+</span></span></span><span class="line"><span class="cl"><span class="s1">    &#34;Service&#34;:{
+</span></span></span><span class="line"><span class="cl"><span class="s1">        &#34;Service&#34;:&#34;PRD-linux&#34;, # 服务名称
+</span></span></span><span class="line"><span class="cl"><span class="s1">        &#34;ID&#34;:&#34;主机的hostname&#34;,  
+</span></span></span><span class="line"><span class="cl"><span class="s1">        &#34;tags&#34;:[&#34;主机的标签&#34;], # 
+</span></span></span><span class="line"><span class="cl"><span class="s1">        &#34;port&#34;:1239,  # 监听的端口
+</span></span></span><span class="line"><span class="cl"><span class="s1">        &#34;address&#34;:&#34;主机ip地址&#34; 
+</span></span></span><span class="line"><span class="cl"><span class="s1">    }
+</span></span></span><span class="line"><span class="cl"><span class="s1">}&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 开始注册</span>
+</span></span><span class="line"><span class="cl">curl -s -m <span class="m">5</span> -X PUT -d <span class="s2">&#34;</span><span class="nv">$ajson</span><span class="s2">&#34;</span> consul_url/v1/catalog/register
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看注册的节点</span>
+</span></span><span class="line"><span class="cl">curl -s consul_url/v1/catalog/node/主机ip地址
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>注册后, prometheus监控信息如下:</p>
 <p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191126153446.png" alt=""></p>
@@ -730,31 +741,31 @@ curl -s consul_url/v1/catalog/node/主机ip地址
 <p>如果要删除一个台主机监控，则只需要把主机从consul中清理掉即可</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">curl -X PUT -d <span class="s1">&#39;{\&#34;Node\&#34;: \&#34;主机ip地址\&#34;}&#39;</span> consul_url/v1/catalog/deregister
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">curl -X PUT -d <span class="s1">&#39;{\&#34;Node\&#34;: \&#34;主机ip地址\&#34;}&#39;</span> consul_url/v1/catalog/deregister
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="使用文件file_sd_config来保存监控主机信息">使用文件（file_sd_config）来保存监控主机信息</h3>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="c"># 在主配置文件中有这样一段配置</span><span class="w">
-</span><span class="w"></span><span class="k">file_sd_configs</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="k">files</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;/usr/local/prometheus/net.json&#34;</span><span class="p">]</span><span class="w">
-</span><span class="w">    
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># 在主配置文件中有这样一段配置</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">file_sd_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">files</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&#34;/usr/local/prometheus/net.json&#34;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这个我们做的tcp端口的监控，我们只需要监控目标的端口是否正常即可，所以文件的配置信息如下:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -775,26 +786,26 @@ curl -s consul_url/v1/catalog/node/主机ip地址
 </span><span class="lnt">19
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">[</span>
-    <span class="p">{</span>
-        <span class="nt">&#34;labels&#34;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nt">&#34;group&#34;</span><span class="p">:</span> <span class="s2">&#34;slb&#34;</span>
-        <span class="p">},</span>
-        <span class="nt">&#34;targets&#34;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&#34;目标ip1:port&#34;</span>
-        <span class="p">]</span>
-    <span class="p">},</span>
-  	<span class="p">{</span>
-        <span class="nt">&#34;labels&#34;</span><span class="p">:</span> <span class="p">{</span>
-            <span class="nt">&#34;group&#34;</span><span class="p">:</span> <span class="s2">&#34;slb&#34;</span>
-        <span class="p">},</span>
-        <span class="nt">&#34;targets&#34;</span><span class="p">:</span> <span class="p">[</span>
-            <span class="s2">&#34;目标ip2:port&#34;</span>
-        <span class="p">]</span>
-    <span class="p">}</span>
-  
-<span class="p">]</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;labels&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;group&#34;</span><span class="p">:</span> <span class="s2">&#34;slb&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;targets&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;目标ip1:port&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;labels&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&#34;group&#34;</span><span class="p">:</span> <span class="s2">&#34;slb&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">},</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;targets&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;目标ip2:port&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="alertmanager-发送告警">Alertmanager 发送告警</h2>
 <p>prometheus通过一定规则配置后，把符合规则的信息发送到alermanager, alertmanager则把告警信息发送出去</p>
@@ -803,7 +814,7 @@ curl -s consul_url/v1/catalog/node/主机ip地址
 <p>配置文件如下:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -855,63 +866,63 @@ curl -s consul_url/v1/catalog/node/主机ip地址
 </span><span class="lnt">50
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">global</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="c"># 配置发送邮件的信息</span><span class="w">
-</span><span class="w">  </span><span class="k">smtp_smarthost</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;smtp.163.com:25&#39;</span><span class="w">
-</span><span class="w">  </span><span class="k">smtp_from</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;zhou_mfk@163.com&#39;</span><span class="w">
-</span><span class="w">  </span><span class="k">smtp_auth_username</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;zhou_mfk@163.com&#39;</span><span class="w">
-</span><span class="w">  </span><span class="k">smtp_auth_password</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;passwd&#39;</span><span class="w">
-</span><span class="w"></span><span class="c"># The directory from which notification templates are read.</span><span class="w">
-</span><span class="w"></span><span class="k">templates</span><span class="p">:</span><span class="w">  </span><span class="c"># 指定模板</span><span class="w">
-</span><span class="w"></span><span class="c"># - &#39;/etc/alertmanager/template/*.tmpl&#39;</span><span class="w">
-</span><span class="w">  </span>- <span class="s1">&#39;/usr/local/alertmanager/devmy.tmpl&#39;</span><span class="w">
-</span><span class="w"></span><span class="c"># 路由规则</span><span class="w">
-</span><span class="w"></span><span class="k">route</span><span class="p">:</span><span class="w">
-</span><span class="w">	</span><span class="c"># 告警分组 按告警名称和主机组来分</span><span class="w">
-</span><span class="w">  </span><span class="k">group_by</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;alertname&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;group&#39;</span><span class="p">]</span><span class="w">
-</span><span class="w">  </span><span class="k">group_wait</span><span class="p">:</span><span class="w"> </span>10s<span class="w">
-</span><span class="w">  </span><span class="k">group_interval</span><span class="p">:</span><span class="w"> </span>1m<span class="w">
-</span><span class="w">  </span><span class="k">repeat_interval</span><span class="p">:</span><span class="w"> </span>8763h<span class="w">  </span><span class="c"># 重复发送告警的间隔时间 配置这个时间也即是发送一条告警</span><span class="w">
-</span><span class="w">  </span><span class="k">receiver</span><span class="p">:</span><span class="w"> </span>PRD<span class="w">  </span><span class="c"># 默认的接收者</span><span class="w">
-</span><span class="w">	</span><span class="c"># 使用正则可以把不同的告警发送到不同的接收者</span><span class="w">
-</span><span class="w">  </span><span class="k">routes</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span>- <span class="k">match_re</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="k">alertname</span><span class="p">:</span><span class="w"> </span>^(SLB_Port_Down)$<span class="w">
-</span><span class="w">      </span><span class="k">receiver</span><span class="p">:</span><span class="w"> </span>zls<span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="c"># 告警抑制</span><span class="w">
-</span><span class="w"></span><span class="c"># inhibit_rules:</span><span class="w">
-</span><span class="w"></span><span class="c"># - source_match:</span><span class="w">
-</span><span class="w"></span><span class="c">#     severity: &#39;critical&#39;</span><span class="w">
-</span><span class="w"></span><span class="c">#   target_match:</span><span class="w">
-</span><span class="w"></span><span class="c">#     severity: &#39;warning&#39;</span><span class="w">
-</span><span class="w"></span><span class="c">#   # Apply inhibition if the alertname is the same.</span><span class="w">
-</span><span class="w"></span><span class="c">#   equal: [&#39;alertname&#39;, &#39;cluster&#39;, &#39;service&#39;]</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="c"># 配置告警接收者</span><span class="w">
-</span><span class="w"></span><span class="k">receivers</span><span class="p">:</span><span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;noc&#39;</span><span class="w">
-</span><span class="w">  </span><span class="k">email_configs</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="k">to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;lishan.zhou@export.com&#39;</span><span class="w">
-</span><span class="w">  </span>- <span class="k">to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;xxxx@export.com&#39;</span><span class="w">
-</span><span class="w">    </span><span class="k">send_resolved</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">   </span><span class="c"># 是否发送恢复</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="c"># webhook的配置</span><span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;PRD&#39;</span><span class="w">
-</span><span class="w">  </span><span class="k">webhook_configs</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="k">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;http://your_url/v2/receive/&#39;</span><span class="w">
-</span><span class="w">    </span><span class="k">send_resolved</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;zls&#39;</span><span class="w">
-</span><span class="w">  </span><span class="k">webhook_configs</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="k">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;https://your_url/monitor/slb&#39;</span><span class="w">
-</span><span class="w">    </span><span class="k">send_resolved</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">global</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 配置发送邮件的信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">smtp_smarthost</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;smtp.163.com:25&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">smtp_from</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;zhou_mfk@163.com&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">smtp_auth_username</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;zhou_mfk@163.com&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">smtp_auth_password</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;passwd&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># The directory from which notification templates are read.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">templates</span><span class="p">:</span><span class="w">  </span><span class="c"># 指定模板</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># - &#39;/etc/alertmanager/template/*.tmpl&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="s1">&#39;/usr/local/alertmanager/devmy.tmpl&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 路由规则</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">route</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c"># 告警分组 按告警名称和主机组来分</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">group_by</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;alertname&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;group&#39;</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">group_wait</span><span class="p">:</span><span class="w"> </span><span class="l">10s</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">group_interval</span><span class="p">:</span><span class="w"> </span><span class="l">1m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">repeat_interval</span><span class="p">:</span><span class="w"> </span><span class="l">8763h </span><span class="w"> </span><span class="c"># 重复发送告警的间隔时间 配置这个时间也即是发送一条告警</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">receiver</span><span class="p">:</span><span class="w"> </span><span class="l">PRD </span><span class="w"> </span><span class="c"># 默认的接收者</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="c"># 使用正则可以把不同的告警发送到不同的接收者</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">routes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span>- <span class="nt">match_re</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">alertname</span><span class="p">:</span><span class="w"> </span><span class="l">^(SLB_Port_Down)$</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">receiver</span><span class="p">:</span><span class="w"> </span><span class="l">zls</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 告警抑制</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># inhibit_rules:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># - source_match:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">#     severity: &#39;critical&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">#   target_match:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">#     severity: &#39;warning&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">#   # Apply inhibition if the alertname is the same.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c">#   equal: [&#39;alertname&#39;, &#39;cluster&#39;, &#39;service&#39;]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 配置告警接收者</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">receivers</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;noc&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">email_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;lishan.zhou@export.com&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;xxxx@export.com&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">send_resolved</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">   </span><span class="c"># 是否发送恢复</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># webhook的配置</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;PRD&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">webhook_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;http://your_url/v2/receive/&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">send_resolved</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;zls&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">webhook_configs</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;https://your_url/monitor/slb&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">send_resolved</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="告警规则">告警规则</h3>
 <p>主要是使用promQL语言 这个规则是配置在prometheus下面的，不是配置在alertmanager下面的。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -941,35 +952,35 @@ curl -s consul_url/v1/catalog/node/主机ip地址
 </span><span class="lnt">28
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">groups</span><span class="p">:</span><span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>alert.rules<span class="w">  </span><span class="c"># 告警组名，一个组下面可以有多个规则</span><span class="w">
-</span><span class="w">  </span><span class="k">rules</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span>- <span class="k">alert</span><span class="p">:</span><span class="w"> </span>HostDown_is_0<span class="w">  </span><span class="c"># 告警规则名称</span><span class="w">
-</span><span class="w">    </span><span class="k">expr</span><span class="p">:</span><span class="w"> </span>up{job=~<span class="s2">&#34;prd-nginx|PRD-linux&#34;</span>}<span class="w"> </span>==<span class="w"> </span><span class="m">0</span><span class="w">  </span><span class="c"># 告警表达式 promQL语言</span><span class="w">
-</span><span class="w">    </span><span class="k">for</span><span class="p">:</span><span class="w"> </span>2m<span class="w">   </span><span class="c"># 持续的时间</span><span class="w">
-</span><span class="w">    </span><span class="k">labels</span><span class="p">:</span><span class="w">   </span><span class="c"># 告警的标签信息</span><span class="w">
-</span><span class="w">      </span><span class="k">alert_type</span><span class="p">:</span><span class="w"> </span>system<span class="w">
-</span><span class="w">      </span><span class="k">monitor</span><span class="p">:</span><span class="w"> </span>up<span class="w">
-</span><span class="w">      </span><span class="k">serverity</span><span class="p">:</span><span class="w"> </span>critical<span class="w">
-</span><span class="w">      </span><span class="k">current_value</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;{{ $value }}&#39;</span><span class="w">
-</span><span class="w">    </span><span class="k">annotations</span><span class="p">:</span><span class="w">  </span><span class="c"># 告警的描述信息</span><span class="w">
-</span><span class="w">      </span><span class="k">description</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;{{ $labels.instance }} of group {{ $labels.job }} has been down for more than 5 minutes.&#39;</span><span class="w">
-</span><span class="w">      </span><span class="k">recovery</span><span class="p">:</span><span class="w"> </span>Recovery!<span class="w"> </span>Host<span class="w"> </span>{{<span class="w"> </span>$labels.instance<span class="w"> </span>}}<span class="w"> </span>status<span class="w"> </span>UP<span class="w">
-</span><span class="w">      </span><span class="k">summary</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Host {{ $labels.instance }} status Down current value: {{ $value }}&#39;</span><span class="w">
-</span><span class="w">
-</span><span class="w">  </span>- <span class="k">alert</span><span class="p">:</span><span class="w"> </span>DiskSpaceUsed_GT_80<span class="w">
-</span><span class="w">    </span><span class="k">expr</span><span class="p">:</span><span class="w"> </span>(disk_used_percent{fstype!=<span class="s2">&#34;iso9660&#34;</span>}<span class="w"> </span>&gt;<span class="w"> </span><span class="m">80</span><span class="w"> </span>and<span class="w"> </span>disk_free{fstype!=<span class="s2">&#34;iso9660&#34;</span>}<span class="w"> </span>&lt;<span class="w"> </span><span class="m">2.147483648e+10</span>)<span class="w">
-</span><span class="w">    </span><span class="k">for</span><span class="p">:</span><span class="w"> </span>5m<span class="w">
-</span><span class="w">    </span><span class="k">labels</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">alert_type</span><span class="p">:</span><span class="w"> </span>app<span class="w">
-</span><span class="w">      </span><span class="k">monitor</span><span class="p">:</span><span class="w"> </span>disk_used_percent<span class="w">
-</span><span class="w">      </span><span class="k">serverity</span><span class="p">:</span><span class="w"> </span>warning<span class="w">
-</span><span class="w">      </span><span class="k">current_value</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;{{ $value }}&#39;</span><span class="w">
-</span><span class="w">    </span><span class="k">annotations</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">description</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;{{$labels.instance }} of group {{ $labels.group }}&#39;</span><span class="w">
-</span><span class="w">      </span><span class="k">recovery</span><span class="p">:</span><span class="w"> </span>Recovery!<span class="w"> </span>Host<span class="w"> </span>{{<span class="w"> </span>$labels.instance<span class="w"> </span>}}<span class="w"> </span>Disk<span class="w"> </span>Space<span class="w"> </span>less<span class="w"> </span>than<span class="w"> </span><span class="m">80</span>%<span class="w"> </span>and<span class="w"> </span>more<span class="w"> </span>than<span class="w"> </span>20GB.<span class="w">
-</span><span class="w">      </span><span class="k">summary</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Host {{ $labels.host }} Device {{ $labels.device }} Mountpoint is {{ $labels.path }} Disk Space current value: {{ $value }}% and Free Space less than 20GB&#39;</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">groups</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span>- <span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l">alert.rules </span><span class="w"> </span><span class="c"># 告警组名，一个组下面可以有多个规则</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">rules</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l">HostDown_is_0 </span><span class="w"> </span><span class="c"># 告警规则名称</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l">up{job=~&#34;prd-nginx|PRD-linux&#34;} == 0 </span><span class="w"> </span><span class="c"># 告警表达式 promQL语言</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">for</span><span class="p">:</span><span class="w"> </span><span class="l">2m  </span><span class="w"> </span><span class="c"># 持续的时间</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">labels</span><span class="p">:</span><span class="w">   </span><span class="c"># 告警的标签信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">alert_type</span><span class="p">:</span><span class="w"> </span><span class="l">system</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">monitor</span><span class="p">:</span><span class="w"> </span><span class="l">up</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">serverity</span><span class="p">:</span><span class="w"> </span><span class="l">critical</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">current_value</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;{{ $value }}&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">annotations</span><span class="p">:</span><span class="w">  </span><span class="c"># 告警的描述信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;{{ $labels.instance }} of group {{ $labels.job }} has been down for more than 5 minutes.&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">recovery</span><span class="p">:</span><span class="w"> </span><span class="l">Recovery! Host {{ $labels.instance }} status UP</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Host {{ $labels.instance }} status Down current value: {{ $value }}&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span>- <span class="nt">alert</span><span class="p">:</span><span class="w"> </span><span class="l">DiskSpaceUsed_GT_80</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">expr</span><span class="p">:</span><span class="w"> </span><span class="l">(disk_used_percent{fstype!=&#34;iso9660&#34;} &gt; 80 and disk_free{fstype!=&#34;iso9660&#34;} &lt; 2.147483648e+10)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">for</span><span class="p">:</span><span class="w"> </span><span class="l">5m</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">labels</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">alert_type</span><span class="p">:</span><span class="w"> </span><span class="l">app</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">monitor</span><span class="p">:</span><span class="w"> </span><span class="l">disk_used_percent</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">serverity</span><span class="p">:</span><span class="w"> </span><span class="l">warning</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">current_value</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;{{ $value }}&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">annotations</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;{{$labels.instance }} of group {{ $labels.group }}&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">recovery</span><span class="p">:</span><span class="w"> </span><span class="l">Recovery! Host {{ $labels.instance }} Disk Space less than 80% and more than 20GB.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">summary</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Host {{ $labels.host }} Device {{ $labels.device }} Mountpoint is {{ $labels.path }} Disk Space current value: {{ $value }}% and Free Space less than 20GB&#39;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -977,7 +988,7 @@ curl -s consul_url/v1/catalog/node/主机ip地址
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
-    <span class="item-content">周利山</span>
+    <span class="item-content"></span>
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
@@ -1035,7 +1046,7 @@ curl -s consul_url/v1/catalog/node/主机ip地址
     <footer id="footer" class="footer">
       <div class="social-links">
       <a href="zhou_mfk@163.com" class="iconfont icon-email" title="email"></a>
-  <a href="https://zhou-mfk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  
 </div>
 
 <div class="copyright">
@@ -1053,13 +1064,10 @@ curl -s consul_url/v1/catalog/node/主机ip地址
   <span class="copyright-year">
     &copy; 
     2019 - 
-    2022
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">周利山</span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -1070,7 +1078,10 @@ curl -s consul_url/v1/catalog/node/主机ip地址
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

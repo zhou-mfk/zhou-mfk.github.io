@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Consul的安装及配置 - Zhou Li Shan</title>
@@ -16,17 +16,20 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="周利山" /><meta name="description" content="认识consul consul官方地址 什么consul Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置。" /><meta name="keywords" content="consul" />
+<meta name="author" content="" /><meta name="description" content="认识consul consul官方地址
+什么consul Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置。
+Consul由Go语言开发，部署起来非常容易，只需要极少的可执行程序和配置文件，具有绿色、轻量级的特点
+" /><meta name="keywords" content="consul" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
-<link rel="canonical" href="https://zhou-mfk.github.io/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/" />
+<link rel="canonical" href="http://localhost:1313/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -34,28 +37,37 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Consul的安装及配置" />
-<meta property="og:description" content="认识consul consul官方地址 什么consul Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://zhou-mfk.github.io/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/" />
-<meta property="article:published_time" content="2020-01-08T21:05:45+08:00" />
-<meta property="article:modified_time" content="2020-01-08T21:05:45+08:00" />
-<meta itemprop="name" content="Consul的安装及配置">
-<meta itemprop="description" content="认识consul consul官方地址 什么consul Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置。">
-<meta itemprop="datePublished" content="2020-01-08T21:05:45+08:00" />
-<meta itemprop="dateModified" content="2020-01-08T21:05:45+08:00" />
-<meta itemprop="wordCount" content="1240">
+<meta property="og:url" content="http://localhost:1313/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/">
+  <meta property="og:site_name" content="Zhou Li Shan">
+  <meta property="og:title" content="Consul的安装及配置">
+  <meta property="og:description" content="认识consul consul官方地址
+什么consul Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置。
+Consul由Go语言开发，部署起来非常容易，只需要极少的可执行程序和配置文件，具有绿色、轻量级的特点">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2020-01-08T21:05:45+08:00">
+    <meta property="article:modified_time" content="2020-01-08T21:05:45+08:00">
+    <meta property="article:tag" content="Consul">
 
-
-
-<meta itemprop="keywords" content="consul," />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Consul的安装及配置"/>
-<meta name="twitter:description" content="认识consul consul官方地址 什么consul Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置。"/>
+  <meta itemprop="name" content="Consul的安装及配置">
+  <meta itemprop="description" content="认识consul consul官方地址
+什么consul Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置。
+Consul由Go语言开发，部署起来非常容易，只需要极少的可执行程序和配置文件，具有绿色、轻量级的特点">
+  <meta itemprop="datePublished" content="2020-01-08T21:05:45+08:00">
+  <meta itemprop="dateModified" content="2020-01-08T21:05:45+08:00">
+  <meta itemprop="wordCount" content="1363">
+  <meta itemprop="keywords" content="consul">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Consul的安装及配置">
+  <meta name="twitter:description" content="认识consul consul官方地址
+什么consul Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置。
+Consul由Go语言开发，部署起来非常容易，只需要极少的可执行程序和配置文件，具有绿色、轻量级的特点">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -90,12 +102,21 @@
         <li class="mobile-menu-item">分类</li>
       </a>
   </ul>
+
+  
+
+
 </nav>
+
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
   <a href="/" class="logo">花开花落，云卷云舒</a>
 </div>
+
+
+
+
 
 <nav class="site-navbar">
   <ul id="menu" class="menu">
@@ -110,6 +131,7 @@
       </li>
   </ul>
 </nav>
+
     </header>
 
     <main id="main" class="main">
@@ -125,7 +147,7 @@
         <div class="post-category">
             <a href="/categories/consul/"> consul </a>
             </div>
-          <span class="more-meta"> 约 1240 字 </span>
+          <span class="more-meta"> 约 1363 字 </span>
           <span class="more-meta"> 预计阅读 3 分钟 </span>
         
       </div>
@@ -185,24 +207,24 @@
 <p>由于部署非常简单，我这里直接使用docker-compose直接部署了，如果不了解docker 和docker-compose的请移步到<a href="https://docs.docker.com/get-started/">Docker Docs</a></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 准备目录
-mkdir consul
-cd consul
-mkdir node1 node2 node3 client
-# 这里准备部署三个server节点一个client节点
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 准备目录
+</span></span><span class="line"><span class="cl">mkdir consul
+</span></span><span class="line"><span class="cl">cd consul
+</span></span><span class="line"><span class="cl">mkdir node1 node2 node3 client
+</span></span><span class="line"><span class="cl"># 这里准备部署三个server节点一个client节点
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>docker-compose.yml</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -273,120 +295,116 @@ mkdir node1 node2 node3 client
 </span><span class="lnt">69
 </span><span class="lnt">70
 </span><span class="lnt">71
-</span><span class="lnt">72
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="k">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="w">
-</span><span class="w"></span><span class="k">services</span><span class="p">:</span><span class="w">
-</span><span class="w">  </span><span class="k">consul_node1</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>consul_node1<span class="w">
-</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>consul<span class="p">:</span><span class="m">1.6.2</span><span class="w">
-</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- /etc/localtime<span class="p">:</span>/etc/localtime<span class="p">:</span>ro<span class="w">
-</span><span class="w">      </span>- ./node1<span class="p">:</span>/consul/data<span class="p">:</span>rw<span class="w">
-</span><span class="w">    </span><span class="k">ulimits</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">nproc</span><span class="p">:</span><span class="w"> </span><span class="m">65535</span><span class="w">
-</span><span class="w">      </span><span class="k">nofile</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="k">soft</span><span class="p">:</span><span class="w"> </span><span class="m">20000</span><span class="w">
-</span><span class="w">        </span><span class="k">hard</span><span class="p">:</span><span class="w"> </span><span class="m">40000</span><span class="w">
-</span><span class="w">    </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>consul<span class="w"> </span>agent<span class="w"> </span>-data-dir=/consul/data<span class="w"> </span>-datacenter=<span class="s2">&#34;prometheus&#34;</span><span class="w"> </span>-bootstrap<span class="w"> </span>-server<span class="w"> </span>-node=consul_node1<span class="w"> </span>-enable-script-checks<span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="k">consul_node2</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>consul_node2<span class="w">
-</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>consul<span class="p">:</span><span class="m">1.6.2</span><span class="w">
-</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- /etc/localtime<span class="p">:</span>/etc/localtime<span class="p">:</span>ro<span class="w">
-</span><span class="w">      </span>- ./node2<span class="p">:</span>/consul/data<span class="p">:</span>rw<span class="w">
-</span><span class="w">    </span><span class="k">ulimits</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">nproc</span><span class="p">:</span><span class="w"> </span><span class="m">65535</span><span class="w">
-</span><span class="w">      </span><span class="k">nofile</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="k">soft</span><span class="p">:</span><span class="w"> </span><span class="m">20000</span><span class="w">
-</span><span class="w">        </span><span class="k">hard</span><span class="p">:</span><span class="w"> </span><span class="m">40000</span><span class="w">
-</span><span class="w">    </span><span class="k">links</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- consul_node1<span class="w">
-</span><span class="w">    </span><span class="k">depends_on</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- consul_node1<span class="w">
-</span><span class="w">    </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>consul<span class="w"> </span>agent<span class="w"> </span>-data-dir=/consul/data<span class="w"> </span>-datacenter=<span class="s2">&#34;prometheus&#34;</span><span class="w"> </span>-server<span class="w"> </span>-node=consul_node2<span class="w"> </span>-retry-join=consul_node1<span class="w"> </span>-retry-interval=30s<span class="w"> </span>-enable-script-checks<span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="k">consul_node3</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>consul_node3<span class="w">
-</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>consul<span class="p">:</span><span class="m">1.6.2</span><span class="w">
-</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- /etc/localtime<span class="p">:</span>/etc/localtime<span class="p">:</span>ro<span class="w">
-</span><span class="w">      </span>- ./node3<span class="p">:</span>/consul/data<span class="p">:</span>rw<span class="w">
-</span><span class="w">    </span><span class="k">ulimits</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">nproc</span><span class="p">:</span><span class="w"> </span><span class="m">65535</span><span class="w">
-</span><span class="w">      </span><span class="k">nofile</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="k">soft</span><span class="p">:</span><span class="w"> </span><span class="m">20000</span><span class="w">
-</span><span class="w">        </span><span class="k">hard</span><span class="p">:</span><span class="w"> </span><span class="m">40000</span><span class="w">
-</span><span class="w">    </span><span class="k">links</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- consul_node1<span class="w">
-</span><span class="w">    </span><span class="k">depends_on</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- consul_node1<span class="w">
-</span><span class="w">    </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>consul<span class="w"> </span>agent<span class="w"> </span>-data-dir=/consul/data<span class="w"> </span>-datacenter=<span class="s2">&#34;prometheus&#34;</span><span class="w"> </span>-server<span class="w"> </span>-node=consul_node3<span class="w"> </span>-retry-join=consul_node1<span class="w"> </span>-retry-interval=30s<span class="w"> </span>-enable-script-checks<span class="w">
-</span><span class="w">
-</span><span class="w">  </span><span class="k">consul_client</span><span class="p">:</span><span class="w">
-</span><span class="w">    </span><span class="k">container_name</span><span class="p">:</span><span class="w"> </span>consul_client<span class="w">
-</span><span class="w">    </span><span class="k">image</span><span class="p">:</span><span class="w"> </span>consul<span class="p">:</span><span class="m">1.6.2</span><span class="w">
-</span><span class="w">    </span><span class="k">volumes</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- /etc/localtime<span class="p">:</span>/etc/localtime<span class="p">:</span>ro<span class="w">
-</span><span class="w">      </span>- ./client<span class="p">:</span>/consul/data<span class="p">:</span>rw<span class="w">
-</span><span class="w">    </span><span class="k">ports</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- <span class="s2">&#34;8500:8500&#34;</span><span class="w">
-</span><span class="w">      </span>- <span class="s2">&#34;8600:8600&#34;</span><span class="w">
-</span><span class="w">      </span>- <span class="s2">&#34;8300:8300&#34;</span><span class="w">
-</span><span class="w">      </span>- <span class="s2">&#34;8301:8301&#34;</span><span class="w">
-</span><span class="w">      </span>- <span class="s2">&#34;8302:8302&#34;</span><span class="w">
-</span><span class="w">    </span><span class="k">ulimits</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span><span class="k">nproc</span><span class="p">:</span><span class="w"> </span><span class="m">65535</span><span class="w">
-</span><span class="w">      </span><span class="k">nofile</span><span class="p">:</span><span class="w">
-</span><span class="w">        </span><span class="k">soft</span><span class="p">:</span><span class="w"> </span><span class="m">20000</span><span class="w">
-</span><span class="w">        </span><span class="k">hard</span><span class="p">:</span><span class="w"> </span><span class="m">40000</span><span class="w">
-</span><span class="w">    </span><span class="k">links</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- consul_node1<span class="w">
-</span><span class="w">    </span><span class="k">depends_on</span><span class="p">:</span><span class="w">
-</span><span class="w">      </span>- consul_node1<span class="w">
-</span><span class="w">    </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>consul<span class="w"> </span>agent<span class="w"> </span>-data-dir=/consul/data<span class="w"> </span>-datacenter=<span class="s2">&#34;prometheus&#34;</span><span class="w"> </span>-node=consul_client<span class="w"> </span>-retry-join=consul_node1<span class="w"> </span>-retry-interval=30s<span class="w"> </span>-ui<span class="w"> </span>-bind=<span class="s2">&#34;0.0.0.0&#34;</span><span class="w"> </span>-client=<span class="s2">&#34;0.0.0.0&#34;</span><span class="w"> </span>-enable-script-checks<span class="w">
-</span><span class="w">
-</span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;3&#39;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">consul_node1</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">consul_node1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">consul:1.6.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/etc/localtime:/etc/localtime:ro</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./node1:/consul/data:rw</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ulimits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nproc</span><span class="p">:</span><span class="w"> </span><span class="m">65535</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nofile</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">soft</span><span class="p">:</span><span class="w"> </span><span class="m">20000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">hard</span><span class="p">:</span><span class="w"> </span><span class="m">40000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">consul agent -data-dir=/consul/data -datacenter=&#34;prometheus&#34; -bootstrap -server -node=consul_node1 -enable-script-checks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">consul_node2</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">consul_node2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">consul:1.6.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/etc/localtime:/etc/localtime:ro</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./node2:/consul/data:rw</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ulimits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nproc</span><span class="p">:</span><span class="w"> </span><span class="m">65535</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nofile</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">soft</span><span class="p">:</span><span class="w"> </span><span class="m">20000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">hard</span><span class="p">:</span><span class="w"> </span><span class="m">40000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">consul_node1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">consul_node1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">consul agent -data-dir=/consul/data -datacenter=&#34;prometheus&#34; -server -node=consul_node2 -retry-join=consul_node1 -retry-interval=30s -enable-script-checks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">consul_node3</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">consul_node3</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">consul:1.6.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/etc/localtime:/etc/localtime:ro</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./node3:/consul/data:rw</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ulimits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nproc</span><span class="p">:</span><span class="w"> </span><span class="m">65535</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nofile</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">soft</span><span class="p">:</span><span class="w"> </span><span class="m">20000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">hard</span><span class="p">:</span><span class="w"> </span><span class="m">40000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">consul_node1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">consul_node1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">consul agent -data-dir=/consul/data -datacenter=&#34;prometheus&#34; -server -node=consul_node3 -retry-join=consul_node1 -retry-interval=30s -enable-script-checks</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">consul_client</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">consul_client</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">consul:1.6.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">/etc/localtime:/etc/localtime:ro</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">./client:/consul/data:rw</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;8500:8500&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;8600:8600&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;8300:8300&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;8301:8301&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;8302:8302&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ulimits</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nproc</span><span class="p">:</span><span class="w"> </span><span class="m">65535</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">nofile</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">soft</span><span class="p">:</span><span class="w"> </span><span class="m">20000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nt">hard</span><span class="p">:</span><span class="w"> </span><span class="m">40000</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">links</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">consul_node1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">depends_on</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="l">consul_node1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">command</span><span class="p">:</span><span class="w"> </span><span class="l">consul agent -data-dir=/consul/data -datacenter=&#34;prometheus&#34; -node=consul_client -retry-join=consul_node1 -retry-interval=30s -ui -bind=&#34;0.0.0.0&#34; -client=&#34;0.0.0.0&#34; -enable-script-checks</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>执行安装部署命令:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">docker-compose up   <span class="c1"># 此命令在前台输出 如果想要在后台运行需要加 -d 指令 我们可以先在前台输出，如果没有问题再使用后台指令运行</span>
-<span class="c1"># docker-compose up -d   后台运行docker-compose</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker-compose up   <span class="c1"># 此命令在前台输出 如果想要在后台运行需要加 -d 指令 我们可以先在前台输出，如果没有问题再使用后台指令运行</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># docker-compose up -d   后台运行docker-compose</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>完成后，可以使用以下指令</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 进入一个节点</span>
-docker <span class="nb">exec</span> -it consul_node1 sh
-<span class="c1"># 执行查看节点成员信息</span>
-consul members
-Node                      Address                       Status      Type          Build            Protocol  DC          Segment
-consul_node1   192.168.80.2:8301    alive         server      1.6.2  <span class="m">2</span>         prometheus         &lt;all&gt;
-consul_node2   192.168.80.4:8301    alive         server      1.6.2  <span class="m">2</span>         prometheus         &lt;all&gt;
-consul_node3   192.168.80.5:8301    alive         server      1.6.2  <span class="m">2</span>         prometheus         &lt;all&gt;
-consul_client    192.168.80.3:8301    alive         client        1.6.2  <span class="m">2</span>         prometheus         &lt;default&gt;
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 进入一个节点</span>
+</span></span><span class="line"><span class="cl">docker <span class="nb">exec</span> -it consul_node1 sh
+</span></span><span class="line"><span class="cl"><span class="c1"># 执行查看节点成员信息</span>
+</span></span><span class="line"><span class="cl">consul members
+</span></span><span class="line"><span class="cl">Node                      Address                       Status      Type          Build            Protocol  DC          Segment
+</span></span><span class="line"><span class="cl">consul_node1   192.168.80.2:8301    alive         server      1.6.2  <span class="m">2</span>         prometheus         &lt;all&gt;
+</span></span><span class="line"><span class="cl">consul_node2   192.168.80.4:8301    alive         server      1.6.2  <span class="m">2</span>         prometheus         &lt;all&gt;
+</span></span><span class="line"><span class="cl">consul_node3   192.168.80.5:8301    alive         server      1.6.2  <span class="m">2</span>         prometheus         &lt;all&gt;
+</span></span><span class="line"><span class="cl">consul_client    192.168.80.3:8301    alive         client        1.6.2  <span class="m">2</span>         prometheus         &lt;default&gt;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>查看ui， 在浏览器中输入http://you_ip:8500/</p>
 <p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20200108214501.png" alt=""></p>
@@ -400,7 +418,7 @@ consul_client    192.168.80.3:8301    alive         client        1.6.2  <span c
 <p>注册时需要传入以下json格式数据</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -414,39 +432,39 @@ consul_client    192.168.80.3:8301    alive         client        1.6.2  <span c
 </span><span class="lnt">12
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-    <span class="nt">&#34;ID&#34;</span><span class="p">:</span> <span class="s2">&#34;6df55a0a-f8b5-4301-a3e3-ab41e537af5d&#34;</span><span class="p">,</span>  <span class="err">#</span> <span class="err">一个uuid</span> 
-    <span class="nt">&#34;Address&#34;</span><span class="p">:</span> <span class="s2">&#34;you ip &#34;</span><span class="p">,</span> <span class="err">#</span> <span class="err">节点的ip地址</span>
-    <span class="nt">&#34;Node&#34;</span><span class="p">:</span> <span class="s2">&#34;you node name &#34;</span><span class="p">,</span>  <span class="err">#</span> <span class="err">要保证节点名称唯一</span>
-    <span class="nt">&#34;Service&#34;</span><span class="p">:</span> <span class="p">{</span>  <span class="err">#</span> <span class="err">要注册的服务信息</span>
-        <span class="nt">&#34;Service&#34;</span><span class="p">:</span> <span class="s2">&#34;mysql&#34;</span><span class="p">,</span>  <span class="err">#</span>  <span class="err">服务的名称</span> 
-        <span class="nt">&#34;ID&#34;</span><span class="p">:</span> <span class="s2">&#34;serviceid&#34;</span><span class="p">,</span> <span class="err">#</span> <span class="err">服务的id</span> <span class="err">保证唯一</span>
-        <span class="nt">&#34;tags&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;mysql&#34;</span><span class="p">,</span> <span class="s2">&#34;master&#34;</span> <span class="p">],</span>
-        <span class="nt">&#34;port&#34;</span><span class="p">:</span> <span class="mi">3306</span><span class="p">,</span>
-        <span class="nt">&#34;address&#34;</span><span class="p">:</span> <span class="s2">&#34;service的ip&#34;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;ID&#34;</span><span class="p">:</span> <span class="s2">&#34;6df55a0a-f8b5-4301-a3e3-ab41e537af5d&#34;</span><span class="p">,</span>  <span class="err">#</span> <span class="err">一个uuid</span> 
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;Address&#34;</span><span class="p">:</span> <span class="s2">&#34;you ip &#34;</span><span class="p">,</span> <span class="err">#</span> <span class="err">节点的ip地址</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;Node&#34;</span><span class="p">:</span> <span class="s2">&#34;you node name &#34;</span><span class="p">,</span>  <span class="err">#</span> <span class="err">要保证节点名称唯一</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;Service&#34;</span><span class="p">:</span> <span class="p">{</span>  <span class="err">#</span> <span class="err">要注册的服务信息</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Service&#34;</span><span class="p">:</span> <span class="s2">&#34;mysql&#34;</span><span class="p">,</span>  <span class="err">#</span>  <span class="err">服务的名称</span> 
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;ID&#34;</span><span class="p">:</span> <span class="s2">&#34;serviceid&#34;</span><span class="p">,</span> <span class="err">#</span> <span class="err">服务的id</span> <span class="err">保证唯一</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;tags&#34;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&#34;mysql&#34;</span><span class="p">,</span> <span class="s2">&#34;master&#34;</span> <span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;port&#34;</span><span class="p">:</span> <span class="mi">3306</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;address&#34;</span><span class="p">:</span> <span class="s2">&#34;service的ip&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>uuid 可以使用以下命令生成</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">cat /proc/sys/kernel/random/uuid
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">cat /proc/sys/kernel/random/uuid
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>注册命令如下:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">ajson</span><span class="o">=</span><span class="sb">`</span>cat a.json<span class="sb">`</span>
-curl -s -m <span class="m">5</span> -X PUT -d <span class="s2">&#34;</span><span class="nv">$ajson</span><span class="s2">&#34;</span> http://consul_ip:8500/v1/catalog/deregister
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nv">ajson</span><span class="o">=</span><span class="sb">`</span>cat a.json<span class="sb">`</span>
+</span></span><span class="line"><span class="cl">curl -s -m <span class="m">5</span> -X PUT -d <span class="s2">&#34;</span><span class="nv">$ajson</span><span class="s2">&#34;</span> http://consul_ip:8500/v1/catalog/deregister
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>完成后在页面上就会出现mysql信息</p>
 <p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20200108224510.png" alt=""></p>
@@ -456,20 +474,20 @@ curl -s -m <span class="m">5</span> -X PUT -d <span class="s2">&#34;</span><span
 <p>删除注册的节点命令如下:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">curl -X PUT -d <span class="s1">&#39;{&#34;Node&#34;: &#34;node name&#34;}&#39;</span> http://consul_ip:8500/v1/catalog/deregister
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">curl -X PUT -d <span class="s1">&#39;{&#34;Node&#34;: &#34;node name&#34;}&#39;</span> http://consul_ip:8500/v1/catalog/deregister
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>节点有多个服务时需要删除其中一个服务时命令如下 :</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">curl -X PUT -d <span class="s1">&#39;{&#34;Node&#34;: &#34;node name&#34;,&#34;Service&#34;: {&#34;ID&#34;: &#34;y&#34;}}&#39;</span> http://consul_ip:8500/v1/catalog/deregister
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">curl -X PUT -d <span class="s1">&#39;{&#34;Node&#34;: &#34;node name&#34;,&#34;Service&#34;: {&#34;ID&#34;: &#34;y&#34;}}&#39;</span> http://consul_ip:8500/v1/catalog/deregister
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="kv存储">KV存储</h3>
 <h3 id="配置中心">配置中心</h3>
@@ -480,7 +498,7 @@ curl -s -m <span class="m">5</span> -X PUT -d <span class="s2">&#34;</span><span
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
-    <span class="item-content">周利山</span>
+    <span class="item-content"></span>
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
@@ -537,7 +555,7 @@ curl -s -m <span class="m">5</span> -X PUT -d <span class="s2">&#34;</span><span
     <footer id="footer" class="footer">
       <div class="social-links">
       <a href="zhou_mfk@163.com" class="iconfont icon-email" title="email"></a>
-  <a href="https://zhou-mfk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  
 </div>
 
 <div class="copyright">
@@ -555,13 +573,10 @@ curl -s -m <span class="m">5</span> -X PUT -d <span class="s2">&#34;</span><span
   <span class="copyright-year">
     &copy; 
     2019 - 
-    2022
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">周利山</span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -572,7 +587,10 @@ curl -s -m <span class="m">5</span> -X PUT -d <span class="s2">&#34;</span><span
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

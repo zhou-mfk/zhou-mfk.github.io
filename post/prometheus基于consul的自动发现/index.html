@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Prometheus基于consul的自动发现 - Zhou Li Shan</title>
@@ -16,17 +16,18 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="周利山" /><meta name="description" content="consul 集群 Consul是由HashiCorp开发的一个支持多数据中心的分布式服务发现和键值对存储服务的开源软件，被大量应用于基于微服务的软件架构" /><meta name="keywords" content="prometheus, 监控, consul" />
+<meta name="author" content="" /><meta name="description" content="consul 集群 Consul是由HashiCorp开发的一个支持多数据中心的分布式服务发现和键值对存储服务的开源软件，被大量应用于基于微服务的软件架构当中。
+" /><meta name="keywords" content="prometheus, 监控, consul" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
-<link rel="canonical" href="https://zhou-mfk.github.io/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/" />
+<link rel="canonical" href="http://localhost:1313/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -34,28 +35,33 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Prometheus基于consul的自动发现" />
-<meta property="og:description" content="consul 集群 Consul是由HashiCorp开发的一个支持多数据中心的分布式服务发现和键值对存储服务的开源软件，被大量应用于基于微服务的软件架构" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://zhou-mfk.github.io/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/" />
-<meta property="article:published_time" content="2019-12-27T13:03:41+08:00" />
-<meta property="article:modified_time" content="2019-12-27T13:03:41+08:00" />
-<meta itemprop="name" content="Prometheus基于consul的自动发现">
-<meta itemprop="description" content="consul 集群 Consul是由HashiCorp开发的一个支持多数据中心的分布式服务发现和键值对存储服务的开源软件，被大量应用于基于微服务的软件架构">
-<meta itemprop="datePublished" content="2019-12-27T13:03:41+08:00" />
-<meta itemprop="dateModified" content="2019-12-27T13:03:41+08:00" />
-<meta itemprop="wordCount" content="1785">
+<meta property="og:url" content="http://localhost:1313/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/">
+  <meta property="og:site_name" content="Zhou Li Shan">
+  <meta property="og:title" content="Prometheus基于consul的自动发现">
+  <meta property="og:description" content="consul 集群 Consul是由HashiCorp开发的一个支持多数据中心的分布式服务发现和键值对存储服务的开源软件，被大量应用于基于微服务的软件架构当中。">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2019-12-27T13:03:41+08:00">
+    <meta property="article:modified_time" content="2019-12-27T13:03:41+08:00">
+    <meta property="article:tag" content="Prometheus">
+    <meta property="article:tag" content="监控">
+    <meta property="article:tag" content="Consul">
 
-
-
-<meta itemprop="keywords" content="prometheus,监控,consul," />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Prometheus基于consul的自动发现"/>
-<meta name="twitter:description" content="consul 集群 Consul是由HashiCorp开发的一个支持多数据中心的分布式服务发现和键值对存储服务的开源软件，被大量应用于基于微服务的软件架构"/>
+  <meta itemprop="name" content="Prometheus基于consul的自动发现">
+  <meta itemprop="description" content="consul 集群 Consul是由HashiCorp开发的一个支持多数据中心的分布式服务发现和键值对存储服务的开源软件，被大量应用于基于微服务的软件架构当中。">
+  <meta itemprop="datePublished" content="2019-12-27T13:03:41+08:00">
+  <meta itemprop="dateModified" content="2019-12-27T13:03:41+08:00">
+  <meta itemprop="wordCount" content="1785">
+  <meta itemprop="keywords" content="prometheus,监控,consul">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Prometheus基于consul的自动发现">
+  <meta name="twitter:description" content="consul 集群 Consul是由HashiCorp开发的一个支持多数据中心的分布式服务发现和键值对存储服务的开源软件，被大量应用于基于微服务的软件架构当中。">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -90,12 +96,21 @@
         <li class="mobile-menu-item">分类</li>
       </a>
   </ul>
+
+  
+
+
 </nav>
+
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
   <a href="/" class="logo">花开花落，云卷云舒</a>
 </div>
+
+
+
+
 
 <nav class="site-navbar">
   <ul id="menu" class="menu">
@@ -110,6 +125,7 @@
       </li>
   </ul>
 </nav>
+
     </header>
 
     <main id="main" class="main">
@@ -160,20 +176,20 @@
 <p>创建目录</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">mkdir consul
-<span class="nb">cd</span> consul
-mkdir node1 node2 node3 client
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">mkdir consul
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> consul
+</span></span><span class="line"><span class="cl">mkdir node1 node2 node3 client
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>docker-compose.yml如下所示:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -246,93 +262,93 @@ mkdir node1 node2 node3 client
 </span><span class="lnt">71
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">version: &#39;3&#39;
-services:
-  consul_node1:
-    container_name: consul_node1
-    image: consul:1.6.2
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ./node1:/consul/data:rw
-    ulimits:
-      nproc: 65535
-      nofile:
-        soft: 20000
-        hard: 40000
-    command: consul agent -data-dir=/consul/data -datacenter=&#34;prometheus&#34; -bootstrap -server -node=consul_node1
-
-  consul_node2:
-    container_name: consul_node2
-    image: consul:1.6.2
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ./node2:/consul/data:rw
-    ulimits:
-      nproc: 65535
-      nofile:
-        soft: 20000
-        hard: 40000
-    links:
-      - consul_node1
-    depends_on:
-      - consul_node1
-    command: consul agent -data-dir=/consul/data -datacenter=&#34;prometheus&#34; -server -node=consul_node2 -retry-join=consul_node1 -retry-interval=30s
-
-  consul_node3:
-    container_name: consul_node3
-    image: consul:1.6.2
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ./node3:/consul/data:rw
-    ulimits:
-      nproc: 65535
-      nofile:
-        soft: 20000
-        hard: 40000
-    links:
-      - consul_node1
-    depends_on:
-      - consul_node1
-    command: consul agent -data-dir=/consul/data -datacenter=&#34;prometheus&#34; -server -node=consul_node3 -retry-join=consul_node1 -retry-interval=30s
-
-  consul_client:
-    container_name: consul_client
-    image: consul:1.6.2
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ./client:/consul/data:rw
-    ports:
-      - &#34;8500:8500&#34;
-      - &#34;8600:8600&#34;
-      - &#34;8300:8300&#34;
-      - &#34;8301:8301&#34;
-      - &#34;8302:8302&#34;
-    ulimits:
-      nproc: 65535
-      nofile:
-        soft: 20000
-        hard: 40000
-    links:
-      - consul_node1
-    depends_on:
-      - consul_node1
-    command: consul agent -data-dir=/consul/data -datacenter=&#34;prometheus&#34; -node=consul_client -retry-join=consul_node1 -retry-interval=30s -ui -bind=&#34;0.0.0.0&#34; -client=&#34;0.0.0.0&#34;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">version: &#39;3&#39;
+</span></span><span class="line"><span class="cl">services:
+</span></span><span class="line"><span class="cl">  consul_node1:
+</span></span><span class="line"><span class="cl">    container_name: consul_node1
+</span></span><span class="line"><span class="cl">    image: consul:1.6.2
+</span></span><span class="line"><span class="cl">    volumes:
+</span></span><span class="line"><span class="cl">      - /etc/localtime:/etc/localtime:ro
+</span></span><span class="line"><span class="cl">      - ./node1:/consul/data:rw
+</span></span><span class="line"><span class="cl">    ulimits:
+</span></span><span class="line"><span class="cl">      nproc: 65535
+</span></span><span class="line"><span class="cl">      nofile:
+</span></span><span class="line"><span class="cl">        soft: 20000
+</span></span><span class="line"><span class="cl">        hard: 40000
+</span></span><span class="line"><span class="cl">    command: consul agent -data-dir=/consul/data -datacenter=&#34;prometheus&#34; -bootstrap -server -node=consul_node1
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  consul_node2:
+</span></span><span class="line"><span class="cl">    container_name: consul_node2
+</span></span><span class="line"><span class="cl">    image: consul:1.6.2
+</span></span><span class="line"><span class="cl">    volumes:
+</span></span><span class="line"><span class="cl">      - /etc/localtime:/etc/localtime:ro
+</span></span><span class="line"><span class="cl">      - ./node2:/consul/data:rw
+</span></span><span class="line"><span class="cl">    ulimits:
+</span></span><span class="line"><span class="cl">      nproc: 65535
+</span></span><span class="line"><span class="cl">      nofile:
+</span></span><span class="line"><span class="cl">        soft: 20000
+</span></span><span class="line"><span class="cl">        hard: 40000
+</span></span><span class="line"><span class="cl">    links:
+</span></span><span class="line"><span class="cl">      - consul_node1
+</span></span><span class="line"><span class="cl">    depends_on:
+</span></span><span class="line"><span class="cl">      - consul_node1
+</span></span><span class="line"><span class="cl">    command: consul agent -data-dir=/consul/data -datacenter=&#34;prometheus&#34; -server -node=consul_node2 -retry-join=consul_node1 -retry-interval=30s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  consul_node3:
+</span></span><span class="line"><span class="cl">    container_name: consul_node3
+</span></span><span class="line"><span class="cl">    image: consul:1.6.2
+</span></span><span class="line"><span class="cl">    volumes:
+</span></span><span class="line"><span class="cl">      - /etc/localtime:/etc/localtime:ro
+</span></span><span class="line"><span class="cl">      - ./node3:/consul/data:rw
+</span></span><span class="line"><span class="cl">    ulimits:
+</span></span><span class="line"><span class="cl">      nproc: 65535
+</span></span><span class="line"><span class="cl">      nofile:
+</span></span><span class="line"><span class="cl">        soft: 20000
+</span></span><span class="line"><span class="cl">        hard: 40000
+</span></span><span class="line"><span class="cl">    links:
+</span></span><span class="line"><span class="cl">      - consul_node1
+</span></span><span class="line"><span class="cl">    depends_on:
+</span></span><span class="line"><span class="cl">      - consul_node1
+</span></span><span class="line"><span class="cl">    command: consul agent -data-dir=/consul/data -datacenter=&#34;prometheus&#34; -server -node=consul_node3 -retry-join=consul_node1 -retry-interval=30s
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  consul_client:
+</span></span><span class="line"><span class="cl">    container_name: consul_client
+</span></span><span class="line"><span class="cl">    image: consul:1.6.2
+</span></span><span class="line"><span class="cl">    volumes:
+</span></span><span class="line"><span class="cl">      - /etc/localtime:/etc/localtime:ro
+</span></span><span class="line"><span class="cl">      - ./client:/consul/data:rw
+</span></span><span class="line"><span class="cl">    ports:
+</span></span><span class="line"><span class="cl">      - &#34;8500:8500&#34;
+</span></span><span class="line"><span class="cl">      - &#34;8600:8600&#34;
+</span></span><span class="line"><span class="cl">      - &#34;8300:8300&#34;
+</span></span><span class="line"><span class="cl">      - &#34;8301:8301&#34;
+</span></span><span class="line"><span class="cl">      - &#34;8302:8302&#34;
+</span></span><span class="line"><span class="cl">    ulimits:
+</span></span><span class="line"><span class="cl">      nproc: 65535
+</span></span><span class="line"><span class="cl">      nofile:
+</span></span><span class="line"><span class="cl">        soft: 20000
+</span></span><span class="line"><span class="cl">        hard: 40000
+</span></span><span class="line"><span class="cl">    links:
+</span></span><span class="line"><span class="cl">      - consul_node1
+</span></span><span class="line"><span class="cl">    depends_on:
+</span></span><span class="line"><span class="cl">      - consul_node1
+</span></span><span class="line"><span class="cl">    command: consul agent -data-dir=/consul/data -datacenter=&#34;prometheus&#34; -node=consul_client -retry-join=consul_node1 -retry-interval=30s -ui -bind=&#34;0.0.0.0&#34; -client=&#34;0.0.0.0&#34;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>启动consul集群</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">docker-compose up -d
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker-compose up -d
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="与prometheus集成">与prometheus集成</h2>
 <p>修改prometheus.yml配置文件增加如下配置</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -352,25 +368,25 @@ services:
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">  - job_name: &#39;consul_linux&#39;
-    consul_sd_configs:
-    - server: &#39;127.0.0.1:8500&#39;
-      datacenter: prometheus
-      services: [&#39;linux&#39;]
-    relabel_configs:
-    - source_labels: [&#39;__meta_consul_service&#39;]
-      regex: &#39;(.*)&#39;
-      target_label: &#39;job&#39;
-      replacement: &#39;$1&#39;
-    - source_labels: [&#39;__meta_consul_node&#39;]
-      regex: &#39;(.*)&#39;
-      target_label: &#39;instance&#39;
-      replacement: &#39;$1&#39;
-    - source_labels: [&#39;__meta_consul_tags&#39;]
-      regex: &#39;,(.*),&#39;
-      target_label: &#39;group&#39;
-      replacement: &#39;$1&#39;
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  - job_name: &#39;consul_linux&#39;
+</span></span><span class="line"><span class="cl">    consul_sd_configs:
+</span></span><span class="line"><span class="cl">    - server: &#39;127.0.0.1:8500&#39;
+</span></span><span class="line"><span class="cl">      datacenter: prometheus
+</span></span><span class="line"><span class="cl">      services: [&#39;linux&#39;]
+</span></span><span class="line"><span class="cl">    relabel_configs:
+</span></span><span class="line"><span class="cl">    - source_labels: [&#39;__meta_consul_service&#39;]
+</span></span><span class="line"><span class="cl">      regex: &#39;(.*)&#39;
+</span></span><span class="line"><span class="cl">      target_label: &#39;job&#39;
+</span></span><span class="line"><span class="cl">      replacement: &#39;$1&#39;
+</span></span><span class="line"><span class="cl">    - source_labels: [&#39;__meta_consul_node&#39;]
+</span></span><span class="line"><span class="cl">      regex: &#39;(.*)&#39;
+</span></span><span class="line"><span class="cl">      target_label: &#39;instance&#39;
+</span></span><span class="line"><span class="cl">      replacement: &#39;$1&#39;
+</span></span><span class="line"><span class="cl">    - source_labels: [&#39;__meta_consul_tags&#39;]
+</span></span><span class="line"><span class="cl">      regex: &#39;,(.*),&#39;
+</span></span><span class="line"><span class="cl">      target_label: &#39;group&#39;
+</span></span><span class="line"><span class="cl">      replacement: &#39;$1&#39;
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="relabel">Relabel</h2>
 <h3 id="prometheus-的relabeling机制">prometheus 的Relabeling机制</h3>
@@ -379,22 +395,22 @@ services:
 <p>默认情况下，当Prometheus加载Target实例完成后，这些Target时候都会包含一些默认的标签</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">__address__：当前Target实例的访问地址&lt;host&gt;:&lt;port&gt;
-__scheme__：采集目标服务访问地址的HTTP Scheme，HTTP或者HTTPS
-__metrics_path__：采集目标服务访问地址的访问路径
-__param_&lt;name&gt;：采集任务目标服务的中包含的请求参数
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">__address__：当前Target实例的访问地址&lt;host&gt;:&lt;port&gt;
+</span></span><span class="line"><span class="cl">__scheme__：采集目标服务访问地址的HTTP Scheme，HTTP或者HTTPS
+</span></span><span class="line"><span class="cl">__metrics_path__：采集目标服务访问地址的访问路径
+</span></span><span class="line"><span class="cl">__param_&lt;name&gt;：采集任务目标服务的中包含的请求参数
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过Consul动态发现的服务实例还会包含以下Metadata标签信息：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -405,21 +421,21 @@ __param_&lt;name&gt;：采集任务目标服务的中包含的请求参数
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">__meta_consul_address：consul地址
-__meta_consul_dc：consul中服务所在的数据中心
-__meta_consulmetadata：服务的metadata
-__meta_consul_node：服务所在consul节点的信息
-__meta_consul_service_address：服务访问地址
-__meta_consul_service_id：服务ID
-__meta_consul_service_port：服务端口
-__meta_consul_service：服务名称
-__meta_consul_tags：服务包含的标签信息
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">__meta_consul_address：consul地址
+</span></span><span class="line"><span class="cl">__meta_consul_dc：consul中服务所在的数据中心
+</span></span><span class="line"><span class="cl">__meta_consulmetadata：服务的metadata
+</span></span><span class="line"><span class="cl">__meta_consul_node：服务所在consul节点的信息
+</span></span><span class="line"><span class="cl">__meta_consul_service_address：服务访问地址
+</span></span><span class="line"><span class="cl">__meta_consul_service_id：服务ID
+</span></span><span class="line"><span class="cl">__meta_consul_service_port：服务端口
+</span></span><span class="line"><span class="cl">__meta_consul_service：服务名称
+</span></span><span class="line"><span class="cl">__meta_consul_tags：服务包含的标签信息
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>完整的relabel_config配置如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -445,38 +461,38 @@ __meta_consul_tags：服务包含的标签信息
 </span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># The source labels select values from existing labels. Their content is concatenated
-# using the configured separator and matched against the configured regular expression
-# for the replace, keep, and drop actions.
-[ source_labels: &#39;[&#39; &lt;labelname&gt; [, ...] &#39;]&#39; ]
-
-# Separator placed between concatenated source label values.
-[ separator: &lt;string&gt; | default = ; ]
-
-# Label to which the resulting value is written in a replace action.
-# It is mandatory for replace actions. Regex capture groups are available.
-[ target_label: &lt;labelname&gt; ]
-
-# Regular expression against which the extracted value is matched.
-[ regex: &lt;regex&gt; | default = (.*) ]
-
-# Modulus to take of the hash of the source label values.
-[ modulus: &lt;uint64&gt; ]
-
-# Replacement value against which a regex replace is performed if the
-# regular expression matches. Regex capture groups are available.
-[ replacement: &lt;string&gt; | default = $1 ]
-
-# Action to perform based on regex matching.
-[ action: &lt;relabel_action&gt; | default = replace ]
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># The source labels select values from existing labels. Their content is concatenated
+</span></span><span class="line"><span class="cl"># using the configured separator and matched against the configured regular expression
+</span></span><span class="line"><span class="cl"># for the replace, keep, and drop actions.
+</span></span><span class="line"><span class="cl">[ source_labels: &#39;[&#39; &lt;labelname&gt; [, ...] &#39;]&#39; ]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Separator placed between concatenated source label values.
+</span></span><span class="line"><span class="cl">[ separator: &lt;string&gt; | default = ; ]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Label to which the resulting value is written in a replace action.
+</span></span><span class="line"><span class="cl"># It is mandatory for replace actions. Regex capture groups are available.
+</span></span><span class="line"><span class="cl">[ target_label: &lt;labelname&gt; ]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Regular expression against which the extracted value is matched.
+</span></span><span class="line"><span class="cl">[ regex: &lt;regex&gt; | default = (.*) ]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Modulus to take of the hash of the source label values.
+</span></span><span class="line"><span class="cl">[ modulus: &lt;uint64&gt; ]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Replacement value against which a regex replace is performed if the
+</span></span><span class="line"><span class="cl"># regular expression matches. Regex capture groups are available.
+</span></span><span class="line"><span class="cl">[ replacement: &lt;string&gt; | default = $1 ]
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Action to perform based on regex matching.
+</span></span><span class="line"><span class="cl">[ action: &lt;relabel_action&gt; | default = replace ]
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>其中action定义了当前relabel_config对Metadata标签的处理方式，默认的action行为为replace。</p>
 <p>replace行为会根据regex的配置匹配source_labels标签的值（多个source_label的值会按照separator进行拼接），并且将匹配到的值写入到target_label当中，如果有多个匹配组，则可以使用${1}, ${2}确定写入的内容。如果没匹配到任何内容则不对target_label进行重新。</p>
 <p>其中action 包含以下:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -485,23 +501,23 @@ __meta_consul_tags：服务包含的标签信息
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">replacement
-keep
-drop
-labeldrop
-labelkeep
-labemap
-hashmod
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">replacement
+</span></span><span class="line"><span class="cl">keep
+</span></span><span class="line"><span class="cl">drop
+</span></span><span class="line"><span class="cl">labeldrop
+</span></span><span class="line"><span class="cl">labelkeep
+</span></span><span class="line"><span class="cl">labemap
+</span></span><span class="line"><span class="cl">hashmod
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>其中<strong>keep and drop</strong>  是用来过滤Target实例的</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">当action设置为keep时，Prometheus会丢弃source_labels的值中没有匹配到regex正则表达式内容的Target实例，而当action设置为drop时，则会丢弃那些source_labels的值匹配到regex正则表达式内容的Target实例。可以简单理解为keep用于选择，而drop用于排除。
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">当action设置为keep时，Prometheus会丢弃source_labels的值中没有匹配到regex正则表达式内容的Target实例，而当action设置为drop时，则会丢弃那些source_labels的值匹配到regex正则表达式内容的Target实例。可以简单理解为keep用于选择，而drop用于排除。
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
     </div>
@@ -509,7 +525,7 @@ hashmod
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
-    <span class="item-content">周利山</span>
+    <span class="item-content"></span>
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
@@ -568,7 +584,7 @@ hashmod
     <footer id="footer" class="footer">
       <div class="social-links">
       <a href="zhou_mfk@163.com" class="iconfont icon-email" title="email"></a>
-  <a href="https://zhou-mfk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  
 </div>
 
 <div class="copyright">
@@ -586,13 +602,10 @@ hashmod
   <span class="copyright-year">
     &copy; 
     2019 - 
-    2022
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">周利山</span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -603,7 +616,10 @@ hashmod
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

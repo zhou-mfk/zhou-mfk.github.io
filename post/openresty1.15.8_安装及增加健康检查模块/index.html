@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>openresty 1.15.8 安装及增加upstream_check_module和upsync_module - Zhou Li Shan</title>
@@ -16,17 +16,19 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="周利山" /><meta name="description" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module 下载健康检测模块这个必须要用王晓开的这个开源模块 nginx_upstream_check_module 1 git clone" /><meta name="keywords" content="openresty, nginx_upstream_check_module, upstram, 健康检测" />
+<meta name="author" content="" /><meta name="description" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module 下载健康检测模块这个必须要用王晓开的这个开源模块
+nginx_upstream_check_module 1 git clone https://github.com/xiaokai-wang/nginx_upstream_check_module.git nginx-upsync-module-2.1.2 下载 nginx-upsync-module 用来动态更新upstream中的server
+" /><meta name="keywords" content="openresty, nginx_upstream_check_module, upstram, 健康检测" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
-<link rel="canonical" href="https://zhou-mfk.github.io/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/" />
+<link rel="canonical" href="http://localhost:1313/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -34,28 +36,37 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module" />
-<meta property="og:description" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module 下载健康检测模块这个必须要用王晓开的这个开源模块 nginx_upstream_check_module 1 git clone" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://zhou-mfk.github.io/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/" />
-<meta property="article:published_time" content="2020-04-11T12:22:04+08:00" />
-<meta property="article:modified_time" content="2020-04-11T12:22:04+08:00" />
-<meta itemprop="name" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module">
-<meta itemprop="description" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module 下载健康检测模块这个必须要用王晓开的这个开源模块 nginx_upstream_check_module 1 git clone">
-<meta itemprop="datePublished" content="2020-04-11T12:22:04+08:00" />
-<meta itemprop="dateModified" content="2020-04-11T12:22:04+08:00" />
-<meta itemprop="wordCount" content="696">
+<meta property="og:url" content="http://localhost:1313/post/openresty1.15.8_%E5%AE%89%E8%A3%85%E5%8F%8A%E5%A2%9E%E5%8A%A0%E5%81%A5%E5%BA%B7%E6%A3%80%E6%9F%A5%E6%A8%A1%E5%9D%97/">
+  <meta property="og:site_name" content="Zhou Li Shan">
+  <meta property="og:title" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module">
+  <meta property="og:description" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module 下载健康检测模块这个必须要用王晓开的这个开源模块
+nginx_upstream_check_module 1 git clone https://github.com/xiaokai-wang/nginx_upstream_check_module.git nginx-upsync-module-2.1.2 下载 nginx-upsync-module 用来动态更新upstream中的server">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2020-04-11T12:22:04+08:00">
+    <meta property="article:modified_time" content="2020-04-11T12:22:04+08:00">
+    <meta property="article:tag" content="Nginx">
+    <meta property="article:tag" content="Openresty">
+    <meta property="article:tag" content="Nginx_upstream_check_module">
+    <meta property="article:tag" content="Upstram">
 
-
-
-<meta itemprop="keywords" content="nginx,openresty,nginx_upstream_check_module,upstram," />
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module"/>
-<meta name="twitter:description" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module 下载健康检测模块这个必须要用王晓开的这个开源模块 nginx_upstream_check_module 1 git clone"/>
+  <meta itemprop="name" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module">
+  <meta itemprop="description" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module 下载健康检测模块这个必须要用王晓开的这个开源模块
+nginx_upstream_check_module 1 git clone https://github.com/xiaokai-wang/nginx_upstream_check_module.git nginx-upsync-module-2.1.2 下载 nginx-upsync-module 用来动态更新upstream中的server">
+  <meta itemprop="datePublished" content="2020-04-11T12:22:04+08:00">
+  <meta itemprop="dateModified" content="2020-04-11T12:22:04+08:00">
+  <meta itemprop="wordCount" content="694">
+  <meta itemprop="keywords" content="openresty,nginx_upstream_check_module,upstram,健康检测">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module">
+  <meta name="twitter:description" content="openresty 1.15.8 安装及增加upstream_check_module和upsync_module 下载健康检测模块这个必须要用王晓开的这个开源模块
+nginx_upstream_check_module 1 git clone https://github.com/xiaokai-wang/nginx_upstream_check_module.git nginx-upsync-module-2.1.2 下载 nginx-upsync-module 用来动态更新upstream中的server">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -90,12 +101,21 @@
         <li class="mobile-menu-item">分类</li>
       </a>
   </ul>
+
+  
+
+
 </nav>
+
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
   <a href="/" class="logo">花开花落，云卷云舒</a>
 </div>
+
+
+
+
 
 <nav class="site-navbar">
   <ul id="menu" class="menu">
@@ -110,6 +130,7 @@
       </li>
   </ul>
 </nav>
+
     </header>
 
     <main id="main" class="main">
@@ -125,7 +146,7 @@
         <div class="post-category">
             <a href="/categories/nginx/"> Nginx </a>
             </div>
-          <span class="more-meta"> 约 696 字 </span>
+          <span class="more-meta"> 约 694 字 </span>
           <span class="more-meta"> 预计阅读 2 分钟 </span>
         
       </div>
@@ -151,11 +172,11 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">git clone https://github.com/xiaokai-wang/nginx_upstream_check_module.git
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">git clone https://github.com/xiaokai-wang/nginx_upstream_check_module.git
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>nginx-upsync-module-2.1.2</li>
@@ -163,16 +184,16 @@
 <p>下载 nginx-upsync-module 用来动态更新upstream中的server</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">wget https://github.com/weibocom/nginx-upsync-module/archive/v2.1.2.tar.gz
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">wget https://github.com/weibocom/nginx-upsync-module/archive/v2.1.2.tar.gz
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="安装方法">安装方法</h2>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -209,48 +230,48 @@
 </span><span class="lnt">35
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 解压
-tar xvf openresty-1.15.8.2.tar.gz
-tar xvf v2.1.2.tar.gz
-# 把两个模块复制到补丁目录
-
-cp -r nginx_upstream_check_module openresty-1.15.8.2/bundle/
-cp -r nginx-upsync-module-2.1.2 openresty-1.15.8.2/bundle/
-
-# 给nginx 打上健康检测模块
-cd openresty-1.15.8.2/bundle/nginx-1.15.8/
-patch -p1&lt;../nginx_upstream_check_module/check_1.12.1+.patch
-
-# 开始编译安装
-./configure --prefix=/usr/local/openresty-1.15 \
---with-http_stub_status_module --with-debug  \
---http-client-body-temp-path=/usr/local/openresty-1.15/nginx/client_temp \
---http-proxy-temp-path=/usr/local/openresty-1.15/nginx/proxy_temp \
---http-fastcgi-temp-path=/usr/local/openresty-1.15/nginx/fastcgi_temp \
---http-uwsgi-temp-path=/usr/local/openresty-1.15/nginx/uwsgi_temp \
---http-scgi-temp-path=/usr/local/openresty-1.15/nginx/scgi_temp \
---user=nginx --group=nginx \
---with-http_ssl_module --with-http_realip_module \
---with-http_addition_module --with-http_sub_module \ 
---with-http_dav_module --with-http_flv_module \
---with-http_mp4_module --with-http_gunzip_module \
---with-http_gzip_static_module --with-http_random_index_module \
---with-http_secure_link_module  --with-http_auth_request_module \
---with-mail --with-mail_ssl_module  --with-file-aio --with-ipv6 \
---with-luajit --with-cc-opt=&#39;-O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector \
---param=ssp-buffer-size=4 -m64 -mtune=generic&#39;  \
---add-module=./bundle/nginx-upsync-module-2.1.2 \
---add-module=./bundle/nginx_upstream_check_module
-
-gmake
-gmake install
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 解压
+</span></span><span class="line"><span class="cl">tar xvf openresty-1.15.8.2.tar.gz
+</span></span><span class="line"><span class="cl">tar xvf v2.1.2.tar.gz
+</span></span><span class="line"><span class="cl"># 把两个模块复制到补丁目录
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cp -r nginx_upstream_check_module openresty-1.15.8.2/bundle/
+</span></span><span class="line"><span class="cl">cp -r nginx-upsync-module-2.1.2 openresty-1.15.8.2/bundle/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 给nginx 打上健康检测模块
+</span></span><span class="line"><span class="cl">cd openresty-1.15.8.2/bundle/nginx-1.15.8/
+</span></span><span class="line"><span class="cl">patch -p1&lt;../nginx_upstream_check_module/check_1.12.1+.patch
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 开始编译安装
+</span></span><span class="line"><span class="cl">./configure --prefix=/usr/local/openresty-1.15 \
+</span></span><span class="line"><span class="cl">--with-http_stub_status_module --with-debug  \
+</span></span><span class="line"><span class="cl">--http-client-body-temp-path=/usr/local/openresty-1.15/nginx/client_temp \
+</span></span><span class="line"><span class="cl">--http-proxy-temp-path=/usr/local/openresty-1.15/nginx/proxy_temp \
+</span></span><span class="line"><span class="cl">--http-fastcgi-temp-path=/usr/local/openresty-1.15/nginx/fastcgi_temp \
+</span></span><span class="line"><span class="cl">--http-uwsgi-temp-path=/usr/local/openresty-1.15/nginx/uwsgi_temp \
+</span></span><span class="line"><span class="cl">--http-scgi-temp-path=/usr/local/openresty-1.15/nginx/scgi_temp \
+</span></span><span class="line"><span class="cl">--user=nginx --group=nginx \
+</span></span><span class="line"><span class="cl">--with-http_ssl_module --with-http_realip_module \
+</span></span><span class="line"><span class="cl">--with-http_addition_module --with-http_sub_module \ 
+</span></span><span class="line"><span class="cl">--with-http_dav_module --with-http_flv_module \
+</span></span><span class="line"><span class="cl">--with-http_mp4_module --with-http_gunzip_module \
+</span></span><span class="line"><span class="cl">--with-http_gzip_static_module --with-http_random_index_module \
+</span></span><span class="line"><span class="cl">--with-http_secure_link_module  --with-http_auth_request_module \
+</span></span><span class="line"><span class="cl">--with-mail --with-mail_ssl_module  --with-file-aio --with-ipv6 \
+</span></span><span class="line"><span class="cl">--with-luajit --with-cc-opt=&#39;-O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector \
+</span></span><span class="line"><span class="cl">--param=ssp-buffer-size=4 -m64 -mtune=generic&#39;  \
+</span></span><span class="line"><span class="cl">--add-module=./bundle/nginx-upsync-module-2.1.2 \
+</span></span><span class="line"><span class="cl">--add-module=./bundle/nginx_upstream_check_module
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">gmake
+</span></span><span class="line"><span class="cl">gmake install
+</span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="开始验证">开始验证</h2>
 <p>先用docker 启动两个nginx 命令如下:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -260,20 +281,20 @@ gmake install
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">docker pull nginx
-docker run -itd --name nginx01 -p 8081:80 -v /data/nginx01/html:/usr/share/nginx/html nginx
-
-docker run -itd --name nginx02 -p 8082:80 -v /data/nginx02/html:/usr/share/nginx/html nginx 
-
-<span class="c1"># 分别在两个html目录放入一个html文件</span>
-<span class="nb">echo</span> <span class="s2">&#34;&lt;h1&gt;nginx01&lt;/h1&gt;&#34;</span> &gt;&gt; /data/nginx01/html/index.html
-<span class="nb">echo</span> <span class="s2">&#34;&lt;h1&gt;nginx02&lt;/h1&gt;&#34;</span> &gt;&gt; /data/nginx02/html/index.html
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker pull nginx
+</span></span><span class="line"><span class="cl">docker run -itd --name nginx01 -p 8081:80 -v /data/nginx01/html:/usr/share/nginx/html nginx
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker run -itd --name nginx02 -p 8082:80 -v /data/nginx02/html:/usr/share/nginx/html nginx 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 分别在两个html目录放入一个html文件</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;&lt;h1&gt;nginx01&lt;/h1&gt;&#34;</span> &gt;&gt; /data/nginx01/html/index.html
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;&lt;h1&gt;nginx02&lt;/h1&gt;&#34;</span> &gt;&gt; /data/nginx02/html/index.html
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>增加以nginx配置</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -308,63 +329,59 @@ docker run -itd --name nginx02 -p 8082:80 -v /data/nginx02/html:/usr/share/nginx
 </span><span class="lnt">33
 </span><span class="lnt">34
 </span><span class="lnt">35
-</span><span class="lnt">36
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback"># 查看nginx状态及upstream_show
-server {
-     listen 8089;
-	 location = /upstream_show {
-            upstream_show;
-	 }
-
-	 location /nginx_status {
-            stub_status;
-            access_log   off;
-	 }
-
-	 location /nstatus {
-             check_status;
-             access_log   off;
-	 }
-}
-
-# 增加一个nginx代理及upstream
-server {
-	listen       8080 backlog=65533;
-   	server_name  localhost;
-
-	location  / {
-        proxy_pass http://web;
-        access_log  logs/nginx.log  main;
-        error_log  logs/nginx_error.log;
-	}
-}
-upstream web {
-	least_conn;
-	server 127.0.0.1:8081;
-	server 127.0.0.1:8082;
-    check interval=5000 rise=1 fall=3 timeout=4000;
-}
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"># 查看nginx状态及upstream_show
+</span></span><span class="line"><span class="cl">server {
+</span></span><span class="line"><span class="cl">     listen 8089;
+</span></span><span class="line"><span class="cl">	 location = /upstream_show {
+</span></span><span class="line"><span class="cl">            upstream_show;
+</span></span><span class="line"><span class="cl">	 }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	 location /nginx_status {
+</span></span><span class="line"><span class="cl">            stub_status;
+</span></span><span class="line"><span class="cl">            access_log   off;
+</span></span><span class="line"><span class="cl">	 }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	 location /nstatus {
+</span></span><span class="line"><span class="cl">             check_status;
+</span></span><span class="line"><span class="cl">             access_log   off;
+</span></span><span class="line"><span class="cl">	 }
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># 增加一个nginx代理及upstream
+</span></span><span class="line"><span class="cl">server {
+</span></span><span class="line"><span class="cl">	listen       8080 backlog=65533;
+</span></span><span class="line"><span class="cl">   	server_name  localhost;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	location  / {
+</span></span><span class="line"><span class="cl">        proxy_pass http://web;
+</span></span><span class="line"><span class="cl">        access_log  logs/nginx.log  main;
+</span></span><span class="line"><span class="cl">        error_log  logs/nginx_error.log;
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">upstream web {
+</span></span><span class="line"><span class="cl">	least_conn;
+</span></span><span class="line"><span class="cl">	server 127.0.0.1:8081;
+</span></span><span class="line"><span class="cl">	server 127.0.0.1:8082;
+</span></span><span class="line"><span class="cl">    check interval=5000 rise=1 fall=3 timeout=4000;
+</span></span><span class="line"><span class="cl">}
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>启动nginx</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
-</span><span class="lnt">5
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">nginx -t  # 检测配置文件是否正常
-nginx   # 启动nginx
-nginx -s reload # 重载nginx
-nginx -s stop # 停止nginx
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">nginx</span> <span class="o">-</span><span class="n">t</span>  <span class="c1"># 检测配置文件是否正常</span>
+</span></span><span class="line"><span class="cl"><span class="n">nginx</span>   <span class="c1"># 启动nginx</span>
+</span></span><span class="line"><span class="cl"><span class="n">nginx</span> <span class="o">-</span><span class="n">s</span> <span class="n">reload</span> <span class="c1"># 重载nginx</span>
+</span></span><span class="line"><span class="cl"><span class="n">nginx</span> <span class="o">-</span><span class="n">s</span> <span class="n">stop</span> <span class="c1"># 停止nginx</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用浏览器打开 http://youip:8080/</p>
 <p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20200411121436.png" alt=""></p>
@@ -376,21 +393,21 @@ nginx -s stop # 停止nginx
 <p>现在可以stop一个docker 启动的nginx来验证nginx的upstream 健康检测模块是否正常使用</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">docker stop nginx01
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker stop nginx01
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过浏览器可以看到ningx01已是down了 说明可以正常检测到异常的节点</p>
 <p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20200411121740.png" alt=""></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-shell" data-lang="shell">docker start nginx01
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker start nginx01
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20200411121902.png" alt=""></p>
 
@@ -399,7 +416,7 @@ nginx -s stop # 停止nginx
     <div class="post-copyright">
   <p class="copyright-item">
     <span class="item-title">文章作者</span>
-    <span class="item-content">周利山</span>
+    <span class="item-content"></span>
   </p>
   <p class="copyright-item">
     <span class="item-title">上次更新</span>
@@ -459,7 +476,7 @@ nginx -s stop # 停止nginx
     <footer id="footer" class="footer">
       <div class="social-links">
       <a href="zhou_mfk@163.com" class="iconfont icon-email" title="email"></a>
-  <a href="https://zhou-mfk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  
 </div>
 
 <div class="copyright">
@@ -477,13 +494,10 @@ nginx -s stop # 停止nginx
   <span class="copyright-year">
     &copy; 
     2019 - 
-    2022
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">周利山</span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -494,7 +508,10 @@ nginx -s stop # 停止nginx
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 

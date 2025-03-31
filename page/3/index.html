@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>Zhou Li Shan</title>
@@ -16,19 +16,19 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-<meta name="author" content="周利山" /><meta name="keywords" content="Linux, 运维, Python开发, k8s, Kubernetes" />
+<meta name="author" content="" /><meta name="keywords" content="Linux, 运维, Python开发, k8s, Kubernetes" />
 
 
 
 
 
 
-<meta name="generator" content="Hugo 0.74.3 with theme even" />
+<meta name="generator" content="Hugo 0.145.0 with theme even" />
 
 
-<link rel="canonical" href="https://zhou-mfk.github.io/" />
-  <link href="https://zhou-mfk.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Zhou Li Shan" />
-  <link href="https://zhou-mfk.github.io/index.xml" rel="feed" type="application/rss+xml" title="Zhou Li Shan" />
+<link rel="canonical" href="http://localhost:1313/" />
+  <link href="http://localhost:1313/index.xml" rel="alternate" type="application/rss+xml" title="Zhou Li Shan" />
+  <link href="http://localhost:1313/index.xml" rel="feed" type="application/rss+xml" title="Zhou Li Shan" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -36,20 +36,22 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 
 
-<link href="/dist/even.c2a46f00.min.css" rel="stylesheet">
+
+<link href="/sass/main.min.f92fd13721ddf72129410fd8250e73152cc6f2438082b6c0208dc24ee7c13fc4.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
-<meta property="og:title" content="Zhou Li Shan" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://zhou-mfk.github.io/" />
-<meta property="og:updated_time" content="2022-03-11T09:57:32+08:00" />
-<meta itemprop="name" content="Zhou Li Shan">
-<meta itemprop="description" content="">
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Zhou Li Shan"/>
-<meta name="twitter:description" content=""/>
+<meta property="og:url" content="http://localhost:1313/">
+  <meta property="og:site_name" content="Zhou Li Shan">
+  <meta property="og:title" content="Zhou Li Shan">
+  <meta property="og:locale" content="en">
+  <meta property="og:type" content="website">
+
+  <meta itemprop="name" content="Zhou Li Shan">
+  <meta itemprop="datePublished" content="2023-07-18T20:39:32+08:00">
+  <meta itemprop="dateModified" content="2023-07-18T20:39:32+08:00">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Zhou Li Shan">
 
 <!--[if lte IE 9]>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
@@ -84,12 +86,21 @@
         <li class="mobile-menu-item">分类</li>
       </a>
   </ul>
+
+  
+
+
 </nav>
+
   <div class="container" id="mobile-panel">
     <header id="header" class="header">
         <div class="logo-wrapper">
   <a href="/" class="logo">花开花落，云卷云舒</a>
 </div>
+
+
+
+
 
 <nav class="site-navbar">
   <ul id="menu" class="menu">
@@ -104,12 +115,42 @@
       </li>
   </ul>
 </nav>
+
     </header>
 
     <main id="main" class="main">
       <div class="content-wrapper">
         <div id="content" class="content">
           <section id="posts" class="posts">
+    <article class="post">
+  <header class="post-header">
+    <h1 class="post-title"><a class="post-link" href="/post/prometheus%E7%9B%91%E6%8E%A7/">Prometheus监控</a></h1>
+    <div class="post-meta">
+      <span class="post-time"> 2019-11-22 </span>
+      <div class="post-category">
+          <a href="/categories/prometheus/"> prometheus </a>
+          </div>
+        <span class="more-meta"> 约 5494 字 </span>
+        <span class="more-meta"> 预计阅读 11 分钟 </span>
+    </div>
+  </header>
+  
+  <div class="post-content">
+    <div class="post-summary">
+      <p>参考:</p>
+<p><a href="https://prometheus.io/">Prometheus</a></p>
+<p><a href="https://prometheus.io/docs/introduction/overview/">官方文档</a></p>
+<p><a href="https://yunlzheng.gitbook.io/prometheus-book/">promethues-book</a></p>
+<h2 id="简介">简介</h2>
+<blockquote>
+<p>Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog系统演变而来），从2012年开始由前Google工程师在Soundcloud以开源软件的形式进行研发，并且于2015年早期对外发布早期版本。2016年5月继Kubernetes之后成为第二个正式加入CNCF基金会的项目，同年6月正式发布1.0版本。2017年底发布了基于全新存储层的2.0版本，能更好地与容器平台、云平台配合</p>
+    </div>
+    <div class="read-more">
+      <a href="/post/prometheus%E7%9B%91%E6%8E%A7/" class="read-more-link">阅读更多</a>
+    </div>
+  </div>
+</article>
+
     <article class="post">
   <header class="post-header">
     <h1 class="post-title"><a class="post-link" href="/post/python%E4%B8%AD%E4%BD%BF%E7%94%A8ldap%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/">Python中使用ldap实现用户认证</a></h1>
@@ -125,7 +166,103 @@
   
   <div class="post-content">
     <div class="post-summary">
-      使用python实现域账号认证，并增加对ldaps的支持 版本信息如下: python 3 python-ldap 3.2.0 安装python-ldap 参考文档 python-ldap 1 python -m pip install python-ldap 代码实例 ldapauth 函数
+      <p>使用python实现域账号认证，并增加对ldaps的支持</p>
+<p>版本信息如下:</p>
+<ul>
+<li>python 3</li>
+<li>python-ldap 3.2.0</li>
+</ul>
+<h2 id="安装python-ldap">安装python-ldap</h2>
+<p>参考文档 <a href="https://www.python-ldap.org/en/python-ldap-3.2.0/index.html">python-ldap</a></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">ldap</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="代码实例">代码实例</h2>
+<p>ldapauth 函数中增加了对ldaps的支持</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">ldap</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choice</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">LDAP_URL</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&#34;ldap://xx.xx.xx.xxx&#34;</span><span class="p">,</span> <span class="s2">&#34;ldaps://xxx.xxx.xxx.xxx&#34;</span><span class="p">,</span> <span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">ldapauth</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">passwd</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dn</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">@corp.xx.com&#39;</span> <span class="o">%</span> <span class="n">username</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ldap_url</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="n">LDAP_URL</span><span class="p">)</span>  <span class="c1"># 从域链接中也随机读取一个访问</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">ldap_url</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;ldaps&#39;</span><span class="p">):</span>  <span class="c1"># 增加对ldaps协议支持</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ldap</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="n">ldap</span><span class="o">.</span><span class="n">OPT_X_TLS_REQUIRE_CERT</span><span class="p">,</span> <span class="n">ldap</span><span class="o">.</span><span class="n">OPT_X_TLS_NEVER</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">conn</span> <span class="o">=</span> <span class="n">ldap</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">ldap_url</span><span class="p">)</span>  <span class="c1"># 初始化ldap链接</span>
+</span></span><span class="line"><span class="cl">        <span class="n">conn</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="n">ldap</span><span class="o">.</span><span class="n">OPT_X_TLS</span><span class="p">,</span> <span class="n">ldap</span><span class="o">.</span><span class="n">OPT_X_TLS_DEMAND</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">conn</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="n">ldap</span><span class="o">.</span><span class="n">OPT_X_TLS_DEMAND</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">conn</span> <span class="o">=</span> <span class="n">ldap</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">ldap_url</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">conn</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="n">ldap</span><span class="o">.</span><span class="n">OPT_PROTOCOL_VERSION</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">conn</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="n">ldap</span><span class="o">.</span><span class="n">OPT_REFERRALS</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 开始认证</span>
+</span></span><span class="line"><span class="cl">        <span class="n">res</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">simple_bind_s</span><span class="p">(</span><span class="n">dn</span><span class="p">,</span> <span class="n">passwd</span><span class="p">)</span>  <span class="c1">## 返回的结果默认为: (97, [], 1, []) </span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">res</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span> <span class="ow">and</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">97</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;msg&#39;</span><span class="p">:</span> <span class="s1">&#39;Auth OK&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="c1"># 这段内容，有时返回值为空，但是不代表认证失败，在这里统一为认证成功</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;msg&#39;</span><span class="p">:</span> <span class="n">res</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="n">ldap</span><span class="o">.</span><span class="n">INVALID_CREDENTIALS</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1">## 这里认证失败时捕捉的异常信息</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;desc&#39;</span> <span class="ow">in</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;msg&#39;</span><span class="p">:</span> <span class="n">e</span><span class="p">[</span><span class="s1">&#39;desc&#39;</span><span class="p">]}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;msg&#39;</span><span class="p">:</span> <span class="s1">&#39;auth error&#39;</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  <span class="c1">## 这里捕捉其他异常信息，也统一表示为认证失败</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">and</span> <span class="s1">&#39;desc&#39;</span> <span class="ow">in</span> <span class="n">e</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;msg&#39;</span><span class="p">:</span> <span class="n">e</span><span class="p">[</span><span class="s1">&#39;desc&#39;</span><span class="p">]}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;status&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;msg&#39;</span><span class="p">:</span> <span class="s1">&#39;auth error&#39;</span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以上就是使用python-ldap实现域认证</p>
     </div>
     <div class="read-more">
       <a href="/post/python%E4%B8%AD%E4%BD%BF%E7%94%A8ldap%E5%AE%9E%E7%8E%B0%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81/" class="read-more-link">阅读更多</a>
@@ -141,14 +278,17 @@
       <div class="post-category">
           <a href="/categories/elk/"> ELK </a>
           </div>
-        <span class="more-meta"> 约 1833 字 </span>
+        <span class="more-meta"> 约 1829 字 </span>
         <span class="more-meta"> 预计阅读 4 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      Elasticsearch常见问题与解决方法 工作中遇到的问题及解决方法，本程文章持续会更新 问题及解决方法 索引字段 默认为1000，如果超过了这
+      <p>Elasticsearch常见问题与解决方法 工作中遇到的问题及解决方法，本程文章持续会更新</p>
+<h2 id="问题及解决方法">问题及解决方法</h2>
+<h3 id="索引字段">索引字段</h3>
+<p>默认为1000，如果超过了这个默认值则日志数据无法写入到Elasticsearch 调整索引字段的个数如下所示:</p>
     </div>
     <div class="read-more">
       <a href="/post/elasticsearch%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="read-more-link">阅读更多</a>
@@ -164,14 +304,14 @@
       <div class="post-category">
           <a href="/categories/elk/"> ELK </a>
           </div>
-        <span class="more-meta"> 约 5283 字 </span>
-        <span class="more-meta"> 预计阅读 11 分钟 </span>
+        <span class="more-meta"> 约 4493 字 </span>
+        <span class="more-meta"> 预计阅读 9 分钟 </span>
     </div>
   </header>
   
   <div class="post-content">
     <div class="post-summary">
-      整理下使用Filebeat+kafka+logstash+elasticsearch+kibana来搭建日志系统， 加上zookeeper是6
+      <p>整理下使用Filebeat+kafka+logstash+elasticsearch+kibana来搭建日志系统， 加上zookeeper是6个组件来完成一套日志系统，这也是在线上业务正式使用的日志系统。</p>
     </div>
     <div class="read-more">
       <a href="/post/filebeat&#43;kafka&#43;logstash&#43;elasticsearch&#43;kibana%E6%90%AD%E5%BB%BA%E6%97%A5%E5%BF%97%E7%B3%BB%E7%BB%9F/" class="read-more-link">阅读更多</a>
@@ -194,33 +334,26 @@
   
   <div class="post-content">
     <div class="post-summary">
-      使用picGo+GitHub制作图床 PicGo介绍 官方站点 下载及安装 参考文档 使用GitHub github上创建一个仓库 设置Token 个人主页
+      <p>使用picGo+GitHub制作图床</p>
+<h2 id="picgo介绍">PicGo介绍</h2>
+<p><a href="https://molunerfinn.com/PicGo/">官方站点</a></p>
+<p>下载及安装 参考<a href="https://picgo.github.io/PicGo-Doc/zh/guide/">文档</a></p>
+<h2 id="使用github">使用GitHub</h2>
+<ul>
+<li>
+<p>github上创建一个仓库</p>
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017215146.png" alt=""></p>
+</li>
+<li>
+<p>设置Token</p>
+<p>个人主页 Settings</p>
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017215246.png" alt=""></p>
+<p>Developer settings &ndash;&gt; Generate token</p>
+<p><img src="https://raw.githubusercontent.com/zhou-mfk/blogimages/master/img/20191017215453.png" alt=""></p>
+<p>点击创建token就显示出当前的token 请记牢，因为就显示一次</p>
     </div>
     <div class="read-more">
       <a href="/post/%E4%BD%BF%E7%94%A8picgo&#43;github%E5%88%B6%E4%BD%9C%E5%9B%BE%E5%BA%8A/" class="read-more-link">阅读更多</a>
-    </div>
-  </div>
-</article>
-
-    <article class="post">
-  <header class="post-header">
-    <h1 class="post-title"><a class="post-link" href="/post/%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BAblog/">使用hugo搭建blog</a></h1>
-    <div class="post-meta">
-      <span class="post-time"> 2019-10-11 </span>
-      <div class="post-category">
-          <a href="/categories/hugo/"> Hugo </a>
-          </div>
-        <span class="more-meta"> 约 491 字 </span>
-        <span class="more-meta"> 预计阅读 1 分钟 </span>
-    </div>
-  </header>
-  
-  <div class="post-content">
-    <div class="post-summary">
-      <p>hugo 的使用到发布到github</p>
-    </div>
-    <div class="read-more">
-      <a href="/post/%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BAblog/" class="read-more-link">阅读更多</a>
     </div>
   </div>
 </article>
@@ -232,7 +365,10 @@
         <i class="iconfont icon-left"></i>
         <span class="prev-text">上一页</span>
       </a>
-    
+    <a class="next" href="/page/4/">
+        <span class="next-text">下一页</span>
+        <i class="iconfont icon-right"></i>
+      </a>
   </nav>
         </div>
         
@@ -243,7 +379,9 @@
     <footer id="footer" class="footer">
       <div class="social-links">
       <a href="zhou_mfk@163.com" class="iconfont icon-email" title="email"></a>
-  <a href="https://zhou-mfk.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  
+    <a href="/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+  
 </div>
 
 <div class="copyright">
@@ -261,13 +399,10 @@
   <span class="copyright-year">
     &copy; 
     2019 - 
-    2022
-    <span class="heart">
-      <i class="iconfont icon-heart"></i>
-    </span>
-    <span class="author">周利山</span>
+    2025<span class="heart"><i class="iconfont icon-heart"></i></span><span></span>
   </span>
 </div>
+
     </footer>
 
     <div class="back-to-top" id="back-to-top">
@@ -278,7 +413,10 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/dist/even.26188efa.min.js"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.4ae89da218555efa0e7093a20b92017d2e1202b66fff9fc2edf4cb8d44b44c6e.js"></script>
 
 
 
