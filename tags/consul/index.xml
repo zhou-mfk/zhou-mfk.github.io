@@ -2,24 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Consul on Zhou Li Shan</title>
-    <link>http://localhost:1313/tags/consul/</link>
+    <link>https://zhou-mfk.github.io/tags/consul/</link>
     <description>Recent content in Consul on Zhou Li Shan</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Wed, 08 Jan 2020 21:05:45 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/consul/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zhou-mfk.github.io/tags/consul/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Consul的安装及配置</title>
-      <link>http://localhost:1313/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/</link>
+      <link>https://zhou-mfk.github.io/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/</link>
       <pubDate>Wed, 08 Jan 2020 21:05:45 +0800</pubDate>
-      <guid>http://localhost:1313/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/</guid>
+      <guid>https://zhou-mfk.github.io/post/consul%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E9%85%8D%E7%BD%AE/</guid>
       <description>&lt;h2 id=&#34;认识consul&#34;&gt;认识consul&lt;/h2&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.consul.io/&#34;&gt;consul官方地址&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;什么consul&#34;&gt;什么consul&lt;/h3&gt;&#xA;&lt;p&gt;Consul是HashiCorp公司推出的开源工具，用于实现分布式系统的服务发现与配置。&lt;/p&gt;&#xA;&lt;p&gt;Consul由Go语言开发，部署起来非常容易，只需要极少的可执行程序和配置文件，具有绿色、轻量级的特点&lt;/p&gt;</description>
     </item>
     <item>
       <title>Prometheus基于consul的自动发现</title>
-      <link>http://localhost:1313/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/</link>
+      <link>https://zhou-mfk.github.io/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/</link>
       <pubDate>Fri, 27 Dec 2019 13:03:41 +0800</pubDate>
-      <guid>http://localhost:1313/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/</guid>
+      <guid>https://zhou-mfk.github.io/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/</guid>
       <description>&lt;h2 id=&#34;consul-集群&#34;&gt;consul 集群&lt;/h2&gt;&#xA;&lt;p&gt;Consul是由HashiCorp开发的一个支持多数据中心的分布式服务发现和键值对存储服务的开源软件，被大量应用于基于微服务的软件架构当中。&lt;/p&gt;</description>
     </item>
   </channel>

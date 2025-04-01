@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Git on Zhou Li Shan</title>
-    <link>http://localhost:1313/tags/git/</link>
+    <link>https://zhou-mfk.github.io/tags/git/</link>
     <description>Recent content in Git on Zhou Li Shan</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Fri, 11 Oct 2019 21:44:22 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zhou-mfk.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>使用hugo搭建blog</title>
-      <link>http://localhost:1313/post/%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BAblog/</link>
+      <link>https://zhou-mfk.github.io/post/%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BAblog/</link>
       <pubDate>Fri, 11 Oct 2019 21:44:22 +0800</pubDate>
-      <guid>http://localhost:1313/post/%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BAblog/</guid>
+      <guid>https://zhou-mfk.github.io/post/%E4%BD%BF%E7%94%A8hugo%E6%90%AD%E5%BB%BAblog/</guid>
       <description>&lt;p&gt;hugo 的使用到发布到github&lt;/p&gt;</description>
     </item>
   </channel>

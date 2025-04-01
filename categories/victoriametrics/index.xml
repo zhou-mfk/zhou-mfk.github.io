@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>VictoriaMetrics on Zhou Li Shan</title>
-    <link>http://localhost:1313/categories/victoriametrics/</link>
+    <link>https://zhou-mfk.github.io/categories/victoriametrics/</link>
     <description>Recent content in VictoriaMetrics on Zhou Li Shan</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Fri, 11 Mar 2022 09:57:32 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/categories/victoriametrics/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zhou-mfk.github.io/categories/victoriametrics/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>VictoriaMetrics简单介绍与使用</title>
-      <link>http://localhost:1313/post/victoriametrics%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/</link>
+      <link>https://zhou-mfk.github.io/post/victoriametrics%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Fri, 11 Mar 2022 09:57:32 +0800</pubDate>
-      <guid>http://localhost:1313/post/victoriametrics%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https://zhou-mfk.github.io/post/victoriametrics%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/</guid>
       <description>&lt;p&gt;VictoriaMetrics 是一种快速、经济高效且可扩展的监控解决方案和时间序列数据库&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;兼容 Prometheus及 PromQL&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;VictoriaMetrics 具有以下突出特点：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;可以作为 Prometheus 的长期存储&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;可以作为 Grafana 中 Prometheus 的替代品，因为它支持 Prometheus 查询 API&lt;/p&gt;</description>
     </item>
   </channel>

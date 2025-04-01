@@ -2,45 +2,45 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Prometheus on Zhou Li Shan</title>
-    <link>http://localhost:1313/tags/prometheus/</link>
+    <link>https://zhou-mfk.github.io/tags/prometheus/</link>
     <description>Recent content in Prometheus on Zhou Li Shan</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate>Fri, 11 Mar 2022 09:57:32 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/prometheus/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://zhou-mfk.github.io/tags/prometheus/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>VictoriaMetrics简单介绍与使用</title>
-      <link>http://localhost:1313/post/victoriametrics%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/</link>
+      <link>https://zhou-mfk.github.io/post/victoriametrics%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/</link>
       <pubDate>Fri, 11 Mar 2022 09:57:32 +0800</pubDate>
-      <guid>http://localhost:1313/post/victoriametrics%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/</guid>
+      <guid>https://zhou-mfk.github.io/post/victoriametrics%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D%E4%B8%8E%E4%BD%BF%E7%94%A8/</guid>
       <description>&lt;p&gt;VictoriaMetrics 是一种快速、经济高效且可扩展的监控解决方案和时间序列数据库&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;兼容 Prometheus及 PromQL&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;VictoriaMetrics 具有以下突出特点：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;可以作为 Prometheus 的长期存储&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;可以作为 Grafana 中 Prometheus 的替代品，因为它支持 Prometheus 查询 API&lt;/p&gt;</description>
     </item>
     <item>
       <title>Pushgateway的使用案例</title>
-      <link>http://localhost:1313/post/pushgateway_use/</link>
+      <link>https://zhou-mfk.github.io/post/pushgateway_use/</link>
       <pubDate>Thu, 27 Aug 2020 22:38:40 +0800</pubDate>
-      <guid>http://localhost:1313/post/pushgateway_use/</guid>
+      <guid>https://zhou-mfk.github.io/post/pushgateway_use/</guid>
       <description>&lt;p&gt;&lt;strong&gt;参考:&lt;/strong&gt; &lt;a href=&#34;https://github.com/prometheus/pushgateway&#34;&gt;pushgatewy GITHUB&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;我们都知道prometheus是主动的向被监控端拉取监控数据的，如果有需要向prometheus推送数据只能通过pushgateway的方式。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Prometheus基于consul的自动发现</title>
-      <link>http://localhost:1313/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/</link>
+      <link>https://zhou-mfk.github.io/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/</link>
       <pubDate>Fri, 27 Dec 2019 13:03:41 +0800</pubDate>
-      <guid>http://localhost:1313/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/</guid>
+      <guid>https://zhou-mfk.github.io/post/prometheus%E5%9F%BA%E4%BA%8Econsul%E7%9A%84%E8%87%AA%E5%8A%A8%E5%8F%91%E7%8E%B0/</guid>
       <description>&lt;h2 id=&#34;consul-集群&#34;&gt;consul 集群&lt;/h2&gt;&#xA;&lt;p&gt;Consul是由HashiCorp开发的一个支持多数据中心的分布式服务发现和键值对存储服务的开源软件，被大量应用于基于微服务的软件架构当中。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Prometheus的数据类型及promQL</title>
-      <link>http://localhost:1313/post/prometheus%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8Apromql/</link>
+      <link>https://zhou-mfk.github.io/post/prometheus%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8Apromql/</link>
       <pubDate>Tue, 10 Dec 2019 16:52:08 +0800</pubDate>
-      <guid>http://localhost:1313/post/prometheus%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8Apromql/</guid>
+      <guid>https://zhou-mfk.github.io/post/prometheus%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E5%8F%8Apromql/</guid>
       <description>&lt;blockquote&gt;&#xA;&lt;p&gt;Prometheus通过指标名称（metrics name）以及对应的一组标签（labelset）唯一定义一条时间序列。指标名称反映了监控样本的基本标识，而label则在这个基本特征上为采集到的数据提供了多种特征维度。用户可以基于这些特征维度过滤，聚合，统计从而产生新的计算后的一条时间序列。&lt;/p&gt;</description>
     </item>
     <item>
       <title>Prometheus监控</title>
-      <link>http://localhost:1313/post/prometheus%E7%9B%91%E6%8E%A7/</link>
+      <link>https://zhou-mfk.github.io/post/prometheus%E7%9B%91%E6%8E%A7/</link>
       <pubDate>Fri, 22 Nov 2019 10:46:18 +0800</pubDate>
-      <guid>http://localhost:1313/post/prometheus%E7%9B%91%E6%8E%A7/</guid>
+      <guid>https://zhou-mfk.github.io/post/prometheus%E7%9B%91%E6%8E%A7/</guid>
       <description>&lt;p&gt;参考:&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://prometheus.io/&#34;&gt;Prometheus&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://prometheus.io/docs/introduction/overview/&#34;&gt;官方文档&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://yunlzheng.gitbook.io/prometheus-book/&#34;&gt;promethues-book&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Prometheus受启发于Google的Brogmon监控系统（相似的Kubernetes是从Google的Brog系统演变而来），从2012年开始由前Google工程师在Soundcloud以开源软件的形式进行研发，并且于2015年早期对外发布早期版本。2016年5月继Kubernetes之后成为第二个正式加入CNCF基金会的项目，同年6月正式发布1.0版本。2017年底发布了基于全新存储层的2.0版本，能更好地与容器平台、云平台配合&lt;/p&gt;</description>
     </item>
   </channel>
