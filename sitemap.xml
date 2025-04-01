@@ -442,11 +442,4 @@
     <priority>0.5</priority>
   </url>
   
-  <url>
-    <loc>http://localhost:1313/page/about/</loc>
-    <lastmod>2019-10-11T12:32:29+08:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
 </urlset>
